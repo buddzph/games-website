@@ -1,0 +1,7 @@
+{"name":"buycoins",
+"qty":0,
+"items":[
+{"title":"standard","image":"\/static\/images\/icon-buy-coins.png","url":"\/coins/buycoinsmessage.php","description":"..."},
+{"title":"professional","image":"\/static\/images\/icon-buy-coins.png","url":"\/coins/buycoinsmessage.php","description":"..."},
+{"title":"extreme","image":"\/static\/images\/icon-buy-coins.png","url":"\/coins/buycoinsmessage.php","description":"..."}
+]}

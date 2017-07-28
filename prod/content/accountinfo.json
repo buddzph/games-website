@@ -1,0 +1,13 @@
+{
+"name":"Donald Duck",
+"address":"121 WashingtonBlvd.", 
+"city":"Orlando", 
+"country":"USA", 
+"zipcode":"14344", 
+"birthday":"01/01/1932",
+"gender":"M",
+"email":"donald@duck.com", 
+"mobileno":"091234344", 
+"mobilenostatus":"",
+"paymenttype":"phtelco"
+}

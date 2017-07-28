@@ -1,0 +1,10 @@
+{"name":"carousel",
+"start_index":0,
+"qty":4,
+"qty_total":4,
+"items":[
+{"title":"carousel1","image":"\/prod\/image\/carousel\/about.jpg","url":"\/about"},
+{"title":"carousel2","image":"\/prod\/image\/carousel\/games.jpg","url":"\/games"},
+{"title":"carousel3","image":"\/prod\/image\/carousel\/coins.jpg","url":"\/coins"},
+{"title":"carousel4","image":"\/prod\/image\/carousel\/prizes.jpg","url":"\/prizes"}
+]}

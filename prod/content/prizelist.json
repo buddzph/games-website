@@ -1,0 +1,7 @@
+{"name":"prizes",
+"qty":3,
+"items":[
+{"title":"item 1","image":"\/static\/assets\/tix_10.png","url":"\/prizes/prizesmessage.php","description":"lorem ipsum dolor sit amet"},
+{"title":"item 2","image":"\/static\/assets\/tix_9.png","url":"\/prizes/prizesmessage.php","description":"lorem ipsum dolor sit amet"},
+{"title":"item 3","image":"\/static\/assets\/tix_8.png","url":"\/prizes/prizesmessage.php","description":"lorem ipsum dolor sit amet"}
+]}
