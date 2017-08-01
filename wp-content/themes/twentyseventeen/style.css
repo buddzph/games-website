@@ -4359,7 +4359,7 @@ CUSTOM CSS
 .logo_wrapper .wrap .account_info span {float: left; margin-right: 10px; margin-top: 10px; font-size: 12px;}
 
 .bt_bb_text p {margin-top: 15px; margin-bottom: 15px !important;}
-span.img_cropper {height: 200px !important;}
+span.img_cropper {height: auto !important;}
 .wplp_container.default:hover .flex-prev, .wplp_container.default:hover .flex-next {border: none !important;}
 .panel-content .wrap {padding-bottom: 0;}
 .wplp_container.default .defaultflexslide > li {border: none;}
