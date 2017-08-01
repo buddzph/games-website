@@ -18,15 +18,31 @@
  * @package WordPress
  */
 
-// ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-define('DB_NAME', 'db_html5games');
+if($_SERVER['HTTP_HOST'] == 'localhost'):
 
-/** MySQL database username */
-define('DB_USER', 'user_html5games');
+	// ** MySQL settings - You can get this info from your web host ** //
+	/** The name of the database for WordPress */
+	define('DB_NAME', 'glyphgames');
 
-/** MySQL database password */
-define('DB_PASSWORD', 'pw_html5g@m3s!');
+	/** MySQL database username */
+	define('DB_USER', 'root');
+
+	/** MySQL database password */
+	define('DB_PASSWORD', '');
+
+else:
+
+	// ** MySQL settings - You can get this info from your web host ** //
+	/** The name of the database for WordPress */
+	define('DB_NAME', 'db_html5games');
+
+	/** MySQL database username */
+	define('DB_USER', 'user_html5games');
+
+	/** MySQL database password */
+	define('DB_PASSWORD', 'pw_html5g@m3s!');
+
+endif;
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
