@@ -12,6 +12,20 @@
 
 get_header(); ?>
 
+
+<?php
+$uid = 0;
+if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])): 
+	$uid = $_SESSION['user']['id'];
+endif;
+
+function g_getsessionid($uid, $gamecode)
+{
+  $s = date('YmdHis') . $uid . "_" . $gamecode;
+  return($s);
+}
+?>
+
 <div class="wrap">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
@@ -40,11 +54,25 @@ get_header(); ?>
 				    	if(function_exists('the_ratings')) { the_ratings(); }
 				    echo '</div>';*/
 
-				    $embedded_game = get_field('embed_game_code');
+				    $gameid = get_field('game_code').'';
 
-				    if(!empty($embedded_game)):
+				    $gamefolder = get_field('embed_game_code');
 
-				    	echo htmlspecialchars_decode($embedded_game);
+				    if(!empty($gamefolder)):
+
+				    	// echo htmlspecialchars_decode($gamefolder);
+
+				    	$url = home_url();
+						$homeurl = esc_url( $url );
+
+						$sessionid = g_getsessionid($uid, $gameid);
+						
+
+				    	$const = $homeurl.'/game_storage/'.$gamefolder.'/index.html?nocache&amp;api-url='.$homeurl.'/prod/api/gpctlstatapi.php&amp;session-id='.$sessionid;
+
+				    	/*echo '<iframe src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 600px"></iframe>';*/
+
+				    	echo '<iframe src="'.$const.'" style="border: 0; width: 100%; height: 600px"></iframe>';
 
 					    echo '<div class="gameraiting">';
 					    	if(function_exists('the_ratings')) { the_ratings(); }

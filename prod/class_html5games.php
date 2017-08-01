@@ -4,10 +4,17 @@ require_once('prod_server_settings.php');
 
 date_default_timezone_set('Asia/Manila');
 
-define('DB_HOSTNAME', 'localhost');
-define('DB_USERNAME', 'user_html5games');
-define('DB_PASSWORD', 'pw_html5g@m3s!');
-define('DB_DATABASE', 'db_html5games');
+if($_SERVER['HTTP_HOST'] == 'localhost'):
+   define('DB_HOSTNAME', 'localhost');
+   define('DB_USERNAME', 'root');
+   define('DB_PASSWORD', '');
+   define('DB_DATABASE', 'glyphgames');
+else:
+   define('DB_HOSTNAME', 'localhost');
+   define('DB_USERNAME', 'user_html5games');
+   define('DB_PASSWORD', 'pw_html5g@m3s!');
+   define('DB_DATABASE', 'db_html5games');
+endif;
 
 $smart_prefix = array(
    "900", "907", "908", "909", "910", "911", "912", "913", "914", "918", 

@@ -5,6 +5,11 @@
 
 define("ROOT_PATH","../");
 define("ROOT_PATH_STYLE","../");
-define("SITE_URL","http://glyphgames.com");
+
+if($_SERVER['HTTP_HOST'] == 'localhost'):
+	define("SITE_URL","http://localhost/glyphgames.com");
+else:
+	define("SITE_URL","http://glyphgames.com");
+endif;
 
 ?>
