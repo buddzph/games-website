@@ -4523,6 +4523,10 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 
 
 /*MEDIA WINDOW SIZE*/
+@media screen and (max-width: 900px) {
+	span.img_cropper {height: auto !important;}
+}
+
 @media screen and (max-width: 800px) {
 	.slider-caption {top: 40%; width: 80%;}
 	.slider-caption h2 {
@@ -4565,6 +4569,10 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	span.img_cropper {height: auto !important;}
 }	
 
+@media screen and (max-device-width: 900px) {
+	span.img_cropper {height: auto !important;}
+}
+
 @media screen and (max-device-width: 800px) {
   	.slider-caption {top: 40%; width: 80%;}
 	.slider-caption h2 {
@@ -4606,6 +4614,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.ui-dialog {width: 100% !important;}
 	span.img_cropper {height: auto !important;}
 }
+
 
 
 
