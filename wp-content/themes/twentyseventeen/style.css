@@ -4383,16 +4383,17 @@ footer .social-navigation {margin: 0 auto; display: inline-block; position: rela
 ul.bt_bb_tabs_header {margin-left: 35%;}
 .wplp_container.default .title, .wplp_container.default .text, .wplp_container.default .read-more {color: #fff; padding-left: 10px; padding-right: 10px;}
 .wplp_container .title span {color: #fff;}
+.wplp_container.default .defaultflexslide img {border: 2px solid; border-radius: 20px;}
 /*.bt_bb_style_simple ul.bt_bb_tabs_header li:first-of-type span {font-weight: bold;}*/
 .bt_bb_style_simple ul.bt_bb_tabs_header li span {font-weight: bold; font-size: 0.75em;}
 .bt_bb_style_simple ul.bt_bb_tabs_header li {border-bottom: none; text-transform: uppercase;}
 .bt_bb_style_simple ul.bt_bb_tabs_header li.on {color: #000;}
 .bt_bb_cell {margin: 0 auto;}
-#coins_home_row .bt_bb_grid_item_inner {background-color: #fff;}
+#coins_home_row .bt_bb_grid_item_inner {/*background-color: #fff;*/ background: none;}
 #coins_home_row .bt_bb_masonry_post_grid .bt_bb_grid_item_post_content {padding: 10px;}
-#coins_home_row .bt_bb_masonry_post_grid .bt_bb_grid_item_post_content .bt_bb_grid_item_post_title a {color: #999; font-size: 11px;}
-#coins_home_row .bt_bb_masonry_post_grid .bt_bb_grid_item_post_content .bt_bb_grid_item_post_excerpt {color: #999; font-size: 10px;}
-#coins_home_row .bt_bb_masonry_post_grid .bt_bb_grid_item_post_thumbnail {background-color: #ccc;}
+#coins_home_row .bt_bb_masonry_post_grid .bt_bb_grid_item_post_content .bt_bb_grid_item_post_title a {color: #fff; font-size: 11px;}
+#coins_home_row .bt_bb_masonry_post_grid .bt_bb_grid_item_post_content .bt_bb_grid_item_post_excerpt {color: #fff; font-size: 10px;}
+#coins_home_row .bt_bb_masonry_post_grid .bt_bb_grid_item_post_thumbnail {/*background-color: #ccc;*/ background: none;}
 /*#coins_home_row .bt_bb_masonry_post_grid .bt_bb_grid_item_post_thumbnail img {margin-top: 8px; margin-left: 8px; }*/
 /*end LATEST POST*/
 
