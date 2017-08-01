@@ -4561,6 +4561,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.navigation-top nav {margin-left: 0;}
 	ul.bt_bb_tabs_header {margin-left: 100%;}
 	.ui-dialog {width: 100% !important;}
+	span.img_cropper {height: auto !important;}
 }	
 
 @media screen and (max-device-width: 800px) {
@@ -4601,6 +4602,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.navigation-top nav {margin-left: 0;}
 	ul.bt_bb_tabs_header {margin-left: 0;}
 	.ui-dialog {width: 100% !important;}
+	span.img_cropper {height: auto !important;}
 }
 
 
