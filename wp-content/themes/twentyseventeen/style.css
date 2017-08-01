@@ -4538,6 +4538,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 		margin-left: 15px;
 	}
 	ul.bt_bb_tabs_header {margin-left: 25%;}
+	span.img_cropper {height: auto !important;}
 }
 
 @media screen and (max-width: 520px) {
@@ -4579,6 +4580,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 		margin-left: 15px;
 	}
 	ul.bt_bb_tabs_header {margin-left: 25%;}
+	span.img_cropper {height: auto !important;}
 }
 
 @media screen and (max-device-width: 520px) {
