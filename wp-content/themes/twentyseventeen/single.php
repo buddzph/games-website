@@ -74,6 +74,8 @@ function g_getsessionid($uid, $gamecode)
 
 				    	echo '<iframe src="'.$const.'" style="border: 0; width: 100%; height: 600px"></iframe>';
 
+				    	echo fb_like_button();
+
 					    echo '<div class="gameraiting">';
 					    	if(function_exists('the_ratings')) { the_ratings(); }
 					    echo '</div>';
