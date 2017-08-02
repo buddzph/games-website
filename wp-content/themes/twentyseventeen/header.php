@@ -290,7 +290,7 @@ $homeurl = esc_url( $url );
 	      width: 400,
 	      modal: true,
 	      buttons: {
-	        "Create Username": checkUsername/*,
+	        "Update Username": checkUsername/*,
 	        Cancel: function() {
 	          dialogusername.dialog( "close" );
 	        }*/
@@ -428,7 +428,7 @@ $homeurl = esc_url( $url );
   </form>
 </div>
 
-<div id="dialog-form-username" title="Create Username" style="display: none;">
+<div id="dialog-form-username" title="Update Username" style="display: none;">
  	<p class="validateTips">All form fields are required.</p>
   <form>
     <fieldset>
