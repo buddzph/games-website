@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Bold Builder
  * Description: WordPress content builder.
- * Version:  1.3.0
+ * Version:  1.3.1
  * Author: BoldThemes
  * Author URI: http://www.bold-themes.com
  */
@@ -164,12 +164,14 @@ function bt_bb_enqueue() {
 
 	wp_enqueue_style( 'bt_bb_font-awesome.min', plugins_url( 'css/font-awesome.min.css', __FILE__ ) );
 	wp_enqueue_style( 'bt_bb', plugins_url( 'css/style.crush.css', __FILE__ ) );
+
 	wp_enqueue_script( 'bt_bb_react', plugins_url( 'react.min.js', __FILE__ ) );
 	wp_enqueue_script( 'bt_bb', plugins_url( 'script.min.js', __FILE__ ), array( 'jquery' ), true );
 	wp_enqueue_script( 'bt_bb_jsx', plugins_url( 'build/jsx.min.js', __FILE__ ), array( 'jquery' ), true );
 	wp_enqueue_script( 'bt_bb_autosize', plugins_url( 'autosize.min.js', __FILE__ ) );
 	wp_enqueue_script( 'bt_bb_imagesloaded', plugins_url( 'imagesloaded.pkgd.min.js', __FILE__ ), array( 'jquery' ), false );
 	wp_enqueue_script( 'wp-color-picker' );
+
 	wp_enqueue_style( 'wp-color-picker' );
 }
 add_action( 'admin_enqueue_scripts', 'bt_bb_enqueue' );
@@ -181,9 +183,11 @@ function bt_bb_enqueue_fe_always() {
 	if ( isset( $opt_arr[ $post_id ] ) ) {
 		wp_add_inline_style( 'bt_bb_dummy', $opt_arr[ $post_id ] );
 	}
+
 	if ( function_exists( 'bt_bb_add_color_schemes' ) ) {
 		bt_bb_add_color_schemes();
 	}
+
 	wp_enqueue_script( 'bt_bb_fe', plugins_url( 'script_fe.js', __FILE__ ), array( 'jquery' ), true );
 }
 

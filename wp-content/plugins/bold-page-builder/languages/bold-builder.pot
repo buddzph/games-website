@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-21 15:56+0200\n"
+"POT-Creation-Date: 2017-08-03 16:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: bold-builder.php:300 bold-builder.php:318
+#: bold-builder.php:304 bold-builder.php:322
 msgid "Bold Builder Settings"
 msgstr ""
 
-#: bold-builder.php:300 bold-builder.php:715
+#: bold-builder.php:304 bold-builder.php:719
 msgid "Bold Builder"
 msgstr ""
 
-#: bold-builder.php:324
+#: bold-builder.php:328
 msgid "Show shortcode tag instead of mapped name"
 msgstr ""
 
-#: bold-builder.php:325
+#: bold-builder.php:329
 msgid "Show shortcode tags instead of mapped names"
 msgstr ""
 
-#: bold-builder.php:326
+#: bold-builder.php:330
 #: content_elements/bt_bb_countdown/bt_bb_countdown.php:82
 #: content_elements/bt_bb_google_maps/bt_bb_google_maps.php:91
 #: content_elements/bt_bb_masonry_post_grid/bt_bb_masonry_post_grid.php:221
@@ -43,7 +43,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: bold-builder.php:327
+#: bold-builder.php:331
 #: content_elements/bt_bb_countdown/bt_bb_countdown.php:83
 #: content_elements/bt_bb_google_maps/bt_bb_google_maps.php:92
 #: content_elements/bt_bb_latest_posts/bt_bb_latest_posts.php:157
@@ -65,149 +65,149 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: bold-builder.php:331 bold-builder.php:332
+#: bold-builder.php:335 bold-builder.php:336
 msgid "Post Types"
 msgstr ""
 
-#: bold-builder.php:350 bold-builder.php:351
+#: bold-builder.php:354 bold-builder.php:355
 msgid "Color Schemes"
 msgstr ""
 
-#: bold-builder.php:360 bold-builder.php:431 bold-builder.php:827
+#: bold-builder.php:364 bold-builder.php:435 bold-builder.php:831
 msgid "Save"
 msgstr ""
 
-#: bold-builder.php:410
+#: bold-builder.php:414
 msgid "Toggle"
 msgstr ""
 
-#: bold-builder.php:411
+#: bold-builder.php:415
 msgid "Add"
 msgstr ""
 
-#: bold-builder.php:412
+#: bold-builder.php:416
 msgid "Edit"
 msgstr ""
 
-#: bold-builder.php:413
+#: bold-builder.php:417
 msgid "Edit Content"
 msgstr ""
 
-#: bold-builder.php:414
+#: bold-builder.php:418
 msgid "Clone"
 msgstr ""
 
-#: bold-builder.php:415
+#: bold-builder.php:419
 msgid "Delete"
 msgstr ""
 
-#: bold-builder.php:416
+#: bold-builder.php:420
 msgid "Layout error!"
 msgstr ""
 
-#: bold-builder.php:417
+#: bold-builder.php:421
 msgid "Add Element"
 msgstr ""
 
-#: bold-builder.php:418
+#: bold-builder.php:422
 msgid "Select Layout"
 msgstr ""
 
-#: bold-builder.php:419
+#: bold-builder.php:423
 #: content_elements/bt_bb_cost_calculator_item/bt_bb_cost_calculator_item.php:81
 msgid "Select"
 msgstr ""
 
-#: bold-builder.php:420 bold-builder.php:903
+#: bold-builder.php:424 bold-builder.php:907
 #: export_import/export_import.php:346
 msgid "Submit"
 msgstr ""
 
-#: bold-builder.php:421
+#: bold-builder.php:425
 msgid "Copy"
 msgstr ""
 
-#: bold-builder.php:422
+#: bold-builder.php:426
 msgid "Copy +"
 msgstr ""
 
-#: bold-builder.php:423 bold-builder.php:822
+#: bold-builder.php:427 bold-builder.php:826
 msgid "Paste"
 msgstr ""
 
-#: bold-builder.php:424
+#: bold-builder.php:428
 msgid "Export"
 msgstr ""
 
-#: bold-builder.php:425
+#: bold-builder.php:429
 msgid "Import"
 msgstr ""
 
-#: bold-builder.php:426
+#: bold-builder.php:430
 msgid "Not allowed!"
 msgstr ""
 
-#: bold-builder.php:427
+#: bold-builder.php:431
 msgid "Manage Clipboard"
 msgstr ""
 
-#: bold-builder.php:428
+#: bold-builder.php:432
 msgid "Filter..."
 msgstr ""
 
-#: bold-builder.php:429
+#: bold-builder.php:433
 msgid "Shortcode Mapper"
 msgstr ""
 
-#: bold-builder.php:430
+#: bold-builder.php:434
 msgid "Insert Mapping"
 msgstr ""
 
-#: bold-builder.php:432
+#: bold-builder.php:436
 msgid "Switch Editor"
 msgstr ""
 
-#: bold-builder.php:433
+#: bold-builder.php:437
 msgid "Custom CSS"
 msgstr ""
 
-#: bold-builder.php:434
+#: bold-builder.php:438
 msgid "Are you sure you want to switch editor?"
 msgstr ""
 
-#: bold-builder.php:435 content_elements/bt_bb_section/bt_bb_section.php:171
+#: bold-builder.php:439 content_elements/bt_bb_section/bt_bb_section.php:171
 msgid "General"
 msgstr ""
 
-#: bold-builder.php:819
+#: bold-builder.php:823
 msgid "Undo"
 msgstr ""
 
-#: bold-builder.php:820
+#: bold-builder.php:824
 msgid "Redo"
 msgstr ""
 
-#: bold-builder.php:824
+#: bold-builder.php:828
 msgid "Clipboard Manager"
 msgstr ""
 
-#: bold-builder.php:826
+#: bold-builder.php:830
 msgid "Preview"
 msgstr ""
 
-#: bold-builder.php:964
+#: bold-builder.php:968
 msgid "Element ID"
 msgstr ""
 
-#: bold-builder.php:964 bold-builder.php:965 bold-builder.php:966
+#: bold-builder.php:968 bold-builder.php:969 bold-builder.php:970
 msgid "Custom"
 msgstr ""
 
-#: bold-builder.php:965
+#: bold-builder.php:969
 msgid "Extra class name(s)"
 msgstr ""
 
-#: bold-builder.php:966
+#: bold-builder.php:970
 msgid "Inline style"
 msgstr ""
 

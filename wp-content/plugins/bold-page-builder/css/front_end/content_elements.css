@@ -43,6 +43,7 @@
 @import url("insta_feed.css");
 @import url("widgets.css");
 @import url("countdown.css");
+@import url("ie.css");
 
 /* External libs override */
 @import url("magnific-popup.css");
