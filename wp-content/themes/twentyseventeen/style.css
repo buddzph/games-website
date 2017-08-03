@@ -4381,6 +4381,7 @@ footer .social-navigation {margin: 0 auto; display: inline-block; position: rela
 .highestrated {float: left; width: 33%; padding: 25px 2%; text-align: center;font-size: 0;}
 .highestrated img.wp-post-image {width: 100%; border: 2px solid; border-radius: 20px;}
 .highestrated a {display: block; font-weight: bold; text-align: center; font-size: 14px;}
+.fb-like-wrapper {float: left; }
 
 /*LATEST POST*/
 ul.bt_bb_tabs_header {margin-left: 35%;}
@@ -4401,7 +4402,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 /*end LATEST POST*/
 
 /*Rating*/
-.gameraiting {text-align: center; margin: 25px auto;}
+.gameraiting {float: left; text-align: center; margin: 10px auto 25px;}
 /*end Rating*/
 
 /*Slider*/
@@ -4571,6 +4572,8 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.ui-dialog {width: 100% !important;}
 	span.img_cropper {height: auto !important;}
 	.highestrated {float: none; width: 90%; margin: 0 auto;}
+	.fb-like-wrapper {float: none;}
+	.fb-like-wrapper div {text-align: center !important;}
 }	
 
 @media screen and (max-device-width: 900px) {
@@ -4618,6 +4621,8 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.ui-dialog {width: 100% !important;}
 	span.img_cropper {height: auto !important;}
 	.highestrated {float: none; width: 90%; margin: 0 auto;}
+	.fb-like-wrapper {float: none;}
+	.fb-like-wrapper div {text-align: center !important;}
 }
 
 
