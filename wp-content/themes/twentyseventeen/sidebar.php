@@ -39,6 +39,8 @@ global $wpdb;
 
 		    get_template_part( 'template-parts/post/content', get_post_format() );
 
+		    echo do_shortcode('[frontpage_news widget="415" name="More Games"]');
+
 		} elseif ( ! empty( $categories ) and $categories[0]->name == "Coins" ) {
 
 			if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
