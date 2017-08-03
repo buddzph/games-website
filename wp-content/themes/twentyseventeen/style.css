@@ -4382,6 +4382,7 @@ footer .social-navigation {margin: 0 auto; display: inline-block; position: rela
 .highestrated img.wp-post-image {width: 100%; border: 2px solid; border-radius: 20px;}
 .highestrated a {display: block; font-weight: bold; text-align: center; font-size: 14px;}
 .fb-like-wrapper {float: left; }
+.entry-meta {display: none;}
 
 /*LATEST POST*/
 ul.bt_bb_tabs_header {margin-left: 35%;}
