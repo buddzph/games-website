@@ -39,7 +39,14 @@ global $wpdb;
 
 		    get_template_part( 'template-parts/post/content', get_post_format() );
 
-		    echo do_shortcode('[frontpage_news widget="415" name="More Games"]');
+		    if($_SERVER['HTTP_HOST'] == 'localhost'):
+
+		    	echo do_shortcode('[frontpage_news widget="452" name="More Games"]');
+		    	
+		    else:
+
+		    	echo do_shortcode('[frontpage_news widget="415" name="More Games"]');
+		   	endif;
 
 		} elseif ( ! empty( $categories ) and $categories[0]->name == "Coins" ) {
 

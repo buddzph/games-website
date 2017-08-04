@@ -55,6 +55,23 @@ switch ($_REQUEST['func']) {
 
 	case 'processusername':
 
+		/*echo '<pre>';
+		print_r($_FILES);
+		echo '</pre>';
+
+		echo 'name: '.basename($_FILES['image']['name']);*/
+
+		$path = getcwd();
+
+		$uploaddir = $path.'/usericon/';
+		echo $uploadfile = $uploaddir . basename($_FILES['image']['name']);
+
+		if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile)) {
+		    echo "File is valid, and was successfully uploaded.\n";
+		} else {
+		    echo "Possible file upload attack!\n";
+		}
+
 		$mobile_number = $_REQUEST['mobile_number'];
 		$username = $_REQUEST['username'];
 		$password = $_REQUEST['password'];
@@ -74,20 +91,102 @@ switch ($_REQUEST['func']) {
 			$res['result'] = true;
 
 			$table = 'subscribers';
-			$data = array();
-			$data['username'] = $username;
-			$data['password'] = md5($password);
-			$data['lastlogin'] = date('Y-m-d H:i:s');
+			$data = array();			
 
-			$wpdb->update( $table, $data, array('mobile_number' => $mobile_number) );
+			$pass = 0;
+			if(!empty($myrows[0]->username)):
 
-			$session = $wpdb->get_results( "SELECT * FROM subscribers WHERE mobile_number = '". $mobile_number ."'" );
+				if($myrows[0]->username != $username):
 
-			$_SESSION['user']['id'] = $session[0]->id;
-			$_SESSION['user']['mobile_number'] = $session[0]->mobile_number;
-			$_SESSION['user']['username'] = $session[0]->username;
+					$checkusername = $wpdb->get_results( "SELECT * FROM subscribers WHERE username = '".$username."' and mobile_number != '". $mobile_number ."'" );
 
-			$res['result'] = true;
+					if(count($checkusername) > 0):
+
+						$res['result'] = false;
+
+					else:
+
+						if(empty($myrows[0]->password)):
+
+							if(!empty($password)):
+								$data['password'] = md5($password);
+								$pass++;
+							else:
+								$res['result'] = false;
+							endif;
+
+						else:
+
+							if(!empty($password)):
+								$data['password'] = md5($password);								
+							endif;
+							$pass++;
+
+						endif;
+
+					endif;
+
+					//echo 1;
+
+				else:
+
+					if(empty($myrows[0]->password)):
+
+						if(!empty($password)):
+							$data['password'] = md5($password);
+							$pass++;
+						else:
+							$res['result'] = false;
+						endif;
+
+					else:
+
+						if(!empty($password)):
+							$data['password'] = md5($password);							
+						endif;
+						$pass++;
+
+					endif;
+
+					//echo 2;
+
+				endif;
+
+			else:
+
+				if(!empty($password)):
+					$data['password'] = md5($password);
+					$pass++;
+				else:
+
+					$res['result'] = false;
+
+				endif;
+
+				//echo 3;
+
+			endif;
+
+			if($pass > 0):
+
+				$data['username'] = $username;
+				$data['lastlogin'] = date('Y-m-d H:i:s');
+
+				$wpdb->update( $table, $data, array('mobile_number' => $mobile_number) );
+
+				$session = $wpdb->get_results( "SELECT * FROM subscribers WHERE mobile_number = '". $mobile_number ."'" );
+
+				$_SESSION['user']['id'] = $session[0]->id;
+				$_SESSION['user']['mobile_number'] = $session[0]->mobile_number;
+				$_SESSION['user']['username'] = $session[0]->username;
+
+				$res['result'] = true;
+
+			else:
+
+				$res['result'] = false;
+
+			endif;
 
 		else:
 

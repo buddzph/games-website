@@ -4379,16 +4379,23 @@ footer .social-navigation {margin: 0 auto; display: inline-block; position: rela
 .coinwrapper {background: rgba(2,2,2,0.30);	border: solid 1px #fff; padding: 25px 0;}
 .leftrightspace15 {margin-left: 15px; margin-right: 15px;}
 .highestrated {float: left; width: 33%; padding: 25px 2%; text-align: center;font-size: 0;}
-.highestrated img.wp-post-image {width: 100%; border: 2px solid; border-radius: 20px;}
+.highestrated img.wp-post-image {width: 100%; border: 2px solid; border-radius: 10px;}
 .highestrated a {display: block; font-weight: bold; text-align: center; font-size: 14px;}
 .fb-like-wrapper {float: left; }
 .entry-meta {display: none;}
+.wpcu_block_title {color: #fff !important;}
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {font-size: 13px !important; padding: 10px 5px;}
+.ui-dialog label {font-size: 13px; margin-bottom: 0; margin-top: 15px;}
+.ui-dialog p {font-size: 13px;}
+.ui-dialog .ui-dialog-titlebar {padding-top: 0; padding-bottom: : 0;}
+.ui-widget-header {background: none !important; border: none !important; font-size: 14px; text-transform: uppercase;}
+
 
 /*LATEST POST*/
 ul.bt_bb_tabs_header {margin-left: 35%;}
 .wplp_container.default .title, .wplp_container.default .text, .wplp_container.default .read-more {color: #fff; padding-left: 10px; padding-right: 10px;}
 .wplp_container .title span {color: #fff;}
-.wplp_container.default .defaultflexslide img {border: 2px solid; border-radius: 20px;}
+.wplp_container.default .defaultflexslide img {border: 2px solid; border-radius: 10px;}
 /*.bt_bb_style_simple ul.bt_bb_tabs_header li:first-of-type span {font-weight: bold;}*/
 .bt_bb_style_simple ul.bt_bb_tabs_header li span {font-weight: bold; font-size: 0.75em;}
 .bt_bb_style_simple ul.bt_bb_tabs_header li {border-bottom: none; text-transform: uppercase;}
@@ -4530,6 +4537,8 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 /*MEDIA WINDOW SIZE*/
 @media screen and (max-width: 900px) {
 	span.img_cropper {height: auto !important;}
+	input[type="text"], input[type="password"], select, textarea {width: 100% !important;}
+	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
 }
 
 @media screen and (max-width: 800px) {
@@ -4548,6 +4557,8 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	}
 	ul.bt_bb_tabs_header {margin-left: 25%;}
 	span.img_cropper {height: auto !important;}
+	input[type="text"], input[type="password"], select, textarea {width: 100% !important;}
+	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
 }
 
 @media screen and (max-width: 520px) {
@@ -4575,10 +4586,14 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.highestrated {float: none; width: 90%; margin: 0 auto;}
 	.fb-like-wrapper {float: none;}
 	.fb-like-wrapper div {text-align: center !important;}
+	input[type="text"], input[type="password"], select, textarea {width: 100% !important;}
+	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
 }	
 
 @media screen and (max-device-width: 900px) {
 	span.img_cropper {height: auto !important;}
+	input[type="text"], input[type="password"], select, textarea {width: 100% !important;}
+	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
 }
 
 @media screen and (max-device-width: 800px) {
@@ -4597,6 +4612,8 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	}
 	ul.bt_bb_tabs_header {margin-left: 25%;}
 	span.img_cropper {height: auto !important;}
+	input[type="text"], input[type="password"], select, textarea {width: 100% !important;}
+	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
 }
 
 @media screen and (max-device-width: 520px) {
@@ -4624,6 +4641,8 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.highestrated {float: none; width: 90%; margin: 0 auto;}
 	.fb-like-wrapper {float: none;}
 	.fb-like-wrapper div {text-align: center !important;}
+	input[type="text"], input[type="password"], select, textarea {width: 100% !important;}
+	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
 }
 
 

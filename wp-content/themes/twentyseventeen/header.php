@@ -98,6 +98,7 @@ $homeurl = esc_url( $url );
 	  	
 	  	var current_mobile_number;
 	  	var from_login = false;
+	  	var saveusername = false;
 
 	    var dialog, form,
 	 
@@ -207,41 +208,108 @@ $homeurl = esc_url( $url );
 	 
 	      valid = valid && checkRegexp( username, /^([0-9a-zA-Z])+$/, "Username field only allow : a-z 0-9" );
 
-	      valid = valid && checkLengthFields( password, "password", 6, 10 );
-	 
-	      valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
 
-	      valid = valid && checkLengthFields( retypepassword, "retype password", 6, 10 );
-	 
-	      valid = valid && checkRegexp( retypepassword, /^([0-9a-zA-Z])+$/, "Re-Type Password field only allow : a-z 0-9" );
+	      <?php if(isset($_SESSION['user']['username']) and !empty($_SESSION['user']['username'])): ?>
+
+		      if(password.val() != "") {
+
+			      valid = valid && checkLengthFields( password, "password", 6, 10 );
+			 
+			      valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+
+			      valid = valid && checkLengthFields( retypepassword, "retype password", 6, 10 );
+			 
+			      valid = valid && checkRegexp( retypepassword, /^([0-9a-zA-Z])+$/, "Re-Type Password field only allow : a-z 0-9" );
+			  }
+
+		  <?php else: ?>
+
+		  		valid = valid && checkLengthFields( password, "password", 6, 10 );
+		 
+		        valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+
+		        valid = valid && checkLengthFields( retypepassword, "retype password", 6, 10 );
+		 
+		        valid = valid && checkRegexp( retypepassword, /^([0-9a-zA-Z])+$/, "Re-Type Password field only allow : a-z 0-9" );
+
+		  <?php endif; ?>
 	 
 	      if ( valid ) {
 
 	      	<?php if(!empty($_SESSION['user']['mobile_number'])): ?>
 
-	      		current_mobile_number = "<?php $_SESSION['user']['mobile_number'] ?>";
+	      		current_mobile_number = "<?php echo $_SESSION['user']['mobile_number'] ?>";
 
 	      	<?php endif; ?>
 
-	      	if(password.val() == retypepassword.val()) {
+	      	if(password.val() != "") {
 
-				$.post( "<?php echo $homeurl.'/?page_id=344' ?>", { func: "processusername", mobile_number: current_mobile_number, username: username.val(), password: password.val() }, function( data ) {
-				  // console.log( data.id );
+		      	if(password.val() != retypepassword.val()) {
 
-			
-				  if( data.result ){
+					updateTips( "Password and Re-Type Password must match!" );
 
-				  	dialogusername.dialog( "close" );
-				  	dialogsuccessful.dialog( "open" )
+				} else {
 
-				  }
+					saveusername = true;
+
+				}
+
+			}else{
+
+				saveusername = true;
+
+			}
+
+			if(saveusername){
+
+				// Variable to store your files
+				var files = $('#ImageBrowse')[0].files[0];
+				var formData = new FormData($('#imageUploadForm')[0]);
+				
+				formData.append('func', "processusername");
+				formData.append('mobile_number', current_mobile_number);
+				formData.append('image', files);
+
+				console.log(formData);
+				$.ajax({
+				       url:"<?php echo $homeurl.'/?page_id=344' ?>",
+				       type: 'POST',
+				       data: formData,
+				       cache: false,
+				       dataType: 'json',
+				       processData: false, // Don't process the files
+				       contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+				       success: function(data, textStatus, jqXHR)
+				       {
+				           if(typeof data.error === 'undefined')
+				           {
+				               // Success so call function to process the form
+				               submitForm(event, data);
+				           }
+				           else
+				           {
+				               // Handle errors here
+				               console.log('ERRORS: ' + data.error);
+				           }
+
+				           //dialogusername.dialog( "close" );
+
+						  	updateTips( "You have successfully updated your username." );
+
+						  	//dialogsuccessful.dialog( "open" );
 
 
-				}, "json");
+				       },
+				       error: function(jqXHR, textStatus, errorThrown)
+				       {
+				           // Handle errors here
+				           console.log('ERRORS: ' + textStatus);
+				           // STOP LOADING SPINNER
 
-			} else {
-
-				updateTips( "Password and Re-Type Password must match!" );
+				           updateTips( "Unable to update. Check if you have current password, or new username is already used by other user." );
+				       }
+				  
+				  });
 
 			}
 	        
@@ -286,7 +354,7 @@ $homeurl = esc_url( $url );
 	    /*DIALOG NUMBER 2. ENTER USERNAME AND PASSWORD*/
 	    dialogusername = $( "#dialog-form-username" ).dialog({
 	      autoOpen: false,
-	      height: 500,
+	      height: 600,
 	      width: 400,
 	      modal: true,
 	      buttons: {
@@ -402,7 +470,7 @@ $homeurl = esc_url( $url );
 	    $( "#updateusername" ).removeClass('ui-button');
 	    $( "#logout" ).removeClass('ui-button');
 
-	  } );
+	  });
 	  </script>
 
 	  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
@@ -430,22 +498,28 @@ $homeurl = esc_url( $url );
 
 <div id="dialog-form-username" title="Update Username" style="display: none;">
  	<p class="validateTips">All form fields are required.</p>
-  <form>
+  <form name="photo" id="imageUploadForm" enctype="multipart/form-data">
     <fieldset>
       <label for="name">Username:</label>
       <input type="text" name="username" id="username" value="<?php echo $_SESSION['user']['username']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
- 	  <label for="name">Password:</label>
+ 	  <label for="name">Password:
+ 	  	<?php if(isset($_SESSION['user']['username']) and !empty($_SESSION['user']['username'])): ?>
+ 	  		<span style="font-size: 10px;">Leave blank if you don't want to change your current password.</span>
+ 	  	<?php endif; ?>
+ 	  </label>
       <input type="password" name="password" id="password" value="" placeholder="" class="text ui-widget-content ui-corner-all">
       <label for="name">Re-Type Password:</label>
       <input type="password" name="retypepassword" id="retypepassword" value="" placeholder="" class="text ui-widget-content ui-corner-all">
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+      <input type="file" id="ImageBrowse" name="image" size="30"/>
     </fieldset>
   </form>
+
 </div>
 
 <div id="dialog-successful" title="Completed" style="display: none;"> 
-	<p class="validateTips">You have successfully created your username.</p>
+	<p class="validateTips">You have successfully updated your username.</p>
 </div>
 
 <div id="dialog-buycoin" title="Buy this coin" style="display: none;"> 
