@@ -52,11 +52,11 @@ if ($result->num_rows > 0) {
 
 			if ($resultpostlikes->num_rows > 0) {
 				// UPDATE
-				$update = "UPDATE post_likes SET og_object = '".$pid."', likes_count = '".$likescount."', url = '".$row["guid"]."' WHERE post_id = '".$row["ID"]."'";
+				$update = "UPDATE post_likes SET post_title = '".$row["post_title"]."', og_object = '".$pid."', likes_count = '".$likescount."', url = '".$row["guid"]."' WHERE post_id = '".$row["ID"]."'";
 				$resins = $conn->query($update);
 			}else{
 				// INSERT
-				$insert = "INSERT INTO post_likes (post_id, og_object, likes_count, url) VALUES ('".$row["ID"]."', '".$pid."', '".$likescount."', '".$row["guid"]."')";
+				$insert = "INSERT INTO post_likes (post_id, post_title, og_object, likes_count, url) VALUES ('".$row["ID"]."', '".$row["post_title"]."', '".$pid."', '".$likescount."', '".$row["guid"]."')";
 				$resins = $conn->query($insert);
 			}
 
@@ -64,7 +64,7 @@ if ($result->num_rows > 0) {
 
     }
 
-    echo 'Done!';
+    echo 'Done!\n';
 } else {
     echo "0 results";
 }
