@@ -44,12 +44,6 @@ $sql = "SELECT * FROM ggames_posts LEFT JOIN ggames_postmeta ON(ggames_posts.ID 
 
 $result = $conn->query($sql);
 
-/*echo $result->num_rows;*/
-
-/*echo '<pre>';
-print_r($result->fetch_assoc());
-echo '</pre>';*/
-
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
@@ -62,7 +56,6 @@ if ($result->num_rows > 0) {
         $test = file_get_contents('https://graph.facebook.com/?id='.$row["guid"]);
 
         $json = json_decode($test, true);
-
         
 
         if(isset($json['og_object']['id']) and !empty($json['og_object']['id'])):
@@ -73,9 +66,21 @@ if ($result->num_rows > 0) {
 
 			$jsoncount = json_decode($getcount, true);
 
-			echo $jsoncount['summary']['total_count'];
+			$likescount = $jsoncount['summary']['total_count'];
 
-			echo '<br />';
+			$sqlpostlikes = "SELECT id FROM post_likes WHERE post_id = ".$row["ID"];
+
+			$resultpostlikes = $conn->query($sqlpostlikes);
+
+			if ($resultpostlikes->num_rows > 0) {
+				// UPDATE
+				$update = "UPDATE post_likes SET og_object = '".$pid."', likes_count = '".$likescount."', url = '".$row["guid"]."' WHERE post_id = '".$row["ID"]."'";
+				$resins = $conn->query($update);
+			}else{
+				// INSERT
+				$insert = "INSERT INTO post_likes (post_id, og_object, likes_count, url) VALUES ('".$row["ID"]."', '".$pid."', '".$likescount."', '".$row["guid"]."')";
+				$resins = $conn->query($insert);
+			}
 
 		endif;
 
