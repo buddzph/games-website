@@ -42,6 +42,7 @@ switch ($_REQUEST['func']) {
 			$_SESSION['user']['id'] = $myrows[0]->id;
 			$_SESSION['user']['mobile_number'] = $myrows[0]->mobile_number;
 			$_SESSION['user']['username'] = $myrows[0]->username;
+			$_SESSION['user']['user_avatar'] = $myrows[0]->user_avatar;
 
 		else:
 
@@ -55,21 +56,89 @@ switch ($_REQUEST['func']) {
 
 	case 'processusername':
 
-		/*echo '<pre>';
-		print_r($_FILES);
-		echo '</pre>';
+		$table = 'subscribers';
+		$data = array();
 
-		echo 'name: '.basename($_FILES['image']['name']);*/
 
-		$path = getcwd();
+		if (!file_exists($_FILES['image']['tmp_name']) || !is_uploaded_file($_FILES['image']['tmp_name'])) {
 
-		$uploaddir = $path.'/usericon/';
-		echo $uploadfile = $uploaddir . basename($_FILES['image']['name']);
+			// NOTHING TO DO
 
-		if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile)) {
-		    echo "File is valid, and was successfully uploaded.\n";
-		} else {
-		    echo "Possible file upload attack!\n";
+		}else{
+
+			$path = getcwd();
+
+			//echo $path.'/wp-content/themes/twentyseventeen/template-parts/imageManipulator.php';
+
+			//include('imageManipulator.php');
+
+			$uploaddir = $path.'/usericon/';
+
+			$temp = explode(".", $_FILES["image"]["name"]);
+			$newbasename = round(microtime(true));
+			$newfilename =  $newbasename . '.' . end($temp);
+
+			// AVATAR FILENAME
+			$data['user_avatar'] = $newfilename;
+
+			if(move_uploaded_file($_FILES["image"]["tmp_name"], $uploaddir . $newfilename)):
+				chmod($uploaddir . $newfilename, 0777);
+
+				if(end($temp) == 'jpg' or end($temp) == 'JPG' or end($temp) == 'jpeg' or end($temp) == 'JPEG'):
+					$image = imagecreatefromjpeg($uploaddir . $newfilename);
+				elseif(end($temp) == 'png' or end($temp) == 'PNG'):
+					$image = imagecreatefrompng($uploaddir . $newfilename);
+				endif;
+
+				$filename = $uploaddir.'cropped/' . $newfilename;
+
+				$thumb_width = 200;
+				$thumb_height = 200;
+
+				$width = imagesx($image);
+				$height = imagesy($image);
+
+				$original_aspect = $width / $height;
+				$thumb_aspect = $thumb_width / $thumb_height;
+
+				if ( $original_aspect >= $thumb_aspect )
+				{
+				   // If image is wider than thumbnail (in aspect ratio sense)
+				   $new_height = $thumb_height;
+				   $new_width = $width / ($height / $thumb_height);
+				}
+				else
+				{
+				   // If the thumbnail is wider than the image
+				   $new_width = $thumb_width;
+				   $new_height = $height / ($width / $thumb_width);
+				}
+
+				$thumb = imagecreatetruecolor( $thumb_width, $thumb_height );
+
+				if(end($temp) == 'png' or end($temp) == 'PNG'):
+					@imagealphablending($thumb, false);
+					@imagesavealpha($thumb, true);
+				endif;
+
+				// Resize and crop
+				imagecopyresampled($thumb,
+				                   $image,
+				                   0 - ($new_width - $thumb_width) / 2, // Center the image horizontally
+				                   0 - ($new_height - $thumb_height) / 2, // Center the image vertically
+				                   0, 0,
+				                   $new_width, $new_height,
+				                   $width, $height);
+
+				if(end($temp) == 'jpg' or end($temp) == 'JPG' or end($temp) == 'jpeg' or end($temp) == 'JPEG'):
+					imagejpeg($thumb, $filename, 80);
+				elseif(end($temp) == 'png' or end($temp) == 'PNG'):
+					imagepng($thumb, $uploaddir.'cropped/' . $newbasename . '.png');
+				endif;
+				chmod($uploaddir . $newfilename, 0777);
+
+			endif;
+
 		}
 
 		$mobile_number = $_REQUEST['mobile_number'];
@@ -89,9 +158,6 @@ switch ($_REQUEST['func']) {
 		if(count($myrows) > 0):
 			
 			$res['result'] = true;
-
-			$table = 'subscribers';
-			$data = array();			
 
 			$pass = 0;
 			if(!empty($myrows[0]->username)):
@@ -179,6 +245,7 @@ switch ($_REQUEST['func']) {
 				$_SESSION['user']['id'] = $session[0]->id;
 				$_SESSION['user']['mobile_number'] = $session[0]->mobile_number;
 				$_SESSION['user']['username'] = $session[0]->username;
+				$_SESSION['user']['user_avatar'] = $session[0]->user_avatar;
 
 				$res['result'] = true;
 

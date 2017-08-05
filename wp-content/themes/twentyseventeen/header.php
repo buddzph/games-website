@@ -264,52 +264,70 @@ $homeurl = esc_url( $url );
 
 				// Variable to store your files
 				var files = $('#ImageBrowse')[0].files[0];
-				var formData = new FormData($('#imageUploadForm')[0]);
-				
-				formData.append('func', "processusername");
-				formData.append('mobile_number', current_mobile_number);
-				formData.append('image', files);
 
-				console.log(formData);
-				$.ajax({
-				       url:"<?php echo $homeurl.'/?page_id=344' ?>",
-				       type: 'POST',
-				       data: formData,
-				       cache: false,
-				       dataType: 'json',
-				       processData: false, // Don't process the files
-				       contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-				       success: function(data, textStatus, jqXHR)
-				       {
-				           if(typeof data.error === 'undefined')
-				           {
-				               // Success so call function to process the form
-				               submitForm(event, data);
-				           }
-				           else
-				           {
-				               // Handle errors here
-				               console.log('ERRORS: ' + data.error);
-				           }
+				// VALIDATE IMAGE
+				var ext = $('#ImageBrowse').val().split('.').pop().toLowerCase();
+				if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1 && $('#ImageBrowse').val() != '') {
+					    
+					    // alert('invalid extension!');
 
-				           //dialogusername.dialog( "close" );
+					    updateTips( "Please select image for the avatar." );
 
-						  	updateTips( "You have successfully updated your username." );
+				}else{
 
-						  	//dialogsuccessful.dialog( "open" );
+						var formData = new FormData($('#imageUploadForm')[0]);
+						
+						formData.append('func', "processusername");
+						formData.append('mobile_number', current_mobile_number);
+						formData.append('image', files);
+
+						console.log(formData);
+						$.ajax({
+						       url:"<?php echo $homeurl.'/?page_id=344' ?>",
+						       type: 'POST',
+						       data: formData,
+						       cache: false,
+						       dataType: 'json',
+						       processData: false, // Don't process the files
+						       contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+						       success: function(data, textStatus, jqXHR)
+						       {
+						           if(data.result)
+						           {
+						               
+						           		dialogusername.dialog( "close" );
+
+									  	updateTips( "Account successfully updated." );
+
+									  	dialogsuccessful.dialog( "open" );
+
+						           }
+						           else
+						           {
+						               // Handle errors here
+						               console.log('ERRORS: ' + data.result);
+
+						               updateTips( "Unable to update. Check if you have current password, or new username is already used by other user." );
 
 
-				       },
-				       error: function(jqXHR, textStatus, errorThrown)
-				       {
-				           // Handle errors here
-				           console.log('ERRORS: ' + textStatus);
-				           // STOP LOADING SPINNER
+						           }
 
-				           updateTips( "Unable to update. Check if you have current password, or new username is already used by other user." );
-				       }
-				  
-				  });
+						            
+
+
+						       },
+						       error: function(jqXHR, textStatus, errorThrown)
+						       {
+						           // Handle errors here
+						           console.log('ERRORS: ' + textStatus);
+						           // STOP LOADING SPINNER
+
+						           updateTips( "Unable to update. Check if you have current password, or new username is already used by other user." );
+						       }
+						  
+						});
+
+				} // END VALIDATE IMAGE
 
 			}
 	        
@@ -331,7 +349,7 @@ $homeurl = esc_url( $url );
 	 	/*FIRST POPUP TO ENTER MOBILE NUMBER ONLY AND TO CHECK IF USERNAME IS EXIST OR NOT. IF NOT WILL OPEN THE NEXT DIALOG.*/
 	    dialog = $( "#dialog-form" ).dialog({
 	      autoOpen: false,
-	      height: 350,
+	      height: 'auto',
 	      width: 400,
 	      modal: true,
 	      buttons: {
@@ -354,7 +372,7 @@ $homeurl = esc_url( $url );
 	    /*DIALOG NUMBER 2. ENTER USERNAME AND PASSWORD*/
 	    dialogusername = $( "#dialog-form-username" ).dialog({
 	      autoOpen: false,
-	      height: 600,
+	      height: 'auto',
 	      width: 400,
 	      modal: true,
 	      buttons: {
@@ -381,7 +399,7 @@ $homeurl = esc_url( $url );
 	    /*DIALOG NUMBER 3. USERNAME SUCCESSFULLY UPDATED*/
 	    dialogsuccessful = $( "#dialog-successful" ).dialog({
 	      autoOpen: false,
-	      height: 200,
+	      height: 'auto',
 	      width: 400,
 	      modal: true,	      
 	      close: function() {
@@ -392,7 +410,7 @@ $homeurl = esc_url( $url );
 	    /*DIALOG NUMBER 4. USERNAME SUCCESSFULLY UPDATED*/
 	    dialogbuycoin = $( "#dialog-buycoin" ).dialog({
 	      autoOpen: false,
-	      height: 250,
+	      height: 'auto',
 	      width: 400,
 	      modal: true,
 	      buttons: {
@@ -409,7 +427,7 @@ $homeurl = esc_url( $url );
 	    /*DIALOG NUMBER 4. USERNAME SUCCESSFULLY UPDATED*/
 	    dialoggetrewards = $( "#dialog-getrewards" ).dialog({
 	      autoOpen: false,
-	      height: 300,
+	      height: 'auto',
 	      width: 800,
 	      modal: true,	      
 	      close: function() {
@@ -512,6 +530,19 @@ $homeurl = esc_url( $url );
       <input type="password" name="retypepassword" id="retypepassword" value="" placeholder="" class="text ui-widget-content ui-corner-all">
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+      <center>
+      	<br />
+      	<?php if(isset($_SESSION['user']['user_avatar']) and !empty($_SESSION['user']['user_avatar'])): ?>
+
+      		<img src="<?php echo $homeurl; ?>/usericon/cropped/<?php echo $_SESSION['user']['user_avatar']; ?>" alt="" class="user_avatar">
+
+      	<?php else: ?>
+
+      		<b>NO AVATAR SELECTED YET!</b>
+
+      	<?php endif; ?>
+      </center>
+      <label for="name">Upload Avatar: <span style="font-size: 10px;">Max file size: 500 x 500 px.</span></label>
       <input type="file" id="ImageBrowse" name="image" size="30"/>
     </fieldset>
   </form>
@@ -550,10 +581,20 @@ $homeurl = esc_url( $url );
 						<?php else: ?>
 							<span>Logged in as: <b><?php echo $_SESSION['user']['username']; ?></b>&nbsp; &nbsp;<a href="javascript: void(0);" id="logout">Logout</a></span>
 						<?php endif; ?>
-						<a href="javascript: void(0);" id="updateusername"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Faces.png" alt=""></a>
+						<a href="javascript: void(0);" id="updateusername">
+							<?php if(isset($_SESSION['user']['user_avatar']) and !empty($_SESSION['user']['user_avatar'])): ?>
+
+					      		<img src="<?php echo $homeurl; ?>/usericon/cropped/<?php echo $_SESSION['user']['user_avatar']; ?>" alt="">
+
+					      	<?php else: ?>
+
+					      		<img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/62x62-Account-Icon.png" alt="" class="planeicon">
+
+					      	<?php endif; ?>
+						</a>
 					<?php else: ?>
 						<span>Sign In</span>
-						<a href="javascript: void(0);" id="mobilecheck"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/62x62-Account-Icon.png" alt=""></a>
+						<a href="javascript: void(0);" id="mobilecheck"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/62x62-Account-Icon.png" alt="" class="planeicon"></a>
 					<?php endif; ?>
 				</div>
 				<a href="<?php echo $homeurl; ?>"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/GlyphGames-Logo-Light.png" alt=""></a>
