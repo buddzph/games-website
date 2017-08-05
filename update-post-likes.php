@@ -1,5 +1,5 @@
 <?php
-if($_SERVER['HTTP_HOST'] == 'localhost'):
+if(isset($_SERVER['HTTP_HOST']) and $_SERVER['HTTP_HOST'] == 'localhost'):
    define('DB_HOSTNAME', 'localhost');
    define('DB_USERNAME', 'root');
    define('DB_PASSWORD', '');
@@ -19,25 +19,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-//echo "Connected successfully";
-
-
-function getUrlContent($url){
-	// Get cURL resource
-	$curl = curl_init();
-	// Set some options - we are passing in a useragent too here
-	curl_setopt_array($curl, array(
-	    CURLOPT_RETURNTRANSFER => 1,
-	    CURLOPT_URL => $url,
-	    CURLOPT_USERAGENT => 'TEST'
-	));
-	// Send the request & save response to $resp
-	$resp = curl_exec($curl);
-	// Close request to clear up some resources
-	curl_close($curl);
-
-	return $resp;
-}
+echo "Script is running. Please wait!";
 
 
 $sql = "SELECT * FROM ggames_posts LEFT JOIN ggames_postmeta ON(ggames_posts.ID = ggames_postmeta.post_id) LEFT JOIN ggames_term_relationships ON(ggames_posts.ID = ggames_term_relationships.object_id) LEFT JOIN ggames_term_taxonomy ON(ggames_term_relationships.term_taxonomy_id = ggames_term_taxonomy.term_taxonomy_id) WHERE ggames_term_taxonomy.term_id IN (4) AND ggames_term_taxonomy.taxonomy = 'category' GROUP BY ggames_posts.ID";
@@ -47,11 +29,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        /*echo "id: " . $row["ID"]. " - Name: " . $row["post_name"]. " - Guid: ".$row["guid"];
-
-        //echo getUrlContent('https://graph.facebook.com/?id='.$row["guid"]);
-
-        echo "<br>";*/
+        /*echo "id: " . $row["ID"]. " - Name: " . $row["post_name"]. " - Guid: ".$row["guid"];*/
 
         $test = file_get_contents('https://graph.facebook.com/?id='.$row["guid"]);
 
