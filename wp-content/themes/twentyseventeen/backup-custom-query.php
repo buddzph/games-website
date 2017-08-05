@@ -65,7 +65,7 @@ $postid = $row['post_id'];
 echo '<div class="highestrated">';
 echo '<a href="'.get_permalink( $postid ).'">'.get_the_post_thumbnail( $postid, 'twentyseventeen-featured-image' ).'</a>';
 echo '<a href="'.get_permalink( $postid ).'">'.$row['post_title'].'</a>';
-echo '<a href="https://facebook.com/client" class="fb-like js-fb-like"><i class="ico ico-fb"></i>Like</span></a>';
+echo '<div class="fbcount"><i class="ico ico-fb"></i> <span class="bold">Likes</span> '.$row['likes_count'].'</div>';
 echo '</div>';
 }
 [/insert_php]
