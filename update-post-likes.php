@@ -19,7 +19,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-echo "Script is running. Please wait!";
+echo "Script is running. Please wait!...";
 
 
 $sql = "SELECT * FROM ggames_posts LEFT JOIN ggames_postmeta ON(ggames_posts.ID = ggames_postmeta.post_id) LEFT JOIN ggames_term_relationships ON(ggames_posts.ID = ggames_term_relationships.object_id) LEFT JOIN ggames_term_taxonomy ON(ggames_term_relationships.term_taxonomy_id = ggames_term_taxonomy.term_taxonomy_id) WHERE ggames_term_taxonomy.term_id IN (4) AND ggames_term_taxonomy.taxonomy = 'category' GROUP BY ggames_posts.ID";
@@ -64,7 +64,7 @@ if ($result->num_rows > 0) {
 
     }
 
-    echo 'Done!\n';
+    echo 'Done! ';
 } else {
     echo "0 results";
 }

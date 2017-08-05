@@ -47,7 +47,25 @@ echo '<div class="highestrated">';
 echo '<a href="'.get_permalink( $postid ).'">'.get_the_post_thumbnail( $postid, 'twentyseventeen-featured-image' ).'</a>';
 echo '<a href="'.get_permalink( $postid ).'">'.$row['rating_posttitle'].'</a>';
 echo '[ratings id="'.$postid.'" results="true"]';
-echo '</div>
-';
+echo '</div>';
+}
+[/insert_php]
+
+
+/*********************************/
+
+-- POST LIKES --
+
+[insert_php]
+global $wpdb;
+$myrows = mysql_query( "SELECT * FROM post_likes ORDER BY likes_count DESC, post_title ASC" );
+
+while ($row = mysql_fetch_assoc($myrows)) {
+$postid = $row['post_id'];
+echo '<div class="highestrated">';
+echo '<a href="'.get_permalink( $postid ).'">'.get_the_post_thumbnail( $postid, 'twentyseventeen-featured-image' ).'</a>';
+echo '<a href="'.get_permalink( $postid ).'">'.$row['post_title'].'</a>';
+echo '<a href="https://facebook.com/client" class="fb-like js-fb-like"><i class="ico ico-fb"></i>Like</span></a>';
+echo '</div>';
 }
 [/insert_php]
