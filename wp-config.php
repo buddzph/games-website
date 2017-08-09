@@ -37,10 +37,10 @@ else:
 	define('DB_NAME', 'db_html5games');
 
 	/** MySQL database username */
-	define('DB_USER', 'user_html5games');
+	define('DB_USER', 'glyph_dbuser');
 
 	/** MySQL database password */
-	define('DB_PASSWORD', 'pw_html5g@m3s!');
+	define('DB_PASSWORD', 'Qebr91951Qw!');
 
 endif;
 

@@ -6,8 +6,8 @@ if($_SERVER['HTTP_HOST'] == 'localhost'):
    define('DB_DATABASE', 'glyphgames');
 else:
    define('DB_HOSTNAME', 'localhost');
-   define('DB_USERNAME', 'user_html5games');
-   define('DB_PASSWORD', 'pw_html5g@m3s!');
+   define('DB_USERNAME', 'glyph_dbuser');
+   define('DB_PASSWORD', 'Qebr91951Qw!');
    define('DB_DATABASE', 'db_html5games');
 endif;
 
