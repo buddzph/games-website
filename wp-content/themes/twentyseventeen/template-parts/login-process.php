@@ -2,47 +2,184 @@
 /* 
 Template Name: Login Process
 */ 
-
+define('WP_DEBUG', true);
+define('WP_DEBUG_LOG', true);
+define('WP_DEBUG_DISPLAY', false);
+@ini_set('display_errors', 1);
 
 //get_header();
 
 global $wpdb;
 
+$wpdb->show_errors();
+
+// SMART NUMBER CHECKER
+function isSmart($cellnum) {
+	$smart_prefix = array(
+		"900", "907", "908", "909", "910", "911", "912", "913", "914", "918", 
+		"919", "920", "921", "928", "929", "930", "938", "939", "940", "946",
+		"947", "948", "949", "950", "951", "989", "998", "999"
+	);
+	$numberPrefix = substr($cellnum, -10, 3);
+
+	if (in_array($numberPrefix, $smart_prefix)) return true;
+	return false;
+}
+
+
+// GLOBE NUMBER CHECKER
+function isGlobe($cellnum) {
+	$globe_prefix = array(
+	   "905", "906", "915", "916", "917", "925", "926", "927", "935", "936", 
+	   "937", "945", "973", "974", "975", "976", "977", "978", "979", "994", 
+	   "995", "996", "997" 
+	);
+	$numberPrefix = substr($cellnum, -10, 3);
+	if (in_array($numberPrefix, $globe_prefix)) return true;
+	return false;
+}
+
+// GENERATE 6 DIGITS TEMPORARY PASSWORD
+function genRandStr(){
+  $a = '';
+  $b = '';
+
+  for($i = 0; $i < 3; $i++){
+    $a .= chr(mt_rand(65, 90)); // see the ascii table why 65 to 90.    
+    $b .= mt_rand(0, 9);
+  }
+
+  return $a . $b;
+}
+
+
 switch ($_REQUEST['func']) {
+	case 'registermobile':
+		// get last 10 digits
+		$num_request = substr($_REQUEST['mobile_number'], -10);
+
+		$mobile_number = $num_request;
+
+		$checknumber = false;
+		$smartuser = false;
+		$globeuser = false;
+
+		if(isSmart($mobile_number)):
+			$checknumber = true;
+			$smartuser = true;
+		endif;
+
+		if(isGlobe($mobile_number)):
+			$checknumber = true;
+			$globeuser = true;
+		endif;
+
+		if($checknumber and strlen($mobile_number) == 10):
+
+			try {
+
+				$myrows = $wpdb->get_results( "SELECT * FROM user WHERE celno = '". $mobile_number ."'" );
+
+				if(count($myrows) > 0):
+
+					// MEANING THE NUMBER IS EXIST IN THE DATABASE
+					$res['result'] = false;
+
+				else:
+
+					// INSERT AND SEND TEMPORARY PASSWORD AND FREE COINS
+					$temppass = genRandStr();
+
+					$ins['celno'] = $mobile_number;
+					$ins['password'] = md5($temppass);
+					$ins['dt_registered'] = date('Y-m-d H:i:s');
+					$ins['tot_freetokens'] = 10;
+					$ins['tokens'] = 10;
+
+					$wpdb->insert( 'user', $ins );
+
+					// PUT THE CODE SEND TEMPORARY PASSWORD TO MOBILE
+
+						if($smartuser):
+
+						endif;
+
+						if($globeuser):
+
+						endif;
+
+					// END PUT THE CODE SEND TEMPORARY PASSWORD TO MOBILE
+
+					$res['temppass'] = $temppass;
+					$res['result'] = true;
+
+				endif;
+
+			} catch (Exception $e) {
+
+          		$res['result'] = false;
+
+          	}
+
+        else:
+
+        	$res['result'] = false;
+
+		endif;
+
+		break;
+
 	case 'processlogin':
-		$mobile_number = $_REQUEST['mobile_number'];
 
+		// get last 10 digits
+		$username = $_REQUEST['loginusername'];
+		$password = md5($_REQUEST['loginpassword']);
 
-		$myrows = $wpdb->get_results( "SELECT * FROM subscribers WHERE mobile_number = '". $mobile_number ."'" );
+		$ismobilenumber = false;
+	    if (!preg_match('/^[0-9]+$/', $username)) {
+	        // its a username
+	    } else {
+	    	// its a password
+	        $ismobilenumber = true;
+	    }
 
-		/*echo "SELECT * FROM subscribers WHERE mobile_number = '". $mobile_number ."'";
+	    if($ismobilenumber):
 
-		echo '<pre>';
-		print_r($myrows);
-		echo '</pre>';*/
+	    	$num_request = substr($username, -10);
+
+			$mobile_number = $num_request;
+
+			$myrows = $wpdb->get_results( "SELECT * FROM user WHERE celno = '". $mobile_number ."' and password = '". $password ."'" );
+
+		else:
+
+			$myrows = $wpdb->get_results( "SELECT * FROM user WHERE username = '". $username ."' and password = '". $password ."'" );
+
+		endif;
 
 		$res = array();
 
-		$table = 'subscribers';
+		/*$table = 'subscribers';
 		$data = array();
 		$data['lastlogin'] = date('Y-m-d H:i:s');
 
-		$wpdb->update( $table, $data, array('mobile_number' => $mobile_number) );
+		$wpdb->update( $table, $data, array('mobile_number' => $mobile_number) );*/
 
 		if(count($myrows) > 0):
 
-			$res['id'] = $myrows[0]->id;
-			$res['mobile_number'] = $myrows[0]->mobile_number;
-			$res['username'] = $myrows[0]->username;
-			$res['firstname'] = $myrows[0]->firstname;
-			$res['lastname'] = $myrows[0]->lastname;
-			$res['email'] = $myrows[0]->email;
-			$res['result'] = true;
-
 			$_SESSION['user']['id'] = $myrows[0]->id;
-			$_SESSION['user']['mobile_number'] = $myrows[0]->mobile_number;
+			$_SESSION['user']['mobile_number'] = $myrows[0]->celno;
 			$_SESSION['user']['username'] = $myrows[0]->username;
+			$_SESSION['user']['firstname'] = $myrows[0]->firstname;
+			$_SESSION['user']['lastname'] = $myrows[0]->lastname;
+			$_SESSION['user']['street'] = $myrows[0]->street;
+			$_SESSION['user']['city'] = $myrows[0]->city;
+			$_SESSION['user']['country'] = $myrows[0]->country;
+			$_SESSION['user']['zip'] = $myrows[0]->zip;
+			$_SESSION['user']['email'] = $myrows[0]->email;
 			$_SESSION['user']['user_avatar'] = $myrows[0]->user_avatar;
+
+			$res['result'] = true;
 
 		else:
 
@@ -50,13 +187,12 @@ switch ($_REQUEST['func']) {
 
 		endif;
 
-
 		break;
 	
 
-	case 'processusername':
+	case 'processupdateaccountdetails':
 
-		$table = 'subscribers';
+		$table = 'user';
 		$data = array();
 
 
@@ -144,8 +280,15 @@ switch ($_REQUEST['func']) {
 		$mobile_number = $_REQUEST['mobile_number'];
 		$username = $_REQUEST['username'];
 		$password = $_REQUEST['password'];
+		$firstname = $_REQUEST['firstname'];
+		$lastname = $_REQUEST['lastname'];
+		$street = $_REQUEST['street'];
+		$city = $_REQUEST['city'];
+		$country = $_REQUEST['country'];
+		$zip = $_REQUEST['zip'];
+		$email = $_REQUEST['email'];
 
-		$myrows = $wpdb->get_results( "SELECT * FROM subscribers WHERE mobile_number = '". $mobile_number ."'" );
+		$myrows = $wpdb->get_results( "SELECT * FROM user WHERE celno = '". $mobile_number ."'" );
 
 		/*echo "SELECT * FROM subscribers WHERE mobile_number = '". $mobile_number ."'";
 
@@ -160,15 +303,53 @@ switch ($_REQUEST['func']) {
 			$res['result'] = true;
 
 			$pass = 0;
-			if(!empty($myrows[0]->username)):
 
-				if($myrows[0]->username != $username):
 
-					$checkusername = $wpdb->get_results( "SELECT * FROM subscribers WHERE username = '".$username."' and mobile_number != '". $mobile_number ."'" );
+			/*CHECK EMAIL ADDRESS*/
+			$checkemailaddress = $wpdb->get_results( "SELECT * FROM user WHERE email = '".$email."' and celno != '". $mobile_number ."'" );
 
-					if(count($checkusername) > 0):
+			if(count($checkemailaddress) > 0): // email is taken
 
-						$res['result'] = false;
+				$res['errmsg'] = 'Email address is already taken. Kindly supply valid email address.';
+				$res['result'] = false;
+
+			else: // email pass.
+
+				if(!empty($myrows[0]->username)):
+
+					if($myrows[0]->username != $username):
+
+						$checkusername = $wpdb->get_results( "SELECT * FROM user WHERE username = '".$username."' and celno != '". $mobile_number ."'" );
+
+						if(count($checkusername) > 0):
+
+							$res['errmsg'] = 'Username is already taken. Kindly supply valid username.';
+							$res['result'] = false;
+
+						else:
+
+							if(empty($myrows[0]->password)):
+
+								if(!empty($password)):
+									$data['password'] = md5($password);
+									$pass++;
+								else:
+									$res['errmsg'] = 'Please supply valid password.';
+									$res['result'] = false;
+								endif;
+
+							else:
+
+								if(!empty($password)):
+									$data['password'] = md5($password);								
+								endif;
+								$pass++;
+
+							endif;
+
+						endif;
+
+						//echo 1;
 
 					else:
 
@@ -178,85 +359,80 @@ switch ($_REQUEST['func']) {
 								$data['password'] = md5($password);
 								$pass++;
 							else:
+								$res['errmsg'] = 'Please supply valid password.';
 								$res['result'] = false;
 							endif;
 
 						else:
 
 							if(!empty($password)):
-								$data['password'] = md5($password);								
+								$data['password'] = md5($password);							
 							endif;
 							$pass++;
 
 						endif;
 
-					endif;
+						//echo 2;
 
-					//echo 1;
+					endif;
 
 				else:
 
-					if(empty($myrows[0]->password)):
-
-						if(!empty($password)):
-							$data['password'] = md5($password);
-							$pass++;
-						else:
-							$res['result'] = false;
-						endif;
-
+					if(!empty($password)):
+						$data['password'] = md5($password);
+						$pass++;
 					else:
 
-						if(!empty($password)):
-							$data['password'] = md5($password);							
-						endif;
-						$pass++;
+						$res['errmsg'] = 'Please supply valid password.';
+						$res['result'] = false;
 
 					endif;
 
-					//echo 2;
+					//echo 3;
 
-				endif;
+				endif; // end of checking username
 
-			else:
-
-				if(!empty($password)):
-					$data['password'] = md5($password);
-					$pass++;
-				else:
-
-					$res['result'] = false;
-
-				endif;
-
-				//echo 3;
-
-			endif;
+			endif; // end of checking email address
 
 			if($pass > 0):
 
 				$data['username'] = $username;
-				$data['lastlogin'] = date('Y-m-d H:i:s');
+				$data['firstname'] = $firstname;
+				$data['lastname'] = $lastname;
+				$data['street'] = $street;
+				$data['city'] = $city;
+				$data['country'] = $country;
+				$data['zip'] = $zip;
+				$data['email'] = $email;
 
-				$wpdb->update( $table, $data, array('mobile_number' => $mobile_number) );
+				$wpdb->update( $table, $data, array('celno' => $mobile_number) );
 
-				$session = $wpdb->get_results( "SELECT * FROM subscribers WHERE mobile_number = '". $mobile_number ."'" );
+				$session = $wpdb->get_results( "SELECT * FROM user WHERE celno = '". $mobile_number ."'" );
 
 				$_SESSION['user']['id'] = $session[0]->id;
-				$_SESSION['user']['mobile_number'] = $session[0]->mobile_number;
+				$_SESSION['user']['celno'] = $session[0]->celno;
 				$_SESSION['user']['username'] = $session[0]->username;
+				$_SESSION['user']['firstname'] = $session[0]->firstname;
+				$_SESSION['user']['lastname'] = $session[0]->lastname;
+				$_SESSION['user']['street'] = $session[0]->street;
+				$_SESSION['user']['city'] = $session[0]->city;
+				$_SESSION['user']['country'] = $session[0]->country;
+				$_SESSION['user']['zip'] = $session[0]->zip;
+				$_SESSION['user']['email'] = $session[0]->email;
 				$_SESSION['user']['user_avatar'] = $session[0]->user_avatar;
 
 				$res['result'] = true;
 
 			else:
 
+				// $res['errmsg'] = 'Please complete all the required fields.';
 				$res['result'] = false;
 
 			endif;
 
 		else:
 
+			$res['errmsg'] = 'Mobile number not found!';
 			$res['result'] = false;
 
 		endif;

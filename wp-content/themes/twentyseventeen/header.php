@@ -108,8 +108,18 @@ $homeurl = esc_url( $url );
 	      username = $( "#username" ),
 	      password = $( "#password" ),
 	      retypepassword = $( "#retypepassword" ),
+	      loginusername = $( "#loginusername" ),
+	      loginpassword = $( "#loginpassword" ),
+	      firstname = $( "#firstname" ),
+	      lastname = $( "#lastname" ),
+	      street = $( "#street" ),
+	      city = $( "#city" ),
+	      country = $( "#country" ),
+	      zip = $( "#zip" ),
+	      email = $( "#email" ),
 	      allFields = $( [] ).add( mobile_number ),
-	      allFieldsusername = $( [] ).add( username ).add( password ).add( retypepassword ),
+	      allFieldsaccountdetails = $( [] ).add( username ).add( password ).add( retypepassword ).add( firstname ).add( lastname ).add( street ).add( city ).add( country ).add( zip ).add( email ),
+	      allFieldslogin = $( [] ).add( loginusername ).add( loginpassword ),
 	      tips = $( ".validateTips" );
 	 
 	    function updateTips( t ) {
@@ -165,30 +175,18 @@ $homeurl = esc_url( $url );
 
 			  /*console.log(mobile_number.val());*/
 
-			$.post( "<?php echo $homeurl.'/?page_id=344' ?>", { func: "processlogin", mobile_number: mobile_number.val() }, function( data ) {
+			$.post( "<?php echo $homeurl.'/?page_id=344' ?>", { func: "registermobile", mobile_number: mobile_number.val() }, function( data ) {
 			  // console.log( data.id );
 
-				if(data.result == true){
+				if(data.result == true){					
 
-					if( data.username == '' ){
-
-						current_mobile_number = data.mobile_number;
-						from_login = true;
-
-						updateTips( "You don't have username yet. Kindly create please." );
+						updateTips( "Access has been sent to your mobile. Please wait!" + "Remove this temp pass: " + data.temppass );
 						dialog.dialog( "close" );
-						dialogusername.dialog( "open" );
-
-					} else {
-
-						dialog.dialog( "close" );
-						location.reload();
-
-					}
+						dialogsuccessful.dialog( "open" );
 
 				} else {
 					
-			        updateTips( "Mobile number Not Found!" );
+			        updateTips( "Mobile exists or mobile number is not in proper format!" );
 
 				}
 
@@ -200,13 +198,84 @@ $homeurl = esc_url( $url );
 	      return valid;
 	    }
 
-	    function checkUsername() {
+	    function userlogin() {
 	      var valid = true;
-	      allFieldsusername.removeClass( "ui-state-error" );
+	      allFieldslogin.removeClass( "ui-state-error" );
+	 
+	      valid = valid && checkLengthFields( loginusername, "loginusername", 6, 11 );
+	 
+	      valid = valid && checkRegexp( loginusername, /^([0-9a-zA-Z])+$/, "Username field only allow : a-z 0-9" );
+
+	      valid = valid && checkLengthFields( loginpassword, "password", 6, 10 );
+	 
+	      valid = valid && checkRegexp( loginpassword, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+	 
+	      if ( valid ) {
+
+			  /*console.log(mobile_number.val());*/
+
+			$.post( "<?php echo $homeurl.'/?page_id=344' ?>", { func: "processlogin", loginusername: loginusername.val(), loginpassword: loginpassword.val() }, function( data ) {
+			  // console.log( data.id );
+
+				if(data.result == true){
+
+					/*if( data.username == '' ){
+
+						current_mobile_number = data.mobile_number;
+						from_login = true;
+
+						updateTips( "You don't have username yet. Kindly create please." );
+						dialog.dialog( "close" );
+						dialogupdateaccountdetails.dialog( "open" );
+
+					} else {
+
+						dialog.dialog( "close" );
+						location.reload();
+
+					}*/
+
+					current_mobile_number = data.mobile_number;
+
+					updateTips( "Login Successful." );
+					dialoglogin.dialog( "close" );
+					dialogsuccessful.dialog( "open" );
+
+				} else {
+					
+			        updateTips( "Account not found!" );
+
+				}
+
+
+			}, "json");
+
+	        
+	      }
+	      return valid;
+	    }
+
+	    function forgotpassword() {
+	    	alert('go to forgot password dialog.')
+	    }
+
+	    function updateUserAccountDetails() {
+	      var valid = true;
+	      allFieldsaccountdetails.removeClass( "ui-state-error" );
 	 
 	      valid = valid && checkLengthFields( username, "username", 6, 10 );
 	 
 	      valid = valid && checkRegexp( username, /^([0-9a-zA-Z])+$/, "Username field only allow : a-z 0-9" );
+
+	      valid = valid && checkLengthFields( firstname, "firstname", 6, 10 );
+	 
+	      valid = valid && checkRegexp( firstname, /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/, "Firstname field only allow : a-z 0-9" );
+
+	      valid = valid && checkLengthFields( lastname, "lastname", 6, 10 );
+	 
+	      valid = valid && checkRegexp( lastname, /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/, "Lastname field only allow : a-z 0-9" );
+	 
+	      valid = valid && checkRegexp( email, emailRegex, "Please supply valid email." );
 
 
 	      <?php if(isset($_SESSION['user']['username']) and !empty($_SESSION['user']['username'])): ?>
@@ -277,7 +346,7 @@ $homeurl = esc_url( $url );
 
 						var formData = new FormData($('#imageUploadForm')[0]);
 						
-						formData.append('func', "processusername");
+						formData.append('func', "processupdateaccountdetails");
 						formData.append('mobile_number', current_mobile_number);
 						formData.append('image', files);
 
@@ -295,7 +364,7 @@ $homeurl = esc_url( $url );
 						           if(data.result)
 						           {
 						               
-						           		dialogusername.dialog( "close" );
+						           		dialogupdateaccountdetails.dialog( "close" );
 
 									  	updateTips( "Account successfully updated." );
 
@@ -307,7 +376,7 @@ $homeurl = esc_url( $url );
 						               // Handle errors here
 						               console.log('ERRORS: ' + data.result);
 
-						               updateTips( "Unable to update. Check if you have current password, or new username is already used by other user." );
+						               updateTips( data.errmsg );
 
 
 						           }
@@ -369,16 +438,40 @@ $homeurl = esc_url( $url );
 	      checkMobile();
 	    });
 	 
-	    /*DIALOG NUMBER 2. ENTER USERNAME AND PASSWORD*/
-	    dialogusername = $( "#dialog-form-username" ).dialog({
+	    /*LOGIN DIALOG.*/
+	    dialoglogin = $( "#dialog-form-login" ).dialog({
 	      autoOpen: false,
 	      height: 'auto',
 	      width: 400,
 	      modal: true,
 	      buttons: {
-	        "Update Username": checkUsername/*,
+	        "Sign In": userlogin,
+	        "Forgot Password": forgotpassword,
 	        Cancel: function() {
-	          dialogusername.dialog( "close" );
+	          dialoglogin.dialog( "close" );
+	        }
+	      },
+	      close: function() {
+	        form[ 0 ].reset();
+	        allFieldslogin.removeClass( "ui-state-error" );
+	      }
+	    });
+	 
+	    form = dialoglogin.find( "form" ).on( "submit", function( event ) {
+	      event.preventDefault();
+	      userlogin();
+	    });
+
+	    /*DIALOG NUMBER 2. ENTER USERNAME AND PASSWORD*/
+	    dialogupdateaccountdetails = $( "#dialog-form-username" ).dialog({
+	      autoOpen: false,
+	      height: 'auto',
+	      width: 400,
+	      modal: true,
+	      buttons: {
+	        "Update Account Details": updateUserAccountDetails/*,
+	        Cancel: function() {
+	          dialogupdateaccountdetails.dialog( "close" );
 	        }*/
 	      },
 	      close: function() {
@@ -386,14 +479,14 @@ $homeurl = esc_url( $url );
 	        	location.reload();
 	        }else{
 	        	formusername[ 0 ].reset();
-	        	allFieldsusername.removeClass( "ui-state-error" );
+	        	allFieldsaccountdetails.removeClass( "ui-state-error" );
 	        }
 	      }
 	    });
 	 
-	    formusername = dialogusername.find( "form" ).on( "submit", function( event ) {
+	    formusername = dialogupdateaccountdetails.find( "form" ).on( "submit", function( event ) {
 	      event.preventDefault();
-	      checkUsername();
+	      updateUserAccountDetails();
 	    });
 
 	    /*DIALOG NUMBER 3. USERNAME SUCCESSFULLY UPDATED*/
@@ -416,7 +509,7 @@ $homeurl = esc_url( $url );
 	      buttons: {
 	        "Buy Coins": buycoins/*,
 	        Cancel: function() {
-	          dialogusername.dialog( "close" );
+	          dialogupdateaccountdetails.dialog( "close" );
 	        }*/
 	      },      
 	      close: function() {
@@ -440,8 +533,12 @@ $homeurl = esc_url( $url );
 	      dialog.dialog( "open" );
 	    });
 
+	    $( "#userlogin" ).button().on( "click", function() {
+	      dialoglogin.dialog( "open" );
+	    });
+
 	    $( "#updateusername" ).button().on( "click", function() {
-	      dialogusername.dialog( "open" );
+	      dialogupdateaccountdetails.dialog( "open" );
 	    });
 
 	    $( "#logout" ).button().on( "click", function() {
@@ -487,6 +584,8 @@ $homeurl = esc_url( $url );
 	    $( "#mobilecheck" ).removeClass('ui-button');
 	    $( "#updateusername" ).removeClass('ui-button');
 	    $( "#logout" ).removeClass('ui-button');
+	    $( "#logout" ).removeClass('ui-widget');
+	    $( "#userlogin" ).removeClass('ui-button');
 
 	  });
 	  </script>
@@ -501,7 +600,7 @@ $homeurl = esc_url( $url );
 
 <body <?php body_class(); ?>>
 
-<div id="dialog-form" title="Login with your Mobile Number" style="display: none;"> 
+<div id="dialog-form" title="Register with your Mobile Number" style="display: none;"> 
 	<p class="validateTips">Mobile number is required.</p>
   <form>
     <fieldset>
@@ -514,20 +613,49 @@ $homeurl = esc_url( $url );
   </form>
 </div>
 
-<div id="dialog-form-username" title="Update Username" style="display: none;">
+<div id="dialog-form-login" title="Sign In" style="display: none;"> 
+	<p class="validateTips">Username or Mobile number is required.</p>
+  <form>
+    <fieldset>
+      <label for="name">Username or Mobile Number:</label>
+      <input type="text" name="loginusername" id="loginusername" value="" placeholder="" class="text ui-widget-content ui-corner-all">
+ 	  <label for="loginpassword">Password:</label>
+ 	  <input type="password" name="loginpassword" id="loginpassword" class="text ui-widget-content ui-corner-all">
+
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
+</div>
+
+<div id="dialog-form-username" title="Update Account Details" style="display: none;">
  	<p class="validateTips">All form fields are required.</p>
   <form name="photo" id="imageUploadForm" enctype="multipart/form-data">
     <fieldset>
-      <label for="name">Username:</label>
+      <label for="username">Username:</label>
       <input type="text" name="username" id="username" value="<?php echo $_SESSION['user']['username']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
- 	  <label for="name">Password:
+ 	  <label for="password">Password:
  	  	<?php if(isset($_SESSION['user']['username']) and !empty($_SESSION['user']['username'])): ?>
  	  		<span style="font-size: 10px;">Leave blank if you don't want to change your current password.</span>
  	  	<?php endif; ?>
  	  </label>
       <input type="password" name="password" id="password" value="" placeholder="" class="text ui-widget-content ui-corner-all">
-      <label for="name">Re-Type Password:</label>
+      <label for="retypepassword">Re-Type Password:</label>
       <input type="password" name="retypepassword" id="retypepassword" value="" placeholder="" class="text ui-widget-content ui-corner-all">
+      <label for="firstname">Firstname:</label>
+      <input type="text" name="firstname" id="firstname" value="<?php echo $_SESSION['user']['firstname']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
+      <label for="lastname">Lastname:</label>
+      <input type="text" name="lastname" id="lastname" value="<?php echo $_SESSION['user']['lastname']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
+      <label for="street">Street:</label>
+      <input type="text" name="street" id="street" value="<?php echo $_SESSION['user']['street']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
+      <label for="city">City:</label>
+      <input type="text" name="city" id="city" value="<?php echo $_SESSION['user']['city']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
+      <label for="country">Country:</label>
+      <input type="text" name="country" id="country" value="<?php echo $_SESSION['user']['country']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
+      <label for="zip">Zip:</label>
+      <input type="text" name="zip" id="zip" value="<?php echo $_SESSION['user']['zip']; ?>" style="width: 40% !important;" placeholder="" class="text ui-widget-content ui-corner-all">
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" value="<?php echo $_SESSION['user']['email']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
       <center>
@@ -593,8 +721,8 @@ $homeurl = esc_url( $url );
 					      	<?php endif; ?>
 						</a>
 					<?php else: ?>
-						<span>Sign In</span>
-						<a href="javascript: void(0);" id="mobilecheck"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/62x62-Account-Icon.png" alt="" class="planeicon"></a>
+						<span><a href="javascript: void(0);" id="mobilecheck">Register</a> | <a href="javascript: void(0);" id="userlogin">Login</a></span>
+						<img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/62x62-Account-Icon.png" alt="" class="planeicon">
 					<?php endif; ?>
 				</div>
 				<a href="<?php echo $homeurl; ?>"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/GlyphGames-Logo-Light.png" alt=""></a>

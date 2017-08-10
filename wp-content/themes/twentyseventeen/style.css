@@ -4358,6 +4358,7 @@ CUSTOM CSS
 .logo_wrapper .wrap .account_info img {width: 40px; float: right; box-shadow: 0px 0px 15px 5px #fff; border-radius: 100%;}
 .logo_wrapper .wrap .account_info img.planeicon {box-shadow: none; border-radius: 0;}
 .logo_wrapper .wrap .account_info span {float: left; margin-right: 10px; margin-top: 10px; font-size: 12px;}
+.logo_wrapper .wrap .account_info a {font-size: 12px;}
 
 .bt_bb_text p {margin-top: 15px; margin-bottom: 15px !important;}
 span.img_cropper {height: auto !important;}
@@ -4392,6 +4393,7 @@ footer .social-navigation {margin: 0 auto; display: inline-block; position: rela
 .ui-dialog .ui-dialog-titlebar {padding-top: 0; padding-bottom: : 0;}
 .ui-widget-header {background: none !important; border: none !important; font-size: 14px; text-transform: uppercase;}
 img.user_avatar {border-radius: 100%; width: 50%; border: solid 2px green; box-shadow: 0px 0px 15px 5px #999;}
+a#mobilecheck, a#userlogin {font-size: 12px;}
 
 
 /*LATEST POST*/
@@ -4574,6 +4576,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	span.img_cropper {height: auto !important;}
 	input[type="text"], input[type="password"], select, textarea {width: 100% !important;}
 	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
+	.logo_wrapper .wrap .account_info a {font-size: 10px;}
 }
 
 @media screen and (max-width: 520px) {
@@ -4603,6 +4606,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.fb-like-wrapper div {text-align: center !important;}
 	input[type="text"], input[type="password"], select, textarea {width: 100% !important;}
 	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
+	.logo_wrapper .wrap .account_info a {font-size: 10px;}
 }	
 
 @media screen and (max-device-width: 900px) {
@@ -4629,6 +4633,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	span.img_cropper {height: auto !important;}
 	input[type="text"], input[type="password"], select, textarea {width: 100% !important;}
 	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
+	.logo_wrapper .wrap .account_info a {font-size: 10px;}
 }
 
 @media screen and (max-device-width: 520px) {
@@ -4658,6 +4663,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.fb-like-wrapper div {text-align: center !important;}
 	input[type="text"], input[type="password"], select, textarea {width: 100% !important;}
 	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
+	.logo_wrapper .wrap .account_info a {font-size: 10px;}
 }
 
 
