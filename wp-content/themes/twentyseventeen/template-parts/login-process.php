@@ -202,13 +202,13 @@ switch ($_REQUEST['func']) {
 
 		}else{
 
-			echo $path = getcwd();
+			$path = getcwd();
 
 			//echo $path.'/wp-content/themes/twentyseventeen/template-parts/imageManipulator.php';
 
 			//include('imageManipulator.php');
 
-			$uploaddir = $path.'/usericon/';
+			echo $uploaddir = $path.'/usericon/';
 
 			$temp = explode(".", $_FILES["image"]["name"]);
 			$newbasename = round(microtime(true));
