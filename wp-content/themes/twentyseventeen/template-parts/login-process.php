@@ -202,7 +202,7 @@ switch ($_REQUEST['func']) {
 
 		}else{
 
-			$path = getcwd();
+			echo $path = getcwd();
 
 			//echo $path.'/wp-content/themes/twentyseventeen/template-parts/imageManipulator.php';
 
