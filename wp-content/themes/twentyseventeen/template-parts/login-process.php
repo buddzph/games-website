@@ -208,7 +208,7 @@ switch ($_REQUEST['func']) {
 
 			//include('imageManipulator.php');
 
-			echo $uploaddir = $path.'/usericon/';
+			$uploaddir = $path.'/usericon/';
 
 			$temp = explode(".", $_FILES["image"]["name"]);
 			$newbasename = round(microtime(true));
