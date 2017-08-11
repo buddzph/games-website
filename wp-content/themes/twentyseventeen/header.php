@@ -39,6 +39,22 @@ $uploaddir = wp_upload_dir();
 $url = home_url();
 $homeurl = esc_url( $url );
 
+global $wpdb;
+
+// QUERY TO GET LIST OF COUNTRIES
+$countries = $wpdb->get_results( "SELECT * FROM apps_countries" );
+$tablecountries = '';
+$tablecountries .= '<option value"">-- Please select --</option>';
+foreach ($countries as $key => $value) {
+	if(isset($_SESSION['user']['country']) and $value->country_name == $_SESSION['user']['country']):
+		$selected = 'selected="selected"';
+	else:
+		$selected = '';
+	endif;
+
+	$tablecountries .= '<option value"'.$value->country_name.'" '. $selected .'>'.$value->country_name.'</option>';
+}
+
 /*echo 'testinghere<pre>'.print_r($_SESSION['user']).'</pre>';*/
 ?>
 
@@ -651,7 +667,7 @@ $homeurl = esc_url( $url );
       <label for="city">City:</label>
       <input type="text" name="city" id="city" value="<?php echo $_SESSION['user']['city']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
       <label for="country">Country:</label>
-      <input type="text" name="country" id="country" value="<?php echo $_SESSION['user']['country']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
+      <select name="country" id="country"><?php echo $tablecountries; ?></select>
       <label for="zip">Zip:</label>
       <input type="text" name="zip" id="zip" value="<?php echo $_SESSION['user']['zip']; ?>" style="width: 40% !important;" placeholder="" class="text ui-widget-content ui-corner-all">
       <label for="email">Email:</label>
