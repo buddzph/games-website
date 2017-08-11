@@ -4412,6 +4412,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 #coins_home_row .bt_bb_masonry_post_grid .bt_bb_grid_item_post_content .bt_bb_grid_item_post_excerpt {color: #fff; font-size: 0.75em;}
 #coins_home_row .bt_bb_masonry_post_grid .bt_bb_grid_item_post_thumbnail {/*background-color: #ccc;*/ background: none;}
 /*#coins_home_row .bt_bb_masonry_post_grid .bt_bb_grid_item_post_thumbnail img {margin-top: 8px; margin-left: 8px; }*/
+.bt_bb_grid_item_post_thumbnail img, .single-featured-image-header img {border: solid 1px #ccc;}
 /*end LATEST POST*/
 
 /*Rating*/
