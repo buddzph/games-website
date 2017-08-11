@@ -12,8 +12,9 @@
 
 get_header(); ?>
 
-
 <?php
+global $wpdb;
+
 $uid = 0;
 if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])): 
 	$uid = $_SESSION['user']['id'];
@@ -58,6 +59,12 @@ function g_getsessionid($uid, $gamecode)
 
 				    $gamefolder = get_field('embed_game_code');
 
+				    $hasfreeversion = get_field('has_free_version');
+
+				    $playthegame = false;
+
+				    $gametitle = get_the_title();
+
 				    if(!empty($gamefolder)):
 
 				    	// echo htmlspecialchars_decode($gamefolder);
@@ -67,22 +74,101 @@ function g_getsessionid($uid, $gamecode)
 
 						$sessionid = g_getsessionid($uid, $gameid);
 						
+						if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
 
-				    	$const = $homeurl.'/game_storage/'.$gamefolder.'/index.html?nocache&amp;api-url='.$homeurl.'/prod/api/gpctlstatapi.php&amp;session-id='.$sessionid;
+							// QUERY TO CHECK IF USER HAS TOKEN
+							$checkuser = $wpdb->get_results( "SELECT * FROM user WHERE id = " . $_SESSION['user']['id']);
 
-				    	/*echo '<iframe src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 600px"></iframe>';*/
+							if(count($checkuser[0]->tokens) > 0):
 
-				    	echo '<iframe src="'.$const.'" style="border: 0; width: 100%; height: 600px"></iframe>';
+								// PAID VERSION
 
-				    	echo '<div class="fb-like-wrapper">';
+								$const = $homeurl.'/game_storage/'.$gamefolder.'/index.html?nocache&amp;api-url='.$homeurl.'/prod/api/gpctlstatapi.php&amp;session-id='.$sessionid;
 
-				    	echo fb_like_button();
+						    	/*echo '<iframe src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 600px"></iframe>';*/
 
-				    	echo '</div>';
+						    	echo '<iframe src="'.$const.'" style="border: 0; width: 100%; height: 600px"></iframe>';
 
-					    echo '<div class="gameraiting">';
-					    	if(function_exists('the_ratings')) { the_ratings(); }
-					    echo '</div>';
+						    	$playthegame = true;
+
+						    else:
+
+						    	if(count($checkuser[0]->tot_freetokens) > 0):
+
+						    		// PAID VERSION
+
+									$const = $homeurl.'/game_storage/'.$gamefolder.'/index.html?nocache&amp;api-url='.$homeurl.'/prod/api/gpctlstatapi.php&amp;session-id='.$sessionid;
+
+							    	/*echo '<iframe src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 600px"></iframe>';*/
+
+							    	echo '<iframe src="'.$const.'" style="border: 0; width: 100%; height: 600px"></iframe>';
+
+							    	$playthegame = true;
+
+						    	else:
+
+						    		if($hasfreeversion == 'Yes'):
+
+							    		// FREE VERSION
+
+							    		echo '<h3>You are playing the FREE version of '. $gametitle .'.</h3>';
+
+										$const = $homeurl.'/game_storage/'.$gamefolder.'/index.html?nocache&amp;api-url='.$homeurl.'/prod/api/gpctlstatapi.php&amp;session-id='.$sessionid.'_FREE';
+
+								    	/*echo '<iframe src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 600px"></iframe>';*/
+
+								    	echo '<iframe src="'.$const.'" style="border: 0; width: 100%; height: 600px"></iframe>';
+
+								    	$playthegame = true;
+
+								    else:
+
+								    	echo '<h3>There is NO FREE version for the game '. $gametitle .'.</h3>';
+
+								    endif;
+
+						    	endif;
+
+						    endif;
+
+						else:
+
+							if($hasfreeversion == 'Yes'):
+
+					    		// FREE VERSION
+
+					    		echo '<h3>You are playing the FREE version of '. $gametitle .'.</h3>';
+
+								$const = $homeurl.'/game_storage/'.$gamefolder.'/index.html?nocache&amp;api-url='.$homeurl.'/prod/api/gpctlstatapi.php&amp;session-id='.$sessionid.'_FREE';
+
+						    	/*echo '<iframe src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 600px"></iframe>';*/
+
+						    	echo '<iframe src="'.$const.'" style="border: 0; width: 100%; height: 600px"></iframe>';
+
+						    	$playthegame = true;
+
+						    else:
+
+						    	echo '<h3>There is NO FREE version for the game '. $gametitle .'.</h3>';
+
+						    endif;
+
+
+						endif;
+
+						if($playthegame):
+
+					    	echo '<div class="fb-like-wrapper">';
+
+					    	echo fb_like_button();
+
+					    	echo '</div>';
+
+						    echo '<div class="gameraiting">';
+						    	if(function_exists('the_ratings')) { the_ratings(); }
+						    echo '</div>';
+
+						endif;
 
 				    else:
 
