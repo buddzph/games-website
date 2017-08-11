@@ -32,8 +32,8 @@ if ( ! isset( $color_scheme[2] ) ) {
 
 		/* Icons */
 		
-		.bt_bb_color_scheme_{$scheme_id}.bt_bb_icon a { color: {$color_scheme[1]}; }
-		.bt_bb_color_scheme_{$scheme_id}.bt_bb_icon:hover a { color: {$color_scheme[2]}; }
+		.bt_bb_color_scheme_{$scheme_id}.bt_bb_icon .bt_bb_icon_holder { color: {$color_scheme[1]}; }
+		.bt_bb_color_scheme_{$scheme_id}.bt_bb_icon:hover a.bt_bb_icon_holder { color: {$color_scheme[2]}; }
 		
 		.bt_bb_color_scheme_{$scheme_id}.bt_bb_icon.bt_bb_style_outline .bt_bb_icon_holder:before {
 			background-color: transparent;
@@ -41,7 +41,7 @@ if ( ! isset( $color_scheme[2] ) ) {
 			color: {$color_scheme[1]};
 		}
 		
-		.bt_bb_color_scheme_{$scheme_id}.bt_bb_icon.bt_bb_style_outline:hover .bt_bb_icon_holder:before {
+		.bt_bb_color_scheme_{$scheme_id}.bt_bb_icon.bt_bb_style_outline:hover a.bt_bb_icon_holder:before {
 			background-color: {$color_scheme[1]};
 			box-shadow: 0 0 0 1em {$color_scheme[1]} inset;
 			color: {$color_scheme[2]};
@@ -52,7 +52,7 @@ if ( ! isset( $color_scheme[2] ) ) {
 			color: {$color_scheme[1]};
 		}
 		
-		.bt_bb_color_scheme_{$scheme_id}.bt_bb_icon.bt_bb_style_filled:hover .bt_bb_icon_holder:before {
+		.bt_bb_color_scheme_{$scheme_id}.bt_bb_icon.bt_bb_style_filled:hover a.bt_bb_icon_holder:before {
 			box-shadow: 0 0 0 1px {$color_scheme[2]} inset;
 			background-color: {$color_scheme[1]};
 			color: {$color_scheme[2]};
@@ -62,7 +62,7 @@ if ( ! isset( $color_scheme[2] ) ) {
 			color: {$color_scheme[1]};
 		}
 		
-		.bt_bb_color_scheme_{$scheme_id}.bt_bb_icon.bt_bb_style_borderless:hover .bt_bb_icon_holder:before {
+		.bt_bb_color_scheme_{$scheme_id}.bt_bb_icon.bt_bb_style_borderless:hover a.bt_bb_icon_holder:before {
 			color: {$color_scheme[2]};
 		}
 		

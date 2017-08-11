@@ -3,7 +3,7 @@ Contributors: JoomUnited
 Tags: latest post, news widget, recent posts, posts, recent post widget, news posts, latest page, custom content, previous posts, page, featured posts, article display, news display, news slider, page display, post display, article display, frontpage news, news
 Requires at least: 4.0
 Tested up to: 4.8.0
-Stable tag: 4.0.2
+Stable tag: 4.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -135,6 +135,10 @@ Yes the support has been added since the 3.5.2 version.
  
 
 == Changelog ==
+
+= 4.0.3 =
+* Fix : Get full content and crop text
+* Fix : Get post excerpt
 
 = 4.0.2 =
 * Fix : Prefix on custom CSS not applied

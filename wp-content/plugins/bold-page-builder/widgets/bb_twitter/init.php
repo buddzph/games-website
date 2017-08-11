@@ -24,7 +24,7 @@ if ( ! function_exists( 'bt_bb_get_twitter_data' ) ) {
 
 		if ( false == ( $twitter_data = unserialize( base64_decode( get_transient( $trans_name ) ) ) ) ) {
 			require_once( 'twitteroauth.php' );
-			$twitter_connection = new TwitterOAuth( $consumer_key, $consumer_secret, $access_token, $access_token_secret );
+			$twitter_connection = new BT_BB\TwitterOAuth( $consumer_key, $consumer_secret, $access_token, $access_token_secret );
 			if ( !preg_match( '/#/', $username ) ) {
 				$twitter_data = $twitter_connection->get(
 					'statuses/user_timeline',

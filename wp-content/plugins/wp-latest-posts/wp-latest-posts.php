@@ -3,7 +3,7 @@
  * Plugin Name: WP Latest Posts
  * Plugin URI: http://www.joomunited.com/wordpress-products/wp-latest-posts
  * Description: Advanced frontpage and widget news slider
- * Version: 4.0.2
+ * Version: 4.0.3
  * Text Domain: wp-latest-posts
  * Domain Path: /languages
  * Author: JoomUnited
@@ -70,8 +70,7 @@ if (version_compare(PHP_VERSION, '5.3', '<')) {
 
 //Include the jutranslation helpers
 include_once('jutranslation' . DIRECTORY_SEPARATOR . 'jutranslation.php');
-\Joomunited\WPLatestPosts\Jutranslation\Jutranslation::init(__FILE__, 'wp-latest-posts', 'WP Latest Posts', 'wp-latest-posts', 'languages' . DIRECTORY_SEPARATOR . 'wp-latest-posts-en_US.mo');
-
+call_user_func('\Joomunited\WPLatestPosts\Jutranslation\Jutranslation::init',__FILE__, 'wp-latest-posts', 'WP Latest Posts', 'wp-latest-posts', 'languages' . DIRECTORY_SEPARATOR . 'wp-latest-posts-en_US.mo');
 /** Class includes **/
 include_once(dirname(__FILE__) . '/inc/wplp-admin.inc.php');            // custom classes
 include_once(dirname(__FILE__) . '/inc/wplp-widget.inc.php');        // custom classes
@@ -88,7 +87,7 @@ include_once(dirname(__FILE__) . '/views/wplp-configuration.php'); //view config
 global $wpcu_wpfn;
 $wpcu_wpfn = new WPLP_Admin(
     array(
-        'version' => '4.0.2',
+        'version' => '4.0.3',
         'translation_domain' => 'wp-latest-posts', // must be copied in the widget class!!!
         'plugin_file' => __FILE__,
     )

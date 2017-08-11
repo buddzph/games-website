@@ -1,5 +1,7 @@
 <?php
 
+namespace BT_BB;
+
 /*
  * Abraham Williams (abraham@abrah.am) http://abrah.am
  *

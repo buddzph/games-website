@@ -1144,36 +1144,37 @@ class WPLP_Front {
             if (isset($this->widget->settings["text_content"]) && $this->widget->settings["text_content"] == "0") {
                 $text = $post->post_content;
             } elseif (isset($this->widget->settings["text_content"]) && $this->widget->settings["text_content"] == "1") {
-                $text = $post->post_excerpt;
+                $text = get_the_excerpt($post->ID);
             }
 
             $text = strip_shortcodes($text);
             $text = apply_filters('the_content', $text);
             $text = str_replace(']]>', ']]&gt;', $text);
-            $text = wp_trim_words($text, 55, "");
+            $text = wp_strip_all_tags( $text );
             $strlen = $text;
-            $croplength = (int) $this->widget->settings['crop_text_len'];
-            if ($this->widget->settings['crop_text'] == 0) {  // word cropping
-                if (function_exists('wp_trim_words'))
-                    $text = wp_trim_words($text, $this->widget->settings['crop_text_len']);
-                if ($croplength < str_word_count($strlen)) {
-                    $text.= "...";
+            if (class_exists('WPLP_Addon_Admin')) {
+                $croplength = (int)$this->widget->settings['crop_text_len'];
+                if ($this->widget->settings['crop_text'] == 0) {  // word cropping
+                    if (function_exists('wp_trim_words'))
+                        $text = wp_trim_words($text, $this->widget->settings['crop_text_len']);
+                    if ($croplength < str_word_count($strlen)) {
+                        $text .= "...";
+                    }
+                }
+                if ($this->widget->settings['crop_text'] == 1) {  // char cropping
+                    $text = strip_tags($text);
+                    $text = mb_substr($text, 0, $this->widget->settings['crop_text_len']);
+                    $text = mb_substr($text, 0, mb_strripos($text, " "));
+                    if ($croplength < strlen($strlen)) {
+                        $text .= "...";
+                    }
+                }
+                if ($this->widget->settings['crop_text'] == 2) {  // line limitting
+                    $before = '<span style="max-height:' . ($this->widget->settings['crop_text_len'] * $cropTextSize) . 'em" class="line_limit">';
+                    $after = '</span>';
+                    $text .= "...";
                 }
             }
-            if ($this->widget->settings['crop_text'] == 1) {  // char cropping
-                $text = strip_tags($text);
-                $text = mb_substr($text, 0, $this->widget->settings['crop_text_len']);
-                $text = mb_substr($text, 0, mb_strripos($text, " "));
-                if ($croplength < strlen($strlen)) {
-                    $text.= "...";
-                }
-            }
-            if ($this->widget->settings['crop_text'] == 2) {  // line limitting
-                $before = '<span style="max-height:' . ($this->widget->settings['crop_text_len'] * $cropTextSize ) . 'em" class="line_limit">';
-                $after = '</span>';
-                $text.= "...";
-            }
-
             return $before . $text . $after;
         }
 
