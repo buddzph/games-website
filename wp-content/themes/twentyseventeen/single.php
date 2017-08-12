@@ -123,6 +123,13 @@ function g_getsessionid($uid, $gamecode)
 
 								    else:
 
+								    	if ( ( is_single() || ( is_page() && ! twentyseventeen_is_frontpage() ) ) && has_post_thumbnail( get_queried_object_id() ) ) :
+											echo '<div class="single-featured-image-header">';
+											// echo get_the_post_thumbnail( get_queried_object_id(), 'twentyseventeen-featured-image' );
+											the_post_thumbnail( 'full' );
+											echo '</div><!-- .single-featured-image-header -->';
+										endif;
+
 								    	echo '<h3>There is NO FREE version for the game '. $gametitle .'.</h3>';
 
 								    endif;
@@ -148,6 +155,13 @@ function g_getsessionid($uid, $gamecode)
 						    	$playthegame = true;
 
 						    else:
+
+						    	if ( ( is_single() || ( is_page() && ! twentyseventeen_is_frontpage() ) ) && has_post_thumbnail( get_queried_object_id() ) ) :
+									echo '<div class="single-featured-image-header">';
+									// echo get_the_post_thumbnail( get_queried_object_id(), 'twentyseventeen-featured-image' );
+									the_post_thumbnail( 'full' );
+									echo '</div><!-- .single-featured-image-header -->';
+								endif;
 
 						    	echo '<h3>There is NO FREE version for the game '. $gametitle .'.</h3>';
 

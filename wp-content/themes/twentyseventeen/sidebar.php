@@ -15,6 +15,9 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 }
 
 global $wpdb;
+
+$url = home_url();
+$homeurl = esc_url( $url );
 ?>
 
 <aside id="secondary" class="widget-area" role="complementary">
@@ -67,15 +70,94 @@ global $wpdb;
 								$coin_count = $coindata[0]->coin_count;
 								$coin_price = $coindata[0]->coin_price;
 
-								echo '<h2>Coin Count: <b>'.$coin_count.'</b></h2>';
-
-								echo '<h2>Coin Price: <b>'.number_format($coin_price,2).'</b></h2>';
+								echo '<h2>Coin Price: <br />PHP <b>'.number_format($coin_price,2).'</b> for <b>'.$coin_count.'</b> coins</h2>';
 
 								echo '<input type="hidden" id="coinid" value="'.$coinid.'">';
 
 								echo '<center><a href="javascript: void(0);" id="buycoins" class="ui-button">Buy this coin</a> <a href="javascript: void(0);" id="getrewards" class="ui-button">Get your rewards.</a></center>';
 
-								echo '';
+								echo '<div class="usersettings">';
+
+								// QUERY TO CHECK IF USER HAS TOKEN
+								$checkuser = $wpdb->get_results( "SELECT * FROM user WHERE id = " . $_SESSION['user']['id']);
+
+								/*Array
+								(
+								    [0] => stdClass Object
+								        (
+								            [id] => 5
+								            [celno] => 9062846807
+								            [username] => buddzph
+								            [password] => fda3d9d0fbe5aae3177ad16c1739a16f
+								            [adminflag] => 0
+								            [testuserstatus] => 0
+								            [firstname] => Frederick
+								            [lastname] => de Guzman
+								            [street] => 
+								            [city] => 
+								            [country] => Philippines
+								            [zip] => 
+								            [email] => frederickdeguzman@gmail.com
+								            [dt_registered] => 2017-08-11 03:07:05
+								            [dt_lastplayed] => 2001-01-01 00:00:00
+								            [tot_gamesplayed] => 0
+								            [tot_playtime] => 0
+								            [dt_lastgivenfreetokens] => 2001-01-01 00:00:00
+								            [tot_freetokens] => 10
+								            [dt_lastpurchased] => 2001-01-01 00:00:00
+								            [tot_amountpurchased] => 0.00
+								            [tot_tickets] => 0
+								            [tot_leaderboardtickets] => 0
+								            [tokens] => 10
+								            [tickets] => 0
+								            [user_avatar] => 1502420918.jpg
+								        )
+
+								)*/
+
+								echo '<br />';
+								?>
+
+								<center>
+							      	<br />
+							      	<?php if(isset($_SESSION['user']['user_avatar']) and !empty($_SESSION['user']['user_avatar'])): ?>
+
+							      		<img src="<?php echo $homeurl; ?>/usericon/cropped/<?php echo $_SESSION['user']['user_avatar']; ?>" alt="" class="user_avatar">
+
+							      	<?php else: ?>
+
+							      		<img src="<?php echo $homeurl; ?>/usericon/blank-user.png" alt="" class="user_avatar">
+
+							      	<?php endif; ?>
+							    </center>
+
+							    <?php
+
+							    echo '<h3>Account Information</h3>';
+
+								$table = '';
+
+								$table .= '<table border=0 cellpadding=0 cellspacing=0 width=100%>';
+
+									$table .= '<tr>';
+										$table .= '<th>Name: </th><td>'.$checkuser[0]->firstname.' '.$checkuser[0]->lastname.'</td>';
+									$table .= '</tr>';
+									$table .= '<tr>';
+										$table .= '<th>Tickets: </th><td>'.$checkuser[0]->tickets.'</td>';
+									$table .= '</tr>';
+									$table .= '<tr>';
+										$table .= '<th>Free Coins: </th><td>'.$checkuser[0]->tot_freetokens.'</td>';
+									$table .= '</tr>';
+									$table .= '<tr>';
+										$table .= '<th>Current Coins: </th><td>'.$checkuser[0]->tokens.'</td>';
+									$table .= '</tr>';
+
+								$table .= '</table>';
+
+
+								echo $table;
+
+								echo '</div>';
 
 							endif;
 							?>
@@ -83,8 +165,18 @@ global $wpdb;
 						<div style="clear: both;"> </div>
 					</div>
 
+					<?php
 
-			<?php
+					if($_SERVER['HTTP_HOST'] == 'localhost'):
+
+				    	echo do_shortcode('[frontpage_news widget="452" name="More Games"]');
+				    	
+				    else:
+
+				    	echo do_shortcode('[frontpage_news widget="415" name="More Games"]');
+				   	endif;
+
+
 			else:
 
 				echo '<div class="coinwrapper"><div class="leftrightspace15">';
@@ -92,6 +184,15 @@ global $wpdb;
 				echo 'Please login to buy this coin.<br />Some important info here.<br />Add any content.';
 
 				echo '</div></div>';
+
+				if($_SERVER['HTTP_HOST'] == 'localhost'):
+
+			    	echo do_shortcode('[frontpage_news widget="452" name="More Games"]');
+			    	
+			    else:
+
+			    	echo do_shortcode('[frontpage_news widget="415" name="More Games"]');
+			   	endif;
 
 			endif;
 

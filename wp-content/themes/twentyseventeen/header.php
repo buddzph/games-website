@@ -607,6 +607,7 @@ foreach ($countries as $key => $value) {
 	  </script>
 
 	  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+	  <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/hover.css">
 
 	  <style type="text/css">
 	  	.ui-widget-overlay {background: #000; opacity: 0.7; filter: alpha(opacity=70); /* For IE8 and earlier */}
@@ -703,11 +704,11 @@ foreach ($countries as $key => $value) {
 
 <div id="dialog-getrewards" title="Select your reward" style="display: none;"> 
 
-	<a href="javascript: void(0);" id="reward1"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure01.png" alt=""></a>
+	<a href="javascript: void(0);" id="reward1"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure01.png" alt="" class="hvr-buzz-out"></a>
 
-	<a href="javascript: void(0);" id="reward2"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure02.png" alt=""></a>
+	<a href="javascript: void(0);" id="reward2"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure02.png" alt="" class="hvr-buzz-out"></a>
 
-	<a href="javascript: void(0);" id="reward3"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure03.png" alt=""></a>
+	<a href="javascript: void(0);" id="reward3"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure03.png" alt="" class="hvr-buzz-out"></a>
 
 </div>
 
