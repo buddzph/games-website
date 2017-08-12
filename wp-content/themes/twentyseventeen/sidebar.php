@@ -74,7 +74,7 @@ $homeurl = esc_url( $url );
 
 								echo '<input type="hidden" id="coinid" value="'.$coinid.'">';
 
-								echo '<center><a href="javascript: void(0);" id="buycoins" class="ui-button">Buy this coin</a> <a href="javascript: void(0);" id="getrewards" class="ui-button">Get your rewards.</a></center>';
+								echo '<center><button id="buycoins" class="hvr-overline-from-center">Buy this coin</button> <button id="getrewards" class="hvr-overline-from-center">Get your rewards.</button></center>';
 
 								echo '<div class="usersettings">';
 

@@ -602,6 +602,10 @@ foreach ($countries as $key => $value) {
 	    $( "#logout" ).removeClass('ui-button');
 	    $( "#logout" ).removeClass('ui-widget');
 	    $( "#userlogin" ).removeClass('ui-button');
+	    $( "#buycoins" ).removeClass('ui-widget');
+	    $( "#buycoins" ).removeClass('ui-button');
+	    $( "#getrewards" ).removeClass('ui-widget');
+	    $( "#getrewards" ).removeClass('ui-button');
 
 	  });
 	  </script>
