@@ -133,9 +133,11 @@ foreach ($countries as $key => $value) {
 	      country = $( "#country" ),
 	      zip = $( "#zip" ),
 	      email = $( "#email" ),
+	      verifycode = $( "#verifycode" ),
 	      allFields = $( [] ).add( mobile_number ),
 	      allFieldsaccountdetails = $( [] ).add( username ).add( password ).add( retypepassword ).add( firstname ).add( lastname ).add( street ).add( city ).add( country ).add( zip ).add( email ),
 	      allFieldslogin = $( [] ).add( loginusername ).add( loginpassword ),
+	      allFieldsverification = $( [] ).add( verifycode ),
 	      tips = $( ".validateTips" );
 	 
 	    function updateTips( t ) {
@@ -196,7 +198,7 @@ foreach ($countries as $key => $value) {
 
 				if(data.result == true){					
 
-						updateTips( "Access has been sent to your mobile. Please wait!" + "Remove this temp pass: " + data.temppass );
+						updateTips( "Access has been sent to your mobile. Please wait!" + " REMOVE THIS temp pass: " + data.temppass );
 						dialog.dialog( "close" );
 						dialogsuccessful.dialog( "open" );
 
@@ -422,9 +424,125 @@ foreach ($countries as $key => $value) {
 	 
 
 	    function buycoins() {
-	    	updateTips( "You have successfully selected and buy this coin." );
+
+	    	var formData = new FormData($('#buycoinsForm')[0]);
+			
+			formData.append('func', "processbuycoins");
+
+			console.log(formData);
+
+			$.ajax({
+			       url:"<?php echo $homeurl.'/?page_id=344' ?>",
+			       type: 'POST',
+			       data: formData,
+			       cache: false,
+			       dataType: 'json',
+			       processData: false, // Don't process the files
+			       contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+			       success: function(data, textStatus, jqXHR)
+			       {
+			           if(data.result)
+			           {
+			               
+			           		dialogbuycoin.dialog( "close" );
+
+						  	updateTips( "You have successfully selected and buy this coin. Kindly check your phone and enter the verification code below. REMOVE THIS. Temporary verification code " + data.tempverif );
+
+						  	dialogbuycoinconfirmation.dialog( "open" );
+
+			           }
+			           else
+			           {
+			               // Handle errors here
+			               console.log('ERRORS: ' + data.result);
+
+			               updateTips( data.errmsg );
+
+
+			           }
+
+			            
+
+
+			       },
+			       error: function(jqXHR, textStatus, errorThrown)
+			       {
+			           // Handle errors here
+			           console.log('ERRORS: ' + textStatus);
+			           // STOP LOADING SPINNER
+
+			           updateTips( "Unable to update. Check if you have current password, or new username is already used by other user." );
+			       }
+			  
+			});
+
+	    	/*updateTips( "You have successfully selected and buy this coin." );
 	    	dialogbuycoin.dialog( "close" );
-			dialogsuccessful.dialog( "open" );
+			dialogsuccessful.dialog( "open" );*/
+	    }
+
+	    function verifybuycoins () {
+
+			var valid = true;
+
+			allFieldsverification.removeClass( "ui-state-error" );
+
+			valid = valid && checkLengthFields( verifycode, "verifycode", 5, 10 );
+
+			valid = valid && checkRegexp( verifycode, /^([0-9a-zA-Z])+$/, "Verification code field only allow : a-z 0-9" );
+
+
+			var formData = new FormData($('#formbuycoinsVerification')[0]);
+			
+			formData.append('func', "processbuycoinsverification");
+
+			console.log(formData);
+
+			$.ajax({
+			       url:"<?php echo $homeurl.'/?page_id=344' ?>",
+			       type: 'POST',
+			       data: formData,
+			       cache: false,
+			       dataType: 'json',
+			       processData: false, // Don't process the files
+			       contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+			       success: function(data, textStatus, jqXHR)
+			       {
+			           if(data.result)
+			           {
+			               
+			           		dialogbuycoinconfirmation.dialog( "close" );
+
+						  	updateTips( "Purchase completed. Coins added to your account. Thank you and enjoy playing!" );
+
+						  	dialogsuccessful.dialog( "open" );
+
+			           }
+			           else
+			           {
+			               // Handle errors here
+			               console.log('ERRORS: ' + data.result);
+
+			               updateTips( data.errmsg );
+
+
+			           }
+
+			            
+
+
+			       },
+			       error: function(jqXHR, textStatus, errorThrown)
+			       {
+			           // Handle errors here
+			           console.log('ERRORS: ' + textStatus);
+			           // STOP LOADING SPINNER
+
+			           updateTips( "Unable to update. Check if you have current password, or new username is already used by other user." );
+			       }
+			  
+			});
+
 	    }
 
 	    function getrewards() {
@@ -531,6 +649,27 @@ foreach ($countries as $key => $value) {
 	      close: function() {
 	        // --
 	      }
+	    });
+
+	    dialogbuycoinconfirmation = $( "#dialog-buycoin-confirmation" ).dialog({
+	      autoOpen: false,
+	      height: 'auto',
+	      width: 400,
+	      modal: true,
+	      buttons: {
+	        "Submit verification key": verifybuycoins,
+	        Cancel: function() {
+	          dialogbuycoinconfirmation.dialog( "close" );
+	        }
+	      },      
+	      close: function() {
+	        // --
+	      }
+	    });
+
+	    form = dialogbuycoinconfirmation.find( "form" ).on( "submit", function( event ) {
+	      event.preventDefault();
+	      verifybuycoins();
 	    });
 
 	    /*DIALOG NUMBER 4. USERNAME SUCCESSFULLY UPDATED*/
@@ -704,6 +843,16 @@ foreach ($countries as $key => $value) {
 
 <div id="dialog-buycoin" title="Buy this coin" style="display: none;"> 
 	<p>Are you sure you want to buy this coins? This will use your mobile number to buy.</p>
+</div>
+
+<div id="dialog-buycoin-confirmation" title="Verify Code" style="display: none;"> 
+	<p class="validateTips">Confirmation.</p>
+
+	<form name="photo" id="formbuycoinsVerification" enctype="multipart/form-data">
+		<label for="city">Enter verification code:</label>
+	    <input type="text" name="verifycode" id="verifycode" value="" placeholder="" class="text ui-widget-content ui-corner-all">
+	    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </form>
 </div>
 
 <div id="dialog-getrewards" title="Select your reward" style="display: none;"> 

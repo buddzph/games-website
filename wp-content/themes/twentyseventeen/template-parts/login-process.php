@@ -55,6 +55,8 @@ function genRandStr(){
 
 switch ($_REQUEST['func']) {
 	case 'registermobile':
+
+		// IMPORTANT TO CHECK GLOBE AND SMART USERS
 		// get last 10 digits
 		$num_request = substr($_REQUEST['mobile_number'], -10);
 
@@ -73,6 +75,7 @@ switch ($_REQUEST['func']) {
 			$checknumber = true;
 			$globeuser = true;
 		endif;
+		// END IMPORTANT TO CHECK GLOBE AND SMART USERS
 
 		if($checknumber and strlen($mobile_number) == 10):
 
@@ -439,6 +442,95 @@ switch ($_REQUEST['func']) {
 
 		break;
 
+	case 'processbuycoins':
+
+		// IMPORTANT TO CHECK GLOBE AND SMART USERS
+		// get last 10 digits
+		$num_request = substr($_REQUEST['mobile_number'], -10);
+
+		$mobile_number = $num_request;
+
+		$checknumber = false;
+		$smartuser = false;
+		$globeuser = false;
+
+		if(isSmart($mobile_number)):
+			$checknumber = true;
+			$smartuser = true;
+		endif;
+
+		if(isGlobe($mobile_number)):
+			$checknumber = true;
+			$globeuser = true;
+		endif;
+		// IMPORTANT TO CHECK GLOBE AND SMART USERS		
+
+		$verificationcode = genRandStr();
+
+		$ins['subscribers_id'] = $_SESSION['user']['id'];
+		$ins['coins_id'] = $_REQUEST['coinid'];
+		$ins['verificationcode'] = $verificationcode;
+
+		$wpdb->insert( 'coinsavailed', $ins );
+
+		// PUT THE CODE SEND VERIFICATION CODE TO MOBILE
+
+			if($smartuser):
+
+			endif;
+
+			if($globeuser):
+
+			endif;
+
+		// END PUT THE CODE SEND VERIFICATION CODE TO MOBILE
+
+		$res['tempverif'] = $verificationcode;
+		$res['result'] = true;
+
+		break;
+
+	case 'processbuycoinsverification':
+
+		$verificationcode = $_REQUEST['verifycode'];
+
+		$checkverif = $wpdb->get_results( "SELECT * FROM coinsavailed WHERE subscribers_id = '". $_SESSION['user']['id'] ."' AND verificationcode = '".$verificationcode."'" );
+
+		if(count($checkverif) > 0):
+
+			$table = 'coinsavailed';
+
+			$data['status'] = 1;
+
+			$wpdb->update( $table, $data, array('subscribers_id' => $_SESSION['user']['id'], 'verificationcode' => $verificationcode) );
+
+			// GET COIN COUNTS
+			$checkcoins = $wpdb->get_results( "SELECT * FROM coins WHERE id = '". $checkverif[0]->coins_id ."'" );
+
+			if(count($checkcoins) > 0):
+				$coincount = $checkcoins[0]->coin_count;
+			endif;
+
+			// CHECK USER EXISTING TOKENS
+			$checkuser = $wpdb->get_results( "SELECT * FROM user WHERE id = '". $_SESSION['user']['id'] ."'" );
+
+			if(count($checkuser) > 0):
+				$totalcoins = $checkuser[0]->tokens + $coincount;
+			endif;
+
+			// UPDATE USER
+			$tableuser = 'user';
+
+			$upduser['tokens'] = $totalcoins;
+
+			$wpdb->update( $tableuser, $upduser, array('id' => $_SESSION['user']['id']) );
+
+			$res['result'] = true;
+
+		endif;
+
+		break;
+
 	case 'logout':
 
 		unset($_SESSION['user']);
@@ -450,21 +542,6 @@ switch ($_REQUEST['func']) {
 		# code...
 		break;
 }
-
-// echo json_encode(array("result"=>$mobile_number));
-
-
-/*[0] => stdClass Object
-        (
-            [id] => 1
-            [mobile_number] => 09062846807
-            [username] => thebuddz
-            [password] => 5f4dcc3b5aa765d61d8327deb882cf99
-            [firstname] => Frederick
-            [lastname] => de Guzman
-            [email] => frederick@glyphgames.com
-            [dateentered] => 2017-07-26 15:41:29
-        )*/
 
 echo json_encode($res);
 

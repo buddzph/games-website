@@ -72,7 +72,15 @@ $homeurl = esc_url( $url );
 
 								echo '<h2>Coin Price: <br />PHP <b>'.number_format($coin_price,2).'</b> for <b>'.$coin_count.'</b> coins</h2>';
 
-								echo '<input type="hidden" id="coinid" value="'.$coinid.'">';
+								echo '<form name="photo" id="buycoinsForm" enctype="multipart/form-data">';
+
+									echo '<input type="hidden" name="coinid" id="coinid" value="'.$coinid.'">';
+
+									echo '<input type="hidden" name="coin_count" id="coin_count" value="'.$coin_count.'">';
+
+									echo '<input type="hidden" name="coin_price" id="coin_price" value="'.$coin_price.'">';
+
+								echo '</form>';
 
 								echo '<center><button id="buycoins" class="hvr-overline-from-center">Buy this coin</button> <button id="getrewards" class="hvr-overline-from-center">Get your rewards.</button></center>';
 
