@@ -48,11 +48,9 @@ function doPlaystart($req)
    }
 
    $sessionid = $req->sessionid;
-   apiLOg("Here 1");
    $coins = getusercoins($mysqli,$sessionid);
-   apiLOg("Here 2");
+   $coins = 9999;
    $cost = getgamecost($mysqli,$sessionid);
-   apiLOg("Here 3");
    if ($coins < $cost) {
       doPlaystartFail("You don't have enough coins ($coins) to play this game ($cost).");
    } else {
@@ -160,22 +158,17 @@ function getgameidfromsessionid($sessionid)
 
 function getusercoins($mysqli,$sessionid)
 {
-   aplLog("in getusercoins");
    $uid = getuidfromsessionid($sessionid);
       $query = "SELECT tokens from user WHERE id = '" . $uid ."'";
-      apiLog("getusercoins $uid, $sessionid, $query");
       $res = $mysqli->query($query);
       if ($res === false) {
          $retVal = 0;
-   apiLog("deduct fail " . $mysqli->error);        
       } else {
          $result = $res->fetch_assoc();
          if ($result === NULL) {
             $retVal = 0;
-   apiLog("deduct 0");        
          } else {
             $retVal = $result['tokens'];
-            apiLog("deduct ok $retVal");
          }
       }
       return($retVal);
@@ -184,8 +177,7 @@ function getusercoins($mysqli,$sessionid)
 function deductcoins($mysqli,$sessionid,$cost)
 {
    $uid = getuidfromsessionid($sessionid);
-    apilog("deductcoins : " . $uid . ' - ' . $sessionid);
-
+   
       $query = "UPDATE user SET tokens=tokens-$cost WHERE id = '" . $uid ."'";
       $res = $mysqli->query($query);
       if ($res === false) {
