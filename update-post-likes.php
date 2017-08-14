@@ -26,6 +26,10 @@ $sql = "SELECT * FROM ggames_posts LEFT JOIN ggames_postmeta ON(ggames_posts.ID 
 
 $result = $conn->query($sql);
 
+echo '<pre>';
+print_r($result);
+echo '</pre>';
+
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
