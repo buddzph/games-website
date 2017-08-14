@@ -160,7 +160,7 @@ function getusercoins($mysqli,$sessionid)
 {
    $uid = getuidfromsessionid($sessionid);
       $query = "SELECT tokens from user WHERE id = '" . $uid ."'";
-apiLog("gETUSRCOINS $query")
+apiLog("gETUSRCOINS $query");
       $res = $mysqli->query($query);
       if ($res === false) {
 apiLog("1");
