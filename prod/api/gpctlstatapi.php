@@ -41,6 +41,7 @@ endif;
 
 function doPlaystart($req)
 {
+   
    $mysqli = new mysqli(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
    if (mysqli_connect_errno()) {
       doPlaystartFail("Mysql error");
