@@ -53,7 +53,7 @@ function doPlaystart($req)
 //   $coins = 9999;
    $cost = getgamecost($mysqli,$sessionid);
 
-   apiLog("COINS COST $coins $cost");
+   apiLog("COINS COST $coins $cost\r\n");
    if ($coins < $cost) {
       doPlaystartFail("You don't have enough coins ($coins) to play this game ($cost).");
    } else {
@@ -199,6 +199,7 @@ function getgamecost($mysqli,$sessionid)
    $gameid = getgameidfromsessionid($sessionid);
    $amount = 0;
    $query = "SELECT * from game WHERE gameid='$gameid'";
+   apiLog("Getgamecost $sessionid, $gameid, $query\r\n");
    $res = $mysqli->query($query);
    if ($res === false) {
    } else {
