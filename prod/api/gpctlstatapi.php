@@ -49,7 +49,6 @@ function doPlaystart($req)
 
    $sessionid = $req->sessionid;
    $coins = getusercoins($mysqli,$sessionid);
-   $coins = 9999;
    $cost = getgamecost($mysqli,$sessionid);
    if ($coins < $cost) {
       doPlaystartFail("You don't have enough coins ($coins) to play this game ($cost).");
@@ -158,17 +157,22 @@ function getgameidfromsessionid($sessionid)
 
 function getusercoins($mysqli,$sessionid)
 {
+   aplLog("in getusercoins");
    $uid = getuidfromsessionid($sessionid);
       $query = "SELECT tokens from user WHERE id = '" . $uid ."'";
+      apiLog("getusercoins $uid, $sessionid, $query");
       $res = $mysqli->query($query);
       if ($res === false) {
          $retVal = 0;
+   apiLog("deduct fail " . $mysqli->error);        
       } else {
          $result = $res->fetch_assoc();
          if ($result === NULL) {
             $retVal = 0;
+   apiLog("deduct 0");        
          } else {
             $retVal = $result['tokens'];
+            apiLog("deduct ok $retVal");
          }
       }
       return($retVal);
