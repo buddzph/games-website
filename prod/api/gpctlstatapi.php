@@ -159,7 +159,7 @@ function getgameidfromsessionid($sessionid)
 function getusercoins($mysqli,$sessionid)
 {
    $uid = getuidfromsessionid($sessionid);
-      $query = "SELECT coins from user WHERE uid = '" . $uid ."'";
+      $query = "SELECT tokens from user WHERE id = '" . $uid ."'";
       $res = $mysqli->query($query);
       if ($res === false) {
          $retVal = 0;
@@ -168,7 +168,7 @@ function getusercoins($mysqli,$sessionid)
          if ($result === NULL) {
             $retVal = 0;
          } else {
-            $retVal = $result['coins'];
+            $retVal = $result['tokens'];
          }
       }
       return($retVal);
@@ -177,10 +177,12 @@ function getusercoins($mysqli,$sessionid)
 function deductcoins($mysqli,$sessionid,$cost)
 {
    $uid = getuidfromsessionid($sessionid);
-      $query = "UPDATE user SET coins=coins-$cost WHERE uid = '" . $uid ."'";
+      $query = "UPDATE user SET tokens=tokens-$cost WHERE id = '" . $uid ."'";
       $res = $mysqli->query($query);
       if ($res === false) {
+         apilog("ok " . $query . ' ' . $mysqli->error);
       } else {
+         apilog("ok " . $query);
       }
 }
 
@@ -221,7 +223,7 @@ function getticketswon($mysqli,$sessionid,$gameplayid,$score)
    $scoreticket_conversion = getscoreticket_conversion($mysqli,$sessionid);
    $tickets = floor($score * $scoreticket_conversion);
    $uid = getuidfromsessionid($sessionid);
-   $query = "UPDATE user SET tickets=tickets+$tickets WHERE uid = '" . $uid ."'";
+   $query = "UPDATE user SET tickets=tickets+$tickets WHERE id = '" . $uid ."'";
    $res = $mysqli->query($query);
    if ($res === false) {
    } else {

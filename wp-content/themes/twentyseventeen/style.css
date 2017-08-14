@@ -4391,7 +4391,7 @@ footer .social-navigation {margin: 0 auto; display: inline-block; position: rela
 .ui-dialog label {font-size: 13px; margin-bottom: 0; margin-top: 15px;}
 .ui-dialog p {font-size: 13px;}
 .ui-dialog .ui-dialog-titlebar {padding-top: 0; padding-bottom: : 0;}
-div.ui-dialog < div#dialog-getrewards {background: none; border: none;}
+div#dialog-getrewards > div.ui-dialog {background: none; border: none;}
 .ui-widget-header {background: none !important; border: none !important; font-size: 14px; text-transform: uppercase;}
 img.user_avatar {border-radius: 100%; width: 50%; border: solid 2px green; box-shadow: 0px 0px 15px 5px #999;}
 a#mobilecheck, a#userlogin {font-size: 12px;}
