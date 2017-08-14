@@ -41,7 +41,7 @@ endif;
 
 function doPlaystart($req)
 {
-   
+
    $mysqli = new mysqli(DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
    if (mysqli_connect_errno()) {
       doPlaystartFail("Mysql error");
@@ -161,18 +161,18 @@ function getusercoins($mysqli,$sessionid)
 {
    $uid = getuidfromsessionid($sessionid);
       $query = "SELECT tokens from user WHERE id = '" . $uid ."'";
-apiLog("gETUSRCOINS $query");
+apiLog("gETUSRCOINS $query\r\n");
       $res = $mysqli->query($query);
       if ($res === false) {
-apiLog("1");
+apiLog("1=" . $mysqli->error . "\r\n");
          $retVal = 0;
       } else {
          $result = $res->fetch_assoc();
          if ($result === NULL) {
-apiLog("2");
+apiLog("2\r\n");
             $retVal = 0;
          } else {
-apiLog("3");
+apiLog("3\r\n");
             $retVal = $result['tokens'];
          }
       }
