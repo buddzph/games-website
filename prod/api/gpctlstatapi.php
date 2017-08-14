@@ -50,8 +50,10 @@ function doPlaystart($req)
 
    $sessionid = $req->sessionid;
    $coins = getusercoins($mysqli,$sessionid);
-   $coins = 9999;
+//   $coins = 9999;
    $cost = getgamecost($mysqli,$sessionid);
+
+   apiLog("COINS COST $coins $cost");
    if ($coins < $cost) {
       doPlaystartFail("You don't have enough coins ($coins) to play this game ($cost).");
    } else {
