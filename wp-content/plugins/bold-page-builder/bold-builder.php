@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Bold Builder
  * Description: WordPress content builder.
- * Version:  1.3.2
+ * Version:  1.3.3
  * Author: BoldThemes
  * Author URI: http://www.bold-themes.com
  */

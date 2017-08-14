@@ -96,6 +96,9 @@ Bold Builder is supported through our [support forum](https://wordpress.org/supp
 
 == Changelog ==
 
+= 1.3.3 =
+* Improved unit test compatibility.
+
 = 1.3.2 =
 * Fixed OAuth namespace.
 

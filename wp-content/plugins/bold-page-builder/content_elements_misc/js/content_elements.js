@@ -180,6 +180,36 @@
 
 	});
 
+	$.fn.isOnScreen = function() {
+		var element = this.get( 0 );
+		if ( element == undefined ) return false;
+		var bounds = element.getBoundingClientRect();
+		return bounds.top + 75 < window.innerHeight && bounds.bottom > 0;
+	}
+
+	// animations
+	function bt_bb_animate_elements() {
+		var $elems = $( '.animate:not(.animated)' );
+		$elems.each(function() {
+			var $elm = $( this );
+			if ( $elm.isOnScreen() ) {
+				$elm.addClass( 'animated' );
+				if ( $elm.hasClass( 'bt_bb_counter' ) ) {
+					bt_bb_animate_counter( $elm );
+				}
+			}
+		});
+		$( '.slick-slider .slick-slide:not(.slick-active) .animate' ).removeClass( 'animated' );
+	}
+
+	$( window ).on( 'scroll', function() {
+		bt_bb_animate_elements();
+	});
+	
+	$( window ).on( 'load', function() {
+		bt_bb_animate_elements();
+	});
+
 }( jQuery ));
 
 // google maps

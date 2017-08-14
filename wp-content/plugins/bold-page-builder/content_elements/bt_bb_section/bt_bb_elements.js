@@ -19,20 +19,6 @@
 		$( v ).parent().addClass( 'video_on' );
 	}
 
-	function bt_bb_animate_elements( ) {
-		var $elems = $( '.animate:not(.animated)' );
-		$elems.each(function() {
-			var $elm = $( this );
-			if ( $elm.isOnScreen() ) {
-				$elm.addClass( 'animated' );
-				if ( $elm.hasClass( 'bt_bb_counter' ) ) {
-					bt_bb_animate_counter( $elm );
-				}
-			}
-		});
-		$( '.slick-slider .slick-slide:not(.slick-active) .animate' ).removeClass( 'animated' );
-	}
-
 	$( document ).ready(function () {
 		bt_bb_video_background();
 		var googleMapSelector = "iframe[src*=\"google.com/maps\"]";
@@ -51,21 +37,6 @@
 			});
 		}, 1000 );		
 	});
-
-	$( window ).on( 'scroll', function() {
-		bt_bb_animate_elements();
-	});
-
-	$( window ).on( 'load', function() {
-		bt_bb_animate_elements();
-	});
-
-	$.fn.isOnScreen = function() {
-		var element = this.get( 0 );
-		if ( element == undefined ) return false;
-		var bounds = element.getBoundingClientRect();
-		return bounds.top + 75 < window.innerHeight && bounds.bottom > 0;
-	}
 
 	$( 'a[href*="#"]:not([href="#"])' ).not( '.menu-scroll-down' ).on( 'click', function() { // .menu-scroll-down - 2017 theme
 		if ( location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname ) {
