@@ -177,6 +177,8 @@ function getusercoins($mysqli,$sessionid)
 function deductcoins($mysqli,$sessionid,$cost)
 {
    $uid = getuidfromsessionid($sessionid);
+    apilog("deductcoins : " . $uid . ' - ' . $sessionid);
+
       $query = "UPDATE user SET tokens=tokens-$cost WHERE id = '" . $uid ."'";
       $res = $mysqli->query($query);
       if ($res === false) {
