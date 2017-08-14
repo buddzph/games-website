@@ -160,14 +160,18 @@ function getusercoins($mysqli,$sessionid)
 {
    $uid = getuidfromsessionid($sessionid);
       $query = "SELECT tokens from user WHERE id = '" . $uid ."'";
+apiLog("gETUSRCOINS $query")
       $res = $mysqli->query($query);
       if ($res === false) {
+apiLog("1");
          $retVal = 0;
       } else {
          $result = $res->fetch_assoc();
          if ($result === NULL) {
+apiLog("2");
             $retVal = 0;
          } else {
+apiLog("3");
             $retVal = $result['tokens'];
          }
       }
@@ -177,7 +181,7 @@ function getusercoins($mysqli,$sessionid)
 function deductcoins($mysqli,$sessionid,$cost)
 {
    $uid = getuidfromsessionid($sessionid);
-   
+
       $query = "UPDATE user SET tokens=tokens-$cost WHERE id = '" . $uid ."'";
       $res = $mysqli->query($query);
       if ($res === false) {
