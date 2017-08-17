@@ -75,13 +75,13 @@ function smartcurl($url, $fields){
 
 	$authToken = curl_exec($ch);
 
-	/*$ARRRES = array();
+	$ARRRES = array();
 	$ARRRES['info'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	$ARRRES['authToken'] = $authToken;*/
+	$ARRRES['authToken'] = $authToken;
 
 	curl_close($ch);
 
-	return $authToken;
+	return $ARRRES;
   		
   	//TODO: ADD LOGGER
 }
@@ -516,6 +516,8 @@ switch ($_REQUEST['func']) {
 
 				$resArr = json_decode($getcode);
 				// echo "<pre>"; print_r($resArr); echo "</pre>";
+
+				$res['process'] = 'curl proc';
 
 			endif;
 
