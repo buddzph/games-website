@@ -512,10 +512,12 @@ switch ($_REQUEST['func']) {
 			if($smartuser):
 
 				// 'cellnum=1&bar=2&baz=3'
-				$getcode = smartcurl('http://52.220.44.97:3000/song/sing/request', 'cellnum=63'.$mobile_number);
+				/*$getcode = smartcurl('http://52.220.44.97:3000/song/sing/request', 'cellnum=63'.$mobile_number);
 
-				$resArr = json_decode($getcode);
+				$resArr = json_decode($getcode);*/
 				// echo "<pre>"; print_r($resArr); echo "</pre>";
+
+				echo 'http://52.220.44.97:3000/song/sing/request', 'cellnum=63'.$mobile_number;
 
 				$res['process'] = 'curl proc';
 
