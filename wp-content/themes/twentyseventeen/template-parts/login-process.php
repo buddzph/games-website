@@ -52,7 +52,7 @@ function genRandStr(){
   return $a . $b;
 }
 
-function smartcurl($url, $fields){
+function smartcurl($url){
 	//$ch = curl_init($url);
 
 	//Tell cURL that we want to send a POST request.
@@ -69,7 +69,7 @@ function smartcurl($url, $fields){
 	//$result = curl_exec($ch);
 
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+	// curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
@@ -81,7 +81,7 @@ function smartcurl($url, $fields){
 
 	curl_close($ch);
 
-	return $ARRRES;
+	return $authToken;
   		
   	//TODO: ADD LOGGER
 }
@@ -512,12 +512,12 @@ switch ($_REQUEST['func']) {
 			if($smartuser):
 
 				// 'cellnum=1&bar=2&baz=3'
-				/*$getcode = smartcurl('http://52.220.44.97:3000/song/sing/request', 'cellnum=63'.$mobile_number);
+				$getcode = smartcurl('http://52.220.44.97:3000/song/sing/request?cellnum=63'.$mobile_number);
 
-				$resArr = json_decode($getcode);*/
+				$resArr = json_decode($getcode);
 				// echo "<pre>"; print_r($resArr); echo "</pre>";
 
-				echo 'http://52.220.44.97:3000/song/sing/request', 'cellnum=63'.$mobile_number;
+				// echo 'http://52.220.44.97:3000/song/sing/request', 'cellnum=63'.$mobile_number;
 
 				$res['process'] = 'curl proc';
 
