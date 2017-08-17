@@ -4573,6 +4573,8 @@ button:hover, button:focus, input[type="button"]:hover, input[type="button"]:foc
 
 .wplp_container .title span {font-family: 'Peralta', cursive; font-weight: normal;}
 
+iframe body { background: transparent !important; }
+
 /*LATEST POST*/
 ul.bt_bb_tabs_header {margin-left: 35%;}
 .wplp_container.default .title, .wplp_container.default .text, .wplp_container.default .read-more {color: #fff; padding-left: 10px; padding-right: 10px;}

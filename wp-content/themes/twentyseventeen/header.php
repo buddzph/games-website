@@ -917,7 +917,7 @@ foreach ($countries as $key => $value) {
 		            <div class="item">
 		              
 		              <div class="shadow-effect">
-		                <img class="pull-right" src="<?php echo $uploaddir['baseurl'] ?>/2017/07/1300x565-Games.jpg" alt="">
+		                <img class="pull-right" src="<?php echo $uploaddir['baseurl'] ?>/2017/07/1300x400-Games.jpg" alt="">
 		                <?php /*
 						<div class="slider-caption">
 							<div class="top-caption">
@@ -943,7 +943,7 @@ foreach ($countries as $key => $value) {
 		            <div class="item">
 		              
 		              <div class="shadow-effect">
-		                <img class="pull-right" src="<?php echo $uploaddir['baseurl'] ?>/2017/07/1300x565-PlayMore.jpg" alt="">
+		                <img class="pull-right" src="<?php echo $uploaddir['baseurl'] ?>/2017/07/1300x400-PlayMore.jpg" alt="">
 		                <?php /*
 						<div class="slider-caption slider-caption2">
 							<div class="top-caption">
