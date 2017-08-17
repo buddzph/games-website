@@ -52,6 +52,40 @@ function genRandStr(){
   return $a . $b;
 }
 
+private function smartcurl($url, $fields){
+	//$ch = curl_init($url);
+
+	//Tell cURL that we want to send a POST request.
+	//curl_setopt($ch, CURLOPT_POST, 1);
+
+	//Attach our encoded JSON string to the POST fields.
+	//curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+	//curl_setopt($ch, CURLOPT_VERBOSE, true);
+
+	//Set the content type to application/json
+	//curl_setopt($ch, CURLOPT_HTTPHEADER, 0);
+
+	//Execute the request
+	//$result = curl_exec($ch);
+
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+	$authToken = curl_exec($ch);
+
+	/*$ARRRES = array();
+	$ARRRES['info'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+	$ARRRES['authToken'] = $authToken;*/
+
+	curl_close($ch);
+
+	return $authToken;
+  		
+  	//TODO: ADD LOGGER
+}
+
 
 switch ($_REQUEST['func']) {
 	case 'registermobile':
@@ -476,6 +510,12 @@ switch ($_REQUEST['func']) {
 		// PUT THE CODE SEND VERIFICATION CODE TO MOBILE
 
 			if($smartuser):
+
+				// 'cellnum=1&bar=2&baz=3'
+				$getcode = smartcurl('http://52.220.44.97:3000/song/sing/request', 'cellnum='.$mobile_number);
+
+				$resArr = json_decode($getcode);
+				echo "<pre>"; print_r($resArr); echo "</pre>";
 
 			endif;
 
