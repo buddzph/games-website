@@ -480,7 +480,7 @@ switch ($_REQUEST['func']) {
 
 		// IMPORTANT TO CHECK GLOBE AND SMART USERS
 		// get last 10 digits
-		$num_request = substr($_SESSIONXDGADGFDFGDGFDFGDFGSDGF['mobile_number'], -10);
+		$num_request = $_SESSION['user']['mobile_number'];
 
 		$mobile_number = $num_request;
 
