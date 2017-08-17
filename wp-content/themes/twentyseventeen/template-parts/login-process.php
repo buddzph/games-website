@@ -480,7 +480,7 @@ switch ($_REQUEST['func']) {
 
 		// IMPORTANT TO CHECK GLOBE AND SMART USERS
 		// get last 10 digits
-		$num_request = substr($_REQUEST['mobile_number'], -10);
+		$num_request = substr($_SESSIONXDGADGFDFGDGFDFGDFGSDGF['mobile_number'], -10);
 
 		$mobile_number = $num_request;
 
@@ -515,9 +515,12 @@ switch ($_REQUEST['func']) {
 				$getcode = smartcurl('http://52.220.44.97:3000/song/sing/request', 'cellnum=63'.$mobile_number);
 
 				$resArr = json_decode($getcode);
-				echo "<pre>"; print_r($resArr); echo "</pre>";
+				// echo "<pre>"; print_r($resArr); echo "</pre>";
 
 			endif;
+
+			$res['curl'] = $resArr;
+			$res['cellnum'] = $mobile_number;
 
 			if($globeuser):
 
