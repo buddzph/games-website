@@ -52,7 +52,7 @@ function genRandStr(){
   return $a . $b;
 }
 
-private function smartcurl($url, $fields){
+function smartcurl($url, $fields){
 	//$ch = curl_init($url);
 
 	//Tell cURL that we want to send a POST request.
