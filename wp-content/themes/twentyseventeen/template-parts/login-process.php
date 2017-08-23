@@ -52,36 +52,51 @@ function genRandStr(){
   return $a . $b;
 }
 
-function smartcurl($url){
-	//$ch = curl_init($url);
+function smartcurl($url, $mobile_number){
 
-	//Tell cURL that we want to send a POST request.
-	//curl_setopt($ch, CURLOPT_POST, 1);
 
-	//Attach our encoded JSON string to the POST fields.
-	//curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-	//curl_setopt($ch, CURLOPT_VERBOSE, true);
+ //$url = "http://{$this->ip}:{$this->port}/charge/payment/transactions";
+                
+                /*$request = array(
+                                "request" => array(
+                                                "appId" => $data["appId"],
+                                                "appAuth" => array(
+                                                                "username" => $data["username"],
+                                                                "password" => $data["password"]
+                                                ),
+                                                "accessCode" => $data["accessNumber"],
+                                                "serviceId" => $data["serviceId"],
+                                                "productId" => $data["productId"],
+                                                "chargeInfo" => array(
+                                                                "mobileNo" => $data["mobileNo"],
+                                                                "billDescription" => $data["billDescription"],
+                                                                "amount" => $data["amount"],
+                                                                "purchaseCategory" => "IVR"
+                                                )
+                                )
+                );*/
 
-	//Set the content type to application/json
-	//curl_setopt($ch, CURLOPT_HTTPHEADER, 0);
+                $request = array(
+                                "request" => array(
+                                                "cellnum" => $mobile_number
+                                )
+                );
+                
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array ('Content-Type: application/json'));
 
-	//Execute the request
-	//$result = curl_exec($ch);
+                $dateLog = date("Ymd");
+                $timeLog = date("Y-m-d H:i:s");
+                
+                $result = curl_exec($ch);
+/*ang important dyan is ung set opt na CURLOPT_POSTFIELDS
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));*/
 
-	$ch = curl_init();
-	// curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-	$authToken = curl_exec($ch);
-
-	$ARRRES = array();
-	$ARRRES['info'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	$ARRRES['authToken'] = $authToken;
-
-	curl_close($ch);
-
-	return $ARRRES;
+				return $result;
+	
   		
   	//TODO: ADD LOGGER
 }
@@ -512,18 +527,18 @@ switch ($_REQUEST['func']) {
 			if($smartuser):
 
 				// 'cellnum=1&bar=2&baz=3'
-				$getcode = smartcurl('http://52.220.44.97:3000/song/sing/request?cellnum=63'.$mobile_number);
+				$getcode = smartcurl('http://52.220.44.97:3000/song/sing/request', $mobile_number);
 
-				$resArr = json_decode($getcode);
+				//$resArr = json_decode($getcode);
 				// echo "<pre>"; print_r($resArr); echo "</pre>";
 
 				// echo 'http://52.220.44.97:3000/song/sing/request', 'cellnum=63'.$mobile_number;
 
-				$res['process'] = 'curl proc';
+				//$res['process'] = 'curl proc';
 
 			endif;
 
-			$res['curl'] = $resArr;
+			$res['curlresult'] = $getcode;
 			$res['cellnum'] = $mobile_number;
 
 			if($globeuser):
