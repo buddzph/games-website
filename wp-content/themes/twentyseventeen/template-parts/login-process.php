@@ -91,7 +91,7 @@ function smartcurl($url, $mobile_number){
 
                 $ARRRES = array();
 				$ARRRES['info'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-				$ARRRES['authToken'] = $authToken;
+				$ARRRES['authToken'] = $result;
 
 /*ang important dyan is ung set opt na CURLOPT_POSTFIELDS
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));*/
