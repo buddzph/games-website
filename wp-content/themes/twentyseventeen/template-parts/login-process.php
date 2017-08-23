@@ -76,11 +76,7 @@ function smartcurl($url, $mobile_number){
                                 )
                 );*/
 
-                $request = array(
-                                "request" => array(
-                                                "cellnum" => '63'.$mobile_number
-                                )
-                );
+                $request = array("cellnum" => '63'.$mobile_number);
                 
                 $ch = curl_init($url);
                 curl_setopt($ch, CURLOPT_POST, 1);
