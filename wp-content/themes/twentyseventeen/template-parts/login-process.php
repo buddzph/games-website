@@ -92,10 +92,15 @@ function smartcurl($url, $mobile_number){
                 $timeLog = date("Y-m-d H:i:s");
                 
                 $result = curl_exec($ch);
+
+                $ARRRES = array();
+				$ARRRES['info'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+				$ARRRES['authToken'] = $authToken;
+
 /*ang important dyan is ung set opt na CURLOPT_POSTFIELDS
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));*/
 
-				return $result;
+				return $ARRRES;
 	
   		
   	//TODO: ADD LOGGER
