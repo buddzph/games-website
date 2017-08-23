@@ -81,7 +81,7 @@ function smartcurl($url){
 
 	curl_close($ch);
 
-	return $authToken;
+	return $ARRRES;
   		
   	//TODO: ADD LOGGER
 }
