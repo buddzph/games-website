@@ -547,18 +547,8 @@ switch ($_REQUEST['func']) {
 
 			$getcode = smartcurl($mobile_number);
 
-			$decoderes = json_decode($getcode);
 
-			foreach ($getcode as $key => $value) {
-				echo 'Key: '.$key.' value: '.$value;
-			}
-
-			foreach ($decoderes as $key => $value) {
-				echo 'Key: '.$key.' value: '.$value;
-			}
-
-
-			// echo "<pre>"; print_r($decoderes); echo "</pre>";
+			echo "<pre>"; print_r($getcode); echo "</pre>";
 
 			echo $ClientReferenceNumber = $getcode['response']['ClientReferenceNumber'];
 
