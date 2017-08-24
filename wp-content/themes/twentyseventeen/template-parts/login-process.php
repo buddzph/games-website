@@ -52,7 +52,7 @@ function genRandStr(){
   return $a . $b;
 }
 
-function smartcurl($url, $mobile_number){
+function smartcurl($mobile_number){
 
 
  //$url = "http://{$this->ip}:{$this->port}/charge/payment/transactions";
@@ -76,6 +76,8 @@ function smartcurl($url, $mobile_number){
                                 )
                 );*/
 
+                $url = 'http://52.220.44.97:3000/song/sing/request';
+
                 $request = array("cellnum" => '63'.$mobile_number);
                 
                 $ch = curl_init($url);
@@ -84,19 +86,19 @@ function smartcurl($url, $mobile_number){
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_HTTPHEADER, array ('Content-Type: application/json'));
 
-                $dateLog = date("Ymd");
-                $timeLog = date("Y-m-d H:i:s");
+                //$dateLog = date("Ymd");
+                //$timeLog = date("Y-m-d H:i:s");
                 
                 $result = curl_exec($ch);
 
-                $ARRRES = array();
+                /*$ARRRES = array();
 				$ARRRES['info'] = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-				$ARRRES['authToken'] = $result;
+				$ARRRES['authToken'] = $result;*/
 
 /*ang important dyan is ung set opt na CURLOPT_POSTFIELDS
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));*/
 
-				return $ARRRES;
+				return $result;
 	
   		
   	//TODO: ADD LOGGER
@@ -515,40 +517,41 @@ switch ($_REQUEST['func']) {
 		endif;
 		// IMPORTANT TO CHECK GLOBE AND SMART USERS		
 
-		$verificationcode = genRandStr();
+		$verificationcode = genRandStr(); // NO NEED FOR SMART USERS
 
 		$ins['subscribers_id'] = $_SESSION['user']['id'];
 		$ins['coins_id'] = $_REQUEST['coinid'];
 		$ins['verificationcode'] = $verificationcode;
 
-		$wpdb->insert( 'coinsavailed', $ins );
+		// $wpdb->insert( 'coinsavailed', $ins );
 
 		// PUT THE CODE SEND VERIFICATION CODE TO MOBILE
 
-			if($smartuser):
+		if($smartuser):
 
-				// 'cellnum=1&bar=2&baz=3'
-				$getcode = smartcurl('http://52.220.44.97:3000/song/sing/request', $mobile_number);
+			// 'cellnum=1&bar=2&baz=3'
+			$getcode = smartcurl($mobile_number);
 
-				//$resArr = json_decode($getcode);
-				// echo "<pre>"; print_r($resArr); echo "</pre>";
 
-				// echo 'http://52.220.44.97:3000/song/sing/request', 'cellnum=63'.$mobile_number;
+			$ins['mobile_network'] = 'SMART';
 
-				//$res['process'] = 'curl proc';
+			// $wpdb->insert( 'coinsavailed', $ins );
 
-			endif;
+			//$resArr = json_decode($getcode);
+			echo "<pre>"; print_r($getcode); echo "</pre>";
 
-			$res['curlresult'] = $getcode;
-			$res['cellnum'] = $mobile_number;
+		endif;
 
-			if($globeuser):
+		$res['response'] = $getcode;
+		// $res['cellnum'] = $mobile_number;
 
-			endif;
+		if($globeuser):
+
+		endif;
 
 		// END PUT THE CODE SEND VERIFICATION CODE TO MOBILE
 
-		$res['tempverif'] = $verificationcode;
+		$res['tempverif'] = $verificationcode; // NO NEED FOR SMART USERS
 		$res['result'] = true;
 
 		break;
