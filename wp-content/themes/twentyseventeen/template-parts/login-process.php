@@ -552,12 +552,12 @@ switch ($_REQUEST['func']) {
 
 
 			foreach ($decoderes as $key => $value) {
-				echo $value['ClientReferenceNumber'];
+				$ClientReferenceNumber = $value['ClientReferenceNumber'];
 			}
 
 			//echo $ClientReferenceNumber = $getcode['response']['ClientReferenceNumber'];
 
-			/*$ins['mobile_network'] = 'SMART';
+			$ins['mobile_network'] = 'SMART';
 			$ins['smart_ClientReferenceNumber'] = $ClientReferenceNumber;
 
 			$wpdb->insert( 'coinsavailed', $ins );
@@ -566,7 +566,7 @@ switch ($_REQUEST['func']) {
 			// echo "<pre>"; print_r($getcode); echo "</pre>";
 
 			$res['mobile_network'] = 'SMART';
-			$res['ClientReferenceNumber'] = $ClientReferenceNumber;*/
+			$res['ClientReferenceNumber'] = $ClientReferenceNumber;
 
 			$msgstatus = true;
 
