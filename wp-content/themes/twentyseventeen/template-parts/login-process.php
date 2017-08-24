@@ -634,6 +634,12 @@ switch ($_REQUEST['func']) {
 					$totalcoins = $checkuser[0]->tokens + $coincount;
 				endif;
 
+				$table = 'coinsavailed';
+
+				$data['status'] = 1;
+
+				$wpdb->update( $table, $data, array('subscribers_id' => $_SESSION['user']['id'], 'smart_ClientReferenceNumber' => $ClientReferenceNumber) );
+
 				// UPDATE USER
 				$tableuser = 'user';
 
