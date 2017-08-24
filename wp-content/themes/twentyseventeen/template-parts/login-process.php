@@ -552,11 +552,8 @@ switch ($_REQUEST['func']) {
 
 
 			foreach ($decoderes as $key => $value) {
-				echo "<pre>"; print_r($value); echo "</pre>";
+				echo $value['ClientReferenceNumber'];
 			}
-
-
-			echo "<pre>"; print_r($decoderes); echo "</pre>";
 
 			//echo $ClientReferenceNumber = $getcode['response']['ClientReferenceNumber'];
 
