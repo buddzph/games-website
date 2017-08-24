@@ -85,9 +85,9 @@ function g_getsessionid($uid, $gamecode)
 
 								$const = $homeurl.'/game_storage/'.$gamefolder.'/index.html?nocache&amp;api-url='.$homeurl.'/prod/api/gpctlstatapi.php&amp;session-id='.$sessionid;
 
-						    	/*echo '<iframe src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 600px"></iframe>';*/
+						    	/*echo '<iframe id="gamewrapper" src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 560px"></iframe>';*/
 
-						    	echo '<iframe src="'.$const.'" style="border: 0; width: 100%; height: 600px"></iframe>';
+						    	echo '<iframe id="gamewrapper" src="'.$const.'" style="border: 0; width: 100%; height: 560px"></iframe>';
 
 						    	$playthegame = true;
 
@@ -99,9 +99,9 @@ function g_getsessionid($uid, $gamecode)
 
 									$const = $homeurl.'/game_storage/'.$gamefolder.'/index.html?nocache&amp;api-url='.$homeurl.'/prod/api/gpctlstatapi.php&amp;session-id='.$sessionid;
 
-							    	/*echo '<iframe src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 600px"></iframe>';*/
+							    	/*echo '<iframe id="gamewrapper" src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 560px"></iframe>';*/
 
-							    	echo '<iframe src="'.$const.'" style="border: 0; width: 100%; height: 600px"></iframe>';
+							    	echo '<iframe id="gamewrapper" src="'.$const.'" style="border: 0; width: 100%; height: 560px"></iframe>';
 
 							    	$playthegame = true;
 
@@ -115,9 +115,9 @@ function g_getsessionid($uid, $gamecode)
 
 										$const = $homeurl.'/game_storage/'.$gamefolder.'/index.html?nocache&amp;api-url='.$homeurl.'/prod/api/gpctlstatapi.php&amp;session-id='.$sessionid.'_FREE';
 
-								    	/*echo '<iframe src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 600px"></iframe>';*/
+								    	/*echo '<iframe id="gamewrapper" src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 560px"></iframe>';*/
 
-								    	echo '<iframe src="'.$const.'" style="border: 0; width: 100%; height: 600px"></iframe>';
+								    	echo '<iframe id="gamewrapper" src="'.$const.'" style="border: 0; width: 100%; height: 560px"></iframe>';
 
 								    	$playthegame = true;
 
@@ -148,9 +148,9 @@ function g_getsessionid($uid, $gamecode)
 
 								$const = $homeurl.'/game_storage/'.$gamefolder.'/index.html?nocache&amp;api-url='.$homeurl.'/prod/api/gpctlstatapi.php&amp;session-id='.$sessionid.'_FREE';
 
-						    	/*echo '<iframe src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 600px"></iframe>';*/
+						    	/*echo '<iframe id="gamewrapper" src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 560px"></iframe>';*/
 
-						    	echo '<iframe src="'.$const.'" style="border: 0; width: 100%; height: 600px"></iframe>';
+						    	echo '<iframe id="gamewrapper" src="'.$const.'" style="border: 0; width: 100%; height: 560px"></iframe>';
 
 						    	$playthegame = true;
 

@@ -756,6 +756,28 @@ foreach ($countries as $key => $value) {
 	  	.ui-widget-overlay {background: #000; opacity: 0.7; filter: alpha(opacity=70); /* For IE8 and earlier */}
 	  </style>
 
+	  <?php if ( !is_front_page() && !is_home() ) : ?>
+
+	  		<style type="text/css">
+	  			.site-content {padding-top: 10px;}
+	  			.logo_wrapper .wrap img {width: 100px;}
+				.logo_wrapper .wrap .account_info {margin-top: 0;}
+				.logo_wrapper .wrap .account_info img {width: 30px;}
+				.logo_wrapper .wrap .account_info span {margin-top: 5px; font-size: 10px;}
+				.logo_wrapper .wrap .account_info a {font-size: 10px;}
+	  		</style>
+
+	  		<script type="text/javascript">
+	  			jQuery(document).ready(function($) {
+	  				window.setTimeout(function(){
+				           $('#gamewrapper').contents().find('body').css('background-color','transparent');
+				           $('#gamewrapper').contents().find('html').css('background-color','transparent');
+			           }, 1000);
+			       });
+	  		</script>
+
+	  <?php endif; ?>
+
 </head>
 
 <body <?php body_class(); ?>>
