@@ -547,10 +547,16 @@ switch ($_REQUEST['func']) {
 
 			$getcode = smartcurl($mobile_number);
 
+			$decoderes = json_decode($getcode, TRUE);
 
-			echo "<pre>"; print_r($getcode); echo "</pre>";
+			foreach ($decoderes->response as $key => $value) {
+				echo 'Key: '.$key.' value: '.$value;
+			}
 
-			echo $ClientReferenceNumber = $getcode['response']['ClientReferenceNumber'];
+
+			// echo "<pre>"; print_r($getcode); echo "</pre>";
+
+			//echo $ClientReferenceNumber = $getcode['response']['ClientReferenceNumber'];
 
 			/*$ins['mobile_network'] = 'SMART';
 			$ins['smart_ClientReferenceNumber'] = $ClientReferenceNumber;
@@ -567,7 +573,7 @@ switch ($_REQUEST['func']) {
 
 		endif;
 
-		$res['response'] = $getcode;
+		// $res['response'] = $getcode;
 		// $res['cellnum'] = $mobile_number;
 
 		if($globeuser): // GLOBE USERS
