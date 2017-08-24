@@ -549,9 +549,9 @@ switch ($_REQUEST['func']) {
 
 			$decoderes = json_decode($getcode);
 
-			echo "<pre>"; print_r($decoderes); echo "</pre>";
+			// echo "<pre>"; print_r($decoderes); echo "</pre>";
 
-			$ClientReferenceNumber = $getcode['response']['ClientReferenceNumber'];
+			echo $ClientReferenceNumber = $getcode['response']['ClientReferenceNumber'];
 
 			/*$ins['mobile_network'] = 'SMART';
 			$ins['smart_ClientReferenceNumber'] = $ClientReferenceNumber;
