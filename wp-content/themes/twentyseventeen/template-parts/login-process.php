@@ -108,7 +108,7 @@ function validateSmart($num_request, $amount, $ClientReferenceNumber, $pin){
 
 	$url = 'http://52.220.44.97:3000/song/sing/validate';
 
-    $request = array("cellnum" => '63'.$mobile_number, "amount" => $amount, "referenceCode" => $ClientReferenceNumber, "pin" => $pin);
+    $request = array("cellnum" => '63'.$num_request, "amount" => $amount, "referenceCode" => $ClientReferenceNumber, "pin" => $pin);
     
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_POST, 1);
@@ -547,9 +547,13 @@ switch ($_REQUEST['func']) {
 
 			$getcode = smartcurl($mobile_number);
 
+			$decoderes = json_decode($getcode);
+
+			echo "<pre>"; print_r($decoderes); echo "</pre>";
+
 			$ClientReferenceNumber = $getcode['response']['ClientReferenceNumber'];
 
-			$ins['mobile_network'] = 'SMART';
+			/*$ins['mobile_network'] = 'SMART';
 			$ins['smart_ClientReferenceNumber'] = $ClientReferenceNumber;
 
 			$wpdb->insert( 'coinsavailed', $ins );
@@ -558,7 +562,7 @@ switch ($_REQUEST['func']) {
 			// echo "<pre>"; print_r($getcode); echo "</pre>";
 
 			$res['mobile_network'] = 'SMART';
-			$res['ClientReferenceNumber'] = $ClientReferenceNumber;
+			$res['ClientReferenceNumber'] = $ClientReferenceNumber;*/
 
 			$msgstatus = true;
 
