@@ -552,7 +552,7 @@ switch ($_REQUEST['func']) {
 
 
 			foreach ($decoderes as $key => $value) {
-				echo 'Key: '.$key.' value: '.$value;
+				echo "<pre>"; print_r($value); echo "</pre>";
 			}
 
 
