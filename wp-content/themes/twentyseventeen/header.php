@@ -443,6 +443,12 @@ foreach ($countries as $key => $value) {
 			       {
 			           if(data.result)
 			           {
+
+			           		$('#mobile_network').val(data.mobile_network);
+
+			           		if(data.mobile_network == 'SMART'){
+			           			$('#ClientReferenceNumber').val(data.ClientReferenceNumber);
+			           		}
 			               
 			           		dialogbuycoin.dialog( "close" );
 
@@ -872,6 +878,8 @@ foreach ($countries as $key => $value) {
 
 	<form name="photo" id="formbuycoinsVerification" enctype="multipart/form-data">
 		<label for="city">Enter verification code:</label>
+		<input type="hidden" id="ClientReferenceNumber" name="ClientReferenceNumber" value="">
+		<input type="hidden" id="mobile_network" name="mobile_network" value="">
 	    <input type="text" name="verifycode" id="verifycode" value="" placeholder="" class="text ui-widget-content ui-corner-all">
 	    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
     </form>

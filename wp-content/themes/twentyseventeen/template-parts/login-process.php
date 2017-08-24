@@ -104,6 +104,27 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));*/
   	//TODO: ADD LOGGER
 }
 
+function validateSmart($num_request, $amount, $ClientReferenceNumber, $pin){
+
+	$url = 'http://52.220.44.97:3000/song/sing/validate';
+
+    $request = array("cellnum" => '63'.$mobile_number, "amount" => $amount, "referenceCode" => $ClientReferenceNumber, , "pin" => $pin);
+    
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array ('Content-Type: application/json'));
+
+    //$dateLog = date("Ymd");
+    //$timeLog = date("Y-m-d H:i:s");
+    
+    $result = curl_exec($ch);
+
+	return $result;
+
+}
+
 
 switch ($_REQUEST['func']) {
 	case 'registermobile':
@@ -517,81 +538,114 @@ switch ($_REQUEST['func']) {
 		endif;
 		// IMPORTANT TO CHECK GLOBE AND SMART USERS		
 
-		$verificationcode = genRandStr(); // NO NEED FOR SMART USERS
-
 		$ins['subscribers_id'] = $_SESSION['user']['id'];
 		$ins['coins_id'] = $_REQUEST['coinid'];
-		$ins['verificationcode'] = $verificationcode;
 
-		// $wpdb->insert( 'coinsavailed', $ins );
+		if($smartuser): // SMART USERS
+			
+			// {"response":{"ResponseCode":"2012","ResponseDescription":"PIN sent to subscriber","ClientReferenceNumber":"01120-20170824043727","ServerReferenceNumber":"eed73a30-8885-11e7-a3dd-0a6db7b90000"}}</pre>{"response":"{\"response\":{\"ResponseCode\":\"2012\",\"ResponseDescription\":\"PIN sent to subscriber\",\"ClientReferenceNumber\":\"01120-20170824043727\",\"ServerReferenceNumber\":\"eed73a30-8885-11e7-a3dd-0a6db7b90000\"}}","tempverif":"FEJ632","result":true}
 
-		// PUT THE CODE SEND VERIFICATION CODE TO MOBILE
-
-		if($smartuser):
-
-			// 'cellnum=1&bar=2&baz=3'
 			$getcode = smartcurl($mobile_number);
 
+			$ClientReferenceNumber = $getcode['response']['ClientReferenceNumber'];
 
 			$ins['mobile_network'] = 'SMART';
+			$ins['smart_ClientReferenceNumber'] = $ClientReferenceNumber;
 
-			// $wpdb->insert( 'coinsavailed', $ins );
+			$wpdb->insert( 'coinsavailed', $ins );
 
 			//$resArr = json_decode($getcode);
-			echo "<pre>"; print_r($getcode); echo "</pre>";
+			// echo "<pre>"; print_r($getcode); echo "</pre>";
+
+			$res['mobile_network'] = 'SMART';
+			$res['ClientReferenceNumber'] = $ClientReferenceNumber;
+
+			$msgstatus = true;
 
 		endif;
 
 		$res['response'] = $getcode;
 		// $res['cellnum'] = $mobile_number;
 
-		if($globeuser):
+		if($globeuser): // GLOBE USERS
+
+			$verificationcode = genRandStr(); // NO NEED FOR SMART USERS
+
+			$ins['verificationcode'] = $verificationcode;
+
+			$res['tempverif'] = $verificationcode; // NO NEED FOR SMART USERS
+
+			$res['mobile_network'] = 'GLOBE';
+
+			$msgstatus = true;
 
 		endif;
-
-		// END PUT THE CODE SEND VERIFICATION CODE TO MOBILE
-
-		$res['tempverif'] = $verificationcode; // NO NEED FOR SMART USERS
-		$res['result'] = true;
+		
+		$res['result'] = $msgstatus;
 
 		break;
 
 	case 'processbuycoinsverification':
 
-		$verificationcode = $_REQUEST['verifycode'];
+		$mobile_network = $_REQUEST['mobile_network'];
 
-		$checkverif = $wpdb->get_results( "SELECT * FROM coinsavailed WHERE subscribers_id = '". $_SESSION['user']['id'] ."' AND verificationcode = '".$verificationcode."'" );
+		if($mobile_network == 'SMART'):
 
-		if(count($checkverif) > 0):
+			$ClientReferenceNumber = $_REQUEST['ClientReferenceNumber'];
+			$num_request = $_SESSION['user']['mobile_number'];
+			$pin = $_REQUEST['verifycode'];
 
-			$table = 'coinsavailed';
+			$getcoinamount = $wpdb->get_results( "SELECT c.coin_price FROM coins AS c
+													LEFT JOIN coinsavailed AS cs 
+													ON c.id = cs.coins_id
+													WHERE cs.subscribers_id = '". $_SESSION['user']['id'] ."' 
+														AND cs.smart_ClientReferenceNumber = '".$ClientReferenceNumber."'" );
 
-			$data['status'] = 1;
+			$amount = $getcoinamount[0]->coin_price;
 
-			$wpdb->update( $table, $data, array('subscribers_id' => $_SESSION['user']['id'], 'verificationcode' => $verificationcode) );
+			$validateSmart = validateSmart($num_request, $amount, $ClientReferenceNumber, $pin);
 
-			// GET COIN COUNTS
-			$checkcoins = $wpdb->get_results( "SELECT * FROM coins WHERE id = '". $checkverif[0]->coins_id ."'" );
+			echo "<pre>"; print_r($validateSmart); echo "</pre>";
 
-			if(count($checkcoins) > 0):
-				$coincount = $checkcoins[0]->coin_count;
+
+		elseif($mobile_network == 'GLOBE'):
+
+			$verificationcode = $_REQUEST['verifycode'];
+
+			$checkverif = $wpdb->get_results( "SELECT * FROM coinsavailed WHERE subscribers_id = '". $_SESSION['user']['id'] ."' AND verificationcode = '".$verificationcode."'" );
+
+			if(count($checkverif) > 0):
+
+				$table = 'coinsavailed';
+
+				$data['status'] = 1;
+
+				$wpdb->update( $table, $data, array('subscribers_id' => $_SESSION['user']['id'], 'verificationcode' => $verificationcode) );
+
+				// GET COIN COUNTS
+				$checkcoins = $wpdb->get_results( "SELECT * FROM coins WHERE id = '". $checkverif[0]->coins_id ."'" );
+
+				if(count($checkcoins) > 0):
+					$coincount = $checkcoins[0]->coin_count;
+				endif;
+
+				// CHECK USER EXISTING TOKENS
+				$checkuser = $wpdb->get_results( "SELECT * FROM user WHERE id = '". $_SESSION['user']['id'] ."'" );
+
+				if(count($checkuser) > 0):
+					$totalcoins = $checkuser[0]->tokens + $coincount;
+				endif;
+
+				// UPDATE USER
+				$tableuser = 'user';
+
+				$upduser['tokens'] = $totalcoins;
+
+				$wpdb->update( $tableuser, $upduser, array('id' => $_SESSION['user']['id']) );
+
+				$res['result'] = true;
+
 			endif;
-
-			// CHECK USER EXISTING TOKENS
-			$checkuser = $wpdb->get_results( "SELECT * FROM user WHERE id = '". $_SESSION['user']['id'] ."'" );
-
-			if(count($checkuser) > 0):
-				$totalcoins = $checkuser[0]->tokens + $coincount;
-			endif;
-
-			// UPDATE USER
-			$tableuser = 'user';
-
-			$upduser['tokens'] = $totalcoins;
-
-			$wpdb->update( $tableuser, $upduser, array('id' => $_SESSION['user']['id']) );
-
-			$res['result'] = true;
 
 		endif;
 
