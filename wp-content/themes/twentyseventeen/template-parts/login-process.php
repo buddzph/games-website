@@ -601,21 +601,49 @@ switch ($_REQUEST['func']) {
 			$num_request = $_SESSION['user']['mobile_number'];
 			$pin = $_REQUEST['verifycode'];
 
-			$getcoinamount = $wpdb->get_results( "SELECT c.coin_price FROM coins AS c
+			$getcoinamount = $wpdb->get_results( "SELECT c.coin_count, c.coin_price FROM coins AS c
 													LEFT JOIN coinsavailed AS cs 
 													ON c.id = cs.coins_id
 													WHERE cs.subscribers_id = '". $_SESSION['user']['id'] ."' 
 														AND cs.smart_ClientReferenceNumber = '".$ClientReferenceNumber."'" );
 
+			$coincount = $getcoinamount[0]->coin_count;
 			$amount = $getcoinamount[0]->coin_price;
 
 			$validateSmart = validateSmart($num_request, $amount, $ClientReferenceNumber, $pin);
 
 			$decodevalidate = json_decode($validateSmart, TRUE);
 
+			$haserror = 0;
 			foreach ($decodevalidate as $key => $value) {
-				echo $value['error']['error_code'];	
+				if(!empty($value['error']['error_code'])):
+					$haserror++;
+				endif;
 			}
+
+			if($haserror > 0):
+
+				$res['result'] = false;
+
+			else:
+
+				// CHECK USER EXISTING TOKENS
+				$checkuser = $wpdb->get_results( "SELECT * FROM user WHERE id = '". $_SESSION['user']['id'] ."'" );
+
+				if(count($checkuser) > 0):
+					$totalcoins = $checkuser[0]->tokens + $coincount;
+				endif;
+
+				// UPDATE USER
+				$tableuser = 'user';
+
+				$upduser['tokens'] = $totalcoins;
+
+				$wpdb->update( $tableuser, $upduser, array('id' => $_SESSION['user']['id']) );
+
+				$res['result'] = true;
+
+			endif;
 
 
 		elseif($mobile_network == 'GLOBE'):
