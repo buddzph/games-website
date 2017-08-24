@@ -549,8 +549,6 @@ switch ($_REQUEST['func']) {
 
 			$decoderes = json_decode($getcode, TRUE);
 
-
-
 			foreach ($decoderes as $key => $value) {
 				$ClientReferenceNumber = $value['ClientReferenceNumber'];
 			}
@@ -613,7 +611,11 @@ switch ($_REQUEST['func']) {
 
 			$validateSmart = validateSmart($num_request, $amount, $ClientReferenceNumber, $pin);
 
-			echo "<pre>"; print_r($validateSmart); echo "</pre>";
+			$decodevalidate = json_decode($validateSmart, TRUE);
+
+			foreach ($decodevalidate as $key => $value) {
+				echo $value['error']['error_code'];	
+			}
 
 
 		elseif($mobile_network == 'GLOBE'):
