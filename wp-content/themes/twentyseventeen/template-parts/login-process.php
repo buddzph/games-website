@@ -108,7 +108,7 @@ function validateSmart($num_request, $amount, $ClientReferenceNumber, $pin){
 
 	$url = 'http://52.220.44.97:3000/song/sing/validate';
 
-    $request = array("cellnum" => '63'.$mobile_number, "amount" => $amount, "referenceCode" => $ClientReferenceNumber, , "pin" => $pin);
+    $request = array("cellnum" => '63'.$mobile_number, "amount" => $amount, "referenceCode" => $ClientReferenceNumber, "pin" => $pin);
     
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_POST, 1);
