@@ -752,6 +752,13 @@ foreach ($countries as $key => $value) {
 	    $( "#getrewards" ).removeClass('ui-widget');
 	    $( "#getrewards" ).removeClass('ui-button');
 
+
+	    $('ul.nav li.dropdown').hover(function() {
+		  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
+		}, function() {
+		  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
+		});
+
 	  });
 	  </script>
 
@@ -887,11 +894,11 @@ foreach ($countries as $key => $value) {
 
 <div id="dialog-getrewards" title="Select your reward" style="display: none;"> 
 
-	<a href="javascript: void(0);" id="reward1"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure01.png" alt="" class="hvr-buzz-out"></a>
+	<a href="javascript: void(0);" style="width: 32.5%;" id="reward1"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure01.png" alt="" class="hvr-buzz-out"></a>
 
-	<a href="javascript: void(0);" id="reward2"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure02.png" alt="" class="hvr-buzz-out"></a>
+	<a href="javascript: void(0);" style="width: 32.5%;" id="reward2"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure02.png" alt="" class="hvr-buzz-out"></a>
 
-	<a href="javascript: void(0);" id="reward3"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure03.png" alt="" class="hvr-buzz-out"></a>
+	<a href="javascript: void(0);" style="width: 32.5%;" id="reward3"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure03.png" alt="" class="hvr-buzz-out"></a>
 
 </div>
 
@@ -905,21 +912,39 @@ foreach ($countries as $key => $value) {
 				<div class="account_info">
 					<?php if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])): ?>
 						<?php if(empty($_SESSION['user']['username'])): ?>
-							<span>No username&nbsp; &nbsp;<a href="javascript: void(0);" id="logout">Logout</a></span>	
+							<span>No username&nbsp; &nbsp;</span>	
 						<?php else: ?>
-							<span>Logged in as: <b><?php echo $_SESSION['user']['username']; ?></b>&nbsp; &nbsp;<a href="javascript: void(0);" id="logout">Logout</a></span>
+							<span>Logged in as: <b><?php echo $_SESSION['user']['username']; ?></b>&nbsp; &nbsp;</span>
 						<?php endif; ?>
-						<a href="javascript: void(0);" id="updateusername">
-							<?php if(isset($_SESSION['user']['user_avatar']) and !empty($_SESSION['user']['user_avatar'])): ?>
 
-					      		<img src="<?php echo $homeurl; ?>/usericon/cropped/<?php echo $_SESSION['user']['user_avatar']; ?>" alt="">
+				      	<ul class="nav navbar-nav">
+				            <li class="dropdown">
+				              <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="display: block;">
 
-					      	<?php else: ?>
+				              	<?php if(isset($_SESSION['user']['user_avatar']) and !empty($_SESSION['user']['user_avatar'])): ?>
 
-					      		<img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/62x62-Account-Icon.png" alt="" class="planeicon">
+						      		<img src="<?php echo $homeurl; ?>/usericon/cropped/<?php echo $_SESSION['user']['user_avatar']; ?>" alt="">
 
-					      	<?php endif; ?>
-						</a>
+						      	<?php else: ?>
+
+						      		<img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/62x62-Account-Icon.png" alt="" class="planeicon">
+
+						      	<?php endif; ?>
+
+				              </a>
+				              <ul class="dropdown-menu" style="display: none;">
+				                <li><a href="javascript: void(0);" id="accountstatus">Account Status</a></li>
+			      				<li><a href="javascript: void(0);" id="updateusername">Update Account</a></li>
+			      				<li><a href="javascript: void(0);" id="logout">Logout</a></li>
+				              </ul>
+				            </li>
+				          </ul>
+
+				      	<!--ul class="dropdown-menu">
+			      			<li><a href="javascript: void(0);" id="accountstatus">Account Status</a></li>
+			      			<li><a href="javascript: void(0);" id="updateusername">Update Account</a></li>
+			      		</ul-->
+
 					<?php else: ?>
 						<span><a href="javascript: void(0);" id="mobilecheck">Register</a> | <a href="javascript: void(0);" id="userlogin">Login</a></span>
 						<img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/62x62-Account-Icon.png" alt="" class="planeicon">
