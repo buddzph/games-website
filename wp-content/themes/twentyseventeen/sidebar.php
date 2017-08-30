@@ -30,6 +30,7 @@ $homeurl = esc_url( $url );
 		
 
 		$categories = get_the_category();
+		$gametitle = get_the_title();
 
 		if ( ! empty( $categories ) and $categories[0]->name == "Games" ) {
 		    // echo esc_html( $categories[0]->name );
@@ -39,8 +40,10 @@ $homeurl = esc_url( $url );
 
 		    //echo '<center><a class="button" href="../game-playing?gamecode='.$gamecode.'">Play Now!</a></center>';
 
+			get_template_part( 'template-parts/post/content', 'excerpt' );
 
-		    get_template_part( 'template-parts/post/content', get_post_format() );
+			// DO NOT DELETE, ITS THE POST CONTENT
+		    // get_template_part( 'template-parts/post/content', get_post_format() );
 
 		    if($_SERVER['HTTP_HOST'] == 'localhost'):
 
