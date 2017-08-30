@@ -50,21 +50,5 @@
 			}
 		}
 	});
-
-
-	function bt_bb_animate_counter( elm ) {
-		var number_length = elm.data( 'digit-length' );
-		for ( var i = parseInt( number_length ); i > 0; i-- ) {
-			var digit = parseInt( elm.children( '.p' + i ).data( 'digit' ) );
-			if ( digit == 0 || isNaN( digit ) ) digit = 10;
-			for ( var j = 0; j <= digit; j++ ) {
-				elm.children( '.p' + i ).css( 'transform', 'translateY(-' + digit * elm[0].getBoundingClientRect().height + 'px)' );
-				//elm.children( '.p' + i ).css( 'transform', 'translateY(-' + digit * elm.height() + 'px)' );
-			}
-			elm.addClass( 'animated' );
-		}
-		
-		return false;
-	}
 	
 })( jQuery );

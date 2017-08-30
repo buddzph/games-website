@@ -284,6 +284,7 @@
         });
 
         $("select.mutilsite_select").change(function(){
+            var content_language = $('#selected_content_language').val();
             var val_blog = $(this).val();
             var type = $(this).attr('id');
             $.ajax({
@@ -293,11 +294,11 @@
                 data:{
                     action : 'change_cat_multisite',
                     val_blog : val_blog,
-                    type : type
+                    type : type,
+                    content_language: content_language
 
                 },
                 success : function(res){
-                    console.log(res.output);
                     var type = res.type;
                     if(type.indexOf('post') > -1){
                         parent = $('.postcat');

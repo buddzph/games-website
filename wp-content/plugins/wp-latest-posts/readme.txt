@@ -3,7 +3,7 @@ Contributors: JoomUnited
 Tags: latest post, news widget, recent posts, posts, recent post widget, news posts, latest page, custom content, previous posts, page, featured posts, article display, news display, news slider, page display, post display, article display, frontpage news, news
 Requires at least: 4.0
 Tested up to: 4.8.0
-Stable tag: 4.0.3
+Stable tag: 4.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,6 +47,7 @@ The main idea of this plugin is to visually take the latest or custom content li
 * Create carrousel sliding news displays with a few clicks
 * Full **out-of-the box support of WordPress default theme** and most common custom themes and styling
 * PHP code generation to include news display in your theme
+* WPML integration: Filter news content by WPML language
 
 
 = WP Latest posts add-on features (optional, still open-source version) =
@@ -81,6 +82,7 @@ Main plugins from JoomUnited:
 * WP Table Manager: <a href="https://www.joomunited.com/wordpress-products/wp-file-download" rel="friend">https://www.joomunited.com/wordpress-products/wp-file-download</a>
 * WP Speed of Light: <a href="https://www.joomunited.com/wordpress-products/wp-speed-of-light" rel="friend">https://www.joomunited.com/wordpress-products/wp-speed-of-light</a>
 * WP Latest Posts: <a href="https://www.joomunited.com/wordpress-products/wp-latest-posts" rel="friend">https://www.joomunited.com/wordpress-products/wp-latest-posts</a>
+* WP Smart Editor: <a href="https://wordpress.org/plugins/wp-smart-editor" rel="friend">https://wordpress.org/plugins/wp-smart-editor</a>
 
 **Still not sure! test the plugin live on a demo website:** <a href="https://addendio.com/try-plugin/?slug=wp-latest-posts" rel="friend">https://addendio.com/try-plugin/?slug=wp-latest-posts</a>
 
@@ -135,6 +137,12 @@ Yes the support has been added since the 3.5.2 version.
  
 
 == Changelog ==
+
+= 4.1.0 =
+* Add : WPML integration: filter news block content by language
+
+= 4.0.4 =
+* Fix : Crop text of title and text by default
 
 = 4.0.3 =
 * Fix : Get full content and crop text

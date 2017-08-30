@@ -3,7 +3,7 @@
  * Plugin Name: WP Latest Posts
  * Plugin URI: http://www.joomunited.com/wordpress-products/wp-latest-posts
  * Description: Advanced frontpage and widget news slider
- * Version: 4.0.3
+ * Version: 4.1.0
  * Text Domain: wp-latest-posts
  * Domain Path: /languages
  * Author: JoomUnited
@@ -42,7 +42,7 @@ define ('MAIN_FRONT_SCRIPT' , 'js/wplp_front.js');  //Main front-end jQuery scri
 define ('DEFAULT_IMG' ,'img/default-image-fpnp.png'); //Default thumbnail image
 //const   THEME_LIBRARY                   = 'themes/default/default.php';
 define ('USE_LOCAL_JS_LIBS' , true);
-
+define ('WPLP_PLUGIN_DIR', plugin_dir_url(__FILE__));
 //Check plugin requirements
 if (version_compare(PHP_VERSION, '5.3', '<')) {
     if( !function_exists('wplp_disable_plugin') ){
@@ -75,7 +75,11 @@ call_user_func('\Joomunited\WPLatestPosts\Jutranslation\Jutranslation::init',__F
 include_once(dirname(__FILE__) . '/inc/wplp-admin.inc.php');            // custom classes
 include_once(dirname(__FILE__) . '/inc/wplp-widget.inc.php');        // custom classes
 include_once(dirname(__FILE__) . '/inc/wplp-front.inc.php');            // custom classes
-
+if (function_exists('icl_object_id')){
+    // WPML installed
+    include_once(dirname(__FILE__) . '/inc/compatibility/class.language_content_wpml.php');
+    new WPLP_LanguageContent();
+}
 include_once(dirname(__FILE__) . '/views/wplp-block-settings.php'); //view wplp block settings
 include_once(dirname(__FILE__) . '/views/wplp-configuration.php'); //view config page
 
@@ -87,7 +91,7 @@ include_once(dirname(__FILE__) . '/views/wplp-configuration.php'); //view config
 global $wpcu_wpfn;
 $wpcu_wpfn = new WPLP_Admin(
     array(
-        'version' => '4.0.3',
+        'version' => '4.1.0',
         'translation_domain' => 'wp-latest-posts', // must be copied in the widget class!!!
         'plugin_file' => __FILE__,
     )

@@ -96,6 +96,18 @@ Bold Builder is supported through our [support forum](https://wordpress.org/supp
 
 == Changelog ==
 
+= 1.3.7 =
+* Added slider fade animation.
+
+= 1.3.6 =
+* Fixed post content if BB is disabled for post type.
+
+= 1.3.5 =
+* Fixed Counter content element.
+
+= 1.3.4 =
+* Fixed text editor dropdowns.
+
 = 1.3.3 =
 * Improved unit test compatibility.
 

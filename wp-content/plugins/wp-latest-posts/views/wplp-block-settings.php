@@ -497,6 +497,9 @@ class WPLP_Block_Settings
      */
     private function displayContentSourceTab() {
         global $post;
+        if (function_exists('icl_object_id')){
+            $active_languages = apply_filters( 'wpml_active_languages', NULL, 'orderby=name&order=asc' );
+        }
         $checked = array();
         $settings = get_post_meta($post->ID, '_wplp_settings', true);
         if (empty($settings))
@@ -507,6 +510,10 @@ class WPLP_Block_Settings
 
         $source_type_checked[$settings['source_type']] = ' checked="checked"';
 
+        $selected_content_language = '';
+        if(isset($settings['content_language'])){
+            $selected_content_language = $settings['content_language'];
+        }
 
         $tabs = array(
             'tab-1-1' => array(
@@ -530,7 +537,25 @@ class WPLP_Block_Settings
                                     <li><a href="#<?php echo $tabhref; ?>" id="<?php echo $tab['id']; ?>"><?php echo $tab['name']; ?></a></li>
         <?php endforeach; ?>
                         </ul>-->
+        <?php  if (function_exists('icl_object_id')):?>
+        <!-- CHECK WPML is INSTALLED AND ACTIVED -->
+            <?php if(!empty($active_languages)) : ?>
+            <div class="content-source-language">
+                <label for="content_language" class="content-language-label"><?php _e('Content language','wp-latest-posts');?></label>
+                <select id="content_language" class="content-language-select browser-default" name="wplp_content_language">
 
+                        <?php foreach ($active_languages as $k => $languages) :
+                            $check = ($settings['content_language'] == $k) ? ' selected="selected"' : '';
+                    ?>
+                            <option value="<?php echo $k; ?>" <?php echo $check; ?>><?php echo apply_filters( 'wpml_display_language_names', NULL, $languages['native_name'], $languages['translated_name'] ); ?></option>
+                        <?php endforeach; ?>
+
+                </select>
+            </div><hr>
+            <?php endif; ?>
+        <?php endif; ?>
+        <input type="hidden" value="<?php echo $selected_content_language; ?>" id="selected_content_language">
+        <input type="hidden" value="" id="selected_source_type" />
         <ul class="horizontal">
             <?php $idx = 0; ?>
             <?php foreach ($tabs as $tabhref => $tab) : ?>
@@ -592,7 +617,12 @@ class WPLP_Block_Settings
             echo '</select></div></li>';
             echo '</ul>';
         }
+        $mutilsite_selected_post = '';
+        if(isset($settings['mutilsite_cat'])){
+            $mutilsite_selected_post = $settings['mutilsite_cat'];
+        }
 
+        echo '<input type="hidden" value="'.$mutilsite_selected_post.'" id="selected_multisite_post_type" />';
         echo '<ul class="fields">';
 
         echo '<li class="field postcat">';
@@ -606,6 +636,9 @@ class WPLP_Block_Settings
                 foreach ($blogs as $blog) {
                     switch_to_blog((int)$blog->blog_id);
                     $allcats = get_categories();
+                    if(isset($settings['content_language'])){
+                        $allcats = apply_filters('wplp_get_category_by_language', $allcats, $settings['content_language']);
+                    }
                     foreach ($allcats as $allcat) {
                         $cats[] = $allcat;
                     }
@@ -614,9 +647,13 @@ class WPLP_Block_Settings
             } else {
                 switch_to_blog((int)$settings['mutilsite_cat']);
                 $cats = get_categories();
+                if(isset($settings['content_language'])){
+                    $cats = apply_filters('wplp_get_category_by_language', $cats, $settings['content_language']);
+                }
                 restore_current_blog();
 
             }
+
             foreach ($cats as $k => $cat) {
                 echo '<li><input id="ccb_' . $k . '" type="checkbox" name="wplp_source_category[]" value="' . $k . '_' .
                     $cat->term_id . '" ' . (isset($source_cat_checked[$k . '_' . $cat->term_id]) ? $source_cat_checked[$k . '_' . $cat->term_id] : "") . ' class="post_cb" />';
@@ -624,6 +661,10 @@ class WPLP_Block_Settings
             }
         } else {
             $cats = get_categories();
+            if(isset($settings['content_language'])){
+                $cats = apply_filters('wplp_get_category_by_language', $cats, $settings['content_language']);
+            }
+
             foreach ($cats as $k => $cat) {
                 echo '<li><input id="ccb_' . $k . '" type="checkbox" name="wplp_source_category[]" value="' .
                     $cat->term_id . '" ' . (isset($source_cat_checked[$cat->term_id]) ? $source_cat_checked[$cat->term_id] : "") . ' class="post_cb" />';
@@ -718,7 +759,11 @@ class WPLP_Block_Settings
             echo '</select></div></li>';
             echo '</ul>';
         }
-
+        $mutilsite_selected_page = '';
+        if(isset($settings['mutilsite_page'])){
+            $mutilsite_selected_page = $settings['mutilsite_page'];
+        }
+        echo '<input type="hidden" value="'.$mutilsite_selected_page.'" id="selected_multisite_page_type" />';
         echo '<ul class="fields">';
 
         echo '<li class="field pagecat">';

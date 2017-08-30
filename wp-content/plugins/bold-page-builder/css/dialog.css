@@ -1,6 +1,6 @@
 .bt_bb_dialog {
 	position: fixed;
-	z-index: 100000;
+	z-index: 60000;
 	background-clip: padding-box;
 	left: 50%;
 	background-color: #fff;

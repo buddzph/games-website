@@ -142,7 +142,7 @@ class BT_BB_WP_Import extends WP_Importer {
 	
 	var $end = false;
 
-	function BT_BB_WP_Import( $step ) { $this->step = $step; }
+	function __construct( $step ) { $this->step = $step; }
 
 	/**
 	 * The main controller for the actual import stage.

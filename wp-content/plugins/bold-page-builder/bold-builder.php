@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Bold Builder
  * Description: WordPress content builder.
- * Version:  1.3.3
+ * Version:  1.3.7
  * Author: BoldThemes
  * Author URI: http://www.bold-themes.com
  */
@@ -19,10 +19,14 @@ if ( file_exists( plugin_dir_path( __FILE__ ) . 'css-crush/CssCrush.php' ) ) {
 if ( file_exists( get_template_directory() . '/bt_bb_config.php' ) ) {
 	require_once( get_template_directory() . '/bt_bb_config.php' );
 }
-	
+
 add_filter( 'the_content', 'bt_bb_parse_content', 20 );
 function bt_bb_parse_content( $content ) {
-	return '<div class="bt_bb_wrapper">' . $content . '</div>';
+	if ( bt_bb_active_for_post_type_fe() ) {
+		return '<div class="bt_bb_wrapper">' . $content . '</div>';
+	} else {
+		return $content;
+	}
 }
 
 if ( ! class_exists( 'BoldThemes_BB_Settings' ) || ! BoldThemes_BB_Settings::$custom_content_elements ) {
@@ -482,6 +486,9 @@ function bt_bb_map_js() {
 add_action( 'admin_head', 'bt_bb_map_js' );
 
 function bt_bb_fe_action() {
+	if ( ! bt_bb_active_for_post_type_fe() ) {
+		return;
+	}
 	add_action( 'wp_enqueue_scripts', 'bt_bb_enqueue_fe' );
 	add_filter( 'the_content', 'bt_bb_parse_content_admin' );
 }
@@ -677,6 +684,9 @@ class BT_BB_Remove_Params_Proxy {
  * Remove wpautop
  */
 function bt_bb_wpautop( $content ) {
+	if ( ! bt_bb_active_for_post_type_fe() ) {
+		return $content;
+	}
 	foreach( BT_BB_Root::$elements as $base => $params ) {
 		$proxy = new BT_BB_FE_Map_Proxy( $base, $params );
 	}	
@@ -907,6 +917,22 @@ function bt_bb_edit_dialog() {
 			echo '<input type="button" class="bt_bb_dialog_button bt_bb_edit button button-small" value="' . __( 'Submit', 'bold-builder' ) . '">';
 		echo '</div>';
 	echo '</div>';
+}
+
+function bt_bb_active_for_post_type_fe() {
+	$options = get_option( 'bt_bb_settings' );
+	$post_types = get_post_types( array( 'public' => true, 'show_in_nav_menus' => true ) );
+	$active_pt = array();
+	foreach( $post_types as $pt ) {
+		if ( ! $options || ( ! array_key_exists( $pt, $options ) || ( array_key_exists( $pt, $options ) && $options[ $pt ] == '1' ) ) ) {
+			$active_pt[ $pt ] = $pt;
+		}
+	}
+	$post_type = get_post_type();
+	if ( $post_type ) {
+		return array_key_exists( $post_type, $active_pt );
+	}
+	return false;
 }
 
 function bt_bb_json_encode( $arg ) {

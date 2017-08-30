@@ -8,6 +8,7 @@ class bt_bb_content_slider extends BT_BB_Element {
 		extract( shortcode_atts( apply_filters( 'bt_bb_extract_atts', array(
 			'height'    			=> '',
 			'show_dots' 			=> '',
+			'animation' 			=> '',
 			'gap' 					=> '',
 			'arrows_size' 			=> '',
 			'slides_to_show' 		=> '',
@@ -15,7 +16,7 @@ class bt_bb_content_slider extends BT_BB_Element {
 		) ), $atts, $this->shortcode ) );
 		
 		$class = array( $this->shortcode );
-		//$class[] = 'slick-slider';
+		$slider_class[] = 'slick-slider';
 		
 		if ( $el_class != '' ) {
 			$class[] = $el_class;
@@ -44,6 +45,12 @@ class bt_bb_content_slider extends BT_BB_Element {
 		}
 		
 		$data_slick  = ' data-slick=\'{ "lazyLoad": "progressive", "cssEase": "ease-out", "speed": "600"';
+		
+		if ( $animation == 'fade' ) {
+			$data_slick .= ', "fade": true';
+			$slider_class[] = 'fade';
+			$slides_to_show = 1;
+		}
 		
 		if ( $arrows_size != 'no_arrows' ) {
 			$data_slick  .= ', "prevArrow": "&lt;button type=\"button\" class=\"slick-prev\"&gt;", "nextArrow": "&lt;button type=\"button\" class=\"slick-next\"&gt;"';
@@ -90,7 +97,7 @@ class bt_bb_content_slider extends BT_BB_Element {
 		}
 		$data_slick = $data_slick . '}\' ';
 
-		$output = '<div' . $id_attr . ' class="' . implode( ' ', $class ) . '"' . $style_attr . '><div class="slick-slider" ' . $data_slick .  '>' . do_shortcode( $content ) . '</div></div>';
+		$output = '<div' . $id_attr . ' class="' . implode( ' ', $class ) . '"' . $style_attr . '><div class="' . implode( ' ', $slider_class ) . '" ' . $data_slick .  '>' . do_shortcode( $content ) . '</div></div>';
 		
 		return $output;
 
@@ -105,6 +112,12 @@ class bt_bb_content_slider extends BT_BB_Element {
 						__( 'Keep height', 'bold-builder' ) => 'keep-height',
 						__( 'Half screen', 'bold-builder' ) => 'half_screen',
 						__( 'Full screen', 'bold-builder' ) => 'full_screen'
+					)
+				),
+				array( 'param_name' => 'animation', 'type' => 'dropdown', 'heading' => __( 'Animation', 'bold-builder' ), 'description' => __( 'If fade is selected, number of slides to show will be 1', 'bold-builder' ),
+					'value' => array(
+						__( 'Default', 'bold-builder' ) => 'slide',
+						__( 'Fade', 'bold-builder' ) => 'fade'
 					)
 				),
 				array( 'param_name' => 'arrows_size', 'type' => 'dropdown', 'preview' => true, 'default' => 'normal', 'heading' => __( 'Navigation arrows size', 'bold-builder' ),

@@ -75,7 +75,8 @@ class WPLP_Admin
         'dfText' => 'Text',
         'dfDate' => 'Date',
         'dfCategory' => 'Category',
-        'image_position_width' => '30'
+        'image_position_width' => '30',
+        'content_language' => 'en'
     );
 
 
@@ -200,6 +201,8 @@ class WPLP_Admin
 
             //ajax of mutilsite
             add_action('wp_ajax_change_cat_multisite', array($this, 'change_cat_multisite'));
+            // Ajax of content language
+            add_action('wp_ajax_change_source_type_by_language',array('WPLP_LanguageContent','change_source_type_by_language'));
         } else {
 
             /** Load our theme stylesheet on the front if necessary * */
@@ -224,7 +227,9 @@ class WPLP_Admin
             $val_blog = $_POST['val_blog'];
         if (isset($_POST['type']))
             $type = $_POST['type'];
-
+        if (isset($_POST['content_language'])){
+            $content_language = $_POST['content_language'];
+        }
         $output = '';
         $cats = array();
         if ('all_blog' == $val_blog) {
@@ -233,10 +238,19 @@ class WPLP_Admin
                 switch_to_blog((int)$blog->blog_id);
                 if (strpos($type, 'post') !== false) {
                     $allcats = get_categories();
+                    if(!empty($content_language)){
+                        $allcats = apply_filters('wplp_get_category_by_language', $allcats, $content_language);
+                    }
                 } elseif (strpos($type, 'page') !== false) {
                     $allcats = get_pages();
+                    if(!empty($content_language)){
+                        $allcats = apply_filters('wplp_get_pages_by_language', $allcats, $content_language);
+                    }
                 } elseif (strpos($type, 'tag') !== false) {
                     $allcats = get_tags();
+                    if(!empty($content_language) && !empty($allcats)){
+                        $allcats = apply_filters('wplp_get_tags_by_language', $allcats , $content_language);
+                    }
                 }
                 foreach ($allcats as $allcat) {
                     $cats[] = $allcat;
@@ -247,10 +261,19 @@ class WPLP_Admin
             switch_to_blog((int)$val_blog);
             if (strpos($type, 'post') !== false) {
                 $cats = get_categories();
+                if(!empty($content_language)){
+                    $cats = apply_filters('wplp_get_category_by_language', $cats, $content_language);
+                }
             } elseif (strpos($type, 'page') !== false) {
                 $cats = get_pages();
+                if(!empty($content_language)){
+                    $cats = apply_filters('wplp_get_pages_by_language', $cats, $content_language);
+                }
             } elseif (strpos($type, 'tag') !== false) {
                 $cats = get_tags();
+                if(!empty($content_language) && !empty($cats)){
+                    $cats = apply_filters('wplp_get_tags_by_language', $cats , $content_language);
+                }
             }
             restore_current_blog();
 
@@ -633,9 +656,21 @@ class WPLP_Admin
         wp_enqueue_script('wplp-codemirrorAdmin', plugins_url('js/wplp_codemirrorAdmin.js', dirname(__FILE__)), array('jquery'), '0.1', true
         );
 
-
+        wp_enqueue_script(
+            'wplp-content-language', plugins_url('js/wplp_content_language.js', dirname(__FILE__)), array('jquery'), '0.1', true
+        );
         wp_enqueue_script('jquery-qtip', plugins_url('js/jquery.qtip.min.js', dirname(__FILE__)), array('jquery'), '2.2.1', true);
         wp_enqueue_style('jquery-qtip', plugins_url('css/jquery.qtip.css', dirname(__FILE__)), array(), '2.2.1');
+
+        //set tokken ajax
+        $token_name = array(
+            'check_change_content_language' => wp_create_nonce("_change_content_language"),
+        );
+        $parameter = array(
+                'plugin_dir' => WPLP_PLUGIN_DIR
+        );
+        wp_localize_script('wplp-content-language','_token_name',$token_name);
+        wp_localize_script('wplp-content-language','content_language_param',$parameter);
     }
 
     /**

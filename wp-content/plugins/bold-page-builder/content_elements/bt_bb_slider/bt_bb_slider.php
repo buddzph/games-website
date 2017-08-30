@@ -9,9 +9,11 @@ class bt_bb_slider extends BT_BB_Element {
 			'images'    	=> '',
 			'height'    	=> '',
 			'show_dots'     => '',
+			'animation' 			=> '',
 			'auto_play' 	=> ''
 		) ), $atts, $this->shortcode ) );
 		
+		$slider_class = array( 'slick-slider' );
 		$class = array( $this->shortcode );
 		
 		if ( $el_class != '' ) {
@@ -34,6 +36,12 @@ class bt_bb_slider extends BT_BB_Element {
 		}	
 		
 		$data_slick = ' ' . 'data-slick=\'{ "lazyLoad": "progressive", "cssEase": "ease-out", "speed": "300", "prevArrow": "&lt;button type=\"button\" class=\"slick-prev\"&gt;", "nextArrow": "&lt;button type=\"button\" class=\"slick-next\"&gt;"';
+		
+		if ( $animation == 'fade' ) {
+			$data_slick .= ', "fade": true';
+			$slider_class[] = 'fade';
+			$slides_to_show = 1;
+		}
 		
 		if ( $height != 'keep-height' ) {
 			$data_slick .= ', "adaptiveHeight": true';
@@ -71,7 +79,7 @@ class bt_bb_slider extends BT_BB_Element {
 			}
 		}
 
-		$output = '<div' . $id_attr . ' class="' . implode( ' ', $class ) . '"' . $style_attr . '><div class="slick-slider" ' . $data_slick . '>' . $output . '</div></div>';
+		$output = '<div' . $id_attr . ' class="' . implode( ' ', $class ) . '"' . $style_attr . '><div class="' . implode( ' ', $slider_class ) . '" ' . $data_slick . '>' . $output . '</div></div>';
 		
 		return $output;
 
@@ -87,6 +95,12 @@ class bt_bb_slider extends BT_BB_Element {
 						__( 'Keep height', 'bold-builder' ) => 'keep-height',
 						__( 'Half screen', 'bold-builder' ) => 'half_screen',
 						__( 'Full screen', 'bold-builder' ) => 'full_screen'
+					)
+				),
+				array( 'param_name' => 'animation', 'type' => 'dropdown', 'heading' => __( 'Animation', 'bold-builder' ), 'description' => __( 'If fade is selected, number of slides to show will be 1', 'bold-builder' ),
+					'value' => array(
+						__( 'Default', 'bold-builder' ) => 'slide',
+						__( 'Fade', 'bold-builder' ) => 'fade'
 					)
 				),
 				array( 'param_name' => 'show_dots', 'type' => 'dropdown', 'heading' => __( 'Dots navigation', 'bold-builder' ),
