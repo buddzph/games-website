@@ -45,6 +45,26 @@ $homeurl = esc_url( $url );
 			// DO NOT DELETE, ITS THE POST CONTENT
 		    // get_template_part( 'template-parts/post/content', get_post_format() );
 
+
+			// LEADERBOARDS
+			?>
+
+			<style type="text/css">
+				
+			</style>
+
+			<script type="text/javascript">
+				
+			</script>
+
+			<div class="leaderboards-wrapper">
+				<h1>Leaderboard</h1>
+				<div id="leaderboard">Leaderboard data goes here.</div>
+			</div>
+
+			<?php
+
+
 		    if($_SERVER['HTTP_HOST'] == 'localhost'):
 
 		    	echo do_shortcode('[frontpage_news widget="452" name="More Games"]');

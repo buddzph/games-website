@@ -2086,11 +2086,11 @@ body.page:not(.twentyseventeen-front-page) .entry-title {
 
 .entry-header .entry-title {
 	margin-bottom: 0.25em;
-	font-family: 'Peralta', cursive;
+	font-family: 'Baloo Tammudu', cursive;
 }
 
 .entry-title a {
-	color: #333;
+	color: #fff;
 	text-decoration: none;
 	margin-left: -2px;
 }
@@ -3631,7 +3631,7 @@ object {
 		right: 0;
 		top: 0;
 		width: 100%;
-		z-index: 7;
+		z-index: 999;
 	}
 
 	.admin-bar .site-navigation-fixed.navigation-top {
@@ -4514,7 +4514,7 @@ CUSTOM CSS
   border-top: solid 1px #999;
 }
 .navigation-top a {/*color: #898f94;*/ color: #fff; text-transform: uppercase;}
-.navigation-top li li a {color: #000;}
+.navigation-top li li a {color: #fff; font-weight: normal;}
 .navigation-top a:hover {color: #c3c4f2;}
 .navigation-top .current-menu-item a {color: #c3c4f2;}
 .navigation-top .current-menu-item a:active {color: #c3c4f2;}
@@ -4541,6 +4541,7 @@ span.img_cropper {height: auto !important;}
 .gamerightcontent {float: left; width: 40%;}
 .logo_wrapper {padding: 10px 0; background-color: #113565; color: #fff;}
 .remove-site-navigation-fixed {position: relative !important; top: 0 !important;}
+
 a:hover, a:active {color: #ccc; cursor: pointer;}
 .custom-btn {margin-top: 25px; display: inline-block; border: solid 1px #ccc; padding: 15px;}
 .twentyseventeen-front-page article, footer {border-top: none !important;}
@@ -4567,12 +4568,20 @@ a#mobilecheck, a#userlogin {font-size: 12px;}
 button:hover, button:focus, input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus {background-color: #ccc;}
 
 .entry-header .entry-title {
-	color: #113565 !important;
-	text-shadow: 1px 1px #fff;
+	/*color: #113565 !important;*/
+	color: #fff !important;
+	text-shadow: 1px 1px #000;
+	font-size: 2.5em !important;
 }
 
-.wplp_container .title span {font-family: 'Peralta', cursive; font-weight: normal;}
+.wplp_container .title span {font-family: 'Baloo Tammudu', cursive; font-weight: normal;}
 
+.site-navigation-fixed {background: rgba(2,2,2,0.30) !important;} 
+.site-navigation-fixed .logo_wrapper {background: rgba(17, 53, 101, 0.6) !important;}
+
+#countdown {text-align: center; font-family: 'Baloo Tammudu', cursive;}
+
+.availfreecoins {padding: 25px 0; text-align: center;}
 
 /*LATEST POST*/
 ul.bt_bb_tabs_header {margin-left: 35%;}

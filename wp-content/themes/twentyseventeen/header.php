@@ -40,6 +40,8 @@ $url = home_url();
 $homeurl = esc_url( $url );
 
 global $wpdb;
+global $freebutton;
+
 
 // QUERY TO GET LIST OF COUNTRIES
 $countries = $wpdb->get_results( "SELECT * FROM apps_countries" );
@@ -55,7 +57,27 @@ foreach ($countries as $key => $value) {
 	$tablecountries .= '<option value"'.$value->country_name.'" '. $selected .'>'.$value->country_name.'</option>';
 }
 
-/*echo 'testinghere<pre>'.print_r($_SESSION['user']).'</pre>';*/
+if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
+	$checktoday = date('Y-m-d');
+	$checkbutton = $wpdb->get_results( "SELECT * FROM user WHERE id = ".$_SESSION['user']['id']." and free_tokens_status = 1 and free_tokens_date_availed = '".$checktoday."'");
+
+	if(count($checkbutton) > 0):
+
+		// nothing to do, button is disabled
+		$freebutton = false;
+
+	else:
+
+		$e_table = 'user';
+
+		$e_data['free_tokens_status'] = 0;
+
+		$wpdb->update( $e_table, $e_data, array('id' => $_SESSION['user']['id']) );
+
+		$freebutton = true;
+
+	endif;
+endif;
 ?>
 
 
@@ -198,7 +220,7 @@ foreach ($countries as $key => $value) {
 
 				if(data.result == true){					
 
-						updateTips( "Access has been sent to your mobile. Please wait!" + " REMOVE THIS temp pass: " + data.temppass );
+						updateTips( "Account created. User this temporary password to login: " + "Temporary password: " + data.temppass );
 						dialog.dialog( "close" );
 						dialogsuccessful.dialog( "open" );
 
@@ -907,60 +929,62 @@ foreach ($countries as $key => $value) {
 
 	<header id="masthead" class="site-header" role="banner">
 
-		<div class="logo_wrapper">
-			<div class="wrap">
-				<div class="account_info">
-					<?php if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])): ?>
-						<?php if(empty($_SESSION['user']['username'])): ?>
-							<span>No username&nbsp; &nbsp;</span>	
-						<?php else: ?>
-							<span>Logged in as: <b><?php echo $_SESSION['user']['username']; ?></b>&nbsp; &nbsp;</span>
-						<?php endif; ?>
+		<div class="navigation-top">
+				<div class="logo_wrapper">
+					<div class="wrap">
+						<div class="account_info">
+							<?php if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])): ?>
+								<?php if(empty($_SESSION['user']['username'])): ?>
+									<span>No username&nbsp; &nbsp;</span>	
+								<?php else: ?>
+									<span>Logged in as: <b><?php echo $_SESSION['user']['username']; ?></b>&nbsp; &nbsp;</span>
+								<?php endif; ?>
 
-				      	<ul class="nav navbar-nav">
-				            <li class="dropdown">
-				              <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="display: block;">
+						      	<ul class="nav navbar-nav">
+						            <li class="dropdown">
+						              <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="display: block;">
 
-				              	<?php if(isset($_SESSION['user']['user_avatar']) and !empty($_SESSION['user']['user_avatar'])): ?>
+						              	<?php if(isset($_SESSION['user']['user_avatar']) and !empty($_SESSION['user']['user_avatar'])): ?>
 
-						      		<img src="<?php echo $homeurl; ?>/usericon/cropped/<?php echo $_SESSION['user']['user_avatar']; ?>" alt="">
+								      		<img src="<?php echo $homeurl; ?>/usericon/cropped/<?php echo $_SESSION['user']['user_avatar']; ?>" alt="">
 
-						      	<?php else: ?>
+								      	<?php else: ?>
 
-						      		<img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/62x62-Account-Icon.png" alt="" class="planeicon">
+								      		<img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/62x62-Account-Icon.png" alt="" class="planeicon">
 
-						      	<?php endif; ?>
+								      	<?php endif; ?>
 
-				              </a>
-				              <ul class="dropdown-menu" style="display: none;">
-				                <li><a href="javascript: void(0);" id="accountstatus">Account Status</a></li>
-			      				<li><a href="javascript: void(0);" id="updateusername">Update Account</a></li>
-			      				<li><a href="javascript: void(0);" id="logout">Logout</a></li>
-				              </ul>
-				            </li>
-				          </ul>
+						              </a>
+						              <ul class="dropdown-menu" style="display: none;">
+						                <li><a href="javascript: void(0);" id="accountstatus">Account Status</a></li>
+					      				<li><a href="javascript: void(0);" id="updateusername">Update Account</a></li>
+					      				<li><a href="javascript: void(0);" id="logout">Logout</a></li>
+						              </ul>
+						            </li>
+						          </ul>
 
-				      	<!--ul class="dropdown-menu">
-			      			<li><a href="javascript: void(0);" id="accountstatus">Account Status</a></li>
-			      			<li><a href="javascript: void(0);" id="updateusername">Update Account</a></li>
-			      		</ul-->
+						      	<!--ul class="dropdown-menu">
+					      			<li><a href="javascript: void(0);" id="accountstatus">Account Status</a></li>
+					      			<li><a href="javascript: void(0);" id="updateusername">Update Account</a></li>
+					      		</ul-->
 
-					<?php else: ?>
-						<span><a href="javascript: void(0);" id="mobilecheck">Register</a> | <a href="javascript: void(0);" id="userlogin">Login</a></span>
-						<img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/62x62-Account-Icon.png" alt="" class="planeicon">
-					<?php endif; ?>
+							<?php else: ?>
+								<span><a href="javascript: void(0);" id="mobilecheck">Register</a> | <a href="javascript: void(0);" id="userlogin">Login</a></span>
+								<img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/62x62-Account-Icon.png" alt="" class="planeicon">
+							<?php endif; ?>
+						</div>
+						<a href="<?php echo $homeurl; ?>"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/GlyphGames-Logo-Light.png" alt=""></a>
+					</div>
 				</div>
-				<a href="<?php echo $homeurl; ?>"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/GlyphGames-Logo-Light.png" alt=""></a>
-			</div>
-		</div>
 
-		<?php if ( has_nav_menu( 'top' ) ) : ?>
-			<div class="navigation-top">
-				<div class="wrap">
-					<?php get_template_part( 'template-parts/navigation/navigation', 'top' ); ?>
-				</div><!-- .wrap -->
-			</div><!-- .navigation-top -->
-		<?php endif; ?>
+				<?php if ( has_nav_menu( 'top' ) ) : ?>
+					<div>
+						<div class="wrap">
+							<?php get_template_part( 'template-parts/navigation/navigation', 'top' ); ?>
+						</div><!-- .wrap -->
+					</div>
+				<?php endif; ?>
+		</div><!-- .navigation-top -->
 
 		<?php if ( is_front_page() ) { ?>
 

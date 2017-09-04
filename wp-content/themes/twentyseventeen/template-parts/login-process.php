@@ -125,6 +125,38 @@ function validateSmart($num_request, $amount, $ClientReferenceNumber, $pin){
 
 }
 
+function curl($payload,$url){
+
+	if($payload != NULL){
+
+  		$ch = curl_init($url);
+
+  		//Tell cURL that we want to send a POST request.
+  		curl_setopt($ch, CURLOPT_POST, 1);
+
+  		//Attach our encoded JSON string to the POST fields.
+  		curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+  		curl_setopt($ch, CURLOPT_VERBOSE, true);
+
+  		//Set the content type to application/json
+  		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+
+	}else{
+
+		$ch = curl_init();
+	    curl_setopt($ch, CURLOPT_URL, $url);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	    
+	}
+	//Execute the request
+	$result = curl_exec($ch);
+	
+	return $result;
+	
+	//TODO: ADD LOGGER
+
+}
+
 
 switch ($_REQUEST['func']) {
 	case 'registermobile':
@@ -169,7 +201,7 @@ switch ($_REQUEST['func']) {
 					$ins['celno'] = $mobile_number;
 					$ins['password'] = md5($temppass);
 					$ins['dt_registered'] = date('Y-m-d H:i:s');
-					$ins['tot_freetokens'] = 10;
+					// $ins['tot_freetokens'] = 10;
 					$ins['tokens'] = 10;
 
 					$wpdb->insert( 'user', $ins );
@@ -692,6 +724,39 @@ switch ($_REQUEST['func']) {
 			endif;
 
 		endif;
+
+		break;
+
+	case 'availfreecoins':
+
+		$checktoday = date('Y-m-d');
+		$checkbutton = $wpdb->get_results( "SELECT * FROM user WHERE id = ".$_SESSION['user']['id']." and free_tokens_status = 1 and free_tokens_date_availed = '".$checktoday."'");
+
+		if(count($checkbutton) > 0):
+
+			$res['result'] = false;
+
+		else:
+
+			$checkuser = $wpdb->get_results( "SELECT * FROM user WHERE id = '". $_SESSION['user']['id'] ."'" );
+
+			if(count($checkuser) > 0):
+				$totalcoins = $checkuser[0]->tokens + 10;
+			endif;
+
+			$e_table = 'user';
+
+			$e_data['free_tokens_status'] = 1;
+			$e_data['free_tokens_date_availed']= date('Y-m-d');
+			$e_data['tokens'] = $totalcoins;
+
+			$wpdb->update( $e_table, $e_data, array('id' => $_SESSION['user']['id']) );
+
+			$res['result'] = true;
+
+		endif;
+
+		$res['result'] = true;
 
 		break;
 
