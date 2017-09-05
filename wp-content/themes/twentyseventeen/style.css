@@ -1700,6 +1700,7 @@ body {
 #page {
 	position: relative;
 	word-wrap: break-word;
+	background-image: linear-gradient( 500deg, #52E5E7 0%, #130CB7 100%);
 }
 
 .wrap {
@@ -1725,7 +1726,7 @@ body {
 }
 
 .site-header {
-	background-color: #fafafa;
+	/*background-color: #113565;*/
 	position: relative;
 }
 
@@ -2040,8 +2041,7 @@ body:not(.has-header-image):not(.has-header-video) .custom-header-media {
 --------------------------------------------------------------*/
 
 .site-content-contain {
-	/*background-color: #fff;*/
-	background-image: linear-gradient( 500deg, #52E5E7 0%, #130CB7 100%);
+	/*background-image: linear-gradient( 500deg, #52E5E7 0%, #130CB7 100%);*/
 	position: relative;
 }
 
@@ -4757,6 +4757,10 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	input[type="text"], input[type="password"], select, textarea {width: 100% !important;}
 	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
 	#buycoins {margin-bottom: 10px;}
+	#masthead .wrap {margin-right: 20px;}
+	.account_info {margin-right: 20px;}
+	.navigation-top nav {margin-left: 20px;}
+	.logo_wrapper .wrap img {margin-left: 20px;}
 }
 
 @media screen and (max-width: 800px) {
@@ -4779,6 +4783,10 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
 	.logo_wrapper .wrap .account_info a {font-size: 10px;}
 	#buycoins {margin-bottom: 10px;}
+	#masthead .wrap {margin-right: 20px;}
+	.account_info {margin-right: 20px;}
+	.navigation-top nav {margin-left: 20px;}
+	.logo_wrapper .wrap img {margin-left: 20px;}
 }
 
 @media screen and (max-width: 520px) {
@@ -4810,6 +4818,10 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
 	.logo_wrapper .wrap .account_info a {font-size: 10px;}
 	#buycoins {margin-bottom: 10px;}
+	#masthead .wrap {margin-right: 20px;}
+	.account_info {margin-right: 20px;}
+	.navigation-top nav {margin-left: 20px;}
+	.logo_wrapper .wrap img {margin-left: 20px;}
 
 }	
 
@@ -4818,6 +4830,10 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	input[type="text"], input[type="password"], select, textarea {width: 100% !important;}
 	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
 	#buycoins {margin-bottom: 10px;}
+	#masthead .wrap {margin-right: 20px;}
+	.account_info {margin-right: 20px;}
+	.navigation-top nav {margin-left: 20px;}
+	.logo_wrapper .wrap img {margin-left: 20px;}
 }
 
 @media screen and (max-device-width: 800px) {
@@ -4840,6 +4856,10 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
 	.logo_wrapper .wrap .account_info a {font-size: 10px;}
 	#buycoins {margin-bottom: 10px;}
+	#masthead .wrap {margin-right: 20px;}
+	.account_info {margin-right: 20px;}
+	.navigation-top nav {margin-left: 20px;}
+	.logo_wrapper .wrap img {margin-left: 20px;}
 }
 
 @media screen and (max-device-width: 520px) {
@@ -4871,6 +4891,10 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
 	.logo_wrapper .wrap .account_info a {font-size: 10px;}
 	#buycoins {margin-bottom: 10px;}
+	#masthead .wrap {margin-right: 20px;}
+	.account_info {margin-right: 20px;}
+	.navigation-top nav {margin-left: 20px;}
+	.logo_wrapper .wrap img {margin-left: 20px;}
 }
 
 

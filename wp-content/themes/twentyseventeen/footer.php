@@ -73,16 +73,25 @@ $uploaddir = wp_upload_dir();
 	        var top_offset = jQuery(window).scrollTop();
 	        if (top_offset == 0) {
 	            jQuery('.navigation-top').removeClass('site-navigation-fixed');
+	            $('#customers-testimonials').css('margin-top', '0');
+	            $('.site-content-contain').css('margin-top', '0');
 	        } else {
 	        	jQuery('.navigation-top').removeClass('remove-site-navigation-fixed');
 	            jQuery('.navigation-top').addClass('site-navigation-fixed');
+
+	            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+				 // some code..
+				}else{
+					$('#customers-testimonials').css('margin-top', '110px');
+		            <?php if ( !is_front_page() ): ?>
+		            	$('.site-content-contain').css('margin-top', '90px');
+		            <?php endif; ?>
+				}
 	        }
 	    });
 
-	    /*checkSize();*/
-
 	    jQuery(window).resize(function() {
-		  checkSize();
+		  // checkSize();
 		});
 
 	});
