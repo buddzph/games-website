@@ -760,6 +760,34 @@ switch ($_REQUEST['func']) {
 
 		break;
 
+	case 'accountstatus':
+
+		$checkuser = $wpdb->get_results( "SELECT * FROM user WHERE id = '". $_SESSION['user']['id'] ."'" );
+
+		$table = '<table class="rwd-table">
+						  <tr>
+						    <th>Username</th>
+						    <th>Coins Left</th>
+						    <th>Total Tickets</th>
+						  </tr>';
+
+		foreach ($checkuser as $key => $value) {
+			$table .= '<tr>
+								    <td data-th="Username">'. $value->username .'</td>
+								    <td data-th="Coinsleft">'. $value->tokens .'</td>
+								    <td data-th="TotalTickets">'. $value->tickets .'</td></tr>';
+		}
+
+
+		$table .= '</table>';
+
+		// echo $table;
+
+		$res['table'] = $table;
+		$res['result'] = true;
+
+		break;
+
 	case 'logout':
 
 		unset($_SESSION['user']);

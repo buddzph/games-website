@@ -578,7 +578,8 @@ endif;
 	    	
 	    }
 
-	 	/*FIRST POPUP TO ENTER MOBILE NUMBER ONLY AND TO CHECK IF USERNAME IS EXIST OR NOT. IF NOT WILL OPEN THE NEXT DIALOG.*/
+
+	    /*FIRST POPUP TO ENTER MOBILE NUMBER ONLY AND TO CHECK IF USERNAME IS EXIST OR NOT. IF NOT WILL OPEN THE NEXT DIALOG.*/
 	    dialog = $( "#dialog-form" ).dialog({
 	      autoOpen: false,
 	      height: 'auto',
