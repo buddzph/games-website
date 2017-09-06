@@ -958,7 +958,7 @@ endif;
 
 						              </a>
 						              <ul class="dropdown-menu" style="display: none;">
-						                <li><a href="javascript: void(0);" id="accountstatus">Account Status</a></li>
+						                <!--li><a href="javascript: void(0);" id="accountstatus">Account Status</a></li-->
 					      				<li><a href="javascript: void(0);" id="updateusername">Update Account</a></li>
 					      				<li><a href="javascript: void(0);" id="logout">Logout</a></li>
 						              </ul>

@@ -764,18 +764,18 @@ switch ($_REQUEST['func']) {
 
 		$checkuser = $wpdb->get_results( "SELECT * FROM user WHERE id = '". $_SESSION['user']['id'] ."'" );
 
-		$table = '<table class="rwd-table">
+		$table = '<table class="rwd-table" style="font-size: 11px;">
 						  <tr>
 						    <th>Username</th>
-						    <th>Coins Left</th>
-						    <th>Total Tickets</th>
+						    <th style="text-align: center;">Coins Left</th>
+						    <th style="text-align: center;">Total Tickets</th>
 						  </tr>';
 
 		foreach ($checkuser as $key => $value) {
 			$table .= '<tr>
 								    <td data-th="Username">'. $value->username .'</td>
-								    <td data-th="Coinsleft">'. $value->tokens .'</td>
-								    <td data-th="TotalTickets">'. $value->tickets .'</td></tr>';
+								    <td data-th="Coinsleft" style="text-align: center;">'. $value->tokens .'</td>
+								    <td data-th="TotalTickets" style="text-align: center;">'. $value->tickets .'</td></tr>';
 		}
 
 

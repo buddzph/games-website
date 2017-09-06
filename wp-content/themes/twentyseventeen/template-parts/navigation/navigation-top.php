@@ -10,6 +10,8 @@
 
 $url = home_url();
 $homeurl = esc_url( $url );
+
+if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
 ?>
 
 <script type="text/javascript">
@@ -68,6 +70,8 @@ $homeurl = esc_url( $url );
 
 <div class="button-account-status"><a href="javascript: void(0);" onclick="accountstatus();">Account Status</a></div>
 
+<?php endif; ?>
+
 <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Top Menu', 'twentyseventeen' ); ?>">
 	<button class="menu-toggle" aria-controls="top-menu" aria-expanded="false">
 		<?php
@@ -88,6 +92,6 @@ $homeurl = esc_url( $url );
 </nav><!-- #site-navigation -->
 
 <div id="dialog-successful" title="Account Status" style="display: none;"> 
-	<p class="validateTips">You have successfully updated your username.</p>
+	<p class="validateTips" style="text-align: center;">You have successfully updated your username.</p>
 	<div id="accountdetails-wrapper"></div>
 </div>
