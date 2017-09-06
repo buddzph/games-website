@@ -20,6 +20,8 @@ $url = home_url();
 $homeurl = esc_url( $url );
 ?>
 
+<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/table.css">
+
 <aside id="secondary" class="widget-area" role="complementary">
 	<?php //dynamic_sidebar( 'sidebar-1' ); ?>
 
@@ -42,6 +44,28 @@ $homeurl = esc_url( $url );
 
 			get_template_part( 'template-parts/post/content', 'excerpt' );
 
+			$gamecode = get_field('game_code');
+
+			$gameid = $wpdb->get_results( "SELECT id FROM game WHERE gameid = '". $gamecode ."'" );
+
+			$leaderboards_entries = false;
+
+			if(count($gameid) > 0):
+
+				$leaderboards = $wpdb->get_results( "SELECT u.username, g.title, l.scoretickets FROM leaderboards AS l
+												LEFT JOIN game AS g ON l.gameid = g.id
+												LEFT JOIN user AS u ON l.userid = u.id
+												WHERE l.gameid = '". $gameid[0]->id ."'
+												AND u.username IS NOT NULL 
+												AND u.username != ''
+												ORDER BY l.scoretickets DESC" );
+
+				if(count($leaderboards) > 0):
+					$leaderboards_entries = true;
+				endif;
+
+			endif;
+
 			// DO NOT DELETE, ITS THE POST CONTENT
 		    // get_template_part( 'template-parts/post/content', get_post_format() );
 
@@ -58,8 +82,38 @@ $homeurl = esc_url( $url );
 			</script>
 
 			<div class="leaderboards-wrapper">
+
 				<h1>Leaderboard</h1>
-				<div id="leaderboard">Leaderboard data goes here.</div>
+				<div id="leaderboard">
+					
+					<?php if($leaderboards_entries): ?>
+
+						<table class="rwd-table">
+						  <tr>
+						    <th>Username</th>
+						    <th>Game</th>
+						    <th style="text-align: center;">Score</th>
+						  </tr>
+
+						  <?php foreach ($leaderboards as $key => $value) { ?>
+						  	
+						  		 <tr>
+								    <td data-th="Username"><?php echo $value->username; ?></td>
+								    <td data-th="Game"><?php echo $value->title; ?></td>
+								    <td data-th="Score" style="text-align: center;"><?php echo $value->scoretickets; ?></td>
+								  </tr>
+
+						  <?php } ?>
+						</table>
+
+					<?php else:
+
+						echo 'Leaderboards is Empty! You might be the first lucky 20.';
+
+					endif;
+					?>
+
+				</div>
 			</div>
 
 			<?php
@@ -176,9 +230,9 @@ $homeurl = esc_url( $url );
 									$table .= '<tr>';
 										$table .= '<th>Tickets: </th><td>'.$checkuser[0]->tickets.'</td>';
 									$table .= '</tr>';
-									$table .= '<tr>';
+									/*$table .= '<tr>';
 										$table .= '<th>Free Coins: </th><td>'.$checkuser[0]->tot_freetokens.'</td>';
-									$table .= '</tr>';
+									$table .= '</tr>';*/
 									$table .= '<tr>';
 										$table .= '<th>Current Coins: </th><td>'.$checkuser[0]->tokens.'</td>';
 									$table .= '</tr>';

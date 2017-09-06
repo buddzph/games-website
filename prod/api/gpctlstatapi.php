@@ -237,6 +237,52 @@ function getticketswon($mysqli,$sessionid,$gameplayid,$score)
    if ($res === false) {
    } else {
    }
+
+   // GET GAMEID
+   $q_getgameid = $mysqli->query("SELECT id FROM game WHERE gameid = '" . $gameplayid . "'");
+
+   if ($q_getgameid === false) {
+   } else {
+      $result = $q_getgameid->fetch_assoc();
+      if ($result !== NULL) {
+         $gameid = $result['id'];
+      }
+
+      // GET LEADERBOARD IF GAMEID AND USERID EXIST
+      $q_checkleaderboard = $mysqli->query("SELECT * FROM leaderboards WHERE userid = '" . $uid . "' AND gameid = '" . $gameid . "'");
+
+      // apiLog("\r\nSELECT * FROM leaderboards WHERE userid = '" . $uid . "' AND gameid = '" . $gameid . "'\r\n");
+
+      $lastgamedate = date('Y-m-d H:i:s');
+      if ($q_checkleaderboard->num_rows == 0) {
+
+         // NEW RECORD IN LEADERBOARDS TABLE
+         $query = "INSERT INTO leaderboards (userid, gameid, scoretickets, lastplaydate) VALUES ($uid, $gameid, $score, '" . $lastgamedate . "')";
+         $res = $mysqli->query($query);
+
+         // apiLog("Query 1: $query\r\n");
+
+      } else {
+
+         // UPDATE RECORD IN LEADERBOARDS TABLE
+         $query = "UPDATE leaderboards SET scoretickets=scoretickets+$score, lastplaydate='" . $lastgamedate . "' WHERE userid = '" . $uid . "' AND gameid = '" . $gameid . "'";
+         $res = $mysqli->query($query);
+
+         // apiLog("Query 2: $query\r\n");
+
+      }
+
+      // UPDATE USER TABLE tot_leaderboardtickets FIELD
+      $query = "UPDATE user SET tot_leaderboardtickets=tot_leaderboardtickets+$score WHERE id = '" . $uid . "'";
+      $res = $mysqli->query($query);
+
+      // INSERT TO leaderboards_entry. THIS IS FOR DATE RANGE LEADERBOARDS.
+      if($score > 0):
+         $query = "INSERT INTO leaderboards_entry (userid, gameid, scoretickets, lastplaydate) VALUES ($uid, $gameid, $score, '" . $lastgamedate . "')";
+         $res = $mysqli->query($query);
+      endif;
+   }   
+
    return($tickets);
 }
 
