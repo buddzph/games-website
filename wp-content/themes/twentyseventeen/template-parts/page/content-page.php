@@ -1,5 +1,4 @@
-<?
-date_default_timezone_set('Asia/Manila');
+<?php
 /**
  * Template part for displaying page content in page.php
  *
