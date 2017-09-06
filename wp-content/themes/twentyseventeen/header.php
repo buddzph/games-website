@@ -610,7 +610,7 @@ endif;
 	      modal: true,
 	      buttons: {
 	        "Sign In": userlogin,
-	        "Forgot Password": forgotpassword,
+	        // 	"Forgot Password": forgotpassword,
 	        Cancel: function() {
 	          dialoglogin.dialog( "close" );
 	        }
