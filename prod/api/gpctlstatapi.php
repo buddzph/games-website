@@ -260,7 +260,7 @@ function getticketswon($mysqli,$sessionid,$gameplayid,$score)
          $query = "INSERT INTO leaderboards (userid, gameid, scoretickets, lastplaydate) VALUES ($uid, $gameid, $score, '" . $lastgamedate . "')";
          $res = $mysqli->query($query);
 
-         // apiLog("Query 1: $query\r\n");
+         // apiLog("\r\nQuery 1: $query\r\n");
 
       } else {
 
@@ -268,7 +268,7 @@ function getticketswon($mysqli,$sessionid,$gameplayid,$score)
          $query = "UPDATE leaderboards SET scoretickets=scoretickets+$score, lastplaydate='" . $lastgamedate . "' WHERE userid = '" . $uid . "' AND gameid = '" . $gameid . "'";
          $res = $mysqli->query($query);
 
-         // apiLog("Query 2: $query\r\n");
+         // apiLog("\r\nQuery 2: $query\r\n");
 
       }
 
@@ -280,6 +280,8 @@ function getticketswon($mysqli,$sessionid,$gameplayid,$score)
       if($score > 0):
          $query = "INSERT INTO leaderboards_entry (userid, gameid, scoretickets, lastplaydate) VALUES ($uid, $gameid, $score, '" . $lastgamedate . "')";
          $res = $mysqli->query($query);
+
+         apiLog("\r\nQuery 3: $query\r\n");
       endif;
    }   
 
