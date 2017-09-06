@@ -1,6 +1,6 @@
 AuthType Basic
 AuthName "Wordpress Protected Area"
-AuthUserFile /opt/lampp/htdocs/glyphgames.com/wp-glyphadmin/passwords
+AuthUserFile /var/www/html/glyph-games/wp-glyphadmin/passwords
 Require valid-user
 <Files admin-ajax.php>
  Order allow,deny
