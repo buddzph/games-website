@@ -24,12 +24,12 @@ if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
 
 					updateTips( "Details of your account." );
 					$('#accountdetails-wrapper').html(data.table);
-					dialogsuccessful.dialog( "open" );
+					dialogaccountsetting.dialog( "open" );
 
 				} else {
 					
 			        // updateTips( "You already availed your free coins!" );
-			        dialogsuccessful.dialog( "open" );
+			        dialogaccountsetting.dialog( "open" );
 
 				}
 
@@ -54,7 +54,7 @@ if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
 
     jQuery(document).ready(function($) {
 
-	    dialogsuccessful = $( "#dialog-successful" ).dialog({
+	    dialogaccountsetting = $( "#dialog-account-status" ).dialog({
 		      autoOpen: false,
 		      height: 'auto',
 		      width: 400,
@@ -91,7 +91,7 @@ if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
 	<?php endif; ?>
 </nav><!-- #site-navigation -->
 
-<div id="dialog-successful" title="Account Status" style="display: none;"> 
+<div id="dialog-account-status" title="Account Status" style="display: none;"> 
 	<p class="validateTips" style="text-align: center;">You have successfully updated your username.</p>
 	<div id="accountdetails-wrapper"></div>
 </div>
