@@ -661,12 +661,13 @@ switch ($_REQUEST['func']) {
 			$haserror = false;
 
 			foreach ($decoderes as $key => $value) {
-				$test = $value;
+				echo $value;
+				echo $key;
 			}
 
-			echo var_dump($decoderes);
+			// echo var_dump($decoderes);
 
-			$res['testres'] = var_dump($decoderes);
+			// $res['testres'] = var_dump($decoderes);
 
 			/*if($decoderes):
 
