@@ -648,6 +648,16 @@ switch ($_REQUEST['func']) {
 
 			//$res['tempverif'] = $verificationcode; // NO NEED FOR SMART USERS
 
+			$serviceid = 'ph56772000044433'; // 2.50 pesos
+			$prodid = '1000159911';
+			$message = 'Check your mobile number if you successfully availed your coins.';
+
+			$getcode = globecurl($mobile_number, $serviceid, $prodid, $message);
+
+			$decoderes = json_decode($getcode, TRUE);
+
+			$res['test'] = $decoderes;
+
 			$res['mobile_network'] = 'GLOBE';
 
 			$msgstatus = true;
@@ -721,7 +731,7 @@ switch ($_REQUEST['func']) {
 
 		elseif($mobile_network == 'GLOBE'):
 
-			$verificationcode = $_REQUEST['verifycode'];
+			/*$verificationcode = $_REQUEST['verifycode'];
 
 			$checkverif = $wpdb->get_results( "SELECT * FROM coinsavailed WHERE subscribers_id = '". $_SESSION['user']['id'] ."' AND verificationcode = '".$verificationcode."'" );
 
@@ -756,7 +766,7 @@ switch ($_REQUEST['func']) {
 
 				$res['result'] = true;
 
-			endif;
+			endif;*/
 
 		endif;
 

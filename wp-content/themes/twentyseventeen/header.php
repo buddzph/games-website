@@ -525,14 +525,28 @@ endif;
 			           		$('#mobile_network').val(data.mobile_network);
 
 			           		if(data.mobile_network == 'SMART'){
+
 			           			$('#ClientReferenceNumber').val(data.ClientReferenceNumber);
+
+			           			dialogbuycoin.dialog( "close" );
+
+							  	updateTips( "You have successfully sent your request to buy this coin. Kindly check your phone and enter the verification code below. REMOVE THIS. Temporary verification code " + data.tempverif );
+
+							  	dialogbuycoinconfirmation.dialog( "open" );
+
+			           		}
+
+			           		if(data.mobile_network == 'GLOBE'){
+
+			           			dialogbuycoin.dialog( "close" );
+
+							  	updateTips( "Purchase completed. Coins added to your account. Thank you and enjoy playing!" );
+
+						  		dialogsuccessful.dialog( "open" );
+
 			           		}
 			               
-			           		dialogbuycoin.dialog( "close" );
-
-						  	updateTips( "You have successfully selected and buy this coin. Kindly check your phone and enter the verification code below. REMOVE THIS. Temporary verification code " + data.tempverif );
-
-						  	dialogbuycoinconfirmation.dialog( "open" );
+			           		
 
 			           }
 			           else
