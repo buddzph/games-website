@@ -234,7 +234,14 @@ endif;
 
 				if(data.result == true){					
 
-						updateTips( "Account created. User this temporary password to login: " + "Temporary password: " + data.temppass );
+						if(data.network == 'Smart'){
+							updateTips( "Account created. User this temporary password to login: " + "Temporary password: " + data.temppass );	
+						}
+
+						if(data.network == 'Globe'){
+							updateTips( "Account created. Check you cellphone for your temporary password." );	
+						}
+						
 						dialog.dialog( "close" );
 						dialogsuccessful.dialog( "open" );
 

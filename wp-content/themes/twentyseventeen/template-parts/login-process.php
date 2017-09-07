@@ -195,41 +195,36 @@ switch ($_REQUEST['func']) {
 					// $ins['tot_freetokens'] = 10;
 					$ins['tokens'] = 10;
 
-					// $wpdb->insert( 'user', $ins );
+					$wpdb->insert( 'user', $ins );
 
 					// PUT THE CODE SEND TEMPORARY PASSWORD TO MOBILE
 
 						if($smartuser):
 
+							$res['temppass'] = $temppass;
+							$res['network'] = 'Smart';
+
 						endif;
 
 						if($globeuser):
 
-							$verificationcode = genRandStr(); // NO NEED FOR SMART USERS
-
-							$ins['verificationcode'] = $verificationcode;
-
-							// $res['tempverif'] = $verificationcode; // NO NEED FOR SMART USERS
-
 							$serviceid = 'ph56772000044432';
 							$prodid = '1000159848';
-							$message = 'Thank you! Here is your temporary password: '.$verificationcode;
+							$message = 'Thank you! Here is your temporary password: ' . $temppass;
 
 							$getcode = globecurl($mobile_number, $serviceid, $prodid, $message);
 
 							$decoderes = json_decode($getcode, TRUE);
 
-							print_r($decoderes);
+							// print_r($decoderes);
 
-							$res['mobile_network'] = 'GLOBE';
-
-							// $msgstatus = true;
+							$res['temppass'] = '';
+							$res['network'] = 'Globe';
 
 						endif;
 
 					// END PUT THE CODE SEND TEMPORARY PASSWORD TO MOBILE
 
-					$res['temppass'] = $temppass;
 					$res['result'] = true;
 
 				endif;
