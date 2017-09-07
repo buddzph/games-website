@@ -665,7 +665,7 @@ switch ($_REQUEST['func']) {
 				echo $key;
 			}
 
-			// echo var_dump($decoderes);
+			print_r($getcode);
 
 			// $res['testres'] = var_dump($decoderes);
 
