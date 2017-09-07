@@ -654,17 +654,7 @@ switch ($_REQUEST['func']) {
 
 			$getcode = globecurl($mobile_number, $serviceid, $prodid, $message);
 
-			// $decoderes = json_decode($getcode, TRUE);
-
-			// $res['test'] = print_r($decoderes);
-
-			$haserror = false;
-
-			echo $getcode;
-
-			// $res['testres'] = var_dump($decoderes);
-
-			/*if($decoderes):
+			if($getcode == 'OK'):
 
 				$ins['mobile_network'] = 'GLOBE';
 				$ins['status'] = 1;
@@ -672,13 +662,9 @@ switch ($_REQUEST['func']) {
 
 			else:
 
-				$haserror = true;
+				$res['haserror'] = true;
 
 			endif;
-
-			if($haserror):
-				$res['haserror'] = true;				
-			endif;*/
 
 			$res['mobile_network'] = 'GLOBE';
 
