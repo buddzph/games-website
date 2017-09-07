@@ -59,6 +59,8 @@ foreach ($countries as $key => $value) {
 }
 
 if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
+
+	// CHECK FOR FREE TOKENS
 	$checktoday = date('Y-m-d');
 	$checkbutton = $wpdb->get_results( "SELECT * FROM user WHERE id = ".$_SESSION['user']['id']." and free_tokens_status = 1 and free_tokens_date_availed = '".$checktoday."'");
 
@@ -78,6 +80,15 @@ if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
 		$freebutton = true;
 
 	endif;
+
+	// CHECK IF USER ALREADY HAS USERNAME
+	$nousername = true;
+	$checkusername = $wpdb->get_results( "SELECT username FROM user WHERE id = '".$_SESSION['user']['id']."' AND username IS NOT NULL AND username != ''" );
+	if(count($checkusername) > 0):
+		$nousername = false;
+	endif;
+
+
 endif;
 ?>
 
@@ -157,10 +168,12 @@ endif;
 	      zip = $( "#zip" ),
 	      email = $( "#email" ),
 	      verifycode = $( "#verifycode" ),
+	      validusername = $( "#validusername" ),
 	      allFields = $( [] ).add( mobile_number ),
 	      allFieldsaccountdetails = $( [] ).add( username ).add( password ).add( retypepassword ).add( firstname ).add( lastname ).add( street ).add( city ).add( country ).add( zip ).add( email ),
 	      allFieldslogin = $( [] ).add( loginusername ).add( loginpassword ),
 	      allFieldsverification = $( [] ).add( verifycode ),
+	      allFieldsvalidusername = $( [] ).add( validusername ),
 	      tips = $( ".validateTips" );
 	 
 	    function updateTips( t ) {
@@ -285,6 +298,41 @@ endif;
 				} else {
 					
 			        updateTips( "Account not found!" );
+
+				}
+
+
+			}, "json");
+
+	        
+	      }
+	      return valid;
+	    }
+
+	    function createvalidusername	() {
+	      var valid = true;
+	      allFieldsvalidusername.removeClass( "ui-state-error" );
+	 
+	      valid = valid && checkLengthFields( validusername, "Username", 6, 11 );
+	 
+	      valid = valid && checkRegexp( validusername, /^([0-9a-zA-Z])+$/, "Username field only allow : a-z 0-9" );
+	 
+	      if ( valid ) {
+
+			  /*console.log(mobile_number.val());*/
+
+			$.post( "<?php echo $homeurl.'/?page_id=344' ?>", { func: "processvalidusername", validusername: validusername.val() }, function( data ) {
+			  // console.log( data.id );
+
+				if(data.result == true){
+
+					updateTips( "Thank you! You have successfully created your username. Enjoy playing!" );
+					dialogvalidusername.dialog( "close" );
+					dialogsuccessful.dialog( "open" );
+
+				} else {
+					
+			        updateTips( data.errmsg );
 
 				}
 
@@ -626,6 +674,30 @@ endif;
 	      userlogin();
 	    });
 
+	    /*CREATE USERNAME DIALOG.*/
+	    dialogvalidusername = $( "#dialog-update-username" ).dialog({
+	      autoOpen: false,
+	      height: 'auto',
+	      width: 400,
+	      modal: true,
+	      buttons: {
+	        "Submit Username": createvalidusername,
+	        // 	"Forgot Password": forgotpassword,
+	        Cancel: function() {
+	          dialogvalidusername.dialog( "close" );
+	        }
+	      },
+	      close: function() {
+	        form[ 0 ].reset();
+	        allFieldsvalidusername.removeClass( "ui-state-error" );
+	      }
+	    });
+	 
+	    form = dialogvalidusername.find( "form" ).on( "submit", function( event ) {
+	      event.preventDefault();
+	      createvalidusername();
+	    });
+
 	    /*DIALOG NUMBER 2. ENTER USERNAME AND PASSWORD*/
 	    dialogupdateaccountdetails = $( "#dialog-form-username" ).dialog({
 	      autoOpen: false,
@@ -681,6 +753,7 @@ endif;
 	      }
 	    });
 
+	    /*DIALOG BUY COINS CONFIRMATION*/
 	    dialogbuycoinconfirmation = $( "#dialog-buycoin-confirmation" ).dialog({
 	      autoOpen: false,
 	      height: 'auto',
@@ -782,6 +855,16 @@ endif;
 		}, function() {
 		  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
 		});
+
+	    <?php if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])): ?>
+			
+			/*CHECK USER IF HAS USERNAME*/
+
+			<?php if($nousername): ?>
+				dialogvalidusername.dialog( "open" );
+			<?php endif; ?>
+
+		<?php endif; ?>
 
 	  });
 	  </script>
@@ -894,6 +977,16 @@ endif;
     </fieldset>
   </form>
 
+</div>
+
+<div id="dialog-update-username" title="Create glyphgames username" style="display: none;"> 
+	<p class="validateTips">Username is required to identify you in the glyphgames leaderboards.</p>
+
+	<form name="photo" id="formupdateusername" enctype="multipart/form-data">
+		<label for="city">Enter valid username:</label>
+	    <input type="text" name="validusername" id="validusername" value="" placeholder="" class="text ui-widget-content ui-corner-all">
+	    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </form>
 </div>
 
 <div id="dialog-successful" title="Completed" style="display: none;"> 

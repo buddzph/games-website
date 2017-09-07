@@ -297,6 +297,35 @@ switch ($_REQUEST['func']) {
 
 		break;
 	
+	case 'processvalidusername':
+
+		$username = $_REQUEST['validusername'];
+
+		$checkusername = $wpdb->get_results( "SELECT * FROM user WHERE username = '".$username."'" );
+
+		if(count($checkusername) > 0):
+
+			$res['errmsg'] = 'Username is already taken. Kindly supply valid username.';
+			$res['result'] = false;
+
+		else:
+
+			$table = 'user';
+
+			$data['username'] = $username;
+
+			$wpdb->update( $table, $data, array('celno' => $_SESSION['user']['mobile_number']) );
+
+			// SIMPLY ADD TO SESSIONS
+			$_SESSION['user']['username'] = $username;
+
+			// $res['session'] = $_SESSION; 			
+
+			$res['result'] = true;
+
+		endif;
+
+		break;
 
 	case 'processupdateaccountdetails':
 
