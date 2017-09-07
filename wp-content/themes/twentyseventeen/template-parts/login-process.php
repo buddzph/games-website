@@ -654,18 +654,13 @@ switch ($_REQUEST['func']) {
 
 			$getcode = globecurl($mobile_number, $serviceid, $prodid, $message);
 
-			$decoderes = json_decode($getcode, TRUE);
+			// $decoderes = json_decode($getcode, TRUE);
 
 			// $res['test'] = print_r($decoderes);
 
 			$haserror = false;
 
-			foreach ($decoderes as $key => $value) {
-				echo $value;
-				echo $key;
-			}
-
-			print_r($getcode);
+			echo $getcode;
 
 			// $res['testres'] = var_dump($decoderes);
 
