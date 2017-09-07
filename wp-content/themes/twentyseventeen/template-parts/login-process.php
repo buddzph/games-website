@@ -664,6 +664,8 @@ switch ($_REQUEST['func']) {
 				$test = $value;
 			}
 
+			echo print_r($decoderes);
+
 			$res['testres'] = print_r($decoderes);
 
 			/*if($decoderes):
