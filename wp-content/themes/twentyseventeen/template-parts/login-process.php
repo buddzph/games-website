@@ -125,31 +125,22 @@ function validateSmart($num_request, $amount, $ClientReferenceNumber, $pin){
 
 }
 
-function curl($payload,$url){
+function globecurl($mobile_number, $serviceid, $prodid, $message){
 
-	if($payload != NULL){
+	$url = 'http://10.64.14.134:5672/sms/insurge';
 
-  		$ch = curl_init($url);
+    $request = array("serviceId" => $serviceid, "productId" => $prodid, "linkId" => '12341234123', "message" => $message, "accessCode" => '5677', "mobileNo" => '63'.$mobile_number);
+    
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array ('Content-Type: application/json'));
 
-  		//Tell cURL that we want to send a POST request.
-  		curl_setopt($ch, CURLOPT_POST, 1);
-
-  		//Attach our encoded JSON string to the POST fields.
-  		curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-  		curl_setopt($ch, CURLOPT_VERBOSE, true);
-
-  		//Set the content type to application/json
-  		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-
-	}else{
-
-		$ch = curl_init();
-	    curl_setopt($ch, CURLOPT_URL, $url);
-	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	    
-	}
-	//Execute the request
-	$result = curl_exec($ch);
+    //$dateLog = date("Ymd");
+    //$timeLog = date("Y-m-d H:i:s");
+    
+    $result = curl_exec($ch);
 	
 	return $result;
 	
@@ -640,7 +631,17 @@ switch ($_REQUEST['func']) {
 
 			$ins['verificationcode'] = $verificationcode;
 
-			$res['tempverif'] = $verificationcode; // NO NEED FOR SMART USERS
+			// $res['tempverif'] = $verificationcode; // NO NEED FOR SMART USERS
+
+			$serviceid = 'ph56772000044432';
+			$prodid = '1000159848';
+			$message = 'Thank you! Here is your temporary password: '.$verificationcode;
+
+			$getcode = globecurl($mobile_number, $serviceid, $prodid, $message);
+
+			$decoderes = json_decode($getcode, TRUE);
+
+			print_r($decoderes);
 
 			$res['mobile_network'] = 'GLOBE';
 
