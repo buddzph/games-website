@@ -660,12 +660,18 @@ switch ($_REQUEST['func']) {
 
 			$haserror = false;
 
-			if($decoderes):
+			foreach ($decoderes as $key => $value) {
+				$test = $value;
+			}
+
+			$res['testres'] = $test;
+
+			/*if($decoderes):
 
 				$ins['mobile_network'] = 'GLOBE';
 				$ins['status'] = 1;
 				$wpdb->insert( 'coinsavailed', $ins );
-				
+
 			else:
 
 				$haserror = true;
@@ -674,7 +680,7 @@ switch ($_REQUEST['func']) {
 
 			if($haserror):
 				$res['haserror'] = true;				
-			endif;
+			endif;*/
 
 			$res['mobile_network'] = 'GLOBE';
 
