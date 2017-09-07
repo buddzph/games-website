@@ -650,7 +650,7 @@ switch ($_REQUEST['func']) {
 
 			$serviceid = 'ph56772000044433'; // 2.50 pesos
 			$prodid = '1000159911';
-			$message = 'Check your mobile number if you successfully availed your coins.';
+			$message = 'Thank you! You have successfully purchased the coins at GlyphGames.com. Enjoy playing!';
 
 			$getcode = globecurl($mobile_number, $serviceid, $prodid, $message);
 
