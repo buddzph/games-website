@@ -664,7 +664,7 @@ switch ($_REQUEST['func']) {
 				$test = $value;
 			}
 
-			$res['testres'] = $test;
+			$res['testres'] = print_r($decoderes);
 
 			/*if($decoderes):
 
