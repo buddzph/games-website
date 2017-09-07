@@ -660,6 +660,26 @@ switch ($_REQUEST['func']) {
 				$ins['status'] = 1;
 				$wpdb->insert( 'coinsavailed', $ins );
 
+				$getcoinamount = $wpdb->get_results( "SELECT c.coin_count, c.coin_price FROM coins AS c
+													WHERE c.id = '". $_REQUEST['coinid'] ."'" );
+
+				$coincount = $getcoinamount[0]->coin_count;
+
+
+				// CHECK USER EXISTING TOKENS
+				$checkuser = $wpdb->get_results( "SELECT * FROM user WHERE id = '". $_SESSION['user']['id'] ."'" );
+
+				if(count($checkuser) > 0):
+					$totalcoins = $checkuser[0]->tokens + $coincount;
+				endif;
+
+				// UPDATE USER
+				$tableuser = 'user';
+
+				$upduser['tokens'] = $totalcoins;
+
+				$wpdb->update( $tableuser, $upduser, array('id' => $_SESSION['user']['id']) );
+
 			else:
 
 				$res['haserror'] = true;
