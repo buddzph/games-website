@@ -656,13 +656,24 @@ switch ($_REQUEST['func']) {
 
 			$decoderes = json_decode($getcode, TRUE);
 
-			$res['test'] = print_r($decoderes);
+			// $res['test'] = print_r($decoderes);
 
-			$successbuying = false;
-			if($successbuying):
+			$haserror = false;
+
+			if($decoderes):
+
 				$ins['mobile_network'] = 'GLOBE';
 				$ins['status'] = 1;
 				$wpdb->insert( 'coinsavailed', $ins );
+				
+			else:
+
+				$haserror = true;
+
+			endif;
+
+			if($haserror):
+				$res['haserror'] = true;				
 			endif;
 
 			$res['mobile_network'] = 'GLOBE';

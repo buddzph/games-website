@@ -538,11 +538,23 @@ endif;
 
 			           		if(data.mobile_network == 'GLOBE'){
 
-			           			dialogbuycoin.dialog( "close" );
+			           			if(data.haserror) {
 
-							  	updateTips( "Purchase completed. Coins added to your account. Thank you and enjoy playing!" );
+			           				dialogbuycoin.dialog( "close" );
 
-						  		dialogsuccessful.dialog( "open" );
+			           				updateTips( "Purchase failed. Check your mobile number and load balance." );
+
+							  		dialogsuccessful.dialog( "open" );
+
+			           			}else{
+
+			           				dialogbuycoin.dialog( "close" );
+
+								  	updateTips( "Purchase completed. Coins added to your account. Thank you and enjoy playing!" );
+
+							  		dialogsuccessful.dialog( "open" );
+
+			           			}
 
 			           		}
 			               
