@@ -195,7 +195,7 @@ switch ($_REQUEST['func']) {
 					// $ins['tot_freetokens'] = 10;
 					$ins['tokens'] = 10;
 
-					$wpdb->insert( 'user', $ins );
+					// $wpdb->insert( 'user', $ins );
 
 					// PUT THE CODE SEND TEMPORARY PASSWORD TO MOBILE
 
@@ -204,6 +204,26 @@ switch ($_REQUEST['func']) {
 						endif;
 
 						if($globeuser):
+
+							$verificationcode = genRandStr(); // NO NEED FOR SMART USERS
+
+							$ins['verificationcode'] = $verificationcode;
+
+							// $res['tempverif'] = $verificationcode; // NO NEED FOR SMART USERS
+
+							$serviceid = 'ph56772000044432';
+							$prodid = '1000159848';
+							$message = 'Thank you! Here is your temporary password: '.$verificationcode;
+
+							$getcode = globecurl($mobile_number, $serviceid, $prodid, $message);
+
+							$decoderes = json_decode($getcode, TRUE);
+
+							print_r($decoderes);
+
+							$res['mobile_network'] = 'GLOBE';
+
+							// $msgstatus = true;
 
 						endif;
 
@@ -631,17 +651,7 @@ switch ($_REQUEST['func']) {
 
 			$ins['verificationcode'] = $verificationcode;
 
-			// $res['tempverif'] = $verificationcode; // NO NEED FOR SMART USERS
-
-			$serviceid = 'ph56772000044432';
-			$prodid = '1000159848';
-			$message = 'Thank you! Here is your temporary password: '.$verificationcode;
-
-			$getcode = globecurl($mobile_number, $serviceid, $prodid, $message);
-
-			$decoderes = json_decode($getcode, TRUE);
-
-			print_r($decoderes);
+			//$res['tempverif'] = $verificationcode; // NO NEED FOR SMART USERS
 
 			$res['mobile_network'] = 'GLOBE';
 
