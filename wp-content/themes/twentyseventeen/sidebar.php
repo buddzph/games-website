@@ -147,7 +147,7 @@ $homeurl = esc_url( $url );
 								$coin_count = $coindata[0]->coin_count;
 								$coin_price = $coindata[0]->coin_price;
 
-								echo '<h2>Coin Price: <br />PHP <b>'.number_format($coin_price,2).'</b> for <b>'.$coin_count.'</b> coins</h2>';
+								
 
 								echo '<form name="photo" id="buycoinsForm" enctype="multipart/form-data">';
 
@@ -159,7 +159,16 @@ $homeurl = esc_url( $url );
 
 								echo '</form>';
 
-								echo '<center><button id="buycoins" class="hvr-overline-from-center">Buy this coin</button> <button id="getrewards" class="hvr-overline-from-center">Get your rewards.</button></center>';
+								echo '<center>';
+
+								if(isset($_SESSION['user']['network']) and $_SESSION['user']['network'] == 'GLOBE'):
+									
+			        				echo '<h2>Coin Price: <br />PHP <b>'.number_format($coin_price,2).'</b> for <b>'.$coin_count.'</b> coins</h2>';
+					        		echo '<button id="buycoins" class="hvr-overline-from-center">Buy this coin</button> ';
+
+					        	endif;
+
+								echo '<button id="getrewards" class="hvr-overline-from-center">Get your rewards.</button></center>';
 
 								echo '<div class="usersettings">';
 

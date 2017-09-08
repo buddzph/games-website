@@ -38,6 +38,10 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 					updateTips( "You have successfully availed your free coins." );
 					dialogsuccessful.dialog( "open" );
 
+					setTimeout(function() {
+				        location.reload();
+				      }, 500 );
+
 				} else {
 					
 			        updateTips( "You already availed your free coins!" );
@@ -112,10 +116,6 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 
 					endif;
 
-				?>
-					<div id="countdown"><div id="hm_timer"></div></div>
-
-			        <?php
 
 					$date1 = new DateTime("now");
 					$date2 = new DateTime("tomorrow");
@@ -149,7 +149,15 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 
 			        else:
 
+			        	echo '<div id="countdown"><div id="hm_timer"></div></div>';
+
 			        	echo '<div class="availfreecoins"><h1>You already availed your free coins!<br />Wait for the time of reflenish.</h1></div>';
+
+			        	if(isset($_SESSION['user']['network']) and $_SESSION['user']['network'] == 'GLOBE'):
+			        	
+			        		echo '<br /><center><a href="'.$homeurl.'/?page_id=239" class="button">Buy More Coins!</a></center>';
+
+			        	endif;
 
 			        endif;
 

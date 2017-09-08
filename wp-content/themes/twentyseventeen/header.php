@@ -232,18 +232,27 @@ endif;
 			$.post( "<?php echo $homeurl.'/?page_id=344' ?>", { func: "registermobile", mobile_number: mobile_number.val() }, function( data ) {
 			  // console.log( data.id );
 
-				if(data.result == true){					
+				if(data.result == true){
+
+						dialog.dialog( "close" );
+
+						$('#loginusername').val(mobile_number.val());	
 
 						if(data.network == 'Smart'){
-							updateTips( "Account created. User this temporary password to login: " + "Temporary password: " + data.temppass );	
+							updateTips( "Account created. User this temporary password to sign in: " + "Temporary password: " + data.temppass );
+							dialogsuccessfulregister.dialog( "open" );
+
+							// edit here
 						}
 
 						if(data.network == 'Globe'){
-							updateTips( "Account created. Check you cellphone for your temporary password." );	
+
+							updateTips( "Account created. Check you cellphone for your temporary password." );
+
+							dialoglogin.dialog("open");
+
 						}
 						
-						dialog.dialog( "close" );
-						dialogsuccessful.dialog( "open" );
 
 				} else {
 					
@@ -301,6 +310,8 @@ endif;
 					updateTips( "Login Successful." );
 					dialoglogin.dialog( "close" );
 					dialogsuccessful.dialog( "open" );
+
+					setTimeout(function(){ location.reload(); }, 3000);
 
 				} else {
 					
@@ -465,6 +476,8 @@ endif;
 									  	updateTips( "Account successfully updated." );
 
 									  	dialogsuccessful.dialog( "open" );
+
+									  	setTimeout(function(){ location.reload(); }, 3000);
 
 						           }
 						           else
@@ -659,6 +672,12 @@ endif;
 	    	
 	    }
 
+	    function continuelogin(){
+	    	updateTips( "Username or Mobile number is required." );
+	    	dialogsuccessfulregister.dialog( "close" );
+	    	dialoglogin.dialog("open");
+	    }
+
 
 	    /*FIRST POPUP TO ENTER MOBILE NUMBER ONLY AND TO CHECK IF USERNAME IS EXIST OR NOT. IF NOT WILL OPEN THE NEXT DIALOG.*/
 	    dialog = $( "#dialog-form" ).dialog({
@@ -766,6 +785,23 @@ endif;
 	      modal: true,	      
 	      close: function() {
 	        location.reload();
+	      }
+	    });
+
+	    /*DIALOG SUCCESSFULL REGISTER */
+	    dialogsuccessfulregister = $( "#dialog-successful-register" ).dialog({
+	      autoOpen: false,
+	      height: 'auto',
+	      width: 400,
+	      modal: true,
+	      buttons: {
+	        "Sign in now": continuelogin,
+	        Close: function() {
+	          dialogsuccessfulregister.dialog( "close" );
+	        }
+	      }, 	      
+	      close: function() {
+	        //location.reload();
 	      }
 	    });
 
@@ -894,7 +930,7 @@ endif;
 			/*CHECK USER IF HAS USERNAME*/
 
 			<?php if($nousername): ?>
-				dialogvalidusername.dialog( "open" );
+				dialogupdateaccountdetails.dialog( "open" );
 			<?php endif; ?>
 
 		<?php endif; ?>
@@ -915,7 +951,7 @@ endif;
 	  			.site-content {padding-top: 10px;}
 	  			.logo_wrapper .wrap img {width: 100px;}
 				.logo_wrapper .wrap .account_info {margin-top: 0;}
-				.logo_wrapper .wrap .account_info img {width: 30px;}
+				.logo_wrapper .wrap .account_info img {width: 34px;}
 				.logo_wrapper .wrap .account_info span {margin-top: 5px; font-size: 10px;}
 				.logo_wrapper .wrap .account_info a {font-size: 10px;}
 	  		</style>
@@ -930,6 +966,15 @@ endif;
 	  		</script>
 
 	  <?php endif; ?>
+
+
+		<?php if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])): ?>
+			
+			<style type="text/css">
+				.logo_wrapper .wrap .account_info span {margin-right: 42px;}
+			</style>
+
+		<?php endif; ?>
 
 </head>
 
@@ -967,7 +1012,11 @@ endif;
  	<p class="validateTips">All form fields are required.</p>
   <form name="photo" id="imageUploadForm" enctype="multipart/form-data">
     <fieldset>
-      <label for="username">Username:</label>
+      <label for="username">Username*:
+      	<?php if(isset($_SESSION['user']['username']) and empty($_SESSION['user']['username'])): ?>
+ 	  		<span style="font-size: 10px;">Required to identify you in the GlyphGames Leaderboards.</span>
+ 	  	<?php endif; ?>
+ 	  </label>
       <input type="text" name="username" id="username" value="<?php echo $_SESSION['user']['username']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
  	  <label for="password">Password:
  	  	<?php if(isset($_SESSION['user']['username']) and !empty($_SESSION['user']['username'])): ?>
@@ -977,19 +1026,19 @@ endif;
       <input type="password" name="password" id="password" value="" placeholder="" class="text ui-widget-content ui-corner-all">
       <label for="retypepassword">Re-Type Password:</label>
       <input type="password" name="retypepassword" id="retypepassword" value="" placeholder="" class="text ui-widget-content ui-corner-all">
-      <label for="firstname">Firstname:</label>
+      <label for="firstname">Firstname*:</label>
       <input type="text" name="firstname" id="firstname" value="<?php echo $_SESSION['user']['firstname']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
-      <label for="lastname">Lastname:</label>
+      <label for="lastname">Lastname*:</label>
       <input type="text" name="lastname" id="lastname" value="<?php echo $_SESSION['user']['lastname']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
-      <label for="street">Street:</label>
+      <!--label for="street">Street:</label>
       <input type="text" name="street" id="street" value="<?php echo $_SESSION['user']['street']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
       <label for="city">City:</label>
       <input type="text" name="city" id="city" value="<?php echo $_SESSION['user']['city']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
       <label for="country">Country:</label>
       <select name="country" id="country"><?php echo $tablecountries; ?></select>
       <label for="zip">Zip:</label>
-      <input type="text" name="zip" id="zip" value="<?php echo $_SESSION['user']['zip']; ?>" style="width: 40% !important;" placeholder="" class="text ui-widget-content ui-corner-all">
-      <label for="email">Email:</label>
+      <input type="text" name="zip" id="zip" value="<?php echo $_SESSION['user']['zip']; ?>" style="width: 40% !important;" placeholder="" class="text ui-widget-content ui-corner-all"-->
+      <label for="email">Email*:</label>
       <input type="email" name="email" id="email" value="<?php echo $_SESSION['user']['email']; ?>" placeholder="" class="text ui-widget-content ui-corner-all">
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
@@ -1023,7 +1072,11 @@ endif;
 </div>
 
 <div id="dialog-successful" title="Completed" style="display: none;"> 
-	<p class="validateTips">You have successfully updated your username.</p>
+	<p class="validateTips" style="text-align: center;">You have successfully updated your username.</p>
+</div>
+
+<div id="dialog-successful-register" title="Completed" style="display: none;"> 
+	<p class="validateTips" style="text-align: center;">Tips here.</p>
 </div>
 
 <div id="dialog-buycoin" title="Buy this coin" style="display: none;"> 
@@ -1062,11 +1115,11 @@ endif;
 					<div class="wrap">
 						<div class="account_info">
 							<?php if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])): ?>
-								<?php if(empty($_SESSION['user']['username'])): ?>
+								<?php /* if(empty($_SESSION['user']['username'])): ?>
 									<span>No username&nbsp; &nbsp;</span>	
 								<?php else: ?>
 									<span>Logged in as: <b><?php echo $_SESSION['user']['username']; ?></b>&nbsp; &nbsp;</span>
-								<?php endif; ?>
+								<?php endif;*/ ?>
 
 						      	<ul class="nav navbar-nav">
 						            <li class="dropdown">
@@ -1097,8 +1150,9 @@ endif;
 					      		</ul-->
 
 							<?php else: ?>
-								<span><a href="javascript: void(0);" id="mobilecheck">Register</a> | <a href="javascript: void(0);" id="userlogin">Login</a></span>
+								
 								<img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/62x62-Account-Icon.png" alt="" class="planeicon">
+
 							<?php endif; ?>
 						</div>
 						<a href="<?php echo $homeurl; ?>"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/GlyphGames-Logo-Light.png" alt=""></a>

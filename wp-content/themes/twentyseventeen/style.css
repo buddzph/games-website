@@ -2716,8 +2716,8 @@ h2.widget-title {
 
 .widget ul li,
 .widget ol li {
-	border-bottom: 1px solid #ddd;
-	border-top: 1px solid #ddd;
+	/*border-bottom: 1px solid #ddd;
+	border-top: 1px solid #ddd;*/
 	padding: 0.5em 0;
 }
 
@@ -4524,9 +4524,9 @@ CUSTOM CSS
 .logo_wrapper .wrap {padding-left: 0; padding-right: 0; max-width: 1000px;}
 .logo_wrapper .wrap img {width: 200px;}
 .logo_wrapper .wrap .account_info {float: right; margin-top: 10px;}
-.logo_wrapper .wrap .account_info img {width: 40px; float: right; box-shadow: 0px 0px 15px 5px #fff; border-radius: 100%;}
+.logo_wrapper .wrap .account_info img {width: 55px; float: right; box-shadow: 0px 0px 15px 5px #fff; border-radius: 100%;}
 .logo_wrapper .wrap .account_info img.planeicon {box-shadow: none; border-radius: 0;}
-.logo_wrapper .wrap .account_info span {float: left; margin-right: 45px; margin-top: 10px !important; font-size: 12px;}
+.logo_wrapper .wrap .account_info span {float: left; /*margin-right: 45px;*/ margin-top: 20px !important; font-size: 12px;}
 .logo_wrapper .wrap .account_info a {font-size: 12px;}
 
 .bt_bb_text p {margin-top: 15px; margin-bottom: 15px !important;}
@@ -4764,6 +4764,9 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.account_info {margin-right: 20px;}
 	.navigation-top nav {margin-left: 20px;}
 	.logo_wrapper .wrap img {margin-left: 20px;}
+	.button-account-status {position: relative; margin-top: 10px; text-align: center;}
+	.rwd-table td {text-align: left !important;}
+	.rwd-table th, .rwd-table td:before {margin-right: 10px;}
 }
 
 @media screen and (max-width: 800px) {
@@ -4776,7 +4779,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.slider-caption h3, .slider-caption h3 a {font-size: 1em;}
 	.logo_wrapper .wrap img {margin-left: 15px;}
 	.logo_wrapper .wrap .account_info {margin-top: 0;}
-	.logo_wrapper .wrap .account_info img {width: 40px; margin-left: 0;}
+	.logo_wrapper .wrap .account_info img {width: 55px; margin-left: 0;}
 	.navigation-top nav {
 		margin-left: 15px;
 	}
@@ -4790,6 +4793,9 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.account_info {margin-right: 20px;}
 	.navigation-top nav {margin-left: 20px;}
 	.logo_wrapper .wrap img {margin-left: 20px;}
+	.button-account-status {position: relative; margin-top: 10px; text-align: center;}
+	.rwd-table td {text-align: left !important;}
+	.rwd-table th, .rwd-table td:before {margin-right: 10px;}
 }
 
 @media screen and (max-width: 520px) {
@@ -4804,7 +4810,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.gamerightcontent {float: none; width: 100%;}
 	.logo_wrapper .wrap img {width: 75px; margin-left: 25px;}
 	.logo_wrapper .wrap .account_info {margin-top: 0;}
-	.logo_wrapper .wrap .account_info img {width: 20px; margin-left: 0;}
+	.logo_wrapper .wrap .account_info img {width: 30px; margin-left: 0;}
 	.widget ul li li {padding-left: 0;}
 	.logo_wrapper .wrap .account_info span {margin-right: 10px; margin-top: 0; font-size: 10px;}
 	ul.bt_bb_tabs_header li {float: left;}
@@ -4825,6 +4831,9 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.account_info {margin-right: 20px;}
 	.navigation-top nav {margin-left: 20px;}
 	.logo_wrapper .wrap img {margin-left: 20px;}
+	.button-account-status {position: relative; margin-top: 10px; text-align: center;}
+	.rwd-table td {text-align: left !important;}
+	.rwd-table th, .rwd-table td:before {margin-right: 10px;}
 
 }	
 
@@ -4837,6 +4846,9 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.account_info {margin-right: 20px;}
 	.navigation-top nav {margin-left: 20px;}
 	.logo_wrapper .wrap img {margin-left: 20px;}
+	.button-account-status {position: relative; margin-top: 10px; text-align: center;}
+	.rwd-table td {text-align: left !important;}
+	.rwd-table th, .rwd-table td:before {margin-right: 10px;}
 }
 
 @media screen and (max-device-width: 800px) {
@@ -4849,7 +4861,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.slider-caption h3, .slider-caption h3 a {font-size: 1em;}
 	.logo_wrapper .wrap img {margin-left: 15px;}
 	.logo_wrapper .wrap .account_info {margin-top: 0;}
-	.logo_wrapper .wrap .account_info img {width: 40px; margin-left: 0;}
+	.logo_wrapper .wrap .account_info img {width: 55px; margin-left: 0;}
 	.navigation-top nav {
 		margin-left: 15px;
 	}
@@ -4863,6 +4875,9 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.account_info {margin-right: 20px;}
 	.navigation-top nav {margin-left: 20px;}
 	.logo_wrapper .wrap img {margin-left: 20px;}
+	.button-account-status {position: relative; margin-top: 10px; text-align: center;}
+	.rwd-table td {text-align: left !important;}
+	.rwd-table th, .rwd-table td:before {margin-right: 10px;}
 }
 
 @media screen and (max-device-width: 520px) {
@@ -4877,7 +4892,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.gamerightcontent {float: none; width: 100%;}
 	.logo_wrapper .wrap img {width: 75px; margin-left: 25px;}
 	.logo_wrapper .wrap .account_info {margin-top: 0;}
-	.logo_wrapper .wrap .account_info img {width: 20px; margin-left: 0;}
+	.logo_wrapper .wrap .account_info img {width: 30px; margin-left: 0;}
 	.widget ul li li {padding-left: 0;}
 	.logo_wrapper .wrap .account_info span {margin-right: 10px; margin-top: 0; font-size: 10px;}
 	ul.bt_bb_tabs_header li {float: left;}
@@ -4898,6 +4913,9 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.account_info {margin-right: 20px;}
 	.navigation-top nav {margin-left: 20px;}
 	.logo_wrapper .wrap img {margin-left: 20px;}
+	.button-account-status {position: relative; margin-top: 10px; text-align: center;}
+	.rwd-table td {text-align: left !important;}
+	.rwd-table th, .rwd-table td:before {margin-right: 10px;}
 }
 
 

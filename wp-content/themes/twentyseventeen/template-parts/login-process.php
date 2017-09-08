@@ -286,12 +286,20 @@ switch ($_REQUEST['func']) {
 			$_SESSION['user']['username'] = $myrows[0]->username;
 			$_SESSION['user']['firstname'] = $myrows[0]->firstname;
 			$_SESSION['user']['lastname'] = $myrows[0]->lastname;
-			$_SESSION['user']['street'] = $myrows[0]->street;
+			/*$_SESSION['user']['street'] = $myrows[0]->street;
 			$_SESSION['user']['city'] = $myrows[0]->city;
 			$_SESSION['user']['country'] = $myrows[0]->country;
-			$_SESSION['user']['zip'] = $myrows[0]->zip;
+			$_SESSION['user']['zip'] = $myrows[0]->zip;*/
 			$_SESSION['user']['email'] = $myrows[0]->email;
 			$_SESSION['user']['user_avatar'] = $myrows[0]->user_avatar;
+
+			if(isSmart($myrows[0]->celno)):
+				$_SESSION['user']['network'] = 'SMART';
+			endif;
+
+			if(isGlobe($myrows[0]->celno)):
+				$_SESSION['user']['network'] = 'GLOBE';
+			endif;
 
 			$res['result'] = true;
 
@@ -425,10 +433,10 @@ switch ($_REQUEST['func']) {
 		$password = $_REQUEST['password'];
 		$firstname = $_REQUEST['firstname'];
 		$lastname = $_REQUEST['lastname'];
-		$street = $_REQUEST['street'];
+		/*$street = $_REQUEST['street'];
 		$city = $_REQUEST['city'];
 		$country = $_REQUEST['country'];
-		$zip = $_REQUEST['zip'];
+		$zip = $_REQUEST['zip'];*/
 		$email = $_REQUEST['email'];
 
 		$myrows = $wpdb->get_results( "SELECT * FROM user WHERE celno = '". $mobile_number ."'" );
@@ -542,10 +550,10 @@ switch ($_REQUEST['func']) {
 				$data['username'] = $username;
 				$data['firstname'] = $firstname;
 				$data['lastname'] = $lastname;
-				$data['street'] = $street;
+				/*$data['street'] = $street;
 				$data['city'] = $city;
 				$data['country'] = $country;
-				$data['zip'] = $zip;
+				$data['zip'] = $zip;*/
 				$data['email'] = $email;
 
 				$wpdb->update( $table, $data, array('celno' => $mobile_number) );
@@ -557,12 +565,20 @@ switch ($_REQUEST['func']) {
 				$_SESSION['user']['username'] = $session[0]->username;
 				$_SESSION['user']['firstname'] = $session[0]->firstname;
 				$_SESSION['user']['lastname'] = $session[0]->lastname;
-				$_SESSION['user']['street'] = $session[0]->street;
+				/*$_SESSION['user']['street'] = $session[0]->street;
 				$_SESSION['user']['city'] = $session[0]->city;
 				$_SESSION['user']['country'] = $session[0]->country;
-				$_SESSION['user']['zip'] = $session[0]->zip;
+				$_SESSION['user']['zip'] = $session[0]->zip;*/
 				$_SESSION['user']['email'] = $session[0]->email;
 				$_SESSION['user']['user_avatar'] = $session[0]->user_avatar;
+
+				if(isSmart($session[0]->celno)):
+					$_SESSION['user']['network'] = 'SMART';
+				endif;
+
+				if(isGlobe($session[0]->celno)):
+					$_SESSION['user']['network'] = 'GLOBE';
+				endif;
 
 				$res['result'] = true;
 

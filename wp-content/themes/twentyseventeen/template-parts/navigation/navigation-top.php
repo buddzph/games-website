@@ -14,61 +14,65 @@ $homeurl = esc_url( $url );
 if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
 ?>
 
-<script type="text/javascript">
-	function accountstatus(){
-    	jQuery(document).ready(function($) {
-			$.post( "<?php echo $homeurl.'/?page_id=344' ?>", { func: "accountstatus" }, function( data ) {
-			  // console.log( data.id );
+		<script type="text/javascript">
+			function accountstatus(){
+		    	jQuery(document).ready(function($) {
+					$.post( "<?php echo $homeurl.'/?page_id=344' ?>", { func: "accountstatus" }, function( data ) {
+					  // console.log( data.id );
 
-				if(data.result == true){
+						if(data.result == true){
 
-					updateTips( "Details of your account." );
-					$('#accountdetails-wrapper').html(data.table);
-					dialogaccountsetting.dialog( "open" );
+							updateTips( "Details of your account." );
+							$('#accountdetails-wrapper').html(data.table);
+							dialogaccountsetting.dialog( "open" );
 
-				} else {
-					
-			        // updateTips( "You already availed your free coins!" );
-			        dialogaccountsetting.dialog( "open" );
+						} else {
+							
+					        // updateTips( "You already availed your free coins!" );
+					        dialogaccountsetting.dialog( "open" );
 
-				}
+						}
 
 
-			}, "json");
-		});
-    }
+					}, "json");
+				});
+		    }
 
-    function updateTips( t ) {
-    	jQuery(document).ready(function($) {
-	    	tips = $( ".validateTips" );
+		    function updateTips( t ) {
+		    	jQuery(document).ready(function($) {
+			    	tips = $( ".validateTips" );
 
-		      tips
-		        .text( t )
-		        .addClass( "ui-state-highlight" );
-		      setTimeout(function() {
-		        tips.removeClass( "ui-state-highlight", 1500 );
-		      }, 500 );
+				      tips
+				        .text( t )
+				        .addClass( "ui-state-highlight" );
+				      setTimeout(function() {
+				        tips.removeClass( "ui-state-highlight", 1500 );
+				      }, 500 );
 
-		});
-	}
+				});
+			}
 
-    jQuery(document).ready(function($) {
+		    jQuery(document).ready(function($) {
 
-	    dialogaccountsetting = $( "#dialog-account-status" ).dialog({
-		      autoOpen: false,
-		      height: 'auto',
-		      width: 400,
-		      modal: true,	      
-		      close: function() {
-		        // location.reload();
-		      }
-		    });
-	});
-</script>
+			    dialogaccountsetting = $( "#dialog-account-status" ).dialog({
+				      autoOpen: false,
+				      height: 'auto',
+				      width: 400,
+				      modal: true,	      
+				      close: function() {
+				        // location.reload();
+				      }
+				    });
+			});
+		</script>
 
-<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/table.css">
+		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/table.css">
 
-<div class="button-account-status"><a href="javascript: void(0);" onclick="accountstatus();">Account Status</a></div>
+		<div class="button-account-status"><a href="javascript: void(0);" onclick="accountstatus();">Account Status</a></div>
+
+<?php else: ?>
+
+	<div class="button-account-status"><a href="javascript: void(0);" id="mobilecheck">Register</a> | <a href="javascript: void(0);" id="userlogin">Sign In</a></div>
 
 <?php endif; ?>
 
