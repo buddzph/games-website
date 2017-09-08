@@ -529,15 +529,28 @@ switch ($_REQUEST['func']) {
 
 				else:
 
-					if(!empty($password)):
-						$data['password'] = md5($password);
-						$pass++;
-					else:
+					$checkusername = $wpdb->get_results( "SELECT * FROM user WHERE username = '".$username."' and celno != '". $mobile_number ."'" );
 
-						$res['errmsg'] = 'Please supply valid password.';
+					if(count($checkusername) > 0):
+
+						$res['errmsg'] = 'Username is already taken. Kindly supply valid username.';
 						$res['result'] = false;
 
+					else:
+						
+						if(!empty($password)):
+							$data['password'] = md5($password);
+							$pass++;
+						else:
+
+							$res['errmsg'] = 'Please supply valid password.';
+							$res['result'] = false;
+
+						endif;
+
 					endif;
+
+
 
 					//echo 3;
 

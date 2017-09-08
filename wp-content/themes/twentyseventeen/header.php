@@ -1010,7 +1010,7 @@ endif;
 </div>
 
 <div id="dialog-form-username" title="Update Account Details" style="display: none;">
- 	<p class="validateTips">All form fields are required.</p>
+ 	
   <form name="photo" id="imageUploadForm" enctype="multipart/form-data">
     <fieldset>
       <label for="username">Username*:
@@ -1059,6 +1059,8 @@ endif;
       <input type="file" id="ImageBrowse" name="image" size="30"/>
     </fieldset>
   </form>
+
+  <p class="validateTips">All form fields are required.</p>
 
 </div>
 
