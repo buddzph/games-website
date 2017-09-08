@@ -861,6 +861,7 @@ endif;
 	    });
 
 	    $( "#userlogin" ).button().on( "click", function() {
+	      updateTips( "Username or Mobile number is required." );
 	      dialoglogin.dialog( "open" );
 	    });
 
