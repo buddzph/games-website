@@ -958,12 +958,13 @@ endif;
 	  		</style>
 
 	  		<script type="text/javascript">
+	  			// IFRAME TWEEKS MODIFICATION
 	  			jQuery(document).ready(function($) {
 	  				window.setTimeout(function(){
-				           $('#gamewrapper').contents().find('body').css('background-color','transparent');
-				           $('#gamewrapper').contents().find('html').css('background-color','transparent');
-			           }, 1000);
-			       });
+			           $('#gamewrapper').contents().find('body').css('background-color','transparent');
+			           $('#gamewrapper').contents().find('html').css('background-color','transparent');
+		            }, 1000);
+		        });
 	  		</script>
 
 	  <?php endif; ?>

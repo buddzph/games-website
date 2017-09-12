@@ -27,6 +27,39 @@ function g_getsessionid($uid, $gamecode)
 }
 ?>
 
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(document).keyup(function(e) {
+			if (e.keyCode == 27) { // escape key maps to keycode `27`
+		        off();
+		    }
+		});
+	});
+
+
+	function on(gamelink) {
+		document.getElementById("gameoverlay").innerHTML = '<iframe id="gamewrapper" src="' + gamelink + '" style="border: 0; width: 100%; height: 100%;"></iframe>';
+	    document.getElementById("gameoverlay").style.display = "block";
+
+
+	}
+
+	jQuery(document).ready(function($) {
+    	$('#gamewrapper').contents().find('body').keyup(function(event){
+		  	if (event.keyCode == 27) { // escape key maps to keycode `27`
+		        off();
+		    }
+		});
+	});
+
+	function off() {
+		document.getElementById("gameoverlay").innerHTML = '';
+	    document.getElementById("gameoverlay").style.display = "none";
+	}
+
+	
+</script>
+
 <div class="wrap">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
@@ -87,7 +120,25 @@ function g_getsessionid($uid, $gamecode)
 
 						    	/*echo '<iframe id="gamewrapper" src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 560px"></iframe>';*/
 
-						    	echo '<iframe id="gamewrapper" src="'.$const.'" style="border: 0; width: 100%; height: 560px"></iframe>';
+						    	?>
+
+						    	<div id="gameoverlay" onclick="off()">
+						    		
+						    		<!-- Play the game -->
+
+						    	</div>
+								
+
+						    	<?php
+
+						    	echo '<div class="single-featured-image-header">';
+									// echo get_the_post_thumbnail( get_queried_object_id(), 'twentyseventeen-featured-image' );
+									the_post_thumbnail( 'full' );
+								echo '</div><!-- .single-featured-image-header -->';
+
+								// echo $const;
+
+								echo '<div style="margin-bottom: 25px; margin-top: 25px; text-align: center;"><button onclick="on(\'' . $const . '\')">Play Now!</button></div>';
 
 						    	$playthegame = true;
 
@@ -101,7 +152,25 @@ function g_getsessionid($uid, $gamecode)
 
 							    	/*echo '<iframe id="gamewrapper" src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 560px"></iframe>';*/
 
-							    	echo '<iframe id="gamewrapper" src="'.$const.'" style="border: 0; width: 100%; height: 560px"></iframe>';
+							    	?>
+
+							    	<div id="gameoverlay" onclick="off()">
+							    		
+							    		<!-- Play the game -->
+
+							    	</div>
+									
+
+							    	<?php
+
+							    	echo '<div class="single-featured-image-header">';
+										// echo get_the_post_thumbnail( get_queried_object_id(), 'twentyseventeen-featured-image' );
+										the_post_thumbnail( 'full' );
+									echo '</div><!-- .single-featured-image-header -->';
+
+									// echo $const;
+
+									echo '<div style="margin-bottom: 25px; margin-top: 25px; text-align: center;"><button onclick="on(\'' . $const . '\')">Play Now!</button></div>';
 
 							    	$playthegame = true;
 
@@ -117,7 +186,25 @@ function g_getsessionid($uid, $gamecode)
 
 								    	/*echo '<iframe id="gamewrapper" src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 560px"></iframe>';*/
 
-								    	echo '<iframe id="gamewrapper" src="'.$const.'" style="border: 0; width: 100%; height: 560px"></iframe>';
+								    	?>
+
+								    	<div id="gameoverlay" onclick="off()">
+								    		
+								    		<!-- Play the game -->
+
+								    	</div>
+										
+
+								    	<?php
+
+								    	echo '<div class="single-featured-image-header">';
+											// echo get_the_post_thumbnail( get_queried_object_id(), 'twentyseventeen-featured-image' );
+											the_post_thumbnail( 'full' );
+										echo '</div><!-- .single-featured-image-header -->';
+
+										// echo $const;
+
+										echo '<div style="margin-bottom: 25px; margin-top: 25px; text-align: center;"><button onclick="on(\'' . $const . '\')">Play Now!</button></div>';
 
 								    	$playthegame = true;
 
@@ -150,7 +237,25 @@ function g_getsessionid($uid, $gamecode)
 
 						    	/*echo '<iframe id="gamewrapper" src="http://localhost/glyphgames.com/game_storage/20170524_heros-journey/index.html?nocache&amp;api-url=http://localhost/glyphgames.com/prod/api/gpctlstatapi.php&amp;session-id=201707271628350_20170517_heros-journey" style="border: 0; width: 100%; height: 560px"></iframe>';*/
 
-						    	echo '<iframe id="gamewrapper" src="'.$const.'" style="border: 0; width: 100%; height: 560px"></iframe>';
+						    	?>
+
+						    	<div id="gameoverlay" onclick="off()">
+						    		
+						    		<!-- Play the game -->
+
+						    	</div>
+								
+
+						    	<?php
+
+						    	echo '<div class="single-featured-image-header">';
+									// echo get_the_post_thumbnail( get_queried_object_id(), 'twentyseventeen-featured-image' );
+									the_post_thumbnail( 'full' );
+								echo '</div><!-- .single-featured-image-header -->';
+
+								// echo $const;
+
+								echo '<div style="margin-bottom: 25px; margin-top: 25px; text-align: center;"><button onclick="on(\'' . $const . '\')">Play Now!</button></div>';
 
 						    	$playthegame = true;
 
