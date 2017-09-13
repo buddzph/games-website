@@ -869,6 +869,10 @@ endif;
 	      dialogupdateaccountdetails.dialog( "open" );
 	    });
 
+	    $( "#updateusernameicon" ).button().on( "click", function() {
+	      dialogupdateaccountdetails.dialog( "open" );
+	    });
+
 	    $( "#logout" ).button().on( "click", function() {
 	      $.post( "<?php echo $homeurl.'/?page_id=344' ?>", { func: "logout" }, function( data ) {
 			  // console.log( data.id );
@@ -1135,7 +1139,7 @@ endif;
 										</td>
 										
 										<td>
-											<a href="javascript: void(0);" id="updateusername">
+											<a href="javascript: void(0);" id="updateusernameicon">
 												<?php if(isset($_SESSION['user']['user_avatar']) and !empty($_SESSION['user']['user_avatar'])): ?>
 
 										      		<img src="<?php echo $homeurl; ?>/usericon/cropped/<?php echo $_SESSION['user']['user_avatar']; ?>" id="useravatar" alt="">
