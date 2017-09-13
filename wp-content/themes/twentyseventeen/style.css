@@ -4895,7 +4895,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.navigation-top a {font-size: 12px;}
 	.userinfo a {font-size: 20px;}
 	.availfreecoins {width: 90%; height: auto;}
-
+	.buymorecoins {font-size: 14px;}
 }	
 
 @media screen and (max-device-width: 900px) {
@@ -4983,6 +4983,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.navigation-top a {font-size: 12px;}
 	.userinfo a {font-size: 20px;}
 	.availfreecoins {width: 90%; height: auto;}
+	.buymorecoins {font-size: 14px;}
 }
 
 

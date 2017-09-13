@@ -145,17 +145,17 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 
 			        	echo '<div class="availfreecoins"><a href="javascript: void(0)" onclick="availfreecoins()" id="freecoins">Get your free coins Now!</a></div>';
 
-			        	echo '<br /><center><a href="'.$homeurl.'/?page_id=239" class="button">Buy More Coins!</a></center>';
+			        	echo '<br /><center><a href="'.$homeurl.'/?page_id=239" class="button buymorecoins">Buy More Coins!</a></center>';
 
 			        else:
 
 			        	echo '<div id="countdown"><div id="hm_timer"></div></div>';
 
-			        	echo '<div class="availfreecoins"><h1>You already availed your free coins!<br />Wait for the time of reflenish.</h1></div>';
+			        	echo '<div class="availfreecoins" style="background: none; height: auto;"><h1>You already availed your free coins!<br />Wait for the time of reflenish.</h1></div>';
 
 			        	if(isset($_SESSION['user']['network']) and $_SESSION['user']['network'] == 'GLOBE'):
 			        	
-			        		echo '<br /><center><a href="'.$homeurl.'/?page_id=239" class="button">Buy More Coins!</a></center>';
+			        		echo '<br /><center><a href="'.$homeurl.'/?page_id=239" class="button buymorecoins">Buy More Coins!</a></center>';
 
 			        	endif;
 
