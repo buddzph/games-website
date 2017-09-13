@@ -4516,7 +4516,7 @@ CUSTOM CSS
 }
 .navigation-top a {/*color: #898f94;*/ color: #fff; /*text-transform: uppercase;*/ background: none; border: none;}
 .navigation-top li li a {color: #fff; font-weight: normal;}
-.navigation-top a:hover, .navigation-top a:active {color: #c3c4f2; background: none; border: none;}
+.navigation-top a:hover, .navigation-top a:active, .ui-button:hover, .ui-button:focus {color: #c3c4f2; background: none; border: none;}
 .navigation-top .current-menu-item a {color: #c3c4f2;}
 .navigation-top .current-menu-item a:active {color: #c3c4f2;}
 .main-navigation a {padding: 0.50em 1.25em;}
