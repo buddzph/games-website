@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 if($_SERVER['HTTP_HOST'] == 'localhost'):
    define('DB_HOSTNAME', 'localhost');
    define('DB_USERNAME', 'root');
