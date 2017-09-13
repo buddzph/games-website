@@ -4514,7 +4514,7 @@ CUSTOM CSS
   border-bottom: solid 1px #999;
   border-top: solid 1px #999;
 }
-.navigation-top a {/*color: #898f94;*/ color: #fff; /*text-transform: uppercase;*/}
+.navigation-top a {/*color: #898f94;*/ color: #fff; /*text-transform: uppercase;*/ background: none; border: none;}
 .navigation-top li li a {color: #fff; font-weight: normal;}
 .navigation-top a:hover {color: #c3c4f2;}
 .navigation-top .current-menu-item a {color: #c3c4f2;}
@@ -4529,6 +4529,8 @@ CUSTOM CSS
 .logo_wrapper .wrap .account_info img.planeicon {box-shadow: none; border-radius: 0;}
 .logo_wrapper .wrap .account_info span {float: left; /*margin-right: 45px;*/ margin-top: 20px !important; font-size: 12px;}
 .logo_wrapper .wrap .account_info a {font-size: 12px;}
+
+
 
 .bt_bb_text p {margin-top: 15px; margin-bottom: 15px !important;}
 span.img_cropper {height: auto !important;}
