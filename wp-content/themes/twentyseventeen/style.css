@@ -4516,7 +4516,7 @@ CUSTOM CSS
 }
 .navigation-top a {/*color: #898f94;*/ color: #fff; /*text-transform: uppercase;*/ background: none; border: none;}
 .navigation-top li li a {color: #fff; font-weight: normal;}
-.navigation-top a:hover, .navigation-top a:active, .navigation-top a:visited, .navigation-top a:link {color: #c3c4f2; background: none; border: none;}
+.navigation-top a:hover {color: #c3c4f2;}
 .navigation-top .current-menu-item a {color: #c3c4f2;}
 .navigation-top .current-menu-item a:active {color: #c3c4f2;}
 .main-navigation a {padding: 0.50em 1.25em;}
@@ -4570,12 +4570,11 @@ div#dialog-getrewards > div.ui-dialog {background: none; border: none;}
 .ui-widget-header {background: none !important; border: none !important; font-size: 14px; text-transform: uppercase;}
 img.user_avatar {border-radius: 100%; width: 50%; border: solid 2px green; box-shadow: 0px 0px 15px 5px #999;}
 .userinfo {font-size: 20px;}
-.userinfo a {font-size: 20px;}
-#useravatar {border-radius: 7px;
-    background: #fff;
-    padding: 2px; }
+.userinfo a {font-size: 20px; background: none; border: none;}
+#useravatar {border-radius: 7px; background: #fff; padding: 2px; }
 a#mobilecheck, a#userlogin {font-size: 12px;}
 button:hover, button:focus, input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus {background-color: #ccc;}
+.tbluserdata a.ui-button:hover, .tbluserdata a.ui-button:active, .tbluserdata a.ui-button:visited, .tbluserdata a.ui-button:link {background: none; border: none; margin: 0; padding: 0;}
 
 .entry-header .entry-title {
 	/*color: #113565 !important;*/
