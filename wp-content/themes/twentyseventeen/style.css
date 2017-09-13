@@ -1723,6 +1723,7 @@ body {
 
 #masthead .wrap {
 	position: relative;
+	max-width: 95%;
 }
 
 .site-header {
@@ -2079,9 +2080,9 @@ body.page:not(.twentyseventeen-front-page) .entry-title {
 	/*text-shadow: 1px 1px #fff;*/
 	font-size: 2em;
 	/*font-size: 0.875rem;*/
-	font-weight: 800;
-	letter-spacing: 0.14em;
-	text-transform: uppercase;
+	font-weight: normal;
+	/*letter-spacing: 0.14em;*/
+	text-transform: capitalize;
 }
 
 .entry-header .entry-title {
@@ -4513,7 +4514,7 @@ CUSTOM CSS
   border-bottom: solid 1px #999;
   border-top: solid 1px #999;
 }
-.navigation-top a {/*color: #898f94;*/ color: #fff; text-transform: uppercase;}
+.navigation-top a {/*color: #898f94;*/ color: #fff; /*text-transform: uppercase;*/}
 .navigation-top li li a {color: #fff; font-weight: normal;}
 .navigation-top a:hover {color: #c3c4f2;}
 .navigation-top .current-menu-item a {color: #c3c4f2;}
@@ -4521,8 +4522,8 @@ CUSTOM CSS
 .main-navigation a {padding: 0.50em 1.25em;}
 .navigation-top a:first-child {padding-left: 0;}
 .menu-scroll-down {display: none !important; /*border-radius: 30px; background-color: rgba(255,255,255,0.50);*/}
-.logo_wrapper .wrap {padding-left: 0; padding-right: 0; max-width: 1000px;}
-.logo_wrapper .wrap img {width: 200px;}
+.logo_wrapper .wrap {padding-left: 0; padding-right: 0; max-width: 95%; /*height: 140px;*/}
+.logo_wrapper .wrap img {width: 250px; margin-top: 40px;}
 .logo_wrapper .wrap .account_info {float: right; margin-top: 10px;}
 .logo_wrapper .wrap .account_info img {width: 55px; float: right; box-shadow: 0px 0px 15px 5px #fff; border-radius: 100%;}
 .logo_wrapper .wrap .account_info img.planeicon {box-shadow: none; border-radius: 0;}
@@ -4540,6 +4541,7 @@ span.img_cropper {height: auto !important;}
 .gameleftcontent {float: left; width: 50%; margin-right: 10%;}
 .gamerightcontent {float: left; width: 40%;}
 .logo_wrapper {padding: 10px 0; background-color: #113565; color: #fff;}
+/*#site-navigation {max-width: 90%;}*/
 .remove-site-navigation-fixed {position: relative !important; top: 0 !important;}
 
 a:hover, a:active {color: #ccc; cursor: pointer;}
@@ -4565,6 +4567,11 @@ footer .social-navigation {margin: 0 auto; display: inline-block; position: rela
 div#dialog-getrewards > div.ui-dialog {background: none; border: none;}
 .ui-widget-header {background: none !important; border: none !important; font-size: 14px; text-transform: uppercase;}
 img.user_avatar {border-radius: 100%; width: 50%; border: solid 2px green; box-shadow: 0px 0px 15px 5px #999;}
+.userinfo {font-size: 20px;}
+.userinfo a {font-size: 20px;}
+#useravatar {border-radius: 7px;
+    background: #fff;
+    padding: 2px; }
 a#mobilecheck, a#userlogin {font-size: 12px;}
 button:hover, button:focus, input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus {background-color: #ccc;}
 
@@ -4572,8 +4579,10 @@ button:hover, button:focus, input[type="button"]:hover, input[type="button"]:foc
 	/*color: #113565 !important;*/
 	color: #fff !important;
 	text-shadow: 1px 1px #000;
-	font-size: 2.5em !important;
+	font-size: 3em;
 }
+
+.page .panel-content .entry-title, .page-title, body.page:not(.twentyseventeen-front-page) .entry-title {font-size: 3em;}
 
 /*GAME OVERLAY*/
 #gameoverlay {
@@ -4585,8 +4594,8 @@ button:hover, button:focus, input[type="button"]:hover, input[type="button"]:foc
     left: 0;
     right: 0;
     bottom: 0;
-    /*background-color: rgba(0,0,0,0.5);*/
-    background-color: #000;
+    background-color: rgba(0,0,0,0.5);
+    /*background-color: #000;*/
     z-index: 1005;
     cursor: pointer;
 }
@@ -4601,6 +4610,35 @@ button:hover, button:focus, input[type="button"]:hover, input[type="button"]:foc
 .availfreecoins {padding: 25px 0; text-align: center;}
 
 .button-account-status {position: absolute; top: 5px; right: 0;}
+
+.tbluserdata {float: right; border: none; margin: 0; width: auto;}
+.tbluserdata table {margin: 0;}
+.tbluserdata table tr {border-bottom: none;}
+.tbluserdata table td {border-bottom: none; padding: 0;}
+.tbluserdata table td.userinfo {padding-right: 10px;}
+.logo_wrapper .wrap .tbluserdata table td img {margin-top: 0; width: 140px; margin-left: 0;}
+
+/*#closebtn {position: absolute; top: 0; right: 0;}
+#closebtn a {font-size: 20px; font-weight: bold; color: #fff;}*/
+
+#gameoverlay > button {
+  opacity: 0.3;
+  position: fixed;
+  float: right;
+  right: 10px;
+  top: 10px;
+  transition: 0.5s;
+}
+#gameoverlay > button {
+  /*opacity: 1;*/
+}
+
+.availfreecoins {width: 450px; height: 102px; background: url('assets/images/FreeCoinsButton-01-450x102.png') no-repeat center center; margin: 0 auto;}
+.availfreecoins a {font-size: 2em; font-weight: bold; color: #000;}
+.availfreecoins:hover {opacity: 0.9;}
+.availfreecoins:hover > a {/*color: #fff;*/}
+
+.nocontent {font-size: 0; margin: 0; padding: 0; height: 0;}
 
 /*LATEST POST*/
 ul.bt_bb_tabs_header {margin-left: 35%;}
@@ -4824,7 +4862,8 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.slider-caption h3, .slider-caption h3 a {font-size: 1em;}
 	.gameleftcontent {float: none; width: 100%; margin-right: 0;}
 	.gamerightcontent {float: none; width: 100%;}
-	.logo_wrapper .wrap img {width: 75px; margin-left: 25px;}
+	.logo_wrapper .wrap {text-align: center;}
+	.logo_wrapper .wrap img {/*width: 75px; margin-left: 25px;*/ margin-top: 0;}
 	.logo_wrapper .wrap .account_info {margin-top: 0;}
 	.logo_wrapper .wrap .account_info img {width: 30px; margin-left: 0;}
 	.widget ul li li {padding-left: 0;}
@@ -4839,8 +4878,8 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.highestrated {float: none; width: 90%; margin: 0 auto;}
 	.fb-like-wrapper {float: none;}
 	.fb-like-wrapper div {text-align: center !important;}
-	input[type="text"], input[type="password"], select, textarea {width: 100% !important;}
-	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
+	input[type="text"], input[type="password"], select, textarea {width: 90% !important;}
+	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 90% !important;}
 	.logo_wrapper .wrap .account_info a {font-size: 10px;}
 	#buycoins {margin-bottom: 10px;}
 	#masthead .wrap {margin-right: 20px;}
@@ -4850,6 +4889,10 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.button-account-status {position: relative; margin-top: 10px; text-align: center;}
 	.rwd-table td {text-align: left !important;}
 	.rwd-table th, .rwd-table td:before {margin-right: 10px;}
+	.logo_wrapper .wrap .tbluserdata table td img {width: 80px;}
+	.site-content-contain {margin-top: 0 !important;}
+	.navigation-top a {font-size: 12px;}
+	.availfreecoins {width: 90%; height: auto;}
 
 }	
 
@@ -4906,7 +4949,8 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.slider-caption h3, .slider-caption h3 a {font-size: 1em;}
 	.gameleftcontent {float: none; width: 100%; margin-right: 0;}
 	.gamerightcontent {float: none; width: 100%;}
-	.logo_wrapper .wrap img {width: 75px; margin-left: 25px;}
+	.logo_wrapper .wrap {text-align: center;}
+	.logo_wrapper .wrap img {/*width: 75px; margin-left: 25px;*/ margin-top: 0;}
 	.logo_wrapper .wrap .account_info {margin-top: 0;}
 	.logo_wrapper .wrap .account_info img {width: 30px; margin-left: 0;}
 	.widget ul li li {padding-left: 0;}
@@ -4921,8 +4965,8 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.highestrated {float: none; width: 90%; margin: 0 auto;}
 	.fb-like-wrapper {float: none;}
 	.fb-like-wrapper div {text-align: center !important;}
-	input[type="text"], input[type="password"], select, textarea {width: 100% !important;}
-	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 100% !important;}
+	input[type="text"], input[type="password"], select, textarea {width: 90% !important;}
+	.ui-widget input, .ui-widget select, .ui-widget textarea {width: 90% !important;}
 	.logo_wrapper .wrap .account_info a {font-size: 10px;}
 	#buycoins {margin-bottom: 10px;}
 	#masthead .wrap {margin-right: 20px;}
@@ -4932,6 +4976,10 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.button-account-status {position: relative; margin-top: 10px; text-align: center;}
 	.rwd-table td {text-align: left !important;}
 	.rwd-table th, .rwd-table td:before {margin-right: 10px;}
+	.logo_wrapper .wrap .tbluserdata table td img {width: 80px;}
+	.site-content-contain {margin-top: 0 !important;}
+	.navigation-top a {font-size: 12px;}
+	.availfreecoins {width: 90%; height: auto;}
 }
 
 

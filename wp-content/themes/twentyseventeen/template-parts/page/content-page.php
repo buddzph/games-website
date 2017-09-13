@@ -143,7 +143,7 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 			        <?php
 			        if($freebutton):
 
-			        	echo '<div class="availfreecoins"><a href="javascript: void(0)" onclick="availfreecoins()" class="button">Get your free coins Now!</a></div>';
+			        	echo '<div class="availfreecoins"><a href="javascript: void(0)" onclick="availfreecoins()" id="freecoins">Get your free coins Now!</a></div>';
 
 			        	echo '<br /><center><a href="'.$homeurl.'/?page_id=239" class="button">Buy More Coins!</a></center>';
 

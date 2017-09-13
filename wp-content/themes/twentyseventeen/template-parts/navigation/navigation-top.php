@@ -68,11 +68,11 @@ if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
 
 		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/table.css">
 
-		<div class="button-account-status"><a href="javascript: void(0);" onclick="accountstatus();">Account Status</a></div>
+		<div class="button-account-status"><a href="javascript: void(0);" onclick="accountstatus();">Account Status</a> | <a href="javascript: void(0);" id="logout">Logout</a></div>
 
 <?php else: ?>
 
-	<div class="button-account-status"><a href="javascript: void(0);" id="mobilecheck">Register</a> | <a href="javascript: void(0);" id="userlogin">Sign In</a></div>
+	<!-- <div class="button-account-status"><a href="javascript: void(0);" id="mobilecheck">Register</a> | <a href="javascript: void(0);" id="userlogin">Sign In</a></div> -->
 
 <?php endif; ?>
 

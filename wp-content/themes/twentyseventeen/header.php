@@ -950,11 +950,11 @@ endif;
 
 	  		<style type="text/css">
 	  			.site-content {padding-top: 10px;}
-	  			.logo_wrapper .wrap img {width: 100px;}
+	  			/*.logo_wrapper .wrap img {width: 100px;}
 				.logo_wrapper .wrap .account_info {margin-top: 0;}
 				.logo_wrapper .wrap .account_info img {width: 34px;}
 				.logo_wrapper .wrap .account_info span {margin-top: 5px; font-size: 10px;}
-				.logo_wrapper .wrap .account_info a {font-size: 10px;}
+				.logo_wrapper .wrap .account_info a {font-size: 10px;}*/
 	  		</style>
 
 	  		<script type="text/javascript">
@@ -1115,51 +1115,45 @@ endif;
 	<header id="masthead" class="site-header" role="banner">
 
 		<div class="navigation-top">
+				<!-- LOGO -->
 				<div class="logo_wrapper">
 					<div class="wrap">
-						<div class="account_info">
-							<?php if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])): ?>
-								<?php /* if(empty($_SESSION['user']['username'])): ?>
-									<span>No username&nbsp; &nbsp;</span>	
-								<?php else: ?>
-									<span>Logged in as: <b><?php echo $_SESSION['user']['username']; ?></b>&nbsp; &nbsp;</span>
-								<?php endif;*/ ?>
-
-						      	<ul class="nav navbar-nav">
-						            <li class="dropdown">
-						              <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="display: block;">
-
-						              	<?php if(isset($_SESSION['user']['user_avatar']) and !empty($_SESSION['user']['user_avatar'])): ?>
-
-								      		<img src="<?php echo $homeurl; ?>/usericon/cropped/<?php echo $_SESSION['user']['user_avatar']; ?>" alt="">
-
-								      	<?php else: ?>
-
-								      		<img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/62x62-Account-Icon.png" alt="" class="planeicon">
-
-								      	<?php endif; ?>
-
-						              </a>
-						              <ul class="dropdown-menu" style="display: none;">
-						                <!--li><a href="javascript: void(0);" id="accountstatus">Account Status</a></li-->
-					      				<li><a href="javascript: void(0);" id="updateusername">Update Account</a></li>
-					      				<li><a href="javascript: void(0);" id="logout">Logout</a></li>
-						              </ul>
-						            </li>
-						          </ul>
-
-						      	<!--ul class="dropdown-menu">
-					      			<li><a href="javascript: void(0);" id="accountstatus">Account Status</a></li>
-					      			<li><a href="javascript: void(0);" id="updateusername">Update Account</a></li>
-					      		</ul-->
-
-							<?php else: ?>
-								
-								<img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/62x62-Account-Icon.png" alt="" class="planeicon">
-
-							<?php endif; ?>
-						</div>
 						<a href="<?php echo $homeurl; ?>"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/GlyphGames-Logo-Light.png" alt=""></a>
+						<div class="tbluserdata">
+							<table border="0">
+								<tr>
+									<?php if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])): ?>
+
+										<td class="userinfo" style="text-align: left;">
+											Welcome! <br />
+											<?php
+											if(empty($_SESSION['user']['username'])): ?>
+												No username
+											<?php else: ?>
+												<b><a href="javascript: void(0);" id="updateusername"><?php echo $_SESSION['user']['username']; ?></a></b>
+											<?php endif; ?>
+										</td>
+										
+										<td>
+											<a href="javascript: void(0);" id="updateusername">
+												<?php if(isset($_SESSION['user']['user_avatar']) and !empty($_SESSION['user']['user_avatar'])): ?>
+
+										      		<img src="<?php echo $homeurl; ?>/usericon/cropped/<?php echo $_SESSION['user']['user_avatar']; ?>" id="useravatar" alt="">
+
+										      	<?php else: ?>
+
+										      		<img src="<?php echo get_template_directory_uri() ?>/assets/images/Accounts-Def-512x512.png" alt="">
+
+										      	<?php endif; ?>
+										    </a>
+								      	</td>
+									<?php else: ?>
+										<td class="userinfo"><a href="javascript: void(0);" id="mobilecheck">Register</a> | <a href="javascript: void(0);" id="userlogin">Sign In</a></td>
+										<td><img src="<?php echo get_template_directory_uri() ?>/assets/images/Accounts-Def-512x512.png" alt=""></td>
+									<?php endif; ?>
+								</tr>
+							</table>
+						</div>
 					</div>
 				</div>
 
@@ -1204,7 +1198,8 @@ endif;
 		              </div>
 		            </div>
 		            <!--END OF SLIDE 1 -->
-		            <!--SLIDE 2 -->
+		            <!--SLIDE 2 DISABLED TEMPORARILY -->
+		            <!--
 		            <div class="item">
 		              
 		              <div class="shadow-effect">
@@ -1232,7 +1227,7 @@ endif;
 						</div>
 						*/ ?>
 		              </div>
-		            </div>
+		            </div> -->
 		            <!--END OF SLIDE 2 -->
 
 		          </div>

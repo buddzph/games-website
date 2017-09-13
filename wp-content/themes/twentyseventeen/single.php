@@ -38,19 +38,19 @@ function g_getsessionid($uid, $gamecode)
 
 
 	function on(gamelink) {
-		document.getElementById("gameoverlay").innerHTML = '<iframe id="gamewrapper" src="' + gamelink + '" style="border: 0; width: 100%; height: 100%;"></iframe>';
+		document.getElementById("gameoverlay").innerHTML = '<iframe id="gamewrapper" src="' + gamelink + '" style="border: 0; width: 100%; height: 100%;"></iframe><button onclick="off()">X</button></div>';
 	    document.getElementById("gameoverlay").style.display = "block";
 
 
 	}
 
-	jQuery(document).ready(function($) {
+	/*jQuery(document).ready(function($) {
     	$('#gamewrapper').contents().find('body').keyup(function(event){
 		  	if (event.keyCode == 27) { // escape key maps to keycode `27`
 		        off();
 		    }
 		});
-	});
+	});*/
 
 	function off() {
 		document.getElementById("gameoverlay").innerHTML = '';

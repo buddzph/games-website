@@ -81,11 +81,16 @@ $uploaddir = wp_upload_dir();
 
 	            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 				 // some code..
+				 	$('#customers-testimonials').css('margin-top', '0');
+	            	$('.site-content-contain').css('margin-top', '0');
 				}else{
-					$('#customers-testimonials').css('margin-top', '110px');
+					/*$('#customers-testimonials').css('margin-top', '110px');
 		            <?php if ( !is_front_page() ): ?>
 		            	$('.site-content-contain').css('margin-top', '90px');
-		            <?php endif; ?>
+		            <?php endif; ?>*/
+
+		            $('#customers-testimonials').css('margin-top', '190px');
+		            $('.site-content-contain').css('margin-top', '190px');
 				}
 	        }
 	    });
