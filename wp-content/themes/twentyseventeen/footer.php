@@ -90,7 +90,9 @@ $uploaddir = wp_upload_dir();
 		            <?php endif; ?>*/
 
 		            $('#customers-testimonials').css('margin-top', '190px');
-		            $('.site-content-contain').css('margin-top', '190px');
+		            <?php if ( !is_front_page() ): ?>
+		            	$('.site-content-contain').css('margin-top', '190px');
+		            <?php endif; ?>
 				}
 	        }
 	    });
