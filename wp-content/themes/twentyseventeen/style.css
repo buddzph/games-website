@@ -4609,6 +4609,10 @@ button:hover, button:focus, input[type="button"]:hover, input[type="button"]:foc
 #countdown {text-align: center; font-family: 'Baloo Tammudu', cursive;}
 
 .availfreecoins {padding: 25px 0; text-align: center;}
+.availfreecoins {width: 450px; height: 102px; background: url('assets/images/FreeCoinsButton-01-450x102.png') no-repeat center center; margin: 0 auto;}
+.availfreecoins a {font-size: 2em; font-weight: bold; color: #000;}
+.availfreecoins:hover {opacity: 0.9;}
+.availfreecoins:hover > a {/*color: #fff;*/}
 
 .button-account-status {position: absolute; top: 5px; right: 0;}
 
@@ -4647,11 +4651,6 @@ button:hover, button:focus, input[type="button"]:hover, input[type="button"]:foc
     font-weight: bold;
     text-align: center;
 }​
-
-.availfreecoins {width: 450px; height: 102px; background: url('assets/images/FreeCoinsButton-01-450x102.png') no-repeat center center; margin: 0 auto;}
-.availfreecoins a {font-size: 2em; font-weight: bold; color: #000;}
-.availfreecoins:hover {opacity: 0.9;}
-.availfreecoins:hover > a {/*color: #fff;*/}
 
 .nocontent {font-size: 0; margin: 0; padding: 0; height: 0;}
 
