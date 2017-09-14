@@ -116,12 +116,16 @@ function g_getsessionid($uid, $gamecode)
 
 
 	function on(gamelink) {
-		document.getElementById("gameoverlay").innerHTML = '<iframe id="gamewrapper" src="' + gamelink + '" style="border: 0; width: 100%; height: 100%;"></iframe><button onclick="off()">X</button></div>';
+		document.getElementById("gameoverlay").innerHTML = '<div class="loadinggame">Loading.. Please wait!</div>​<iframe id="gamewrapper" src="' + gamelink + '" style="border: 0; width: 100%; height: 100%;"></iframe><button onclick="off()">X</button>';
 	    document.getElementById("gameoverlay").style.display = "block";
 
 	    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 	    	full_screen();
 	    }
+
+	   /* setTimeout(function() {
+	        jQuery('.loadinggame').fadeOut();
+	      }, 7000 );*/
 	}
 
 	/*jQuery(document).ready(function($) {
