@@ -3165,7 +3165,7 @@ object {
 
 .icon {
 	display: inline-block;
-	fill: currentColor;
+	/*fill: currentColor;*/
 	height: 1em;
 	position: relative; /* Align more nicely with capital letters */
 	top: -0.0625em;
@@ -4565,7 +4565,7 @@ footer .social-navigation {margin: 0 auto; display: inline-block; position: rela
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {font-size: 13px !important; padding: 10px 5px;}
 .ui-dialog label {font-size: 13px; margin-bottom: 0; margin-top: 15px;}
 .ui-dialog p {font-size: 13px;}
-.ui-dialog .ui-dialog-titlebar {padding-top: 0; padding-bottom: : 0;}
+.ui-dialog .ui-dialog-titlebar {padding-top: 0; padding-bottom: 0;}
 div#dialog-getrewards > div.ui-dialog {background: none; border: none;}
 .ui-widget-header {background: none !important; border: none !important; font-size: 14px; text-transform: uppercase;}
 img.user_avatar {border-radius: 100%; width: 50%; border: solid 2px green; box-shadow: 0px 0px 15px 5px #999;}
@@ -4608,11 +4608,13 @@ button:hover, button:focus, input[type="button"]:hover, input[type="button"]:foc
 
 #countdown {text-align: center; font-family: 'Baloo Tammudu', cursive;}
 
-.availfreecoins {padding: 25px 0; text-align: center;}
+.availfreecoins {padding: 38px 0; text-align: center; font-family: 'Baloo Tammudu', cursive;}
 .availfreecoins {width: 450px; height: 102px; background: url('assets/images/FreeCoinsButton-01-450x102.png') no-repeat center center; margin: 0 auto;}
 .availfreecoins a {font-size: 2em; font-weight: bold; color: #000;}
 .availfreecoins:hover {opacity: 0.9;}
 .availfreecoins:hover > a {/*color: #fff;*/}
+
+.buymorecoins {display: inline-block; width: 450px; font-family: 'Baloo Tammudu', cursive; padding: 15px 25px 0;}
 
 .button-account-status {position: absolute; top: 5px; right: 0;}
 
@@ -4645,6 +4647,10 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 .wplp_container.default .title, .wplp_container.default .text, .wplp_container.default .read-more {color: #fff; padding-left: 10px; padding-right: 10px;}
 .wplp_container .title span {color: #fff;}
 .wplp_container.default .defaultflexslide img {border: 2px solid; border-radius: 10px;}
+.wplp_container .title span {height: auto !important;}
+.wplp_container.default .text, .wplp_container.default .date, .wplp_container.default .category {text-align: center;}
+.wplp_container.default .title, .wplp_container.default .text, .wplp_container.default .read-more {text-align: center;}
+
 /*.bt_bb_style_simple ul.bt_bb_tabs_header li:first-of-type span {font-weight: bold;}*/
 .bt_bb_style_simple ul.bt_bb_tabs_header li span {font-weight: bold; font-size: 0.75em;}
 .bt_bb_style_simple ul.bt_bb_tabs_header li {border-bottom: none; text-transform: uppercase;}
@@ -4807,6 +4813,19 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
     padding: 20px;
 }
 
+.loadinggame {
+	position: absolute;
+    width: 220px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px; /* margin is -0.5 * dimension */
+    margin-top: -25px;
+    z-index: -1;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
 
 /*MEDIA WINDOW SIZE*/
 @media screen and (max-width: 900px) {
@@ -4894,7 +4913,9 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.navigation-top a {font-size: 12px;}
 	.userinfo a {font-size: 20px;}
 	.availfreecoins {width: 90%; height: auto;}
-	.buymorecoins {font-size: 14px;}
+	.availfreecoins a {font-size: 1.6em;}
+	.buymorecoins {width: 90%}
+	.buymorecoins {font-size: 1.5em;}
 }	
 
 @media screen and (max-device-width: 900px) {
@@ -4982,24 +5003,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.navigation-top a {font-size: 12px;}
 	.userinfo a {font-size: 20px;}
 	.availfreecoins {width: 90%; height: auto;}
-	.buymorecoins {font-size: 14px;}
+	.availfreecoins a {font-size: 1.6em;}
+	.buymorecoins {width: 90%}
+	.buymorecoins {font-size: 1.5em;}
 }
-
-
-.loadinggame {
-    position: absolute;
-    width: 220px;
-    height: 50px;
-    top: 50%;
-    left: 50%;
-    margin-left: -50px; /* margin is -0.5 * dimension */
-    margin-top: -25px;
-    z-index: -1;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-}​
-
-/*--------------------------------------------------------------
-END CUSTOM QUERIES
---------------------------------------------------------------*/

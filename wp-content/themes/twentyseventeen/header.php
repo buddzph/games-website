@@ -967,6 +967,15 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 				.logo_wrapper .wrap .account_info img {width: 34px;}
 				.logo_wrapper .wrap .account_info span {margin-top: 5px; font-size: 10px;}
 				.logo_wrapper .wrap .account_info a {font-size: 10px;}*/
+
+				<?php
+				$pagetitle = get_the_title();
+        		if($pagetitle != 'Games'):
+				?>
+					.wplp_container.default .title {max-width: 100%; text-align: center; font-size: 12px !important; padding-top: 7px;}
+				<?php else: ?>
+					.wplp_container.default .title {max-width: 100%; text-align: center; font-size: 1.2em !important; padding-top: 7px;}
+				<?php endif; ?>
 	  		</style>
 
 	  		<script type="text/javascript">
@@ -978,6 +987,12 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 		            }, 1000);
 		        });
 	  		</script>
+
+	  <?php else: ?>
+
+	  		<style type="text/css">
+	  			.wplp_container.default .title {max-width: 100%; text-align: center; font-size: 1.2em !important; padding-top: 10px;}
+	  		</style>
 
 	  <?php endif; ?>
 
