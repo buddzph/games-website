@@ -123,9 +123,9 @@ function g_getsessionid($uid, $gamecode)
 	    	full_screen();
 	    }
 
-	   /* setTimeout(function() {
+	    setTimeout(function() {
 	        jQuery('.loadinggame').fadeOut();
-	      }, 7000 );*/
+	      }, 7000 );
 	}
 
 	/*jQuery(document).ready(function($) {
