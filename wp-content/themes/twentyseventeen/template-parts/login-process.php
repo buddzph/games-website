@@ -56,7 +56,7 @@ function smartcurlregistration($mobile_number){
 
                 $url = 'https://ykvgdvddr5.execute-api.us-east-1.amazonaws.com/dev/mobile-verify/create';
 
-                $request = array("cellnum" => '63'.$mobile_number);
+                $request = array("mobileNum" => $mobile_number);
                 
                 $ch = curl_init($url);
                 curl_setopt($ch, CURLOPT_POST, 1);
@@ -232,7 +232,11 @@ switch ($_REQUEST['func']) {
 							/*echo $genTempPass['result']['createResult'];
 							echo $genTempPass['result']['createdCode'];*/
 
-							echo $genTempPass;
+							$gen = json_decode($getcode, TRUE);
+
+							echo '<pre>';
+							print_r($gen);
+							echo '</pre>';
 
 							$res['network'] = 'Smart';
 
