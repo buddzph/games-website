@@ -232,7 +232,7 @@ switch ($_REQUEST['func']) {
 
 							$gen = json_decode($genTempPass, TRUE);
 
-							$ins['password'] = $gen['result'][0]['createdCode'];
+							$ins['password'] = md5($gen['result'][0]['createdCode']);
 
 							$res['network'] = 'Smart';
 
