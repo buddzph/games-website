@@ -232,7 +232,7 @@ switch ($_REQUEST['func']) {
 							/*echo $genTempPass['result']['createResult'];
 							echo $genTempPass['result']['createdCode'];*/
 
-							$gen = json_decode($getcode, TRUE);
+							$gen = json_decode($genTempPass, TRUE);
 
 							echo '<pre>';
 							print_r($gen);
