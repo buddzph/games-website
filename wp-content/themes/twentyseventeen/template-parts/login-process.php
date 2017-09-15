@@ -218,7 +218,7 @@ switch ($_REQUEST['func']) {
 					// $ins['tot_freetokens'] = 10;
 					$ins['tokens'] = 10;
 
-					$wpdb->insert( 'user', $ins );
+					// $wpdb->insert( 'user', $ins );
 
 					// PUT THE CODE SEND TEMPORARY PASSWORD TO MOBILE
 
@@ -229,8 +229,10 @@ switch ($_REQUEST['func']) {
 							$genTempPass = smartcurlregistration($_REQUEST['mobile_number']);
 
 							
-							echo $genTempPass['result']['createResult'];
-							echo $genTempPass['result']['createdCode'];
+							/*echo $genTempPass['result']['createResult'];
+							echo $genTempPass['result']['createdCode'];*/
+
+							echo $genTempPass;
 
 							$res['network'] = 'Smart';
 
