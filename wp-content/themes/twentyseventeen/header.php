@@ -382,11 +382,11 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	 
 	      valid = valid && checkRegexp( username, /^([0-9a-zA-Z])+$/, "Username field only allow : a-z 0-9" );
 
-	      valid = valid && checkLengthFields( firstname, "firstname", 6, 10 );
+	      valid = valid && checkLengthFields( firstname, "firstname", 2, 10 );
 	 
 	      valid = valid && checkRegexp( firstname, /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/, "Firstname field only allow : a-z 0-9" );
 
-	      valid = valid && checkLengthFields( lastname, "lastname", 6, 10 );
+	      valid = valid && checkLengthFields( lastname, "lastname", 2, 10 );
 	 
 	      valid = valid && checkRegexp( lastname, /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/, "Lastname field only allow : a-z 0-9" );
 	 

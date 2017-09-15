@@ -52,6 +52,29 @@ function genRandStr(){
   return $a . $b;
 }
 
+function smartcurlregistration($mobile_number){
+
+                $url = 'https://ykvgdvddr5.execute-api.us-east-1.amazonaws.com/dev/mobile-verify/create';
+
+                $request = array("cellnum" => '63'.$mobile_number);
+                
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array ('Content-Type: application/json'));
+
+                //$dateLog = date("Ymd");
+                //$timeLog = date("Y-m-d H:i:s");
+                
+                $result = curl_exec($ch);
+
+				return $result;
+	
+  		
+  	//TODO: ADD LOGGER
+}
+
 function smartcurl($mobile_number){
 
 
@@ -201,7 +224,14 @@ switch ($_REQUEST['func']) {
 
 						if($smartuser):
 
-							$res['temppass'] = $temppass;
+							/*$res['temppass'] = $temppass;*/
+
+							$genTempPass = smartcurlregistration($_REQUEST['mobile_number']);
+
+							echo '<pre>';
+							print_r($genTempPass);
+							echo '</pre>';							
+
 							$res['network'] = 'Smart';
 
 						endif;
