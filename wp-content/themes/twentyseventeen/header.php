@@ -246,11 +246,10 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 
 						$('#loginusername').val(mobile_number.val());	
 
-						if(data.network == 'Smart'){
+						/*if(data.network == 'Smart'){
 							updateTips( "Account created. User this temporary password to sign in: " + "Temporary password: " + data.temppass );
 							dialogsuccessfulregister.dialog( "open" );
 
-							// edit here
 						}
 
 						if(data.network == 'Globe'){
@@ -259,7 +258,14 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 
 							dialoglogin.dialog("open");
 
-						}
+						}*/
+
+
+						// NOW SENDING TO BOTH NETWORKS
+
+						updateTips( "Account created. Check you cellphone for your temporary password." );
+
+						dialoglogin.dialog("open");
 						
 
 				} else {

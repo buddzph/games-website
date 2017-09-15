@@ -213,12 +213,10 @@ switch ($_REQUEST['func']) {
 					$temppass = genRandStr();
 
 					$ins['celno'] = $mobile_number;
-					$ins['password'] = md5($temppass);
+					
 					$ins['dt_registered'] = date('Y-m-d H:i:s');
 					// $ins['tot_freetokens'] = 10;
 					$ins['tokens'] = 10;
-
-					// $wpdb->insert( 'user', $ins );
 
 					// PUT THE CODE SEND TEMPORARY PASSWORD TO MOBILE
 
@@ -234,9 +232,7 @@ switch ($_REQUEST['func']) {
 
 							$gen = json_decode($genTempPass, TRUE);
 
-							echo '<pre>';
-							print_r($gen);
-							echo '</pre>';
+							$ins['password'] = $gen['result'][0]['createdCode'];
 
 							$res['network'] = 'Smart';
 
@@ -254,12 +250,16 @@ switch ($_REQUEST['func']) {
 
 							// print_r($decoderes);
 
-							$res['temppass'] = '';
+							$ins['password'] = md5($temppass);
+
+							// $res['temppass'] = '';
 							$res['network'] = 'Globe';
 
 						endif;
 
 					// END PUT THE CODE SEND TEMPORARY PASSWORD TO MOBILE
+
+					$wpdb->insert( 'user', $ins );
 
 					$res['result'] = true;
 
