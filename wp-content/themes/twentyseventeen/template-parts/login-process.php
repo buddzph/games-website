@@ -228,9 +228,9 @@ switch ($_REQUEST['func']) {
 
 							$genTempPass = smartcurlregistration($_REQUEST['mobile_number']);
 
-							echo '<pre>';
-							print_r($genTempPass);
-							echo '</pre>';							
+							
+							echo $genTempPass['result']['createResult'];
+							echo $genTempPass['result']['createdCode'];
 
 							$res['network'] = 'Smart';
 
