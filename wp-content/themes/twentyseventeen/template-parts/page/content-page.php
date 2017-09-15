@@ -54,6 +54,26 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 		});
     }
 
+    function getuserdata (){
+    	jQuery(document).ready(function($) {
+			$.post( "<?php echo $homeurl.'/?page_id=344' ?>", { func: "getuserdata" }, function( data ) {
+			  // console.log( data.id );
+
+				if(data.result == true){
+
+					$('#userdata').html(data.userdata);
+
+				} else {
+					
+			        $('#userdata').html('No user records to display.');
+
+				}
+
+
+			}, "json");
+		});
+    }
+
     function updateTips( t ) {
     	jQuery(document).ready(function($) {
 	    	tips = $( ".validateTips" );
@@ -79,6 +99,9 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 			        location.reload();
 			      }
 			    });
+
+
+		getuserdata();
 	});
 
 </script>
@@ -165,6 +188,55 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 
 			endif;
 	        ?>
+
+	    <?php elseif($pagetitle == 'Rewards'): ?>
+
+
+	    	<?php
+	    	if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
+
+	    		$getusertickets = $wpdb->get_results( "SELECT * FROM user WHERE id = '".$_SESSION['user']['id']."'");
+
+	    		$rewards = floor($getusertickets[0]->tickets / 5000);
+
+	    		?>
+	    		<table style="width: auto;">
+	    			<tr>
+	    				<th>Username:</th>
+	    				<td><?php echo $getusertickets[0]->username ?></td>
+	    			</tr>
+	    			<tr>
+	    				<th>Name:</th>
+	    				<td><?php echo $getusertickets[0]->firstname . ' ' . $getusertickets[0]->lastname ?></td>
+	    			</tr>
+	    			<tr>
+	    				<th>Coin balance:</th>
+	    				<td><?php echo $getusertickets[0]->tokens ?></td>
+	    			</tr>
+	    			<tr>
+	    				<th>Total earned tickets:</th>
+	    				<td><?php echo $getusertickets[0]->tickets ?></td>
+	    			</tr>
+	    			<tr>
+	    				<th>No. of rewards can avail:</th>
+	    				<td><?php echo $rewards ?></td>
+	    			</tr>
+	    		</table>
+
+	    		<div id="userdata"></div>
+
+	    		<?php
+
+				/*echo '<pre>';
+				print_r($getusertickets);
+				echo '</pre>';*/
+
+	    	else:
+
+	    		echo '<center>SIGN IN TO GET YOUR REWARDS.</center>';
+
+	    	endif;
+	    	?>
 
 
 	    <?php endif; ?>

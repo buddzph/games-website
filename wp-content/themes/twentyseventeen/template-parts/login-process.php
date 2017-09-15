@@ -222,17 +222,15 @@ switch ($_REQUEST['func']) {
 
 						if($smartuser):
 
-							/*$res['temppass'] = $temppass;*/
+							$ins['password'] = md5($temppass);
 
+							$res['temppass'] = $temppass;
+/*
 							$genTempPass = smartcurlregistration($_REQUEST['mobile_number']);
-
-							
-							/*echo $genTempPass['result']['createResult'];
-							echo $genTempPass['result']['createdCode'];*/
 
 							$gen = json_decode($genTempPass, TRUE);
 
-							$ins['password'] = md5($gen['result'][0]['createdCode']);
+							$ins['password'] = md5($gen['result'][0]['createdCode']);*/
 
 							$res['network'] = 'Smart';
 
@@ -252,7 +250,7 @@ switch ($_REQUEST['func']) {
 
 							$ins['password'] = md5($temppass);
 
-							// $res['temppass'] = '';
+							$res['temppass'] = '';
 							$res['network'] = 'Globe';
 
 						endif;
@@ -922,6 +920,34 @@ switch ($_REQUEST['func']) {
 		// echo $table;
 
 		$res['table'] = $table;
+		$res['result'] = true;
+
+		break;
+
+	case 'getuserdata':
+
+		$checkuser = $wpdb->get_results( "SELECT * FROM user WHERE id = '". $_SESSION['user']['id'] ."'" );
+
+		$table = '<table class="rwd-table" style="font-size: 11px;">
+						  <tr>
+						    <th>Username</th>
+						    <th style="text-align: center;">Coins Left</th>
+						    <th style="text-align: center;">Total Tickets</th>
+						  </tr>';
+
+		foreach ($checkuser as $key => $value) {
+			$table .= '<tr>
+								    <td data-th="Username">'. $value->username .'</td>
+								    <td data-th="Coinsleft" style="text-align: center;">'. $value->tokens .'</td>
+								    <td data-th="TotalTickets" style="text-align: center;">'. $value->tickets .'</td></tr>';
+		}
+
+
+		$table .= '</table>';
+
+		// echo $table;
+
+		$res['userdata'] = $table;
 		$res['result'] = true;
 
 		break;
