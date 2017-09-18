@@ -90,6 +90,7 @@ if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
 
 	// REFRESH REWARDS
 	$checkrewards = $wpdb->get_results( "SELECT * FROM rewards WHERE refresh_date != '".$checktoday."' AND counts != 0");
+	echo "SELECT * FROM rewards WHERE refresh_date != '".$checktoday."' AND counts != 0";
 	if(count($checkrewards) > 0):
 		// UPDATE ALL
 		$r_table = 'rewards';		
