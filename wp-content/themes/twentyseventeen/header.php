@@ -89,13 +89,15 @@ if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
 	endif;
 
 	// REFRESH REWARDS
-	$checkrewards = $wpdb->get_results( "SELECT * FROM rewards WHERE refresh_date != '".$checktoday."'");
+	$checkrewards = $wpdb->get_results( "SELECT * FROM rewards WHERE refresh_date != '".$checktoday."' AND counts != 0");
 	if(count($checkrewards) > 0):
 		// UPDATE ALL
 		$r_table = 'rewards';		
 		$r_data['running'] = 0;
 		$r_data['refresh_date'] = $checktoday;
-		$wpdb->update( $r_table, $r_data, array('refresh_date' != $checktoday) );
+		foreach ($checkrewards as $key => $value) {
+			$wpdb->update( $r_table, $r_data, array('id' => $value->id) );
+		}		
 		/*$wpdb->show_errors();*/
 	endif;
 
