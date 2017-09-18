@@ -171,6 +171,15 @@ function globecurl($mobile_number, $serviceid, $prodid, $message){
 
 }
 
+function random_probability($probabilities) {
+	$rand = rand(0, array_sum($probabilities));
+	do {
+			$sum = array_sum($probabilities);
+			if($rand <= $sum && $rand >= $sum - end($probabilities)) {
+				return key($probabilities);
+			}
+		} while(array_pop($probabilities));
+}
 
 switch ($_REQUEST['func']) {
 	case 'registermobile':
@@ -928,27 +937,101 @@ switch ($_REQUEST['func']) {
 
 		$checkuser = $wpdb->get_results( "SELECT * FROM user WHERE id = '". $_SESSION['user']['id'] ."'" );
 
-		$table = '<table class="rwd-table" style="font-size: 11px;">
-						  <tr>
-						    <th>Username</th>
-						    <th style="text-align: center;">Coins Left</th>
-						    <th style="text-align: center;">Total Tickets</th>
-						  </tr>';
+		if($checkuser[0]->tickets >= 5000):
 
-		foreach ($checkuser as $key => $value) {
-			$table .= '<tr>
-								    <td data-th="Username">'. $value->username .'</td>
-								    <td data-th="Coinsleft" style="text-align: center;">'. $value->tokens .'</td>
-								    <td data-th="TotalTickets" style="text-align: center;">'. $value->tickets .'</td></tr>';
-		}
+			$rewards = floor($checkuser[0]->tickets / 5000);
 
+		else:
 
-		$table .= '</table>';
+			$rewards = 0;
+
+		endif;
+
+		$table = '<table style="width: auto;">
+	    			<tr>
+	    				<th>Username:</th>
+	    				<td>'.$checkuser[0]->username.'</td>
+	    			</tr>
+	    			<tr>
+	    				<th>Name:</th>
+	    				<td>'.$checkuser[0]->firstname . ' ' . $checkuser[0]->lastname.'</td>
+	    			</tr>
+	    			<tr>
+	    				<th>Coin balance:</th>
+	    				<td>'.$checkuser[0]->tokens.'</td>
+	    			</tr>
+	    			<tr>
+	    				<th>Total earned tickets:</th>
+	    				<td>'.$checkuser[0]->tickets.'</td>
+	    			</tr>
+	    			<tr>
+	    				<th>No. of rewards can avail:</th>
+	    				<td>'.$rewards.'</td>
+	    			</tr>
+	    		</table>';
+
+		
 
 		// echo $table;
 
 		$res['userdata'] = $table;
+		$res['try'] = $rewards;
 		$res['result'] = true;
+
+		break;
+
+	case 'getreward':
+
+		$checkuser = $wpdb->get_results( "SELECT * FROM user WHERE id = '". $_SESSION['user']['id'] ."'" );
+
+		if($checkuser[0]->tickets >= 5000):
+
+			// $rewards = floor($checkuser[0]->tickets / 5000);
+
+			$checkbutton = $wpdb->get_results( "SELECT * FROM rewards WHERE status = 1 and counts != running");
+
+    		$probabilities = array();
+
+    		foreach ($checkbutton as $key => $value) {
+    		
+    			$probabilities[$value->id] = $value->probability;
+
+    		}
+
+    		$key = random_probability($probabilities);
+
+    		$checkreward = $wpdb->get_results( "SELECT * FROM rewards WHERE id = $key");
+
+    		$rewardtype = $checkreward[0]->type;
+    		$reward = $checkreward[0]->reward;
+
+			$e_table = 'user';
+		
+    		if($rewardtype == 'coins'):
+				$e_data['tokens'] = $checkuser[0]->tokens + $reward;
+			endif;
+
+			$e_data['tickets']= $checkuser[0]->tickets - 5000;
+
+			$wpdb->update( $e_table, $e_data, array('id' => $_SESSION['user']['id']) );
+
+			if($reward != 0):
+				$r_table = 'rewards';
+				$r_data['running'] = $checkreward[0]->running + 1;
+				$wpdb->update( $r_table, $r_data, array('id' => $key) );
+			endif;
+
+			$res['rewardtype'] = $rewardtype;
+    		$res['reward'] = $reward;
+    		$res['result'] = true;
+
+		else:
+
+			$rewards = 0;
+
+			$res['result'] = false;
+
+		endif;
 
 		break;
 

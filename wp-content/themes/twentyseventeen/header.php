@@ -88,6 +88,16 @@ if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
 		$nousername = false;
 	endif;
 
+	// REFRESH REWARDS
+	$checkrewards = $wpdb->get_results( "SELECT * FROM rewards WHERE refresh_date != '".$checktoday."'");
+	if(count($checkrewards) > 0):
+		// UPDATE ALL
+		$r_table = 'rewards';		
+		$r_data['running'] = 0;
+		$r_data['refresh_date'] = $checktoday;
+		$wpdb->update( $r_table, $r_data, array('refresh_date' != $checktoday) );
+		/*$wpdb->show_errors();*/
+	endif;
 
 endif;
 
@@ -910,21 +920,6 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	      dialoggetrewards.dialog( "open" );
 	    });
 
-	    $( "#reward1" ).button().on( "click", function() {
-	    	updateTips( "You have successfully selected this reward 1." );
-			dialogsuccessful.dialog( "open" );
-	    });
-
-	    $( "#reward2" ).button().on( "click", function() {
-	    	updateTips( "You have successfully selected this reward 2." );
-			dialogsuccessful.dialog( "open" );
-	    });
-
-	    $( "#reward3" ).button().on( "click", function() {
-	    	updateTips( "You have successfully selected this reward 3." );
-			dialogsuccessful.dialog( "open" );
-	    });
-
 	    /*$("#dialog-form").parent().find(".ui-dialog-titlebar-close").css("background","#1C1C1C");*/
 
 	    $( "#mobilecheck" ).removeClass('ui-button');
@@ -1134,11 +1129,11 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 
 <div id="dialog-getrewards" title="Select your reward" style="display: none;"> 
 
-	<a href="javascript: void(0);" style="width: 32.5%;" id="reward1"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure01.png" alt="" class="hvr-buzz-out"></a>
+	<!-- <a href="javascript: void(0);" style="width: 32.5%;" id="reward1"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure01.png" alt="" class="hvr-buzz-out"></a>
 
 	<a href="javascript: void(0);" style="width: 32.5%;" id="reward2"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure02.png" alt="" class="hvr-buzz-out"></a>
 
-	<a href="javascript: void(0);" style="width: 32.5%;" id="reward3"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure03.png" alt="" class="hvr-buzz-out"></a>
+	<a href="javascript: void(0);" style="width: 32.5%;" id="reward3"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure03.png" alt="" class="hvr-buzz-out"></a> -->
 
 </div>
 
