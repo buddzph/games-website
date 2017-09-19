@@ -121,6 +121,7 @@ function g_getsessionid($uid, $gamecode)
 
 	    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 	    	full_screen();
+	    	jQuery('#gameoverlay button').addClass('closebtnmobile');
 	    }
 
 	    setTimeout(function() {
