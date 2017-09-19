@@ -4668,7 +4668,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 /*REWARDS PAGE*/
 #userdata {float: left; width: 50%;}
 #rewardsboxes {float: left; width: 50%;}
-.reward_img {width: 32.5%; margin-bottom: 10px;}
+.reward_img img {width: 32.5%; margin-bottom: 10px;}
 /*END REWARDS PAGE*/
 
 /*Rating*/
@@ -4846,6 +4846,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.button-account-status {position: relative; margin-top: 10px; text-align: center;}
 	.rwd-table td {text-align: left !important;}
 	.rwd-table th, .rwd-table td:before {margin-right: 10px;}
+	.reward_img img {width: 30%;}
 }
 
 @media screen and (max-width: 800px) {
@@ -4875,6 +4876,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.button-account-status {position: relative; margin-top: 10px; text-align: center;}
 	.rwd-table td {text-align: left !important;}
 	.rwd-table th, .rwd-table td:before {margin-right: 10px;}
+	.reward_img img {width: 30%;}
 }
 
 @media screen and (max-width: 520px) {
@@ -4924,7 +4926,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.buymorecoins {font-size: 1.5em;}
 	#userdata {float: none; width: 100%;}
 	#rewardsboxes {float: none; width: 100%;}
-	.reward_img {width: 30%;}
+	.reward_img img {width: 30%;}
 }	
 
 @media screen and (max-device-width: 900px) {
@@ -4939,6 +4941,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.button-account-status {position: relative; margin-top: 10px; text-align: center;}
 	.rwd-table td {text-align: left !important;}
 	.rwd-table th, .rwd-table td:before {margin-right: 10px;}
+	.reward_img img {width: 30%;}
 }
 
 @media screen and (max-device-width: 800px) {
@@ -4968,6 +4971,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.button-account-status {position: relative; margin-top: 10px; text-align: center;}
 	.rwd-table td {text-align: left !important;}
 	.rwd-table th, .rwd-table td:before {margin-right: 10px;}
+	.reward_img img {width: 30%;}
 }
 
 @media screen and (max-device-width: 520px) {
@@ -5017,5 +5021,5 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 	.buymorecoins {font-size: 1.5em;}
 	#userdata {float: none; width: 100%;}
 	#rewardsboxes {float: none; width: 100%;}
-	.reward_img {width: 30%;}
+	.reward_img img {width: 30%;}
 }

@@ -953,20 +953,12 @@ switch ($_REQUEST['func']) {
 	    				<td>'.$checkuser[0]->username.'</td>
 	    			</tr>
 	    			<tr>
-	    				<th>Name:</th>
-	    				<td>'.$checkuser[0]->firstname . ' ' . $checkuser[0]->lastname.'</td>
-	    			</tr>
-	    			<tr>
 	    				<th>Coin balance:</th>
 	    				<td>'.$checkuser[0]->tokens.'</td>
 	    			</tr>
 	    			<tr>
 	    				<th>Total earned tickets:</th>
 	    				<td>'.$checkuser[0]->tickets.'</td>
-	    			</tr>
-	    			<tr>
-	    				<th>No. of rewards can avail:</th>
-	    				<td>'.$rewards.'</td>
 	    			</tr>
 	    		</table>';
 
@@ -1032,6 +1024,29 @@ switch ($_REQUEST['func']) {
 			$res['result'] = false;
 
 		endif;
+
+		break;
+
+	case 'refreshbtn':
+
+		$uploaddir = wp_upload_dir();
+
+		$arraybtns = array('Treasure01.png', 'Treasure02.png', 'Treasure03.png');
+
+		shuffle($arraybtns);
+
+		$images = '';
+		$cntimages = 0;
+		foreach ($arraybtns as $image)
+		{
+			$cntimages++;
+		    $images .= '<a href="javascript: void(0);" onclick="pickreward('.$cntimages.');" class="reward_img" id="reward'.$cntimages.'">';
+		    $images .= "\t" . '<img src="' . $uploaddir['baseurl'] . '/2017/07/' . $image . '" class="hvr-buzz-out"/>';
+		    $images .= '</a>';
+		}
+
+		$res['buttons'] = $images;
+		$res['result'] = true;
 
 		break;
 

@@ -114,8 +114,8 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
     }
 
     function updateTips( t ) {
-    	jQuery(document).ready(function($) {
-	    	tips = $( ".validateTips" );
+		jQuery(document).ready(function($) {
+    		tips = $( ".validateTips" );
 
 		      tips
 		        .text( t )
@@ -124,8 +124,8 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 		        tips.removeClass( "ui-state-highlight", 1500 );
 		      }, 500 );
 
-		   });
-	    }
+	   });
+    }
 
     jQuery(document).ready(function($) {
 
@@ -152,7 +152,7 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 
 		getuserdata();
 
-		$( "#reward1" ).button().on( "click", function() {
+		/*$( "#reward1" ).button().on( "click", function() {
 			if(c_try > 0){
 				getreward ();
 				$(this).fadeOut(600, function(){ $(this).html('<img src="<?php echo get_template_directory_uri(); ?>/assets/images/box-opened-500x600.jpg">')}).fadeIn(600);
@@ -162,96 +162,41 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 				dialogrewards.dialog( "open" );
 			}
 			
-		});
-
-		$( "#reward2" ).button().on( "click", function() {
-			if(c_try > 0){
-				getreward ();
-				$(this).fadeOut(600, function(){ $(this).html('<img src="<?php echo get_template_directory_uri(); ?>/assets/images/box-opened-500x600.jpg">')}).fadeIn(600);
-			}else{
-				$('[aria-describedby="dialog-rewards"] .ui-dialog-title').html('Ooops!');
-				updateTips( "Your tickets is not enough to avail rewards." );
-				dialogrewards.dialog( "open" );
-			}
-		});
-
-		$( "#reward3" ).button().on( "click", function() {
-			if(c_try > 0){
-				getreward ();
-				$(this).fadeOut(600, function(){ $(this).html('<img src="<?php echo get_template_directory_uri(); ?>/assets/images/box-opened-500x600.jpg">')}).fadeIn(600);
-			}else{
-				$('[aria-describedby="dialog-rewards"] .ui-dialog-title').html('Ooops!');
-				updateTips( "Your tickets is not enough to avail rewards." );
-				dialogrewards.dialog( "open" );
-			}
-		});
-
-		$( "#reward4" ).button().on( "click", function() {
-			if(c_try > 0){
-				getreward ();
-				$(this).fadeOut(600, function(){ $(this).html('<img src="<?php echo get_template_directory_uri(); ?>/assets/images/box-opened-500x600.jpg">')}).fadeIn(600);
-			}else{
-				$('[aria-describedby="dialog-rewards"] .ui-dialog-title').html('Ooops!');
-				updateTips( "Your tickets is not enough to avail rewards." );
-				dialogrewards.dialog( "open" );
-			}
-		});
-
-		$( "#reward5" ).button().on( "click", function() {
-			if(c_try > 0){
-				getreward ();
-				$(this).fadeOut(600, function(){ $(this).html('<img src="<?php echo get_template_directory_uri(); ?>/assets/images/box-opened-500x600.jpg">')}).fadeIn(600);
-			}else{
-				$('[aria-describedby="dialog-rewards"] .ui-dialog-title').html('Ooops!');
-				updateTips( "Your tickets is not enough to avail rewards." );
-				dialogrewards.dialog( "open" );
-			}
-		});
-
-		$( "#reward6" ).button().on( "click", function() {
-			if(c_try > 0){
-				getreward ();
-				$(this).fadeOut(600, function(){ $(this).html('<img src="<?php echo get_template_directory_uri(); ?>/assets/images/box-opened-500x600.jpg">')}).fadeIn(600);
-			}else{
-				$('[aria-describedby="dialog-rewards"] .ui-dialog-title').html('Ooops!');
-				updateTips( "Your tickets is not enough to avail rewards." );
-				dialogrewards.dialog( "open" );
-			}
-		});
-
-		$( "#reward7" ).button().on( "click", function() {
-			if(c_try > 0){
-				getreward ();
-				$(this).fadeOut(600, function(){ $(this).html('<img src="<?php echo get_template_directory_uri(); ?>/assets/images/box-opened-500x600.jpg">')}).fadeIn(600);
-			}else{
-				$('[aria-describedby="dialog-rewards"] .ui-dialog-title').html('Ooops!');
-				updateTips( "Your tickets is not enough to avail rewards." );
-				dialogrewards.dialog( "open" );
-			}
-		});
-
-		$( "#reward8" ).button().on( "click", function() {
-			if(c_try > 0){
-				getreward ();
-				$(this).fadeOut(600, function(){ $(this).html('<img src="<?php echo get_template_directory_uri(); ?>/assets/images/box-opened-500x600.jpg">')}).fadeIn(600);
-			}else{
-				$('[aria-describedby="dialog-rewards"] .ui-dialog-title').html('Ooops!');
-				updateTips( "Your tickets is not enough to avail rewards." );
-				dialogrewards.dialog( "open" );
-			}
-		});
-
-		$( "#reward9" ).button().on( "click", function() {
-			if(c_try > 0){
-				getreward ();
-				$(this).fadeOut(600, function(){ $(this).html('<img src="<?php echo get_template_directory_uri(); ?>/assets/images/box-opened-500x600.jpg">')}).fadeIn(600);
-			}else{
-				$('[aria-describedby="dialog-rewards"] .ui-dialog-title').html('Ooops!');
-				updateTips( "Your tickets is not enough to avail rewards." );
-				dialogrewards.dialog( "open" );
-			}
-		});
+		});*/
 	});
+
+	function pickreward(r_btn) {
+		if(c_try > 0){
+			getreward ();
+			jQuery('#reward' + r_btn).fadeOut(600, function(){ jQuery('#reward' + r_btn).html('<img src="<?php echo get_template_directory_uri(); ?>/assets/images/box-opened-500x600.jpg">')}).fadeIn(600);
+			jQuery('.reward_img').attr('onclick', '');
+			jQuery('.reward_img img').removeClass('hvr-buzz-out');
+		}else{
+			jQuery('[aria-describedby="dialog-rewards"] .ui-dialog-title').html('Ooops!');
+			updateTips( "Your tickets is not enough to avail rewards." );
+			dialogrewards.dialog( "open" );
+		}
+	}
+
+	function refreshbtn() {
+		jQuery.post( "<?php echo $homeurl.'/?page_id=344' ?>", { func: "refreshbtn" }, function( data ) {
+		  // console.log( data.id );
+
+			if(data.result == true){
+
+				jQuery('#rewards-button').fadeOut(600, function(){ jQuery('#rewards-button').html(data.buttons)}).fadeIn(600);
+				jQuery('#reward1').focus();
+
+			} else {
+
+
+			}
+
+
+		}, "json");
+	}
+
+	refreshbtn();
 </script>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -356,16 +301,8 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 	    		<div id="userdata"></div>
 	    		
 	    		<div id="rewardsboxes">
-	    			<h2>CHOOSE YOUR REWARD</h2>
-	    			<a href="javascript: void(0);" class="reward_img" id="reward1"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure01.png" alt="" class="hvr-buzz-out"></a>
-					<a href="javascript: void(0);" class="reward_img" id="reward2"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure02.png" alt="" class="hvr-buzz-out"></a>
-					<a href="javascript: void(0);" class="reward_img" id="reward3"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure03.png" alt="" class="hvr-buzz-out"></a>
-					<a href="javascript: void(0);" class="reward_img" id="reward4"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure02.png" alt="" class="hvr-buzz-out"></a>
-					<a href="javascript: void(0);" class="reward_img" id="reward5"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure03.png" alt="" class="hvr-buzz-out"></a>
-					<a href="javascript: void(0);" class="reward_img" id="reward6"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure01.png" alt="" class="hvr-buzz-out"></a>
-					<a href="javascript: void(0);" class="reward_img" id="reward7"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure03.png" alt="" class="hvr-buzz-out"></a>
-					<a href="javascript: void(0);" class="reward_img" id="reward8"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure01.png" alt="" class="hvr-buzz-out"></a>
-					<a href="javascript: void(0);" class="reward_img" id="reward9"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure02.png" alt="" class="hvr-buzz-out"></a>
+	    			<h2>SPEND 5000 TICKETS AND GET A CHANCE TO WIN A REWARDS <a href="javascript: void(0);" onclick="refreshbtn();" class="button hvr-icon-spin" style="font-size: 14px;">Refresh</a></h2>
+	    			<div id="rewards-button"></div>
 	    		</div>
 
 	    		<?php
