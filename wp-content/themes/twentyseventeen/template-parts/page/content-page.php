@@ -283,7 +283,7 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 
 			else:
 
-				echo 'MUST LOGIN TO AVAIL YOUR FREE COINS.';
+				echo '<center>MUST LOGIN TO AVAIL YOUR FREE COINS.</center>';
 
 			endif;
 	        ?>
