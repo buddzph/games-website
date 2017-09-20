@@ -4646,6 +4646,9 @@ button:hover, button:focus, input[type="button"]:hover, input[type="button"]:foc
 
 .nocontent {font-size: 0; margin: 0; padding: 0; height: 0;}
 
+.flex-control-paging li a {background: rgba(255,255,255,0.5) !important;}
+.flex-control-paging li a.flex-active {background: rgba(255,255,255,0.9) !important;}
+
 /*LATEST POST*/
 ul.bt_bb_tabs_header {margin-left: 35%;}
 .wplp_container.default .title, .wplp_container.default .text, .wplp_container.default .read-more {color: #fff; padding-left: 10px; padding-right: 10px;}

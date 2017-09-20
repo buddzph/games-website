@@ -301,8 +301,9 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 	    		<div id="userdata"></div>
 	    		
 	    		<div id="rewardsboxes">
-	    			<h2>SPEND 5000 TICKETS AND GET A CHANCE TO WIN A REWARDS <a href="javascript: void(0);" onclick="refreshbtn();" class="button hvr-icon-spin" style="font-size: 14px;">Refresh</a></h2>
+	    			<h2>Spend 5000 tickets and get a chance to win more tokens </h2>
 	    			<div id="rewards-button"></div>
+	    			<center><a href="javascript: void(0);" onclick="refreshbtn();" class="button hvr-icon-spin" style="font-size: 10px; padding-top: 5px; padding-bottom: 5px; padding-left: 10px;">Refresh</a></center>
 	    		</div>
 
 	    		<?php
