@@ -4672,6 +4672,8 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 .bt_bb_grid_item_post_thumbnail img, .single-featured-image-header img {border: solid 1px #ccc;}
 /*end LATEST POST*/
 
+.adclosebtn {position: absolute; right:0; top: 0; padding: 1px !important;}
+
 /*REWARDS PAGE*/
 #userdata {float: left; width: 50%;}
 #rewardsboxes {float: left; width: 50%;}

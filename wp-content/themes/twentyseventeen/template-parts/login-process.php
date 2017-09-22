@@ -509,6 +509,8 @@ switch ($_REQUEST['func']) {
 
 			else: // email pass.
 
+				$res['newusername'] = false;
+
 				if(!empty($myrows[0]->username)):
 
 					if($myrows[0]->username != $username):
@@ -580,10 +582,14 @@ switch ($_REQUEST['func']) {
 						$res['result'] = false;
 
 					else:
+
+						$res['newusername'] = true;
 						
 						if(!empty($password)):
+
 							$data['password'] = md5($password);
 							$pass++;
+
 						else:
 
 							$res['errmsg'] = 'Please supply valid password.';

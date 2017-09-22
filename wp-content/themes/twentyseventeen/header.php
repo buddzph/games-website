@@ -501,9 +501,19 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 
 									  	updateTips( "Account successfully updated." );
 
-									  	dialogsuccessful.dialog( "open" );
+									  	if(data.newusername){
 
-									  	setTimeout(function(){ location.reload(); }, 3000);
+									  		$(".ui-dialog-titlebar").hide();
+
+									  		dialogwelcome.dialog( "open" );
+
+									  	}else{
+
+									  		dialogsuccessful.dialog( "open" );
+
+									  		setTimeout(function(){ location.reload(); }, 3000);
+
+									  	}
 
 						           }
 						           else
@@ -888,7 +898,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	      width: 'auto',
 	      modal: true,	      
 	      close: function() {
-	        // --
+	        location.reload();
 	      }
 	    });
 
@@ -1130,6 +1140,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 
 <div id="dialog-welcome" title="Welcome" style="display: none;"> 
 	<img src="<?php echo get_template_directory_uri() ?>/assets/images/Welcome.png" alt="">
+	<button class="adclosebtn" onclick="location.reload();">X</button>
 </div>
 
 <div id="dialog-buycoin-confirmation" title="Verify Code" style="display: none;"> 
