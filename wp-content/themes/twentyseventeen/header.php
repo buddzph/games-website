@@ -1163,7 +1163,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 				<!-- LOGO -->
 				<div class="logo_wrapper">
 					<div class="wrap">
-						<a href="<?php echo $homeurl; ?>"><img src="<?php echo get_template_directory_uri() ?>/assets/images/GlyphGames-Logo-Light-Beta.png" alt=""></a>
+						<a href="<?php echo $homeurl; ?>"><img src="<?php echo get_template_directory_uri() ?>/assets/images/GlyphGames-Logo-Light-Beta-01.png" alt=""></a>
 						<div class="tbluserdata">
 							<table border="0">
 								<tr>
