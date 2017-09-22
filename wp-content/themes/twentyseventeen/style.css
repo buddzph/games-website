@@ -4673,6 +4673,7 @@ ul.bt_bb_tabs_header {margin-left: 35%;}
 /*end LATEST POST*/
 
 .adclosebtn {position: absolute; right:0; top: 0; padding: 1px !important;}
+.adclosebtn:focus, .adclosebtn:active {background-color: #fff;}
 
 /*REWARDS PAGE*/
 #userdata {float: left; width: 50%;}
