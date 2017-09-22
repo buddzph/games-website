@@ -881,6 +881,17 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	      }
 	    });
 
+	    /*DIALOG WELCOME*/
+	    dialogwelcome = $( "#dialog-welcome" ).dialog({
+	      autoOpen: false,
+	      height: 'auto',
+	      width: 'auto',
+	      modal: true,	      
+	      close: function() {
+	        // --
+	      }
+	    });
+
 
 	    $( "#mobilecheck" ).button().on( "click", function() {
 	      dialog.dialog( "open" );
@@ -1117,6 +1128,10 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	<p>Are you sure you want to buy this coins? This will use your mobile number to buy.</p>
 </div>
 
+<div id="dialog-welcome" title="Welcome" style="display: none;"> 
+	<img src="<?php echo get_template_directory_uri() ?>/assets/images/Welcome.png" alt="">
+</div>
+
 <div id="dialog-buycoin-confirmation" title="Verify Code" style="display: none;"> 
 	<p class="validateTips">Confirmation.</p>
 
@@ -1148,7 +1163,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 				<!-- LOGO -->
 				<div class="logo_wrapper">
 					<div class="wrap">
-						<a href="<?php echo $homeurl; ?>"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/GlyphGames-Logo-Light.png" alt=""></a>
+						<a href="<?php echo $homeurl; ?>"><img src="<?php echo get_template_directory_uri() ?>/assets/images/GlyphGames-Logo-Light-Beta.png" alt=""></a>
 						<div class="tbluserdata">
 							<table border="0">
 								<tr>
