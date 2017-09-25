@@ -292,16 +292,16 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 	    <!-- THIS IS THE REWARDS PAGE -->
 	    <?php elseif($pagetitle == 'Rewards'): ?>
 
-
 	    	<?php
 	    	if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
 
+	    		$grewards_limit = $wpdb->get_results( "SELECT * FROM rewards_limit" );
 	    		?>
 
 	    		<div id="userdata"></div>
 	    		
 	    		<div id="rewardsboxes">
-	    			<h2>Spend 5000 tickets and get a chance to win more tokens </h2>
+	    			<h2>Spend <?php echo $grewards_limit[0]->rewards_limit ?> tickets and get a chance to win more tokens </h2>
 	    			<div id="rewards-button"></div>
 	    			<center><a href="javascript: void(0);" onclick="refreshbtn();" class="button hvr-icon-spin" style="font-size: 10px; padding-top: 5px; padding-bottom: 5px; padding-left: 10px;">Refresh</a></center>
 	    		</div>

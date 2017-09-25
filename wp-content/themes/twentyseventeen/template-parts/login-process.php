@@ -982,7 +982,9 @@ switch ($_REQUEST['func']) {
 
 		$checkuser = $wpdb->get_results( "SELECT * FROM user WHERE id = '". $_SESSION['user']['id'] ."'" );
 
-		if($checkuser[0]->tickets >= 5000):
+		$grewards_limit = $wpdb->get_results( "SELECT * FROM rewards_limit");
+
+		if($checkuser[0]->tickets >= $grewards_limit[0]->rewards_limit):
 
 			// $rewards = floor($checkuser[0]->tickets / 5000);
 
@@ -1009,7 +1011,7 @@ switch ($_REQUEST['func']) {
 				$e_data['tokens'] = $checkuser[0]->tokens + $reward;
 			endif;
 
-			$e_data['tickets']= $checkuser[0]->tickets - 5000;
+			$e_data['tickets']= $checkuser[0]->tickets - $grewards_limit[0]->rewards_limit;
 
 			$wpdb->update( $e_table, $e_data, array('id' => $_SESSION['user']['id']) );
 
