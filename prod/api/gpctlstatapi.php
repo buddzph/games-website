@@ -88,9 +88,9 @@ function doPlayend($req)
 // doSuccess($req->sessionid . " " . $req->gameplayid . " " . $req->score);
 
 // REMOVE POPUP
-//  doSuccess("You won $tickets tickets. Play more to get more!",""); 
+   doSuccess("You won $tickets tickets. Play more to get more!",""); 
 
-   
+
 //      } else {
 //         doFail("Error: Gameplayid invalid");
 //      }
