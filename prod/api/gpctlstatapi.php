@@ -86,7 +86,11 @@ function doPlayend($req)
    $gameplayid = $req->gameplayid;
    $tickets = getticketswon($mysqli,$sessionid,$gameplayid,$req->score);
 // doSuccess($req->sessionid . " " . $req->gameplayid . " " . $req->score);
-  doSuccess("You won $tickets tickets. Play more to get more!",""); 
+
+// REMOVE POPUP
+//  doSuccess("You won $tickets tickets. Play more to get more!",""); 
+
+   
 //      } else {
 //         doFail("Error: Gameplayid invalid");
 //      }
