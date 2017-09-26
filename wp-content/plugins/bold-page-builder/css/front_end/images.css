@@ -34,23 +34,29 @@
 	:leftAlignSelector {
 		float: left;
 	}
-	:leftAlignSelector + .bt_bb_image {
-		margin-left: 1em;
+	:leftAlignSelector {
+		+ .bt_bb_image {
+			margin-left: 1em;
+		}
 	}
 	:rightAlignSelector {
 		float: right;
 	}
-	:rightAlignSelector + .bt_bb_image {
-		margin-right: 1em;
+	:rightAlignSelector {
+		+ .bt_bb_image {
+			margin-right: 1em;
+		}
 	}
 	:centerAlignSelector {
 		float: none;
 		display: inline-block;
 		margin-bottom: -.5em;
 	}
-	:centerAlignSelector + .bt_bb_image {
-		margin-left: 0.5em;
-		margin-right: 0.5em;
+	:centerAlignSelector {
+		+ .bt_bb_image {
+			margin-left: 0.5em;
+			margin-right: 0.5em;
+		}
 	}
 	&:any(.bt_bb_hover_style_zoom-in,.bt_bb_hover_style_to-grayscale,.bt_bb_hover_style_from-grayscale) {
 		> a, > span {

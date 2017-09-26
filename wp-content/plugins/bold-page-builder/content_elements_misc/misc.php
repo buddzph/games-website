@@ -23,14 +23,14 @@ if ( ! function_exists( 'bt_bb_get_color_scheme_param_array' ) ) {
 		$color_scheme_arr_temp = bt_bb_get_color_scheme_array();
 
 		if ( $color_scheme_arr_temp[0] != '' ) {
-			$i = 0;
 			foreach( $color_scheme_arr_temp as $item ) {
-				$i++;
-				$item_arr = explode( ';', $item, 4 );
-				if ( count( $item_arr ) == 4 ) {
-					$color_scheme_arr[ $item_arr[1] ] = $item_arr[0];
-				} else {
-					$color_scheme_arr[ $item_arr[0] ] = $item_arr[0];
+				if ( $item != '' ) {
+					$item_arr = explode( ';', $item, 4 );
+					if ( count( $item_arr ) == 4 ) {
+						$color_scheme_arr[ $item_arr[1] ] = $item_arr[0];
+					} else {
+						$color_scheme_arr[ $item_arr[0] ] = $item_arr[0];
+					}
 				}
 			}
 		}

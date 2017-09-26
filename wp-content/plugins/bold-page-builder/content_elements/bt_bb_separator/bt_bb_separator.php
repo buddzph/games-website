@@ -45,6 +45,8 @@ class bt_bb_separator extends BT_BB_Element {
 			$style_attr = ' ' . 'style="' . $el_style . '"';
 		}
 		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
+		
 		$output = '<div' . $id_attr . ' class="' . implode( ' ', $class ) . '"' . $style_attr . '></div>';
 		
 		return $output;

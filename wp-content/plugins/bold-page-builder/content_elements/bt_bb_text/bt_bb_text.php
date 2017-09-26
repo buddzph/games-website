@@ -22,6 +22,8 @@ class bt_bb_text extends BT_BB_Element {
 			$style_attr = 'style="' . $el_style . '"';
 		}
 		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
+		
 		if ( strpos( $content, '[' ) == 0 && substr( $content, -1 ) == ']' ) {
 			$output = '<div ' . $id_attr . ' class="' . implode( ' ', $class ) . '" ' . $style_attr . '>' . do_shortcode( $content ) . '</div>';
 		} else {

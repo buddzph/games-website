@@ -57,6 +57,8 @@ class bt_bb_service extends BT_BB_Element {
 		} 
 
 		$icon = bt_bb_icon::get_html( $icon, '', $url, $target );
+		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
 
 		$output = $icon;
 

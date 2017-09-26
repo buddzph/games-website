@@ -33,6 +33,8 @@ class bt_bb_google_maps_location extends BT_BB_Element {
 			$icon = wp_get_attachment_image_src( $icon, 'full' );
 			$icon = $icon[0];
 		}
+		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
 
 		$output = '<div' . $id_attr . ' class="' . implode( ' ', $class ) . '"' . $style_attr . ' data-lat="' . $latitude . '" data-lng="' . $longitude . '" data-icon="' . $icon . '">' . wptexturize( do_shortcode( $content ) ) . '</div>';
 

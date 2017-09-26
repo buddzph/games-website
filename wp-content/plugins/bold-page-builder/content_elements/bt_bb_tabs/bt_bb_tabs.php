@@ -36,6 +36,8 @@ class bt_bb_tabs extends BT_BB_Element {
 		if ( $shape != '' ) {
 			$class[] = $this->prefix . 'shape' . '_' . $shape;
 		}
+		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
 
 		$content = do_shortcode( $content );
 		$content = explode( '%$%', $content );

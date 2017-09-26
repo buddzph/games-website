@@ -35,6 +35,8 @@ class bt_bb_cost_calculator extends BT_BB_Element {
 		if ( $color_scheme != '' ) {
 			$class[] = $this->prefix . 'color_scheme_' . bt_bb_get_color_scheme_id( $color_scheme );
 		}
+		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
 
 		$content = do_shortcode( $content );
 		

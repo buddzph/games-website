@@ -81,9 +81,7 @@ class bt_bb_twitter extends BT_BB_Element {
 			}
 		}
 		
-
-		
-
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
 		
 		$twitter_data = bt_bb_get_twitter_data( $number, $cache, $cache_id, $username, $consumer_key, $consumer_secret, $access_token, $access_token_secret );
 		

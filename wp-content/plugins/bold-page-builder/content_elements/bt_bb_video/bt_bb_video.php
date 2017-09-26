@@ -26,7 +26,9 @@ class bt_bb_video extends BT_BB_Element {
 		
 		if ( $disable_controls != '' ) {
 			$class[] = $this->prefix . 'disable_controls' . '_' . $disable_controls;
-		}		
+		}
+
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );		
 		
 		$output = '[video src="' . $video . '"]';
 		

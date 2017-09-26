@@ -28,14 +28,7 @@
 	});
 
 	$( window ).on( 'resize', function( e ) {		
-		bt_bb_video_background();
-		setTimeout( function() {
-			var $elems = $( '.bt_bb_counter.animated' );
-			$elems.each(function() {
-				$elm = $( this );
-				bt_bb_animate_counter( $elm );
-			});
-		}, 1000 );		
+		bt_bb_video_background();		
 	});
 
 	$( 'a[href*="#"]:not([href="#"])' ).not( '.menu-scroll-down' ).on( 'click', function() { // .menu-scroll-down - 2017 theme

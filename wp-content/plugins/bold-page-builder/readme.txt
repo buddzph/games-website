@@ -96,6 +96,27 @@ Bold Builder is supported through our [support forum](https://wordpress.org/supp
 
 == Changelog ==
 
+= 1.4.4 =
+* Fixed IE animations.
+
+= 1.4.3 =
+* Fixed animations.
+
+= 1.4.2 =
+* Added content elements CSS filters.
+
+= 1.4.1 =
+* Fixed color schemes.
+
+= 1.4.0 =
+* Fixed PHP notice.
+
+= 1.3.9 =
+* Fixed animations.
+
+= 1.3.8 =
+* Added responsive options.
+
 = 1.3.7 =
 * Added slider fade animation.
 

@@ -9,11 +9,9 @@ class bt_bb_counter extends BT_BB_Element {
 			'size'     => ''
 		) ), $atts, $this->shortcode ) );
 		
-		$class = array();//array( $this->shortcode );
-
-		if ( $el_class != '' ) {
-			$class[] = $el_class;
-		}
+		$class = array(); //array( $this->shortcode );
+		
+		$class[] = 'bt_bb_counter_holder';
 
 		$id_attr = '';
 		if ( $el_id != '' ) {
@@ -28,9 +26,16 @@ class bt_bb_counter extends BT_BB_Element {
 		if ( $size != '' ) {
 			$class[] = $this->prefix . 'size' . '_' . $size;
 		}
+		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
+		$class_attr = implode( ' ', $class );
+		
+		if ( $el_class != '' ) {
+			$class_attr = $class_attr . ' ' . $el_class;
+		}
 
 		$output = '';
-		$output .= '<div' . $id_attr . ' class="bt_bb_counter_holder ' . implode( ' ', $class ) . '"' . $style_attr . '>';
+		$output .= '<div' . $id_attr . ' class="' . $class_attr . '"' . $style_attr . '>';
 			$output .= '<span class="bt_bb_counter animate" data-digit-length="' . strlen( $number ) . '">';			
 				for ( $i = 0; $i < strlen( $number ); $i++ ) {
 					

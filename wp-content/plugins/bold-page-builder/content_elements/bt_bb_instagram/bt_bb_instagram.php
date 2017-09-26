@@ -37,6 +37,8 @@ class bt_bb_instagram extends BT_BB_Element {
 		}
 		
 		$resolution = 'standard_resolution';
+		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
 
 		$output = '<div' . $id_attr . ' class="' . implode( ' ', $class ) . '"' . $style_attr . '>';
 			ob_start();

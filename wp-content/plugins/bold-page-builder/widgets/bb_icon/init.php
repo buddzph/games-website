@@ -100,7 +100,7 @@ if ( ! class_exists( 'BB_Icon_Widget' ) ) {
 				if ( class_exists( 'BoldThemes_Customize_Default' ) ) { ?>
 					<p>
 						<input class="checkbox" type="checkbox" <?php checked( $instance['show_button'], 'on' ); ?> id="<?php echo $this->get_field_id('show_button'); ?>" name="<?php echo $this->get_field_name('show_button'); ?>" /> 
-						<label for="<?php echo $this->get_field_id('show_button'); ?>"><?php _e( 'Show in accent color', 'bold-builder' ); ?></label>
+						<label for="<?php echo $this->get_field_id('show_button'); ?>"><?php _e( 'Show highlighted', 'bold-builder' ); ?></label>
 					</p>
 				<?php }
 			?>

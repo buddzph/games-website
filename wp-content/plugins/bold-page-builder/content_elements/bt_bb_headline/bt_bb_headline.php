@@ -98,6 +98,8 @@ class bt_bb_headline extends BT_BB_Element {
 			$class[] = $this->prefix . 'align' . '_' . $align;
 		}
 		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
+		
 		if ( $headline != '' ) {
 			if ( $url != '' ) {
 				$url_title = strip_tags( str_replace( array("\n", "\r"), ' ', $headline ) );
@@ -107,9 +109,6 @@ class bt_bb_headline extends BT_BB_Element {
 		}
 		
 		$headline = nl2br( $headline );
-		
-
-
 
 		$output = '<header' . $id_attr . ' class="' . implode( ' ', $class ) . '"' . $style_attr . '>';
 		if ( $headline != '' || $superheadline != '' ) $output .= '<' . $html_tag . $html_tag_style . '>' . $superheadline . $headline . '</' . $html_tag . '>';

@@ -66,6 +66,8 @@ class bt_bb_google_maps extends BT_BB_Element {
 		} else {
 			$content = $content_html;
 		}
+		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
 
 		$output = '<div class="' . $this->shortcode . '_map" id="' . $map_id . '"' . $style_height . '></div>';
 
@@ -73,7 +75,7 @@ class bt_bb_google_maps extends BT_BB_Element {
 
 		$output = '<div' . $id_attr . ' class="' . implode( ' ', $class ) . '"' . $style_attr . ' data-center="' . $center_map . '">' . $output . '</div>';
 
-		$output .= '<script type="text/javascript">jQuery( document ).ready(function() { bt_bb_gmap_init( "' . $map_id . '", ' . $zoom . ', "' . $custom_style . '" ); }); </script>';
+		$output .= '<script type="text/javascript">jQuery( window ).on( "load", function() { bt_bb_gmap_init( "' . $map_id . '", ' . $zoom . ', "' . $custom_style . '" ); }); </script>';
 
 		return $output;
 

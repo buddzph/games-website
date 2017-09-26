@@ -15,5 +15,11 @@
 				}
 			}
 		});
+
+		$(".bt_bb_fe_preview_toggler").click(function (e) {
+			e.stopPropagation();
+			$("body").toggleClass('bt_bb_fe_preview_toggle');
+		});
+
 	});
 }( jQuery ));

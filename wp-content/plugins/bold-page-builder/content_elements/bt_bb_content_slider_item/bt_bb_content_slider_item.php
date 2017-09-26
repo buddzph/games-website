@@ -32,6 +32,8 @@ class bt_bb_content_slider_item extends BT_BB_Element {
 		if ( $background_overlay != '' ) {
 			$class[] = 'bt_bb_background_overlay' . '_' . $background_overlay;
 		}
+		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
 
 		$style_attr .= '"';
 

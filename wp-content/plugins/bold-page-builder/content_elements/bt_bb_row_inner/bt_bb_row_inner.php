@@ -25,7 +25,9 @@ class bt_bb_row_inner extends BT_BB_Element {
 
 		if ( $column_gap != '' ) {
 			$class[] = $this->prefix . 'column_inner_gap' . '_' . $column_gap;
-		}		
+		}
+
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );		
 	
 		$output = '<div ' . $id_attr . ' class="' . implode( ' ', $class ) . '" ' . $style_attr . '>';
 			$output .= wptexturize( do_shortcode( $content ) );

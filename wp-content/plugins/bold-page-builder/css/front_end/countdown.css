@@ -55,7 +55,7 @@
 			margin: .5rem 0 0;
 			text-transform: uppercase;
 		}
-		span[class^="n"], .days span:first-child, .days span:nth-child(2) {
+		span[class^="n"], .days span:first-child, .days span:nth-child(2), .days span:nth-child(3) {
 			position:static;
 			overflow: hidden;
 			height: 3rem;
@@ -105,7 +105,7 @@
 			transition: transform 200ms ease-out;
 			transform: translateY(0px);
 		}
-		span[class^="n"], .days span:first-child, .days span:nth-child(2) {
+		span[class^="n"], .days span:first-child, .days span:nth-child(2), .days span:nth-child(3) {
 			height: 4.5rem;
 		}
 	}

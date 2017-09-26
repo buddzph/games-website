@@ -93,7 +93,7 @@ class bt_bb_image extends BT_BB_Element {
 			$output = '<span>' . $output . '</span>';
 		}
 		
-		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
 		
 		$output = '<div' . $id_attr . ' class="' . implode( ' ', $class ) . '"' . $style_attr . '>' . $output ;
 		if ( $content != "") {

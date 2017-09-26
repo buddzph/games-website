@@ -6,8 +6,12 @@ class bt_bb_accordion_item extends BT_BB_Element {
 		extract( shortcode_atts( apply_filters( 'bt_bb_extract_atts', array(
 			'title' => ''
 		) ), $atts, $this->shortcode ) );
+		
+		$class = array( $this->shortcode );
+		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
 
-		$output = '<div class="bt_bb_accordion_item">';
+		$output = '<div class="' . implode( ' ', $class ) . '">';
 			$output .= '<div class="bt_bb_accordion_item_title">' . $title . '</div>';
 			$output .= '<div class="bt_bb_accordion_item_content">' . wpautop( wptexturize( do_shortcode( $content ) ) ) . '</div>';
 		$output .= '</div>';

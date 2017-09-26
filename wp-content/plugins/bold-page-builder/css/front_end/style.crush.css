@@ -27,6 +27,12 @@
     z-index: 1;
     pointer-events: none;
     }
+.bt_bb_fe_preview_toggle .bt_bb_fe_wrap:before {
+    border-width: 0;
+    }
+.bt_bb_fe_preview_toggle .bt_bb_fe_wrap {
+    min-height: auto;
+    }
 .bt_bb_fe_count {
     position: absolute;
     z-index: 99998;
@@ -96,6 +102,95 @@
     }
 .bt_bb_fe_count:hover .bt_bb_fe_count_inner {
     background-color: #222;
+    }
+.bt_bb_fe_preview_toggle .bt_bb_fe_count {
+    display: none;
+    }
+
+/* Preview toggler */
+.bt_bb_fe_preview_toggler {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    display: block;
+    text-align: center;
+    background-color: #2196f3;
+    text-transform: capitalize;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 2px;
+    border: none;
+    font-size: 13px;
+    line-height: 36px;
+    height: auto;
+    -webkit-box-shadow: 0 0 .75em 0 rgba(0,0,0,.2);
+    box-shadow: 0 0 .75em 0 rgba(0,0,0,.2);
+    padding: 0 16px 0 50px;
+    -webkit-transition: all 270ms ease;
+    -moz-transition: all 270ms ease;
+    transition: all 270ms ease;
+    height: 36px;
+    overflow: hidden;
+    opacity: .5;
+    z-index: 100;
+    }
+.rtl .bt_bb_fe_preview_toggler {
+    right: auto;
+    left: 50px;
+    }
+.bt_bb_fe_preview_toggler:hover {
+    opacity: 1;
+    -webkit-box-shadow: 0 0 1em 0 rgba(0,0,0,.2);
+    box-shadow: 0 0 1em 0 rgba(0,0,0,.2);
+    }
+.bt_bb_fe_preview_toggler:before {
+    font-family: bold-builder;
+    content: "\e951";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 36px;
+    background: rgba(0,0,0,.1);
+    line-height: 36px;
+    opacity: .7;
+    font-size: 16px;
+    z-index: 1;
+    }
+.bt_bb_fe_preview_toggler:after {
+    content: "\0337";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 36px;
+    line-height: 28px;
+    font-size: 36px;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: all 270ms ease;
+    -moz-transition: all 270ms ease;
+    transition: all 270ms ease;
+    font-weight: 300;
+    z-index: 2;
+    }
+.bt_bb_fe_preview_toggle .bt_bb_fe_preview_toggler {
+    background-color: #ff7f00;
+    opacity: .8;
+    }
+.bt_bb_fe_preview_toggle .bt_bb_fe_preview_toggler:hover {
+    opacity: 1;
+    }
+.bt_bb_fe_preview_toggle .bt_bb_fe_preview_toggler:before {
+    opacity: 1;
+    }
+.bt_bb_fe_preview_toggle .bt_bb_fe_preview_toggler:after {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);
     }
 
 /*# sourceMappingURL=style.crush.css.map */

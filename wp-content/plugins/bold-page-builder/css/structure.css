@@ -141,6 +141,9 @@
 							&.bt_bb_icon_bt_bb_icons:before {
 								content: '\e90b';
 							}
+							&.bt_bb_icon_bt_bb_icon:before {
+								content: '\e90b';
+							}
 							&.bt_bb_icon_bt_bb_image:before, &.bt_bb_icon_bt_bb_content_slider_item:before {
 								content: '\e90c';
 							}

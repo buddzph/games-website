@@ -16,7 +16,7 @@ class bt_bb_content_slider extends BT_BB_Element {
 		) ), $atts, $this->shortcode ) );
 		
 		$class = array( $this->shortcode );
-		$slider_class[] = 'slick-slider';
+		$slider_class = array( 'slick-slider' );
 		
 		if ( $el_class != '' ) {
 			$class[] = $el_class;
@@ -38,6 +38,10 @@ class bt_bb_content_slider extends BT_BB_Element {
 		
 		if ( $arrows_size != '' ) {
 			$class[] = $this->prefix . 'arrows_size' . '_' . $arrows_size;
+		}
+		
+		if ( $show_dots != '' ) {
+			$class[] = $this->prefix . 'show_dots_' . $show_dots;
 		}
 		
 		if ( $height != '' ) {
@@ -96,6 +100,8 @@ class bt_bb_content_slider extends BT_BB_Element {
 			$data_slick .= ']';
 		}
 		$data_slick = $data_slick . '}\' ';
+		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
 
 		$output = '<div' . $id_attr . ' class="' . implode( ' ', $class ) . '"' . $style_attr . '><div class="' . implode( ' ', $slider_class ) . '" ' . $data_slick .  '>' . do_shortcode( $content ) . '</div></div>';
 		
@@ -131,6 +137,7 @@ class bt_bb_content_slider extends BT_BB_Element {
 				array( 'param_name' => 'show_dots', 'type' => 'dropdown', 'heading' => __( 'Dots navigation', 'bold-builder' ),
 					'value' => array(
 						__( 'Bottom', 'bold-builder' ) => 'bottom',
+						__( 'Below', 'bold-builder' ) => 'below',
 						__( 'Hide', 'bold-builder' ) => 'hide'
 					)
 				),

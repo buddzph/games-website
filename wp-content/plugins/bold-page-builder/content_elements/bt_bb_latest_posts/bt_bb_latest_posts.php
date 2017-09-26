@@ -45,6 +45,8 @@ class bt_bb_latest_posts extends BT_BB_Element {
 			$class[] = $this->prefix . 'image_shape' . '_' . $image_shape;
 		}
 		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
+		
 		$number = $rows * $columns;
 		
 		$posts = bt_bb_get_posts( $number, 0, $category );

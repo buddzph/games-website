@@ -48,7 +48,9 @@ class bt_bb_countdown extends BT_BB_Element {
 			$h_text = '';
 			$m_text = '';
 			$s_text = '';
-		}		
+		}
+
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );		
 
 		$output = '<div' . $id_attr . ' class="' . implode( ' ', $class ) . '"' . $style_attr . '>';
 			$output .= '<div class="btCountdownHolder" data-init-seconds="' . $init_seconds . '">';

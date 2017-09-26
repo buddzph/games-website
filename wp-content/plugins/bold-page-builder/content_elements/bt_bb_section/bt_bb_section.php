@@ -20,7 +20,7 @@ class bt_bb_section extends BT_BB_Element {
 			'background_video_ogg'  => '',
 			'background_video_webm' => '',
 			'parallax'              => '',
-			'parallax_offset'       => '',
+			'parallax_offset'       => ''
 		) ), $atts, $this->shortcode ) );
 
 		$class = array( $this->shortcode );
@@ -42,15 +42,15 @@ class bt_bb_section extends BT_BB_Element {
 		);
 
 		if ( $top_spacing != '' ) {
-			$class[] = 'top_spacing' . '_' . $top_spacing;
+			$class[] = $this->prefix . 'top_spacing' . '_' . $top_spacing;
 		}
 
 		if ( $bottom_spacing != '' ) {
-			$class[] = 'bottom_spacing' . '_' . $bottom_spacing;
+			$class[] = $this->prefix . 'bottom_spacing' . '_' . $bottom_spacing;
 		}
 
 		if ( $color_scheme != '' ) {
-			$class[] = 'color_scheme_' . bt_bb_get_color_scheme_id( $color_scheme );
+			$class[] = $this->prefix . 'color_scheme_' . bt_bb_get_color_scheme_id( $color_scheme );
 		}
 		
 		if ( $background_color != '' ) {
@@ -58,21 +58,21 @@ class bt_bb_section extends BT_BB_Element {
 		}
 
 		if ( $layout != '' ) {
-			$class[] = 'layout' . '_' . $layout;
+			$class[] = $this->prefix . 'layout' . '_' . $layout;
 		}
 
 		if ( $full_screen == 'yes' ) {
-			$class[] = 'full_screen';
+			$class[] = $this->prefix . 'full_screen';
 		}
 
 		if ( $vertical_align != '' ) {
-			$class[] = 'vertical_align' . '_' . $vertical_align;
+			$class[] = $this->prefix . 'vertical_align' . '_' . $vertical_align;
 		}
 
 		$data_parallax_attr = '';
 		if ( $parallax != '' && ! wp_is_mobile() ) {
 			$data_parallax_attr = 'data-parallax="' . $parallax . '" data-parallax-offset="' . intval( $parallax_offset ) . '"';
-			$class[] = 'parallax';
+			$class[] = $this->prefix . 'parallax';
 		}
 
 		if ( $background_image != '' ) {
@@ -80,11 +80,11 @@ class bt_bb_section extends BT_BB_Element {
 			$background_image_url = $background_image[0];
 			$background_image_style = 'background-image:url(\'' . $background_image_url . '\');';
 			$el_style = $background_image_style . $el_style;	
-			$class[] = 'background_image';
+			$class[] = $this->prefix . 'background_image';
 		}
 
 		if ( $background_overlay != '' ) {
-			$class[] = 'background_overlay' . '_' . $background_overlay;
+			$class[] = $this->prefix . 'background_overlay' . '_' . $background_overlay;
 		}
 
 		$id_attr = '';
@@ -107,7 +107,7 @@ class bt_bb_section extends BT_BB_Element {
 				true
 			);
 
-			$class[] = 'background_video_yt';
+			$class[] = $this->prefix . 'background_video_yt';
 
 			if ( $yt_video_settings == '' ) {
 				$yt_video_settings = 'showControls:false,showYTLogo:false,mute:true,stopMovieOnBlur:false,opacity:1';
@@ -118,7 +118,7 @@ class bt_bb_section extends BT_BB_Element {
 			add_action( 'wp_footer', array( $proxy, 'js_init' ) );
 
 		} else if ( ( $background_video_mp4 != '' || $background_video_ogg != '' || $background_video_webm != '' ) && ! wp_is_mobile() ) {
-			$class[] = 'video';
+			$class[] = $this->prefix . 'video';
 			$video_html = '<video autoplay loop muted onplay="bt_bb_video_callback( this )">';
 			if ( $background_video_mp4 != '' ) {
 				$video_html .= '<source src="' . $background_video_mp4 . '" type="video/mp4">';
@@ -133,8 +133,7 @@ class bt_bb_section extends BT_BB_Element {
 		}
 
 		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
-
-		$class_attr = implode( ' ' . $this->prefix, $class );
+		$class_attr = implode( ' ', $class );
 
 		if ( $el_class != '' ) {
 			$class_attr = $class_attr . ' ' . $el_class;

@@ -61,6 +61,8 @@ class bt_bb_button extends BT_BB_Element {
 			$class[] = $this->prefix . 'align' . '_' . $align;
 		}
 		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
+		
 		$output = $this->get_html( $icon, $text, $url, $target );
 		
 		$output = '<div' . $id_attr . ' class="' . implode( ' ', $class ) . '"' . $style_attr . '>' . $output . '</div>';

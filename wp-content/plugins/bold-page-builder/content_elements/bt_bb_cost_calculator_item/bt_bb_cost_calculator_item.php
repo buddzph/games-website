@@ -23,7 +23,9 @@ class bt_bb_cost_calculator_item extends BT_BB_Element {
 		$style_attr = '';
 		if ( $el_style != '' ) {
 			$style_attr = ' ' . 'style="' . $el_style . '"';
-		}		
+		}
+
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );		
 		
 		$output = '<div class="' . $this->shortcode . '_title">' . $title . '</div>';
 		

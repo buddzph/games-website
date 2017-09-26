@@ -182,6 +182,8 @@ class bt_bb_masonry_post_grid extends BT_BB_Element {
 			$output .= '</div>';
 		}
 		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
+		
 		$output .= '<div class="bt_bb_post_grid_loader"></div>';
 
 		$output .= '<div class="bt_bb_masonry_post_grid_content bt_bb_grid_hide" data-number="' . $number . '" data-category="' . $category . '" data-show="' . urlencode( serialize( $show ) ) . '"><div class="bt_bb_grid_sizer"></div></div>';

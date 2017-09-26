@@ -61,6 +61,8 @@ class bt_bb_slider extends BT_BB_Element {
 		
 		$data_slick = $data_slick . '}\' ';
 		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
+		
 		$output = '';
 
 		if ( $images != '' ) {

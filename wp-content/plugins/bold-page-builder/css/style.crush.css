@@ -2,7 +2,7 @@
 /* ICON FONTS */
 @font-face {
     font-family: 'bold-builder';
-    src: url(../fonts/bold-builder.ttf?ysrbvs) format('truetype'),url(../fonts/bold-builder.woff?ysrbvs) format('woff'),url(../fonts/bold-builder.svg?ysrbvs#bold-builder) format('svg');
+    src: url(../fonts/bold-builder.ttf?kjfbnef) format('truetype'),url(../fonts/bold-builder.woff?kjfbnef) format('woff'),url(../fonts/bold-builder.svg?kjfbnef#bold-builder) format('svg');
     font-weight: normal;
     font-style: normal;
     }
@@ -542,6 +542,9 @@
     content: '\e90a';
     }
 #bt_bb > .bt_bb_item_list > .bt_bb_wrap .bt_bb_item .bt_bb_item .bt_bb_item .bt_bb_item.bt_bb_icon_bt_bb_icons:before {
+    content: '\e90b';
+    }
+#bt_bb > .bt_bb_item_list > .bt_bb_wrap .bt_bb_item .bt_bb_item .bt_bb_item .bt_bb_item.bt_bb_icon_bt_bb_icon:before {
     content: '\e90b';
     }
 #bt_bb > .bt_bb_item_list > .bt_bb_wrap .bt_bb_item .bt_bb_item .bt_bb_item .bt_bb_item.bt_bb_icon_bt_bb_image:before,
@@ -1739,6 +1742,61 @@
     }
 #bt_bb_dialog .wp-picker-open + .wp-picker-input-wrap input.bt_bb_color_picker.wp-color-picker[style*="block"] {
     display: inline-block !important;
+    }
+
+/* checkbox group */
+#bt_bb_dialog .bt_bb_dialog_content .bt_bb_dialog_item[data-type="checkbox_group"] label {
+    margin-right: 1em;
+    }
+#bt_bb_dialog .bt_bb_dialog_content .bt_bb_dialog_item[data-type="checkbox_group"] label:last-of-type {
+    margin-right: 0;
+    }
+
+/* Checkbox for responsive element */
+.bt_bb_dialog_item[data-param_name="responsive"] label {
+    display: inline-block;
+    position: relative;
+    margin-right: 2em !important;
+    }
+.bt_bb_dialog_item[data-param_name="responsive"] label input[type=radio],
+.bt_bb_dialog_item[data-param_name="responsive"] label input[type=checkbox] {
+    position: absolute;
+    right: 0;
+    bottom: 1.75em;
+    margin: 0;
+    }
+.bt_bb_dialog_item[data-param_name="responsive"] label input[type=radio]:checked + span:before,
+.bt_bb_dialog_item[data-param_name="responsive"] label input[type=checkbox]:checked + span:before {
+    opacity: .3;
+    }
+.bt_bb_dialog_item[data-param_name="responsive"] label span {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    }
+.bt_bb_dialog_item[data-param_name="responsive"] label span:before {
+    font-family: bold-builder;
+    font-size: 3em;
+    display: block;
+    opacity: 1;
+    -webkit-transition: opacity 200ms ease;
+    -moz-transition: opacity 200ms ease;
+    transition: opacity 200ms ease;
+    }
+.bt_bb_dialog_item[data-param_name="responsive"] label:nth-of-type(1) span:before {
+    content: "\e95b";
+    }
+.bt_bb_dialog_item[data-param_name="responsive"] label:nth-of-type(2) span:before {
+    content: "\e95c";
+    }
+.bt_bb_dialog_item[data-param_name="responsive"] label:nth-of-type(3) span:before {
+    content: "\e95d";
+    }
+.bt_bb_dialog_item[data-param_name="responsive"] label:nth-of-type(4) span:before {
+    content: "\e95e";
+    }
+.bt_bb_dialog_item[data-param_name="responsive"] label:nth-of-type(5) span:before {
+    content: "\e95f";
     }
 
 /*# sourceMappingURL=style.crush.css.map */

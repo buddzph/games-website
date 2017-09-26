@@ -50,6 +50,8 @@ class bt_bb_icon extends BT_BB_Element {
 		if ( $align != '' ) {
 			$class[] = $this->prefix . 'align' . '_' . $align;
 		}
+		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
 
 		$output = $this->get_html( $icon, $text, $url, $target );
 

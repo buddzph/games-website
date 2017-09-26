@@ -46,6 +46,8 @@ class bt_bb_masonry_image_grid extends BT_BB_Element {
 		if ( $no_lightbox == 'no_lightbox' ) {
 			$class[] = $this->prefix . 'no_lightbox';
 		}
+		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
 
 		$output = '';
 		
@@ -105,7 +107,7 @@ class bt_bb_masonry_image_grid extends BT_BB_Element {
 					)
 				),
 				array( 'param_name' => 'format', 'type' => 'textfield', 'preview' => true, 'heading' => __( 'Tiles format', 'bold-builder' ), 'description' => __( 'e.g. 21, 11, 11' ) ),
-				array( 'param_name' => 'no_lightbox', 'type' => 'checkbox', 'value' => array( __( 'Yes', 'bold-builder' ) => 'no_lightbox' ), 'heading' => __( 'Disable lightbox', 'bold-builder' ) )
+				array( 'param_name' => 'no_lightbox', 'type' => 'checkbox', 'value' => array( __( 'Yes', 'bold-builder' ) => 'no_lightbox', __( 'No', 'bold-builder' ) => 'hide_share' ), 'heading' => __( 'Disable lightbox', 'bold-builder' ) )
 			)
 		) );
 	} 

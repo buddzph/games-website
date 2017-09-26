@@ -122,7 +122,7 @@ if ( ! class_exists( 'BB_Instagram' ) ) {
 		}
 		public function js() { ?>
 			<script>
-				jQuery( document ).ready(function() {
+				jQuery( window ).on( "load", function() {
 					var feed = new Instafeed({
 						get: 'tagged',
 						resolution: '<?php echo $this->resolution; ?>',

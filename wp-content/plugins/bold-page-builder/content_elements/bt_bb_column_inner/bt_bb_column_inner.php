@@ -111,7 +111,9 @@ class bt_bb_column_inner extends BT_BB_Element {
 
 		if ( $el_style != '' ) {
 			$style_attr = 'style="' . $el_style . '"';
-		}		
+		}
+
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );		
 	
 		$output = '<div ' . $id_attr . ' class="' . implode( ' ', $class ) . '" ' . $style_attr . ' data-width="' . $width . '">';
 			$output .= '<div class="' . $this->shortcode . '_content"' . $el_inner_style . '>';

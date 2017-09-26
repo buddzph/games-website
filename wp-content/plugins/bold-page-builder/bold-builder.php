@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Bold Builder
  * Description: WordPress content builder.
- * Version:  1.3.7
+ * Version:  1.4.4
  * Author: BoldThemes
  * Author URI: http://www.bold-themes.com
  */
@@ -87,9 +87,10 @@ function bt_bb_parse_content_admin( $content ) {
 			}
 		}
 
-	}		
+	}
 
-	if ( isset( $wrap_arr['d0'] ) ) {
+	if ( isset( $wrap_arr['d0'] ) && $wrap_arr['d0'] != "" ) {
+		$wrap_arr['d0'] .= '<span id="bt_bb_fe_preview_toggler" class="bt_bb_fe_preview_toggler">'. esc_html( __( 'Show/hide edit mode UI', 'bold-builder' ) ) .'</span>';
 		return $wrap_arr['d0'];
 	} else {
 		return $content;
@@ -962,6 +963,7 @@ class BT_BB_Basic_Element {
 		//$this->map_shortcode();
 		$this->add_params();
 		add_filter( 'bt_bb_extract_atts', array( $this, 'atts_callback' ) );
+		add_filter( $this->shortcode . '_class', array( $this, 'responsive_hide_callback' ), 10, 2 );
 	}
 	
 	function add_params() {
@@ -970,6 +972,13 @@ class BT_BB_Basic_Element {
 	
 	function atts_callback( $atts ) {
 		
+	}
+
+	function responsive_hide_callback( $class, $atts ) {
+		if ( isset( $atts['responsive'] ) && $atts['responsive'] != '' ) {
+			$class = array_merge( $class, preg_filter('/^/', $this->prefix, explode( ' ', $atts['responsive'] ) ) );
+		}
+		return $class;
 	}
 	
 	function to_uc( $str ) {
@@ -991,17 +1000,31 @@ class BT_BB_Element extends BT_BB_Basic_Element {
 
 	function add_params() {
 		bt_bb_add_params( $this->shortcode, array(
+			array( 'param_name' => 'responsive', 'type' => 'checkbox_group', 'heading' => __( 'Hide element on screens', 'bold-builder' ), 'group' => __( 'Responsive', 'bold-builder' ), 'preview' => true,
+				'value' => array(
+					__( '≤480px', 'bold-builder' ) => 'hidden_xs',
+					__( '480-767px', 'bold-builder' ) => 'hidden_ms',
+					__( '768-991px', 'bold-builder' ) => 'hidden_sm',
+					__( '992-1200px', 'bold-builder' ) => 'hidden_md',
+                    __( '≥1200px', 'bold-builder' ) => 'hidden_lg',
+				)
+			),
 			array( 'param_name' => 'el_id', 'type' => 'textfield', 'heading' => __( 'Element ID', 'bold-builder' ), 'group' => __( 'Custom', 'bold-builder' ), 'weight' => 1000 ),
 			array( 'param_name' => 'el_class', 'type' => 'textfield', 'heading' => __( 'Extra class name(s)', 'bold-builder' ), 'group' => __( 'Custom', 'bold-builder' ), 'weight' => 1001 ),
 			array( 'param_name' => 'el_style', 'type' => 'textfield', 'heading' => __( 'Inline style', 'bold-builder' ), 'group' => __( 'Custom', 'bold-builder' ), 'weight' => 1002 )
 		) );
+
+		/*if ( $this->shortcode != 'bt_bb_section' && $this->shortcode != 'bt_bb_row' ){      
+			bt_bb_remove_params( $this->shortcode, 'responsive' );                
+		}*/
 	}
 	
 	function atts_callback( $atts ) {
 		return array(
-			'el_id'    => '',
-			'el_class' => '',
-			'el_style' => ''
+			'responsive' => '',
+			'el_id'      => '',
+			'el_class'   => '',
+			'el_style'   => ''
 		) + $atts;
 	}
 

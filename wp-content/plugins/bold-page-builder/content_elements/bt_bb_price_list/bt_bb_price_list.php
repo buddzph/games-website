@@ -28,6 +28,8 @@ class bt_bb_price_list extends BT_BB_Element {
 			$style_attr = ' ' . 'style="' . $el_style . '"';
 		}
 		
+		$class = apply_filters( $this->shortcode . '_class', $class, $atts );
+		
 		$output = '<div class="' . $this->shortcode . '_title">' . $title . '</div>';
 		$output .= '<div class="' . $this->shortcode . '_subtitle">' . $subtitle . '</div>';
 		$output .= '<div class="' . $this->shortcode . '_price"><span class="' . $this->shortcode . '_currency">' . $currency . '</span><span class="' . $this->shortcode . '_amount">' . $price . '</span></div>';

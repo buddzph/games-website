@@ -20,9 +20,11 @@
 		padding-left: 0em;
 		&.bt_bb_style_borderless.bt_bb_size_large  {
 			padding-right: 1em;	
+			padding-left: 0;	
 		}
 		&.bt_bb_style_borderless.bt_bb_size_xlarge  {
 			padding-right: 2em;	
+			padding-left: 0;
 		}
 	}
 	:rightAlignSelector {
@@ -31,10 +33,12 @@
 		padding-left: 0.5em;
 		padding-right: 0em;
 		&.bt_bb_style_borderless.bt_bb_size_large {
-			padding-left: 1em;	
+			padding-left: 1em;
+			padding-right: 0;			
 		}
 		&.bt_bb_style_borderless.bt_bb_size_xlarge {
 			padding-left: 2em;	
+			padding-right: 0;
 		}
 	}
 	.bt_bb_icon_holder {     

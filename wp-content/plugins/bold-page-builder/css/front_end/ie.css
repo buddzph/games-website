@@ -9,29 +9,14 @@
 		:leftAlignSelector {
 			float: none;
 		}
-		:leftAlignSelector + .bt_bb_image {
-			margin-left: 1em;
-		}
 		:rightAlignSelector {
 			float: none;
 		}
-		:rightAlignSelector + .bt_bb_image {
-			margin-right: 1em;
-		}
 		:centerAlignSelector {
 			float: none;
-			display: block;
+			display: inline-block;
 			margin-bottom: -.5em;
-			&.bt_bb_shape_hard-rounded {
-				display: inline-block;
-			}
-		}
-		:centerAlignSelector + .bt_bb_image {
-			margin-left: 0.5em;
-			margin-right: 0.5em;
-		}
-		.bt_bb_image_content .bt_bb_image_content_inner .bt_bb_icon .bt_bb_icon_holder:before {
-			font-size: .65em;
+			max-width: 100%;
 		}
 	}
 	/* Latest post fix */
