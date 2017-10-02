@@ -943,9 +943,11 @@ switch ($_REQUEST['func']) {
 
 		$checkuser = $wpdb->get_results( "SELECT * FROM user WHERE id = '". $_SESSION['user']['id'] ."'" );
 
-		if($checkuser[0]->tickets >= 5000):
+		$grewards_limit = $wpdb->get_results( "SELECT * FROM rewards_limit");
 
-			$rewards = floor($checkuser[0]->tickets / 5000);
+		if($checkuser[0]->tickets >= $grewards_limit[0]->rewards_limit):
+
+			$rewards = floor($checkuser[0]->tickets / $grewards_limit[0]->rewards_limit);
 
 		else:
 
