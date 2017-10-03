@@ -32,8 +32,8 @@
 	<INPUT type="hidden" name="Remark" value="">
 	<INPUT type="hidden" name="Lang" value="UTF-8">
 	<INPUT type="hidden" name="Signature" value="v4f93AFaktObj79KywOlXbLAeTc=">
-	<INPUT type="hidden" name="ResponseURL" value="http://localhost/iPay88/response.php">
-	<INPUT type="hidden" name="BackendURL" value="http://localhost/iPay88/backend_response.php">
+	<INPUT type="hidden" name="ResponseURL" value="https://glyphgames.com/test/iPay88/response.php">
+	<INPUT type="hidden" name="BackendURL" value="https://glyphgames.com/test/iPay88/backend_response.php">
 	<INPUT type="submit" value="Proceed with Payment" name="Submit">
 </FORM>
 
