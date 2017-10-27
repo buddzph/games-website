@@ -12,6 +12,7 @@ date_default_timezone_set('Asia/Manila');
  * @since 1.0
  * @version 1.0
  */
+
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
@@ -23,6 +24,7 @@ date_default_timezone_set('Asia/Manila');
 
 <?php
 $uploaddir = wp_upload_dir();
+
 /*Array
 (
     [path] => /opt/lampp/htdocs/glyphgames.com/wp-content/uploads/2017/07
@@ -32,11 +34,16 @@ $uploaddir = wp_upload_dir();
     [baseurl] => http://localhost/glyphgames.com/wp-content/uploads
     [error] => 
 )*/
+
 // echo $uploaddir['basedir'];
+
 $url = home_url();
 $homeurl = esc_url( $url );
+
 global $wpdb;
 global $freebutton;
+
+
 // QUERY TO GET LIST OF COUNTRIES
 $countries = $wpdb->get_results( "SELECT * FROM apps_countries" );
 $tablecountries = '';
@@ -47,27 +54,40 @@ foreach ($countries as $key => $value) {
 	else:
 		$selected = '';
 	endif;
+
 	$tablecountries .= '<option value"'.$value->country_name.'" '. $selected .'>'.$value->country_name.'</option>';
 }
+
 if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
+
 	// CHECK FOR FREE TOKENS
 	$checktoday = date('Y-m-d');
 	$checkbutton = $wpdb->get_results( "SELECT * FROM user WHERE id = ".$_SESSION['user']['id']." and free_tokens_status = 1 and free_tokens_date_availed = '".$checktoday."'");
+
 	if(count($checkbutton) > 0):
+
 		// nothing to do, button is disabled
 		$freebutton = false;
+
 	else:
+
 		$e_table = 'user';
+
 		$e_data['free_tokens_status'] = 0;
+
 		$wpdb->update( $e_table, $e_data, array('id' => $_SESSION['user']['id']) );
+
 		$freebutton = true;
+
 	endif;
+
 	// CHECK IF USER ALREADY HAS USERNAME
 	$nousername = true;
 	$checkusername = $wpdb->get_results( "SELECT username FROM user WHERE id = '".$_SESSION['user']['id']."' AND username IS NOT NULL AND username != ''" );
 	if(count($checkusername) > 0):
 		$nousername = false;
 	endif;
+
 	// REFRESH REWARDS
 	$checkrewards = $wpdb->get_results( "SELECT * FROM rewards WHERE refresh_date != '".$checktoday."' AND counts != 0");
 	if(count($checkrewards) > 0):
@@ -80,7 +100,9 @@ if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])):
 		}		
 		/*$wpdb->show_errors();*/
 	endif;
+
 endif;
+
 // 20 MINUTES INACTIVITY WILL DESTROY THE SESSION
 if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1200)) {
     // last request was more than 30 minutes ago
@@ -122,7 +144,10 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 			      }
 			    }
 			  });
+
 			});
+
+
 	</script>
 
 	<style type="text/css">
@@ -144,6 +169,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	  	var current_mobile_number;
 	  	var from_login = false;
 	  	var saveusername = false;
+
 	    var dialog, form,
 	 
 	      // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
@@ -189,6 +215,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	        return true;
 	      }
 	    }
+
 	    function checkLengthFields( o, n, min, max ) {
 	      if ( o.val().length > max || o.val().length < min ) {
 	        o.addClass( "ui-state-error" );
@@ -219,33 +246,54 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	      valid = valid && checkRegexp( mobile_number, /^[0-9]*$/i, "Mobile number may consist of 0-9." );
 	 
 	      if ( valid ) {
+
 			  /*console.log(mobile_number.val());*/
+
 			$.post( "<?php echo $homeurl.'/?page_id=344' ?>", { func: "registermobile", mobile_number: mobile_number.val() }, function( data ) {
 			  // console.log( data.id );
+
 				if(data.result == true){
+
 						dialog.dialog( "close" );
+
 						$('#loginusername').val(mobile_number.val());	
+
 						if(data.network == 'Smart'){
 							updateTips( "Account created. User this temporary password to sign in: " + "Temporary password: " + data.temppass );
 							dialogsuccessfulregister.dialog( "open" );
+
 						}
+
 						if(data.network == 'Globe'){
+
 							updateTips( "Account created. Check you cellphone for your temporary password." );
+
 							dialoglogin.dialog("open");
+
 						}
+
+
 						// NOW SENDING TO BOTH NETWORKS
+
 						/*updateTips( "Account created. Check you cellphone for your temporary password." );
+
 						dialoglogin.dialog("open");*/
 						
+
 				} else {
 					
 			        updateTips( "Mobile exists or mobile number is not in proper format!" );
+
 				}
+
+
 			}, "json");
+
 	        
 	      }
 	      return valid;
 	    }
+
 	    function userlogin() {
 	      var valid = true;
 	      allFieldslogin.removeClass( "ui-state-error" );
@@ -253,39 +301,58 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	      valid = valid && checkLengthFields( loginusername, "loginusername", 6, 11 );
 	 
 	      valid = valid && checkRegexp( loginusername, /^([0-9a-zA-Z])+$/, "Username field only allow : a-z 0-9" );
+
 	      valid = valid && checkLengthFields( loginpassword, "password", 6, 10 );
 	 
 	      valid = valid && checkRegexp( loginpassword, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
 	 
 	      if ( valid ) {
+
 			  /*console.log(mobile_number.val());*/
+
 			$.post( "<?php echo $homeurl.'/?page_id=344' ?>", { func: "processlogin", loginusername: loginusername.val(), loginpassword: loginpassword.val() }, function( data ) {
 			  // console.log( data.id );
+
 				if(data.result == true){
+
 					/*if( data.username == '' ){
+
 						current_mobile_number = data.mobile_number;
 						from_login = true;
+
 						updateTips( "You don't have username yet. Kindly create please." );
 						dialog.dialog( "close" );
 						dialogupdateaccountdetails.dialog( "open" );
+
 					} else {
+
 						dialog.dialog( "close" );
 						location.reload();
+
 					}*/
+
 					current_mobile_number = data.mobile_number;
+
 					updateTips( "Login Successful." );
 					dialoglogin.dialog( "close" );
 					dialogsuccessful.dialog( "open" );
+
 					setTimeout(function(){ location.reload(); }, 3000);
+
 				} else {
 					
 			        updateTips( "Account not found!" );
+
 				}
+
+
 			}, "json");
+
 	        
 	      }
 	      return valid;
 	    }
+
 	    function createvalidusername	() {
 	      var valid = true;
 	      allFieldsvalidusername.removeClass( "ui-state-error" );
@@ -295,25 +362,36 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	      valid = valid && checkRegexp( validusername, /^([0-9a-zA-Z])+$/, "Username field only allow : a-z 0-9" );
 	 
 	      if ( valid ) {
+
 			  /*console.log(mobile_number.val());*/
+
 			$.post( "<?php echo $homeurl.'/?page_id=344' ?>", { func: "processvalidusername", validusername: validusername.val() }, function( data ) {
 			  // console.log( data.id );
+
 				if(data.result == true){
+
 					updateTips( "Thank you! You have successfully created your username. Enjoy playing!" );
 					dialogvalidusername.dialog( "close" );
 					dialogsuccessful.dialog( "open" );
+
 				} else {
 					
 			        updateTips( data.errmsg );
+
 				}
+
+
 			}, "json");
+
 	        
 	      }
 	      return valid;
 	    }
+
 	    function forgotpassword() {
 	    	alert('go to forgot password dialog.')
 	    }
+
 	    function updateUserAccountDetails() {
 	      var valid = true;
 	      allFieldsaccountdetails.removeClass( "ui-state-error" );
@@ -321,60 +399,90 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	      valid = valid && checkLengthFields( username, "username", 6, 10 );
 	 
 	      valid = valid && checkRegexp( username, /^([0-9a-zA-Z])+$/, "Username field only allow : a-z 0-9" );
+
 	      valid = valid && checkLengthFields( firstname, "firstname", 2, 10 );
 	 
 	      valid = valid && checkRegexp( firstname, /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/, "Firstname field only allow : a-z 0-9" );
+
 	      valid = valid && checkLengthFields( lastname, "lastname", 2, 10 );
 	 
 	      valid = valid && checkRegexp( lastname, /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/, "Lastname field only allow : a-z 0-9" );
 	 
 	      valid = valid && checkRegexp( email, emailRegex, "Please supply valid email." );
+
+
 	      <?php if(isset($_SESSION['user']['username']) and !empty($_SESSION['user']['username'])): ?>
+
 		      if(password.val() != "") {
+
 			      valid = valid && checkLengthFields( password, "password", 6, 10 );
 			 
 			      valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+
 			      valid = valid && checkLengthFields( retypepassword, "retype password", 6, 10 );
 			 
 			      valid = valid && checkRegexp( retypepassword, /^([0-9a-zA-Z])+$/, "Re-Type Password field only allow : a-z 0-9" );
 			  }
+
 		  <?php else: ?>
+
 		  		valid = valid && checkLengthFields( password, "password", 6, 10 );
 		 
 		        valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+
 		        valid = valid && checkLengthFields( retypepassword, "retype password", 6, 10 );
 		 
 		        valid = valid && checkRegexp( retypepassword, /^([0-9a-zA-Z])+$/, "Re-Type Password field only allow : a-z 0-9" );
+
 		  <?php endif; ?>
 	 
 	      if ( valid ) {
+
 	      	<?php if(!empty($_SESSION['user']['mobile_number'])): ?>
+
 	      		current_mobile_number = "<?php echo $_SESSION['user']['mobile_number'] ?>";
+
 	      	<?php endif; ?>
+
 	      	if(password.val() != "") {
+
 		      	if(password.val() != retypepassword.val()) {
+
 					updateTips( "Password and Re-Type Password must match!" );
+
 				} else {
+
 					saveusername = true;
+
 				}
+
 			}else{
+
 				saveusername = true;
+
 			}
+
 			if(saveusername){
+
 				// Variable to store your files
 				var files = $('#ImageBrowse')[0].files[0];
+
 				// VALIDATE IMAGE
 				var ext = $('#ImageBrowse').val().split('.').pop().toLowerCase();
 				if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1 && $('#ImageBrowse').val() != '') {
 					    
 					    // alert('invalid extension!');
+
 					    updateTips( "Please select image for the avatar." );
+
 				}else{
+
 						var formData = new FormData($('#imageUploadForm')[0]);
 						
 						formData.append('func', "processupdateaccountdetails");
 						formData.append('mobile_number', current_mobile_number);
 						formData.append('image', files);
+
 						console.log(formData);
 						$.ajax({
 						       url:"<?php echo $homeurl.'/?page_id=344' ?>",
@@ -390,44 +498,66 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 						           {
 						               
 						           		dialogupdateaccountdetails.dialog( "close" );
+
 									  	updateTips( "Account successfully updated." );
+
 									  	if(data.newusername){
+
 									  		$(".ui-dialog-titlebar").hide();
+
 									  		dialogwelcome.dialog( "open" );
+
 									  	}else{
+
 									  		dialogsuccessful.dialog( "open" );
+
 									  		setTimeout(function(){ location.reload(); }, 3000);
+
 									  	}
+
 						           }
 						           else
 						           {
 						               // Handle errors here
 						               console.log('ERRORS: ' + data.result);
+
 						               updateTips( data.errmsg );
+
+
 						           }
+
 						            
+
+
 						       },
 						       error: function(jqXHR, textStatus, errorThrown)
 						       {
 						           // Handle errors here
 						           console.log('ERRORS: ' + textStatus);
 						           // STOP LOADING SPINNER
+
 						           updateTips( "Unable to update. Check if you have current password, or new username is already used by other user." );
 						       }
 						  
 						});
+
 				} // END VALIDATE IMAGE
+
 			}
 	        
 	      }
 	      return valid;
 	    }
 	 
+
 	    function buycoins() {
+
 	    	var formData = new FormData($('#buycoinsForm')[0]);
 			
 			formData.append('func', "processbuycoins");
+
 			console.log(formData);
+
 			$.ajax({
 			       url:"<?php echo $homeurl.'/?page_id=344' ?>",
 			       type: 'POST',
@@ -440,57 +570,93 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 			       {
 			           if(data.result)
 			           {
+
 			           		$('#mobile_network').val(data.mobile_network);
+
 			           		if(data.mobile_network == 'SMART'){
+
 			           			$('#ClientReferenceNumber').val(data.ClientReferenceNumber);
+
 			           			dialogbuycoin.dialog( "close" );
+
 							  	updateTips( "You have successfully sent your request to buy this coin. Kindly check your phone and enter the verification code below. REMOVE THIS. Temporary verification code " + data.tempverif );
+
 							  	dialogbuycoinconfirmation.dialog( "open" );
+
 			           		}
+
 			           		if(data.mobile_network == 'GLOBE'){
+
 			           			if(data.haserror) {
+
 			           				dialogbuycoin.dialog( "close" );
+
 			           				updateTips( "Purchase failed. Check your mobile number and load balance." );
+
 							  		dialogsuccessful.dialog( "open" );
+
 			           			}else{
+
 			           				dialogbuycoin.dialog( "close" );
+
 								  	updateTips( "Purchase completed. Coins added to your account. Thank you and enjoy playing!" );
+
 							  		dialogsuccessful.dialog( "open" );
+
 			           			}
+
 			           		}
 			               
 			           		
+
 			           }
 			           else
 			           {
 			               // Handle errors here
 			               console.log('ERRORS: ' + data.result);
+
 			               updateTips( data.errmsg );
+
+
 			           }
+
 			            
+
+
 			       },
 			       error: function(jqXHR, textStatus, errorThrown)
 			       {
 			           // Handle errors here
 			           console.log('ERRORS: ' + textStatus);
 			           // STOP LOADING SPINNER
+
 			           updateTips( "Unable to update. Check if you have current password, or new username is already used by other user." );
 			       }
 			  
 			});
+
 	    	/*updateTips( "You have successfully selected and buy this coin." );
 	    	dialogbuycoin.dialog( "close" );
 			dialogsuccessful.dialog( "open" );*/
 	    }
+
 	    function verifybuycoins () {
+
 			var valid = true;
+
 			allFieldsverification.removeClass( "ui-state-error" );
+
 			valid = valid && checkLengthFields( verifycode, "verifycode", 5, 10 );
+
 			valid = valid && checkRegexp( verifycode, /^([0-9a-zA-Z])+$/, "Verification code field only allow : a-z 0-9" );
+
+
 			var formData = new FormData($('#formbuycoinsVerification')[0]);
 			
 			formData.append('func', "processbuycoinsverification");
+
 			console.log(formData);
+
 			$.ajax({
 			       url:"<?php echo $homeurl.'/?page_id=344' ?>",
 			       type: 'POST',
@@ -505,35 +671,50 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 			           {
 			               
 			           		dialogbuycoinconfirmation.dialog( "close" );
+
 						  	updateTips( "Purchase completed. Coins added to your account. Thank you and enjoy playing!" );
+
 						  	dialogsuccessful.dialog( "open" );
+
 			           }
 			           else
 			           {
 			               // Handle errors here
 			               console.log('ERRORS: ' + data.result);
+
 			               updateTips( data.errmsg );
+
+
 			           }
+
 			            
+
+
 			       },
 			       error: function(jqXHR, textStatus, errorThrown)
 			       {
 			           // Handle errors here
 			           console.log('ERRORS: ' + textStatus);
 			           // STOP LOADING SPINNER
+
 			           updateTips( "Unable to update. Check if you have current password, or new username is already used by other user." );
 			       }
 			  
 			});
+
 	    }
+
 	    function getrewards() {
 	    	
 	    }
+
 	    function continuelogin(){
 	    	updateTips( "Username or Mobile number is required." );
 	    	dialogsuccessfulregister.dialog( "close" );
 	    	dialoglogin.dialog("open");
 	    }
+
+
 	    /*FIRST POPUP TO ENTER MOBILE NUMBER ONLY AND TO CHECK IF USERNAME IS EXIST OR NOT. IF NOT WILL OPEN THE NEXT DIALOG.*/
 	    dialog = $( "#dialog-form" ).dialog({
 	      autoOpen: false,
@@ -580,6 +761,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	      event.preventDefault();
 	      userlogin();
 	    });
+
 	    /*CREATE USERNAME DIALOG.*/
 	    dialogvalidusername = $( "#dialog-update-username" ).dialog({
 	      autoOpen: false,
@@ -603,6 +785,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	      event.preventDefault();
 	      createvalidusername();
 	    });
+
 	    /*DIALOG NUMBER 2. ENTER USERNAME AND PASSWORD*/
 	    dialogupdateaccountdetails = $( "#dialog-form-username" ).dialog({
 	      autoOpen: false,
@@ -629,6 +812,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	      event.preventDefault();
 	      updateUserAccountDetails();
 	    });
+
 	    /*DIALOG NUMBER 3. USERNAME SUCCESSFULLY UPDATED*/
 	    dialogsuccessful = $( "#dialog-successful" ).dialog({
 	      autoOpen: false,
@@ -639,6 +823,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	        location.reload();
 	      }
 	    });
+
 	    /*DIALOG SUCCESSFULL REGISTER */
 	    dialogsuccessfulregister = $( "#dialog-successful-register" ).dialog({
 	      autoOpen: false,
@@ -655,6 +840,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	        //location.reload();
 	      }
 	    });
+
 	    /*DIALOG NUMBER 4. USERNAME SUCCESSFULLY UPDATED*/
 	    dialogbuycoin = $( "#dialog-buycoin" ).dialog({
 	      autoOpen: false,
@@ -671,6 +857,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	        // --
 	      }
 	    });
+
 	    /*DIALOG BUY COINS CONFIRMATION*/
 	    dialogbuycoinconfirmation = $( "#dialog-buycoin-confirmation" ).dialog({
 	      autoOpen: false,
@@ -687,10 +874,12 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	        // --
 	      }
 	    });
+
 	    form = dialogbuycoinconfirmation.find( "form" ).on( "submit", function( event ) {
 	      event.preventDefault();
 	      verifybuycoins();
 	    });
+
 	    /*DIALOG NUMBER 4. USERNAME SUCCESSFULLY UPDATED*/
 	    dialoggetrewards = $( "#dialog-getrewards" ).dialog({
 	      autoOpen: false,
@@ -701,6 +890,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	        // --
 	      }
 	    });
+
 	    /*DIALOG WELCOME*/
 	    dialogwelcome = $( "#dialog-welcome" ).dialog({
 	      autoOpen: false,
@@ -711,35 +901,50 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	        location.reload();
 	      }
 	    });
+
+
 	    $( "#mobilecheck" ).button().on( "click", function() {
 	      dialog.dialog( "open" );
 	    });
+
 	    $( "#userlogin" ).button().on( "click", function() {
 	      updateTips( "Username or Mobile number is required." );
 	      dialoglogin.dialog( "open" );
 	    });
+
 	    $( "#updateusername" ).button().on( "click", function() {
 	      dialogupdateaccountdetails.dialog( "open" );
 	    });
+
 	    $( "#updateusernameicon" ).button().on( "click", function() {
 	      dialogupdateaccountdetails.dialog( "open" );
 	    });
+
 	    $( "#logout" ).button().on( "click", function() {
 	      $.post( "<?php echo $homeurl.'/?page_id=344' ?>", { func: "logout" }, function( data ) {
 			  // console.log( data.id );
+
 		
 			  if( data.result ){
+
 			  	location.reload();
+
 			  }
+
+
 			}, "json");
 	    });
+
 	    $( "#buycoins" ).button().on( "click", function() {
 	      dialogbuycoin.dialog( "open" );
 	    });
+
 	    $( "#getrewards" ).button().on( "click", function() {
 	      dialoggetrewards.dialog( "open" );
 	    });
+
 	    /*$("#dialog-form").parent().find(".ui-dialog-titlebar-close").css("background","#1C1C1C");*/
+
 	    $( "#mobilecheck" ).removeClass('ui-button');
 	    $( "#updateusername" ).removeClass('ui-button');
 	    $( "#logout" ).removeClass('ui-button');
@@ -749,18 +954,24 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	    $( "#buycoins" ).removeClass('ui-button');
 	    $( "#getrewards" ).removeClass('ui-widget');
 	    $( "#getrewards" ).removeClass('ui-button');
+
+
 	    $('ul.nav li.dropdown').hover(function() {
 		  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(500);
 		}, function() {
 		  $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
 		});
+
 	    <?php if(isset($_SESSION['user']['id']) and !empty($_SESSION['user']['id'])): ?>
 			
 			/*CHECK USER IF HAS USERNAME*/
+
 			<?php if($nousername): ?>
 				dialogupdateaccountdetails.dialog( "open" );
 			<?php endif; ?>
+
 		<?php endif; ?>
+
 	  });
 	  </script>
 
@@ -780,6 +991,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 				.logo_wrapper .wrap .account_info img {width: 34px;}
 				.logo_wrapper .wrap .account_info span {margin-top: 5px; font-size: 10px;}
 				.logo_wrapper .wrap .account_info a {font-size: 10px;}*/
+
 				<?php
 				$pagetitle = get_the_title();
         		if($pagetitle != 'Games'):
@@ -789,6 +1001,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 					.wplp_container.default .title {max-width: 100%; text-align: center; font-size: 1.2em !important; padding-top: 7px;}
 				<?php endif; ?>
 	  		</style>
+
 	  		<script type="text/javascript">
 	  			// IFRAME TWEEKS MODIFICATION
 	  			jQuery(document).ready(function($) {
@@ -798,7 +1011,9 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 		            }, 1000);
 		        });
 	  		</script>
+
 	  <?php else: ?>
+
 	  		<style type="text/css">
 	  			.wplp_container.default .title {max-width: 100%; text-align: center; font-size: 1.2em !important; padding-top: 10px;}
 	  		</style>
@@ -943,7 +1158,9 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 <div id="dialog-getrewards" title="Select your reward" style="display: none;"> 
 
 	<!-- <a href="javascript: void(0);" style="width: 32.5%;" id="reward1"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure01.png" alt="" class="hvr-buzz-out"></a>
+
 	<a href="javascript: void(0);" style="width: 32.5%;" id="reward2"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure02.png" alt="" class="hvr-buzz-out"></a>
+
 	<a href="javascript: void(0);" style="width: 32.5%;" id="reward3"><img src="<?php echo $uploaddir['baseurl'] ?>/2017/07/Treasure03.png" alt="" class="hvr-buzz-out"></a> -->
 
 </div>
@@ -1027,6 +1244,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 							<!--div class="top-caption">
 								<h2>Glyphgames.com</h2>
 							</div>
+
 							<div class="bottom-caption">
 								<h3><i>Have Fun, Enjoy and Relax</i></h3>
 							</div-->
@@ -1037,7 +1255,6 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 		            </div>
 		            <!--END OF SLIDE 1 -->
 		            <!--SLIDE 2 DISABLED TEMPORARILY -->
-		            <!--
 		            <div class="item">
 		              
 		              <div class="shadow-effect">
@@ -1053,9 +1270,11 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 							<!--div class="top-caption">
 								<h2>Exciting, Educational</h2>
 							</div>
+
 							<div class="top-caption">
 								<h2>And New Games</h2>
 							</div>
+
 							<div class="bottom-caption">
 								<h3><a href="#">Check it out!</a></h3>
 							</div-->
@@ -1063,7 +1282,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 						</div>
 						*/ ?>
 		              </div>
-		            </div> -->
+		            </div>
 		            <!--END OF SLIDE 2 -->
 
 		          </div>
@@ -1083,6 +1302,7 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 	</header><!-- #masthead -->
 
 	<?php
+
 	/*
 	 * If a regular post or page, and not the front page, show the featured image.
 	 * Using get_queried_object_id() here since the $post global may not be set before a call to the_post().

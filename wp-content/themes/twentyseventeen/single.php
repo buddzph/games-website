@@ -324,7 +324,7 @@ function g_getsessionid($uid, $gamecode)
 											echo '</div><!-- .single-featured-image-header -->';
 										endif;
 
-								    	echo '<h3>There is NO FREE version for the game '. $gametitle .'.</h3>';
+								    	echo '<h3>Register to play '. $gametitle .' for FREE.</h3>';
 
 								    endif;
 
@@ -375,7 +375,7 @@ function g_getsessionid($uid, $gamecode)
 									echo '</div><!-- .single-featured-image-header -->';
 								endif;
 
-						    	echo '<h3>There is NO FREE version for the game '. $gametitle .'.</h3>';
+						    	echo '<h3>Register to play '. $gametitle .' for FREE.</h3>';
 
 						    endif;
 
