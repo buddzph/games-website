@@ -255,10 +255,11 @@ switch ($_REQUEST['func']) {
 
 							$decoderes = json_decode($getcode, TRUE);
 
-							// print_r($decoderes);
+							print_r($decoderes);
 
 							$ins['password'] = md5($temppass);
 
+							$res['ttemp'] = $temppass;
 							$res['temppass'] = '';
 							$res['network'] = 'Globe';
 
