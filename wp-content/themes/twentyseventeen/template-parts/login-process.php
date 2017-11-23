@@ -162,9 +162,14 @@ function globecurl($mobile_number, $serviceid, $prodid, $message){
 
     //$dateLog = date("Ymd");
     //$timeLog = date("Y-m-d H:i:s");
-    
-    $result = curl_exec($ch);
 	
+	if(curl_error($ch)){
+		//echo 'error:' . curl_error($c);
+		$result = curl_error($ch);
+	}else{
+		$result = curl_exec($ch);
+	}
+
 	return $result;
 	
 	//TODO: ADD LOGGER
