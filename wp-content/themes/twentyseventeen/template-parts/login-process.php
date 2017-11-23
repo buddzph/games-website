@@ -259,7 +259,9 @@ switch ($_REQUEST['func']) {
 
 							$ins['password'] = md5($temppass);
 
-							$res['ttemp'] = $decoderes;
+							$res['decoderes'] = $decoderes;
+							$res['getcode'] = $getcode;
+
 							$res['temppass'] = '';
 							$res['network'] = 'Globe';
 
