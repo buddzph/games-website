@@ -150,7 +150,9 @@ function validateSmart($num_request, $amount, $ClientReferenceNumber, $pin){
 
 function globecurl($mobile_number, $serviceid, $prodid, $message){
 
-	$url = 'http://119.81.67.158:5672/sms/insurge';
+	// $url = 'http://119.81.67.158:5672/sms/insurge';
+
+	$url = 'http://10.64.14.134:5672/sms/insurge';
 
     $request = array("serviceId" => $serviceid, "productId" => $prodid, "linkId" => '12341234123', "message" => $message, "accessCode" => '5677', "mobileNo" => '63'.$mobile_number);
     
