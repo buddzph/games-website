@@ -172,7 +172,8 @@ function globecurl($mobile_number, $serviceid, $prodid, $message){
 		$result = curl_error($ch);
 	}
 
-	return $result.' - '.implode(', ', $request);
+	// return $result.' - '.implode(', ', $request);
+	return $result;
 	
 	//TODO: ADD LOGGER
 
@@ -269,7 +270,7 @@ switch ($_REQUEST['func']) {
 							$res['decoderes'] = $decoderes;
 							$res['getcode'] = $getcode;
 
-							$res['temppass'] = '';
+							$res['temppass'] = $temppass;
 							$res['network'] = 'Globe';
 
 						endif;
