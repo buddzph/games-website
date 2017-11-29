@@ -225,14 +225,20 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 				if(data.result == true){
 						dialog.dialog( "close" );
 						$('#loginusername').val(mobile_number.val());	
-						if(data.network == 'Smart'){
+
+						// TEMPORARY DISPLAY PASSWORD
+						updateTips( "Account created. User this temporary password to sign in: " + "Temporary password: " + data.temppass );
+						dialogsuccessfulregister.dialog( "open" );
+
+						// REMOVE COMMENT WHEN THE ERROR IN GLOBE IS FIXED
+						/*if(data.network == 'Smart'){
 							updateTips( "Account created. User this temporary password to sign in: " + "Temporary password: " + data.temppass );
 							dialogsuccessfulregister.dialog( "open" );
 						}
 						if(data.network == 'Globe'){
 							updateTips( "Account created. Check you cellphone for your temporary password." );
 							dialoglogin.dialog("open");
-						}
+						}*/
 						// NOW SENDING TO BOTH NETWORKS
 						/*updateTips( "Account created. Check you cellphone for your temporary password." );
 						dialoglogin.dialog("open");*/
