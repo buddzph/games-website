@@ -171,6 +171,7 @@ function globecurl($mobile_number, $serviceid, $prodid, $message){
 	if (!curl_errno($ch)) {
 		switch ($http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) {
 		case 200:  # OK
+			$result = $http_code;
 			break;
 		default:
 			$result = 'Unexpected HTTP code: ', $http_code, "\n";
