@@ -172,7 +172,7 @@ function globecurl($mobile_number, $serviceid, $prodid, $message){
 		$result = curl_error($ch);
 	}
 
-	return $result.' - '.$request;
+	return $result.' - '.implode(', ', $request);
 	
 	//TODO: ADD LOGGER
 
