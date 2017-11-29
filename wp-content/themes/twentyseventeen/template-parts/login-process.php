@@ -175,12 +175,10 @@ function globecurl($mobile_number, $serviceid, $prodid, $message){
 		default:
 			$result = 'Unexpected HTTP code: ', $http_code, "\n";
 		}
-	}
-
-	/* if(curl_error($ch)){
+	}elseif(curl_error($ch)){
 		//echo 'error:' . curl_error($c);
 		$result = curl_error($ch);
-	}*/
+	}
 
 	return $result;
 	
