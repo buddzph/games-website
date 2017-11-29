@@ -275,11 +275,12 @@ regexpReplaceWith: "$1<sup class='displayformat'>days</sup> / $2<sup class='disp
 
 			        endif;
 
-			        if(isset($_SESSION['user']['network']) and $_SESSION['user']['network'] == 'GLOBE'):
+					// DO NOT DELETE. REMOVE COMMENT WHEN ISSUE IN GLOBE IS FIXED.
+			        /*if(isset($_SESSION['user']['network']) and $_SESSION['user']['network'] == 'GLOBE'):
 			        	
 		        		echo '<br /><center><a href="'.$homeurl.'/?page_id=239" class="button buymorecoins">Buy More Coins!</a></center>';
 
-		        	endif;
+		        	endif;*/
 
 			else:
 
