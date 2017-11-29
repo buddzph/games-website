@@ -154,7 +154,7 @@ function globecurl($mobile_number, $serviceid, $prodid, $message){
 
 	// $url = 'http://10.64.14.134:5672/sms/insurge';
 
-    $request = array("serviceId" => 'testing', "productId" => $prodid, "linkId" => '12341234123', "message" => $message, "accessCode" => '5677', "mobileNo" => '63'.$mobile_number);
+    $request = array("serviceId" => $serviceid, "productId" => $prodid, "linkId" => '12341234123', "message" => $message, "accessCode" => '5677', "mobileNo" => '63'.$mobile_number);
     
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_POST, 1);
@@ -172,7 +172,7 @@ function globecurl($mobile_number, $serviceid, $prodid, $message){
 		$result = curl_error($ch);
 	}
 
-	return $result;
+	return $result.' - '.$request;
 	
 	//TODO: ADD LOGGER
 
